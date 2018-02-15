@@ -65,8 +65,10 @@ input:focus ~ .floating-label {
 	font-size: 70%;
 }
 
-input:not (:focus ):valid ~ .floating-label {
-	color: transparent;
+input:valid ~ .floating-label {
+	transition: 0.2s ease all;
+	top: -5%;
+	font-size: 70%;
 }
 </style>
 
