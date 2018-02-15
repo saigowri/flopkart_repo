@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	 <class name="com.iiitb.ooadvoid.pojo.FlopkartListing" table="FlopkartListing"  dynamic-update="true">
+	 
+      <meta attribute = "class-description">
+         This class contains the Flopkart user detail. 
+      </meta>
+      
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "listingName" column = "listingName" type = "string"  unique="true"/>
+      <property name = "subcategoryId" column = "subcategoryId" type = "int"/>
+      <property name = "available" column = "availaible" type = "int"/>
+      <property name = "price" column = "price" type = "int"/>
+      <property name = "discount" column = "discount" type = "int"/>
+      <property name = "stars" column = "stars" type = "int"/>
+	 <property name = "total" column = "total" type = "int"/>
+	 <property name = "description" column = "description" type = "string"/>
+	 
+	</class>
+</hibernate-mapping>
