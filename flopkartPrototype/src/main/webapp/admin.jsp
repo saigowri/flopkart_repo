@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.iiitb.ooadvoid.AccessProperties"%>
+    <%@ page import="com.iiitb.ooadvoid.client.FlopkartCategoryClient" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,8 +59,8 @@
 <script src="./bootstrapFiles/js/scripts.js"></script>
 <script>
 $(document).ready(function(){
-<%-- 	<%  --%>
-// 	AccessProperties test = new AccessProperties();	
+
+    <% FlopkartCategoryClient client = new FlopkartCategoryClient(); %>
 <%-- 	String test1 = test.getImageURL();%> --%>
 <%-- 	var test = "<%=test1%>"; --%>
 // 	alert(test);
