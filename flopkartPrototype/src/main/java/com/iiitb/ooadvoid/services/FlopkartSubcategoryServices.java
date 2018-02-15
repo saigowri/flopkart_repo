@@ -32,16 +32,14 @@ public class FlopkartSubcategoryServices
 	@POST
 	@Path("/create")
 	@Consumes("application/json")
-	public String addFlopkartSubcategory(FlopkartSubcategory subcategory)
+	public Response addFlopkartSubcategory(FlopkartSubcategory subcategory)
 	{
 		subcategory.setCategoryId(subcategory.getCategoryId());
 		subcategory.setSubcategoryName(subcategory.getSubcategoryName());
 		FlopkartSubcategoryDAO dao = new FlopkartSubcategoryDAO();
 		dao.addFlopkartSubcategory(subcategory);
 
-		//return Response.ok().build();
-		//Response.ok().toString();
-		return "{\"msg\":\"success\"}";
+		return Response.ok().build();
 	}
 
 	@PUT
