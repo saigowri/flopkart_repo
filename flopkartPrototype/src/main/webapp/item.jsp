@@ -626,7 +626,7 @@ input:not (:focus ):valid ~ .floating-label {
 
 							<div class="description-container m-t-20">
 								Pink printed woven top, has a round neck, long sleeves<br/>
-								Material & Care : Polyester; Machine-wash
+								Material and Care : Polyester; Machine-wash
 							</div><!-- /.description-container -->
 
 							<div class="price-container info-container m-t-20">
