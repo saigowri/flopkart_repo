@@ -34,13 +34,13 @@
 	<div class="col-md-6">
 		<div class="container" style="text-align: center; width: 400px">
 			<h3 style="color:white">Enter new subcategory</h3><br/>
-			<form action="success.jsp">
+			<form>
 				<div id="content"></div>
 				<br /> <input class="form-control" type="text" id="subcatName"
 					placeholder="Enter subcategory name"> 
 				<br/>
 				<input type="submit"
-					onclick="insertSubcategory();" />
+					onclick="return insertSubcategory();" />
 			</form>
 		</div>
 	</div>
@@ -119,16 +119,17 @@ function insertSubcategory()
 		{
 			type : 'POST',
 			contentType : 'application/json',
-			dataType: 'text',
 			url : ctxPath + "/webapi/subcategories/create",
 			data : formToJSON(),
-			success : function(){
-				alert("BYEE");
-			},
+			success : render,
 			error: function(err) {
 				alert(JSON.stringify(err));
 			}
 	});
+}
+
+function render(){
+	alert("BYEE");
 }
 
 function insertCategory()
