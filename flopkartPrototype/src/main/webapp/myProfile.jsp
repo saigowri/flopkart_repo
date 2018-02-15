@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.iiitb.ooadvoid.AccessProperties" %>
+    <%@ page import="com.iiitb.ooadvoid.CreateProperties" %>
+    <%@ page import="com.iiitb.ooadvoid.client.FlopkartCategoryClient" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -603,9 +605,8 @@ $(document).ready(function()
     var email = "<%=request.getParameter("email") %>";
     var phone = "<%=request.getParameter("phone") %>";
     var pic_URL = "<%=request.getParameter("pic_URL") %>";
-    alert(pic_URL);
-    var imgServerURL = "http://127.0.0.1:8887";
-<%--     var imgServerURL = "<%=AccessProperties.imgServerURL %>"; --%>
+    <% AccessProperties ap = new AccessProperties(); %>
+    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 	$('#firstName').val(firstName);
 	$('#lastName').val(lastName);
 	$('#email').val(email);

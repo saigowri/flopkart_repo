@@ -9,8 +9,43 @@ import java.util.Properties;
 
 public class AccessProperties
 {
-	private String serverURL;
+
+	private String imageServerURL;
 	private String serverPath;
+	private String serverURL;
+	private String contextPath;
+	private String restPath;
+	
+	
+	public String getContextPath()
+	{
+		return contextPath;
+	}
+
+	public void setContextPath(String contextPath)
+	{
+		this.contextPath = contextPath;
+	}
+
+	public String getRestPath()
+	{
+		return restPath;
+	}
+
+	public void setRestPath(String restPath)
+	{
+		this.restPath = restPath;
+	}
+
+	public String getImageServerURL()
+	{
+		return imageServerURL;
+	}
+
+	public void setImageServerURL(String imageServerURL)
+	{
+		this.imageServerURL = imageServerURL;
+	}
 
 	public String getServerURL()
 	{
@@ -33,7 +68,7 @@ public class AccessProperties
 	}
 
 //	public static void main(String[] args)
-	AccessProperties()
+	public AccessProperties()
 	{
 
 		Properties prop = new Properties();
@@ -48,9 +83,11 @@ public class AccessProperties
 			prop.load(input);
 
 			// get the property value and print it out
-//			System.out.println(prop.getProperty("serverURL"));
-//			System.out.println(prop.getProperty("serverPath"));
+			System.out.println(prop.getProperty("serverURL"));
+			System.out.println(prop.getProperty("imageServerURL"));
+			System.out.println(prop.getProperty("serverPath"));
 			this.setServerURL(prop.getProperty("serverURL"));
+			this.setImageServerURL(prop.getProperty("imageServerURL"));
 			this.setServerPath(prop.getProperty("serverPath"));
 
 		}
