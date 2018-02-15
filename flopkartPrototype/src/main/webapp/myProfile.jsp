@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="./bootstrapFiles/css/owl.transitions.css">
 <link rel="stylesheet" href="./bootstrapFiles/css/animate.min.css">
 <link rel="stylesheet" href="./bootstrapFiles/css/rateit.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/lightbox.css">
 <link rel="stylesheet" href="./bootstrapFiles/css/bootstrap-select.min.css">
 
 <!-- Icons/Glyphs -->
@@ -120,7 +119,7 @@
                 <div class="cart-item product-summary">
                   <div class="row">
                     <div class="col-xs-4">
-                      <div class="image"> <a href="detail.html"><img src="assets/images/cart.jpg" alt=""></a> </div>
+                      <div class="image"> <a href="detail.html"></a> </div>
                     </div>
                     <div class="col-xs-7">
                       <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
@@ -307,7 +306,7 @@
                               <li><a href="#">Memory Cards</a></li>
                             </ul>
                           </div>
-                          <div class="col-xs-12 col-sm-12 col-md-4 col-menu custom-banner"> <a href="#"><img alt="" src="assets/images/banners/banner-side.png"></a> </div>
+                          <div class="col-xs-12 col-sm-12 col-md-4 col-menu custom-banner"> </div>
                         </div>
                         <!-- /.row --> 
                       </div>
@@ -586,7 +585,6 @@
 <script src="./bootstrapFiles/js/jquery-1.11.1.min.js"></script> 
 <script src="./bootstrapFiles/js/bootstrap.js"></script>
 <script src="./bootstrapFiles/js/bootstrap.min.js"></script> 
-<script src="./bootstrapFiles/js/lightbox.min.js"></script> 
 <script src="./bootstrapFiles/js/bootstrap-hover-dropdown.min.js"></script> 
 <script src="./bootstrapFiles/js/owl.carousel.min.js"></script> 
 <script src="./bootstrapFiles/js/echo.min.js"></script> 
@@ -605,6 +603,7 @@ $(document).ready(function()
     var email = "<%=request.getParameter("email") %>";
     var phone = "<%=request.getParameter("phone") %>";
     var pic_URL = "<%=request.getParameter("pic_URL") %>";
+    <% CreateProperties cp = new CreateProperties(); %>
     <% AccessProperties ap = new AccessProperties(); %>
     var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 	$('#firstName').val(firstName);

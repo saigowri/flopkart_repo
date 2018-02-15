@@ -85,7 +85,6 @@ input:valid ~ .floating-label {
 					<div class="cnt-account">
 						<ul class="list-unstyled">
 							<li><a href="sellerHub.jsp">Sell on Flopkart</a></li>
-							<li><a href="#">24x7 Customer Care</a></li>
 							<li><a data-toggle="modal" data-target="#loginModal">Track
 									Order</a></li>
 							<li><a data-toggle="modal">Sign up</a></li>
@@ -123,7 +122,7 @@ input:valid ~ .floating-label {
 											</div>
 											<div class="row"
 												style="padding-top: 100px; padding-bottom: 30px;">
-												<img src="./images/login_img_1.png" align="center"
+												<img src="./images/login_img_1.png" align="middle"
 													align="bottom" width="200px" />
 											</div>
 										</div>
@@ -157,7 +156,7 @@ input:valid ~ .floating-label {
 												</span> <span class="warning" id="warning_pass"
 													style="align: left; padding-left: 0px; color: red; font-size: 80%"
 													class="pull-left"> <b>Invalid password</b>
-												</span> <a> <span align="right" style="text-align: right">Forgot?</span>
+												</span> <a> <span style="text-align: right">Forgot?</span>
 												</a>
 											</div>
 											<div class="row"
@@ -203,7 +202,7 @@ input:valid ~ .floating-label {
 					<div class="col-xs-12 col-sm-12 col-md-2 logo-holder">
 						<!-- ============================================================= LOGO ============================================================= -->
 						<div class="logo">
-							<a href="#"> <img height="50px"
+							<a href="index.jsp"> <img height="50px"
 								src="./images/flopkartLogo.jpg" alt="">
 							</a>
 						</div>
@@ -224,7 +223,7 @@ input:valid ~ .floating-label {
 												placeholder="Search for products, brands and more" />
 										</div>
 										<div class="col-md-2">
-											<a class="search-button" href="#"></a>
+											<a class="search-button" href="underConstruct.html"></a>
 										</div>
 									</div>
 								</div>
@@ -282,7 +281,7 @@ input:valid ~ .floating-label {
 											<span class="text">Sub Total :</span><span class='price'>$600.00</span>
 										</div>
 										<div class="clearfix"></div>
-										<a href="checkout.html"
+										<a href="underConstruct.html"
 											class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
 									</div> <!-- /.cart-total-->
 
@@ -322,10 +321,10 @@ input:valid ~ .floating-label {
 							id="mc-horizontal-menu-collapse">
 							<div class="nav-outer">
 								<ul class="nav navbar-nav">
-									<li class="active dropdown yamm-fw"><a href="#"
+									<li class="active dropdown yamm-fw"><a href="index.jsp"
 										data-hover="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown">Home</a></li>
-									<li class="dropdown yamm mega-menu"><a href="#"
+									<li class="dropdown yamm mega-menu"><a href="category.jsp"
 										data-hover="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown">Clothing</a>
 										<ul class="dropdown-menu container">
@@ -335,13 +334,13 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-6 col-md-3 col-menu">
 															<h2 class="title">Men</h2>
 															<ul class="links">
-																<li><a href="#">Dresses</a></li>
-																<li><a href="#">Shoes </a></li>
-																<li><a href="#">Jackets</a></li>
-																<li><a href="#">Sunglasses</a></li>
-																<li><a href="#">Sport Wear</a></li>
-																<li><a href="#">Blazers</a></li>
-																<li><a href="#">Shirts</a></li>
+																<li><a href="underConstruct.html">Dresses</a></li>
+																<li><a href="underConstruct.html">Shoes </a></li>
+																<li><a href="underConstruct.html">Jackets</a></li>
+																<li><a href="underConstruct.html">Sunglasses</a></li>
+																<li><a href="underConstruct.html">Sport Wear</a></li>
+																<li><a href="underConstruct.html">Blazers</a></li>
+																<li><a href="underConstruct.html">Shirts</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
@@ -349,13 +348,13 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-6 col-md-3 col-menu">
 															<h2 class="title">Women</h2>
 															<ul class="links">
-																<li><a href="#">Handbags</a></li>
-																<li><a href="#">Jewellery</a></li>
-																<li><a href="#">Swimwear </a></li>
-																<li><a href="#">Tops</a></li>
-																<li><a href="#">Flats</a></li>
-																<li><a href="#">Shoes</a></li>
-																<li><a href="#">Winter Wear</a></li>
+																<li><a href="underConstruct.html">Handbags</a></li>
+																<li><a href="underConstruct.html">Jewellery</a></li>
+																<li><a href="underConstruct.html">Swimwear </a></li>
+																<li><a href="underConstruct.html">Tops</a></li>
+																<li><a href="underConstruct.html">Flats</a></li>
+																<li><a href="underConstruct.html">Shoes</a></li>
+																<li><a href="underConstruct.html">Winter Wear</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
@@ -363,13 +362,13 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-6 col-md-3 col-menu">
 															<h2 class="title">Boys</h2>
 															<ul class="links">
-																<li><a href="#">Toys and Games</a></li>
-																<li><a href="#">Jeans</a></li>
-																<li><a href="#">Shirts</a></li>
-																<li><a href="#">Shoes</a></li>
-																<li><a href="#">School Bags</a></li>
-																<li><a href="#">Lunch Box</a></li>
-																<li><a href="#">Footwear</a></li>
+																<li><a href="underConstruct.html">Toys and Games</a></li>
+																<li><a href="underConstruct.html">Jeans</a></li>
+																<li><a href="underConstruct.html">Shirts</a></li>
+																<li><a href="underConstruct.html">Shoes</a></li>
+																<li><a href="underConstruct.html">School Bags</a></li>
+																<li><a href="underConstruct.html">Lunch Box</a></li>
+																<li><a href="underConstruct.html">Footwear</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
@@ -377,13 +376,13 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-6 col-md-3 col-menu">
 															<h2 class="title">Girls</h2>
 															<ul class="links">
-																<li><a href="#">Sandals </a></li>
-																<li><a href="#">Shorts</a></li>
-																<li><a href="#">Dresses</a></li>
-																<li><a href="#">Jewellery</a></li>
-																<li><a href="#">Bags</a></li>
-																<li><a href="#">Night Dress</a></li>
-																<li><a href="#">Swim Wear</a></li>
+																<li><a href="underConstruct.html">Sandals </a></li>
+																<li><a href="underConstruct.html">Shorts</a></li>
+																<li><a href="underConstruct.html">Dresses</a></li>
+																<li><a href="underConstruct.html">Jewellery</a></li>
+																<li><a href="underConstruct.html">Bags</a></li>
+																<li><a href="underConstruct.html">Night Dress</a></li>
+																<li><a href="underConstruct.html">Swim Wear</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
@@ -394,7 +393,7 @@ input:valid ~ .floating-label {
 												</div>
 											</li>
 										</ul></li>
-									<li class="dropdown mega-menu"><a href="category.jsp"
+									<li class="dropdown mega-menu"><a href="underConstruct.html"
 										data-hover="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown">Electronics <span
 											class="menu-label hot-menu hidden-xs">hot</span>
@@ -406,16 +405,16 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-12 col-md-2 col-menu">
 															<h2 class="title">Laptops</h2>
 															<ul class="links">
-																<li><a href="#">Gaming</a></li>
-																<li><a href="#">Laptop Skins</a></li>
-																<li><a href="#">Apple</a></li>
-																<li><a href="#">Dell</a></li>
-																<li><a href="#">Lenovo</a></li>
-																<li><a href="#">Microsoft</a></li>
-																<li><a href="#">Asus</a></li>
-																<li><a href="#">Adapters</a></li>
-																<li><a href="#">Batteries</a></li>
-																<li><a href="#">Cooling Pads</a></li>
+																<li><a href="underConstruct.html">Gaming</a></li>
+																<li><a href="underConstruct.html">Laptop Skins</a></li>
+																<li><a href="underConstruct.html">Apple</a></li>
+																<li><a href="underConstruct.html">Dell</a></li>
+																<li><a href="underConstruct.html">Lenovo</a></li>
+																<li><a href="underConstruct.html">Microsoft</a></li>
+																<li><a href="underConstruct.html">Asus</a></li>
+																<li><a href="underConstruct.html">Adapters</a></li>
+																<li><a href="underConstruct.html">Batteries</a></li>
+																<li><a href="underConstruct.html">Cooling Pads</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
@@ -423,16 +422,16 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-12 col-md-2 col-menu">
 															<h2 class="title">Desktops</h2>
 															<ul class="links">
-																<li><a href="#">Routers and Modems</a></li>
-																<li><a href="#">CPUs, Processors</a></li>
-																<li><a href="#">PC Gaming Store</a></li>
-																<li><a href="#">Graphics Cards</a></li>
-																<li><a href="#">Components</a></li>
-																<li><a href="#">Webcam</a></li>
-																<li><a href="#">Memory (RAM)</a></li>
-																<li><a href="#">Motherboards</a></li>
-																<li><a href="#">Keyboards</a></li>
-																<li><a href="#">Headphones</a></li>
+																<li><a href="underConstruct.html">Routers and Modems</a></li>
+																<li><a href="underConstruct.html">CPUs, Processors</a></li>
+																<li><a href="underConstruct.html">PC Gaming Store</a></li>
+																<li><a href="underConstruct.html">Graphics Cards</a></li>
+																<li><a href="underConstruct.html">Components</a></li>
+																<li><a href="underConstruct.html">Webcam</a></li>
+																<li><a href="underConstruct.html">Memory (RAM)</a></li>
+																<li><a href="underConstruct.html">Motherboards</a></li>
+																<li><a href="underConstruct.html">Keyboards</a></li>
+																<li><a href="underConstruct.html">Headphones</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
@@ -440,37 +439,37 @@ input:valid ~ .floating-label {
 														<div class="col-xs-12 col-sm-12 col-md-2 col-menu">
 															<h2 class="title">Cameras</h2>
 															<ul class="links">
-																<li><a href="#">Accessories</a></li>
-																<li><a href="#">Binoculars</a></li>
-																<li><a href="#">Telescopes</a></li>
-																<li><a href="#">Camcorders</a></li>
-																<li><a href="#">Digital</a></li>
-																<li><a href="#">Film Cameras</a></li>
-																<li><a href="#">Flashes</a></li>
-																<li><a href="#">Lenses</a></li>
-																<li><a href="#">Surveillance</a></li>
-																<li><a href="#">Tripods</a></li>
+																<li><a href="underConstruct.html">Accessories</a></li>
+																<li><a href="underConstruct.html">Binoculars</a></li>
+																<li><a href="underConstruct.html">Telescopes</a></li>
+																<li><a href="underConstruct.html">Camcorders</a></li>
+																<li><a href="underConstruct.html">Digital</a></li>
+																<li><a href="underConstruct.html">Film Cameras</a></li>
+																<li><a href="underConstruct.html">Flashes</a></li>
+																<li><a href="underConstruct.html">Lenses</a></li>
+																<li><a href="underConstruct.html">Surveillance</a></li>
+																<li><a href="underConstruct.html">Tripods</a></li>
 															</ul>
 														</div>
 														<!-- /.col -->
 														<div class="col-xs-12 col-sm-12 col-md-2 col-menu">
 															<h2 class="title">Mobile Phones</h2>
 															<ul class="links">
-																<li><a href="#">Apple</a></li>
-																<li><a href="#">Samsung</a></li>
-																<li><a href="#">Lenovo</a></li>
-																<li><a href="#">Motorola</a></li>
-																<li><a href="#">LeEco</a></li>
-																<li><a href="#">Asus</a></li>
-																<li><a href="#">Acer</a></li>
-																<li><a href="#">Accessories</a></li>
-																<li><a href="#">Headphones</a></li>
-																<li><a href="#">Memory Cards</a></li>
+																<li><a href="underConstruct.html">Apple</a></li>
+																<li><a href="underConstruct.html">Samsung</a></li>
+																<li><a href="underConstruct.html">Lenovo</a></li>
+																<li><a href="underConstruct.html">Motorola</a></li>
+																<li><a href="underConstruct.html">LeEco</a></li>
+																<li><a href="underConstruct.html">Asus</a></li>
+																<li><a href="underConstruct.html">Acer</a></li>
+																<li><a href="underConstruct.html">Accessories</a></li>
+																<li><a href="underConstruct.html">Headphones</a></li>
+																<li><a href="underConstruct.html">Memory Cards</a></li>
 															</ul>
 														</div>
 														<div
 															class="col-xs-12 col-sm-12 col-md-4 col-menu custom-banner">
-															<a href="#"><img alt=""
+															<a href="underConstruct.html"><img alt=""
 																src="./images/banner-side.png"></a>
 														</div>
 													</div>
@@ -488,7 +487,7 @@ input:valid ~ .floating-label {
 									<li class="dropdown"><a href="contact.html">Shoes</a></li>
 									<li class="dropdown"><a href="contact.html">Kids and
 											Girls</a></li>
-									<li class="dropdown"><a href="#" class="dropdown-toggle"
+									<li class="dropdown"><a href="underConstruct.html" class="dropdown-toggle"
 										data-hover="dropdown" data-toggle="dropdown">Pages</a>
 										<ul class="dropdown-menu pages">
 											<li>
@@ -520,7 +519,7 @@ input:valid ~ .floating-label {
 											</li>
 										</ul></li>
 									<li class="dropdown  navbar-right special-menu"><a
-										href="#">Todays offer</a></li>
+										href="underConstruct.html">Todays offer</a></li>
 								</ul>
 								<!-- /.navbar-nav -->
 								<div class="clearfix"></div>
@@ -564,7 +563,7 @@ input:valid ~ .floating-label {
 												adipisicing elit.</span>
 										</div>
 										<div class="button-holder fadeInDown-3">
-											<a href="#"
+											<a href="underConstruct.html"
 												class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
 												Now</a>
 										</div>
@@ -588,7 +587,7 @@ input:valid ~ .floating-label {
 												aspernatur aut odit aut fugit</span>
 										</div>
 										<div class="button-holder fadeInDown-3">
-											<a href="#"
+											<a href="underConstruct.html"
 												class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
 												Now</a>
 										</div>
@@ -2239,6 +2238,131 @@ input:valid ~ .floating-label {
 			</div>
 		</div>
 	</div>
+	
+	<!-- ============================================================= FOOTER ============================================================= -->
+<footer id="footer" class="footer color-bg">
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Contact Us</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class="toggle-footer" style="">
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p>IIITB, Electronic City, Bangalore</p>
+                </div>
+              </li>
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p>+80 23456789<br>
+                    +91 9876543210</p>
+                </div>
+              </li>
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body"> <span>flopkart@flopkart.com </span> </div>
+              </li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Customer Service</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a href="underConstruct.html" title="About us">Order History</a></li>
+              <li><a href="underConstruct.html" title="faq">FAQ</a></li>
+              <li><a href="underConstruct.html" title="24x7">24x7 Customer Care</a></li>
+              <li><a href="underConstruct.html" title="Popular Searches">Specials</a></li>
+              <li class="last"><a href="underConstruct.html" title="Where is my order?">Help Center</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Corporation</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a title="Your Account" href="underConstruct.html">About us</a></li>
+              <li><a title="Addresses" href="underConstruct.html">Company</a></li>
+              <li><a href="admin.jsp">Admin</a></li>
+              <li><a title="Addresses" href="underConstruct.html">Investor Relations</a></li>
+              <li class="last"><a title="Orders History" href="underConstruct.html">Advanced Search</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Why Choose Us</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a href="underConstruct.html" title="About us">Shopping Guide</a></li>
+              <li><a href="underConstruct.html" title="Blog">Blog</a></li>
+              <li><a href="underConstruct.html" title="Company">Company</a></li>
+              <li><a href="underConstruct.html" title="Investor Relations">Investor Relations</a></li>
+              <li class=" last"><a href="underConstruct.html" title="Suppliers">Contact Us</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright-bar">
+    <div class="container">
+      <div class="col-xs-12 col-sm-6 no-padding social">
+        <ul class="link">
+          <li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="Facebook"></a></li>
+          <li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="Twitter"></a></li>
+          <li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#" title="GooglePlus"></a></li>
+          <li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
+          <li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="PInterest"></a></li>
+          <li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="Linkedin"></a></li>
+          <li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="Youtube"></a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-6 no-padding">
+        <div class="clearfix payment-methods">
+          <ul>
+            <li><img src="./images/payments/1.png" alt=""></li>
+            <li><img src="./images/payments/2.png" alt=""></li>
+            <li><img src="./images/payments/3.png" alt=""></li>
+            <li><img src="./images/payments/4.png" alt=""></li>
+            <li><img src="./images/payments/5.png" alt=""></li>
+          </ul>
+        </div>
+        <!-- /.payment-methods --> 
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- ============================================================= FOOTER : END============================================================= -->
+
 
 	<!-- JavaScripts placed at the end of the document so the pages load faster -->
 	<script src="./bootstrapFiles/js/jquery-1.11.1.min.js"></script>
