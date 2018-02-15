@@ -603,9 +603,11 @@ $(document).ready(function()
     var email = "<%=request.getParameter("email") %>";
     var phone = "<%=request.getParameter("phone") %>";
     var pic_URL = "<%=request.getParameter("pic_URL") %>";
-    <% CreateProperties cp = new CreateProperties(); %>
+<%--     <% CreateProperties cp = new CreateProperties(); %> --%>
     <% AccessProperties ap = new AccessProperties(); %>
-    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
+<%--         var imgServerURL = "<%=ap.getImageServerURL() %>";  --%>
+ //       alert(imgServerURL);
+         var imgServerURL="http://127.0.0.1:8887/"  
 	$('#firstName').val(firstName);
 	$('#lastName').val(lastName);
 	$('#email').val(email);
