@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	 <class name="com.iiitb.ooadvoid.pojo.FlopkartItem" table="flopkartItem"  dynamic-update="true">
+      
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "itemid" column = "itemid" type = "string"  unique="true"/>
+      <property name = "itemname" column = "itemname" type = "string"/>
+      <property name = "category" column = "category" type = "string"/>
+      <property name = "price" column = "price" type = "integer"/>
+      <property name = "discount" column = "discount" type = "integer"/>
+      <property name = "stars" column = "stars" type = "integer"/>
+	 
+	</class>
+</hibernate-mapping>
