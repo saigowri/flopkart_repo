@@ -20,11 +20,7 @@
                 <label class="control-label sr-only" for="password-input">Password </label>
                 <input class="form-control" type="password" placeholder="Password" id="password-input">
             </div>
-            <div class="checkbox hidden">
-                <label>
-                    <input type="checkbox"> Remember me</label>
-            </div>
-            <button class="btn btn-default" type="submit"> <strong>Login</strong></button>
+            <button class="btn btn-default" type="submit" onclick=" return sellerLogin();">Login</button>
         </form>
         
     <div class="container-fluid">
@@ -88,8 +84,39 @@
             <p class="text-lowercase text-center">to process your payments</p>
         </div>
     </div>
-    <script src="./bootstrapFiles/js/jquery.min.js"></script>
+    <script src="./bootstrapFiles/js/jquery-1.11.1.min.js"></script>
     <script src="./bootstrapFiles/js/bootstrap.min.js"></script>
 </body>
+<script>
+function formToJSON() 
+{
+	var email = $("#email-input").val();
+	var password = $("#password-input").val();
+	var flopkart_user = JSON.stringify({
+    	"email":email,
+    	"password":password
+    	});
+	alert(flopkart_user);
+	return flopkart_user;
+}
 
+function sellerLogin(){
+	var ctxPath = "<%=request.getContextPath()%>";
+	$.ajax({
+		type : 'POST',
+		contentType : 'application/json',
+		url : ctxPath + "/webapi/users/email",
+		dataType : "json", // data type of response
+		data : formToJSON(),
+		success : render,
+		error : function(){
+			alert("Enter valid login credentials");
+		}
+	});
+}
+
+function render(result) {
+	window.location.href = "success.jsp";
+}
+</script>
 </html>
