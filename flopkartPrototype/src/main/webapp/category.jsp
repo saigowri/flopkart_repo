@@ -21,7 +21,6 @@
 <link rel="stylesheet" href="./bootstrapFiles/css/owl.transitions.css">
 <link rel="stylesheet" href="./bootstrapFiles/css/animate.min.css">
 <link rel="stylesheet" href="./bootstrapFiles/css/rateit.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/lightbox.css">
 <link rel="stylesheet" href="./bootstrapFiles/css/bootstrap-select.min.css">
 
 <!-- Icons/Glyphs -->
@@ -689,7 +688,6 @@
 <script src="./bootstrapFiles/js/jquery-1.11.1.min.js"></script> 
 <script src="./bootstrapFiles/js/bootstrap.js"></script>
 <script src="./bootstrapFiles/js/bootstrap.min.js"></script> 
-<script src="./bootstrapFiles/js/lightbox.min.js"></script> 
 <script src="./bootstrapFiles/js/bootstrap-hover-dropdown.min.js"></script> 
 <script src="./bootstrapFiles/js/owl.carousel.min.js"></script> 
 <script src="./bootstrapFiles/js/echo.min.js"></script> 
