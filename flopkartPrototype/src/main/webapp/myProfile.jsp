@@ -599,7 +599,6 @@
 $(document).ready(function() 
 {
     $("#gender-row").hide();
-<<<<<<< HEAD
 	checkCookie();		    
 });
 
@@ -625,16 +624,16 @@ function diplayUser(user)
 	$('#email').val(user.email);
 	$('#phone').val(user.phone);
 	$('#userID').html(user.firstName+" "+user.lastName);
-	if(!(user.pic_URL in user))
+<%--     <% CreateProperties cp = new CreateProperties(); %> --%>
+    <% AccessProperties ap = new AccessProperties(); %>
+    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
+	if(!("pic_URL" in user))
 	{	
 		$("#no_dp").show();
 		$("#dp").hide();
 	}
 	else
 	{	
-	    <% CreateProperties cp = new CreateProperties(); %>
-	    <% AccessProperties ap = new AccessProperties(); %>
-	    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
         $('#dp').attr('src',imgServerURL+user.pic_URL);
 		$("#dp").show();
 		$("#no_dp").hide();
