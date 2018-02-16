@@ -93,14 +93,8 @@ input:valid ~ .floating-label {
 									<label id="Login_btn"> <a data-toggle="modal"
 										data-target="#loginModal"> Login </a>
 									</label>
-									<input type="submit" id="user_btn" name="user_btn" value="Guest"
-										class="login_user btn btn-link" style="color: white; font-size: 90%;" /> 
-									<input class="login_user" id="firstName" name="firstName" type="text" />
-									<input class="login_user" id="lastName" name="lastName" type="text" /> 
-									<input class="login_user" id="email" name="email" type="text" /> 
-									<input class="login_user" id="phone" name="phone" type="text" /> 
-									<input class="login_user" id="pic_URL" name="pic_URL" type="text" />
-								</form>
+									<input type="submit" id="user_btn" name="user_btn" value="My Account"
+										class="login_user btn btn-link" style="color: white; font-size: 90%;" /> 								</form>
 							</li>
 							<!-- ============================================== Login Modal ============================================== -->
 
@@ -2376,6 +2370,7 @@ input:valid ~ .floating-label {
 	<script src="./bootstrapFiles/js/bootstrap-select.min.js"></script>
 	<script src="./bootstrapFiles/js/wow.min.js"></script>
 	<script src="./bootstrapFiles/js/scripts.js"></script>
+	<script src="./bootstrapFiles/js/cookies.js"></script>
 	<script>
 	$(document).ready(function()
 			{
@@ -2409,46 +2404,15 @@ input:valid ~ .floating-label {
 	{
 		$(".login_user").hide();
 		$('#Login_btn').hide();
-		$('#user_btn').val("My Account");
-		$('#firstName').val(user.firstName);
-		$('#pic_URL').val(user.pic_URL);
-		$('#lastName').val(user.lastName);
-		$('#email').val(user.email);
-		$('#phone').val(user.phone);
+// 		$('#user_btn').val("My Account");
+// 		$('#firstName').val(user.firstName);
+// 		$('#pic_URL').val(user.pic_URL);
+// 		$('#lastName').val(user.lastName);
+// 		$('#email').val(user.email);
+// 		$('#phone').val(user.phone);
 		$('#user_btn').show();
 	}
-	
-	function setCookie(cname, cvalue, exminutes) 
-	{
-	    var d = new Date();
-	    d.setTime(d.getTime() + (exminutes * 60 * 1000));
-	    var expires = "expires="+d.toUTCString();
-	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-	}
 
-	function deleteCookie(cname) 
-	{
-	    document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
-	};
-	
-	function getCookie(cname) 
-	{
-	    var name = cname + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i = 0; i < ca.length; i++) 
-	    {
-	        var c = ca[i];
-	        while (c.charAt(0) == ' ') 
-	        {
-	            c = c.substring(1);
-	        }
-	        if (c.indexOf(name) == 0) 
-	        {
-	            return c.substring(name.length, c.length);
-	        }
-	    }
-	    return "";
-	}
 		function validate() 
 		{
 			$(".warning").hide();
