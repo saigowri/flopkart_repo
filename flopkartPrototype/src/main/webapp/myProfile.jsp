@@ -594,44 +594,55 @@
 <script src="./bootstrapFiles/js/bootstrap-select.min.js"></script> 
 <script src="./bootstrapFiles/js/wow.min.js"></script> 
 <script src="./bootstrapFiles/js/scripts.js"></script>
+<script src="./bootstrapFiles/js/cookies.js"></script>
 <script>
 $(document).ready(function() 
 {
     $("#gender-row").hide();
-    var firstName = "<%=request.getParameter("firstName") %>";
-    var lastName = "<%=request.getParameter("lastName") %>";
-    var email = "<%=request.getParameter("email") %>";
-    var phone = "<%=request.getParameter("phone") %>";
-    var pic_URL = "<%=request.getParameter("pic_URL") %>";
-    <% CreateProperties cp = new CreateProperties(); %>
-    <% AccessProperties ap = new AccessProperties(); %>
-    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
-	$('#firstName').val(firstName);
-	$('#lastName').val(lastName);
-	$('#email').val(email);
-	$('#phone').val(phone);
-	$('#userID').html(firstName+" "+lastName);
-	if(pic_URL===null || pic_URL.length===0)
+	checkCookie();		    
+});
+
+
+function checkCookie() 
+{
+    var user = getCookie("user_details");
+    if (user != "") 
+    {
+		setCookie("user_details", user, 10);
+		diplayUser(JSON.parse(user));
+    } 
+    else 
+    {
+    	logout();
+    }
+}
+
+function diplayUser(user)
+{
+	$('#firstName').val(user.firstName);
+	$('#lastName').val(user.lastName);
+	$('#email').val(user.email);
+	$('#phone').val(user.phone);
+	$('#userID').html(user.firstName+" "+user.lastName);
+	if(!(user.pic_URL in user))
 	{	
 		$("#no_dp").show();
 		$("#dp").hide();
 	}
 	else
 	{	
-        $('#dp').attr('src',imgServerURL+pic_URL);
+	    <% CreateProperties cp = new CreateProperties(); %>
+	    <% AccessProperties ap = new AccessProperties(); %>
+	    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
+        $('#dp').attr('src',imgServerURL+user.pic_URL);
 		$("#dp").show();
 		$("#no_dp").hide();
 	}
-    
-});
+}
+
 function logout()
 {
 	deleteCookie("user_details");
 }
-
-function deleteCookie(cname) 
-{
-    document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
-};
 </script>
 </body></html>
