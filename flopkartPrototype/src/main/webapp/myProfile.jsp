@@ -599,6 +599,7 @@
 $(document).ready(function() 
 {
     $("#gender-row").hide();
+<<<<<<< HEAD
 	checkCookie();		    
 });
 
