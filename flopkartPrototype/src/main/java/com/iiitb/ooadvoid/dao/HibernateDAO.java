@@ -67,6 +67,7 @@ public class HibernateDAO<E>
 		}
 		update(entity, id, fields);
 		tx.commit();
+		session.flush();
 		session.close();
 	}
 

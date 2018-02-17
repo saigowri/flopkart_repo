@@ -34,7 +34,7 @@
 	<div class="col-md-6">
 		<div class="container" style="text-align: center; width: 400px">
 			<h3 style="color:white">Enter new subcategory</h3><br/>
-			<form>
+			<form action="success.jsp">
 				<div id="content"></div>
 				<br /> <input class="form-control" type="text" id="subcatName"
 					placeholder="Enter subcategory name"> 
@@ -85,7 +85,7 @@ function fetch()
             $('#content').html(data);
     	},
     	error:function() {
-        	alert("error occurred");
+        	//alert("error occurred");
     	}
 	});
 }
@@ -123,7 +123,7 @@ function insertSubcategory()
 			data : formToJSON(),
 			success : render,
 			error: function(err) {
-				alert(JSON.stringify(err));
+				//alert(JSON.stringify(err));
 			}
 	});
 }
@@ -143,7 +143,7 @@ function insertCategory()
 			data : formToJSON1(),
 			success : render,
 			error: function(err) {
-				alert(JSON.stringify(err));
+				//alert(JSON.stringify(err));
 			}
 	});
 }
