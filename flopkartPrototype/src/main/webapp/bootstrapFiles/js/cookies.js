@@ -1,3 +1,4 @@
+	
 	function setCookie(cname, cvalue, exminutes) 
 	{
 	    var d = new Date();
@@ -6,8 +7,9 @@
 	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 	}
 
-	function deleteCookie(cname) {
-	    document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	function deleteCookie(cname) 
+	{
+	    document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 	};
 	
 	function getCookie(cname) 
