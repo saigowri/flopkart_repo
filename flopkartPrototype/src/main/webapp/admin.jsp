@@ -60,7 +60,7 @@
 <script>
 $(document).ready(function(){
 
-    <% FlopkartCategoryClient client = new FlopkartCategoryClient(); %>
+<%--     <% FlopkartCategoryClient client = new FlopkartCategoryClient(); %> --%>
 <%-- 	String test1 = test.getImageURL();%> --%>
 <%-- 	var test = "<%=test1%>"; --%>
 // 	alert(test);
@@ -140,7 +140,11 @@ function insertCategory()
 			type : 'POST',
 			contentType : 'application/json',
 			url : ctxPath + "/webapi/categories/create",
-			data : formToJSON1()
+			data : formToJSON1(),
+			success : render,
+			error: function(err) {
+				alert(JSON.stringify(err));
+			}
 	});
 }
 </script>

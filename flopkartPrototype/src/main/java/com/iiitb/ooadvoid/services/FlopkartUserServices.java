@@ -77,7 +77,6 @@ public class FlopkartUserServices
 	@Consumes("application/json")
 	public Response addFlopkartUser(FlopkartUser user)
 	{
-			user.setUserID(user.getUserID());
 			user.setFirstName(user.getFirstName());
 			user.setLastName(user.getLastName());
 			user.setUserType(user.getUserType());
