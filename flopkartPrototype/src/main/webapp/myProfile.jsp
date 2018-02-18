@@ -30,9 +30,6 @@
 <link href="./bootstrapFiles/css(1).css" rel="stylesheet" type="text/css">
 <link href="./bootstrapFiles/css(2).css" rel="stylesheet" type="text/css">
 <style>
-input[type="file"] {
-	display: none;
-}
 
 .custom-file-upload {
 	border: 1px solid #ccc;
@@ -404,12 +401,14 @@ input[type="file"] {
 						<div id="dp" class="dp"><img id="dp1" height="100px"  src="#" >
 						<span id="tooltiptext" class="tooltiptext"></span></div>
                   	
-					<label class="custom-file-upload" id="no_dp">				
-						<form id="update_img" method="post" action="#" enctype="multipart/form-data">
-							<input type="file" id="profileImg"/>
-							<img height="50px" width="50px" src="./images/profile-pic-male_icon.svg"> Add Image
+					<div id="no_dp">				
+						<form id="update_img" method="post" action="insert-action.jsp" enctype="multipart/form-data">
+							<input type="file"
+								id="studImg" name="studImg" accept=".jpg, .jpeg, .png, .JPG, .PNG, .JPEG" />
+							<input type="text" id="email1" hidden="hidden"/>
+							<input type="submit"/>
 						</form>
-					</label>
+					</div>
 				 </li>
                 </ul>
               </div>
@@ -644,6 +643,7 @@ function diplayUser(user)
 	$('#firstName').val(user.firstName);
 	$('#lastName').val(user.lastName);
 	$('#email').val(user.email);
+	$('#email1').val(user.email);
 	$('#phone').val(user.phone);
 	$('#userID').html(user.firstName+" "+user.lastName);
 <%--     <% CreateProperties cp = new CreateProperties(); %> --%>

@@ -51,16 +51,16 @@ public class FlopkartUserServices
 	@Path("/emailSeller")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public FlopkartUser getFlopkartSeller_UserbyEmail(FlopkartUser user)
+	public Response getFlopkartSeller_UserbyEmail(FlopkartUser user)
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
 		FlopkartUser user_details = dao.getFlopkartSellerByEmail(user);
 		if(user_details==null)
 			return null;
-		if(!(user.encodePassword(user.getPassword()).equals(user_details.getPassword())) || !(user.getUserType().equals("seller")))
-			return user;
+		if(!(user.encodePassword(user.getPassword()).equals(user_details.getPassword())) || !(user_details.getUserType().equals("seller")))
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		else
-			return user_details;
+			return Response.ok(user, "application/json").build();
 	}
 	
 /*	@POST

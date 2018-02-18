@@ -107,13 +107,9 @@ function sellerLogin(){
 		type : 'POST',
 		contentType : 'application/json',
 		url : ctxPath + "/webapi/users/emailSeller",
-		dataType : "json", // data type of response
 		data : formToJSON(),
 		success : render,
-		error : function(err) {
-			alert("Enter valid login credentials");
-			return false;
-		}
+		error : err
 	});
 }
 
@@ -125,6 +121,12 @@ function render(result) {
 	}
 	//alert(JSON.stringify(result))
 	return true;
+}
+
+function err(error) {
+	let x = error;
+	alert(JSON.stringify(error)+" Enter valid login credentials");
+	return false;
 }
 </script>
 </html>

@@ -1,3 +1,4 @@
+<%@page import="com.iiitb.ooadvoid.AccessProperties"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*"%>
@@ -28,13 +29,6 @@
 <title>Results</title>
 </head>
 <%
-	String rollNo = "";
-	String studentName = request.getParameter("studName");
-	String studUrl = "";
-	String dm = "";
-	String ml = "";
-	String ooad = "";
-	String mml = "";
 	String ImageFile = "";
 	String itemName = "";
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -45,42 +39,25 @@
 	items = upload.parseRequest(request);
 	Iterator itr = items.iterator();
 	File savedFile = null;
+	String email="";
 	while (itr.hasNext()) {
 		FileItem item = (FileItem) itr.next();
-
 		if (item.isFormField()) {
 			String name = item.getFieldName();
-			if (name.equalsIgnoreCase("rollNum")) {
-				rollNo = (String) item.getString();
+			if (name.equalsIgnoreCase("email1")) {
+				email = (String) item.getString();
 			}
-			if (name.equalsIgnoreCase("studName")) {
-				studentName = (String) item.getString();
-			}
-			if (name.equalsIgnoreCase("dm")) {
-				dm = (String) item.getString();
-			}
-			if (name.equalsIgnoreCase("ooad")) {
-				ooad = (String) item.getString();
-			}
-			if (name.equalsIgnoreCase("ml")) {
-				ml = (String) item.getString();
-			}
-			if (name.equalsIgnoreCase("mml")) {
-				mml = (String) item.getString();
-			}
-		} else {
+		}
+		else {
 			itemName = item.getName();
-			savedFile = new File(
-					"C:\\Users\\kpuranik\\git\\flopkart\\flopkartPrototype\\src\\main\\webapp\\images\\" + itemName);
-			item.write(savedFile);
+// 			AccessProperties ap = new AccessProperties(); 
+// 		    String path = ap.getImageServerURL();
+			System.out.println(itemName);
+			item.write(new File(
+					"C:\\Users\\YSK\\Desktop\\sample_images" + itemName));
 		}
 	}
-	System.out.println(rollNo+" r "+studentName+" "+dm+" "+ooad+" "+ml+" "+mml);
-	studUrl = "./images/" + itemName;
 
-	ArrayList<String> courses = new ArrayList<String>();
-	ArrayList<String> grades = new ArrayList<String>();
-	int i = 0;
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
 
@@ -90,52 +67,12 @@
 		PreparedStatement pstmt = null;
 		Statement stmt = conn.createStatement();
 		String sql;
-		sql = "INSERT INTO Student(RollNo , StudentName, StudImage) VALUES ('" + rollNo + "','" + studentName
-				+ "','" + studUrl + "')";
+		sql = "UPDATE flopkartuser SET pic_URL ='" + itemName + "' WHERE email='"+email +"'";
 		int o = stmt.executeUpdate(sql);
-		
-		sql = "SELECT StudentID FROM Student where RollNo ='" + rollNo + "'";
-		ResultSet rs = stmt.executeQuery(sql);
-		if (rs.next()) {
-			int sid = rs.getInt("StudentID");
-			System.out.println(sid);
-
-			sql = "INSERT INTO StudentCourse (grade , CourseID, StudentID) VALUES ('" + dm + "' , 1 , " + sid
-					+ ")";
-			o = stmt.executeUpdate(sql);
-			sql = "INSERT INTO StudentCourse (grade , CourseID, StudentID) VALUES ('" + ooad + "' , 2 , " + sid
-					+ ")";
-			o = stmt.executeUpdate(sql);
-			sql = "INSERT INTO StudentCourse (grade , CourseID, StudentID) VALUES ('" + ml + "' , 3 , " + sid
-					+ ")";
-			o = stmt.executeUpdate(sql);
-			sql = "INSERT INTO StudentCourse (grade , CourseID, StudentID) VALUES ('" + mml + "' , 4 , " + sid
-					+ ")";
-			o = stmt.executeUpdate(sql);
+		if(o==1){
+			 response.sendRedirect("myProfile.jsp");
 		}
-		if (o != 1) {
-			response.sendRedirect("grade-data.jsp?invalid=1");
-		} else {
-%>
-
-
-<body>
-	<div class="container">
-		<div class="well" style="width: 400px;">
-			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
-					<h3>Student has been Registered</h3>
-				</div>
-				<div class="col-sm-3"></div>
-			</div>
-		</div>
-	</div>
-</body>
-
-<%
-	}
-  		stmt.close();
+		stmt.close();
 		conn.close();
 	} catch (SQLException se) {
 		se.printStackTrace();
