@@ -401,13 +401,17 @@
 						<div id="dp" class="dp"><img id="dp1" height="100px"  src="#" >
 						<span id="tooltiptext" class="tooltiptext"></span></div>
                   	
-					<div id="no_dp">				
+					<div id="no_dp">		
+					<%if (request.getParameter("i") != null && Integer.parseInt(request.getParameter("i")) == 1) { %>
+						<p style="color:red;"><b>Login again to view uploaded dp</b></p>
+					 <% } else { %>		
 						<form id="update_img" method="post" action="insert-action.jsp" enctype="multipart/form-data">
 							<input type="file"
-								id="studImg" name="studImg" accept=".jpg, .jpeg, .png, .JPG, .PNG, .JPEG" />
-							<input type="text" id="email1" hidden="hidden"/>
-							<input type="submit"/>
+								id="dpImg" name="dpImg" accept=".jpg, .jpeg, .png, .JPG, .PNG, .JPEG" required/>
+							<input type="text" id="email1" name="email1" hidden="hidden"/>
+							<input type="submit" value="Set profile picture"/>
 						</form>
+					<% } %>
 					</div>
 				 </li>
                 </ul>
@@ -615,7 +619,8 @@
 $(document).ready(function() 
 {
     $("#gender-row").hide();
-	checkCookie();		    
+	checkCookie();	
+	
 });
 
 

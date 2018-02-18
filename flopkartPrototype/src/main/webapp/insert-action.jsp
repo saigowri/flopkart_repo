@@ -31,15 +31,17 @@
 <%
 	String ImageFile = "";
 	String itemName = "";
+	String email="";
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
+	
+	try {
 	FileItemFactory factory = new DiskFileItemFactory();
 	ServletFileUpload upload = new ServletFileUpload(factory);
 	List items = null;
 	items = upload.parseRequest(request);
 	Iterator itr = items.iterator();
+	System.out.println(items);
 	File savedFile = null;
-	String email="";
 	while (itr.hasNext()) {
 		FileItem item = (FileItem) itr.next();
 		if (item.isFormField()) {
@@ -54,23 +56,26 @@
 // 		    String path = ap.getImageServerURL();
 			System.out.println(itemName);
 			item.write(new File(
-					"C:\\Users\\YSK\\Desktop\\sample_images" + itemName));
+					"C:\\Users\\YSK\\Desktop\\sample_images\\" + itemName));
 		}
+	}
+	}
+	catch(Exception e){
+		e.printStackTrace();
 	}
 
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/sampleDatabase", "ooaduser",
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampleDatabase", "ooaduser",
 				"Password");
-
 		PreparedStatement pstmt = null;
 		Statement stmt = conn.createStatement();
 		String sql;
 		sql = "UPDATE flopkartuser SET pic_URL ='" + itemName + "' WHERE email='"+email +"'";
 		int o = stmt.executeUpdate(sql);
 		if(o==1){
-			 response.sendRedirect("myProfile.jsp");
+			 response.sendRedirect("myProfile.jsp?i=1");
 		}
 		stmt.close();
 		conn.close();
