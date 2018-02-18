@@ -90,6 +90,7 @@ public class FlopkartUserServices
 			return user_details;
 	}
 	
+	
 	@POST
 	@Path("/create")
 	@Consumes("application/json")
@@ -109,6 +110,25 @@ public class FlopkartUserServices
 		return Response.ok().build();
 	}
 
+	@POST
+	@Path("/createCustomer")
+	@Consumes("application/json")
+	public FlopkartUser addflopkartUser(FlopkartUser user)
+	{
+			user.setFirstName(user.getFirstName());
+			user.setLastName(user.getLastName());
+			user.setUserType("customer");
+			user.setEmail(user.getEmail());
+			user.setPhone(user.getPhone());
+			user.setPic_URL(null);
+			user.setPassword(user.getPassword());
+		
+		FlopkartUser user_details = null;
+		
+		FlopkartUserDAO dao = new FlopkartUserDAO();
+		user_details  = dao.addFlopkartUser(user);
+		return user_details;
+	}
 	@PUT
 	@Path("/update/{id}")
 	@Consumes("application/json")

@@ -206,5 +206,17 @@ public class HibernateDAO<E>
 		return entity;
 //		return currentSession().createCriteria(daoType).list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<E> findAll(String entity_name, String param1, int val1)
+	{
+		session = SessionUtil.getSession();
+		String hql = "from "+ entity_name + " where "+param1+" = :val1";
+		Query query = session.createQuery(hql);
+		query.setParameter("val1", val1);
+		List<E> entity = query.list();
+		session.close();
+		return entity;
+	}
 
 }

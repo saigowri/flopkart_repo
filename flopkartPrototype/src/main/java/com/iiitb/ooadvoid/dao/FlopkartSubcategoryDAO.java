@@ -38,4 +38,10 @@ public class FlopkartSubcategoryDAO extends HibernateDAO<FlopkartSubcategory>
 		super.update(subcategory,id);
 		return 1;
 	}
+	
+	public List<FlopkartSubcategory> getFlopkartSubcategoryBysubcategoryId(FlopkartSubcategory subcategory)
+	{
+		int val =  subcategory.getCategoryId();
+		return super.findAll(entity_name,"categoryId",val);
+	}
 }
