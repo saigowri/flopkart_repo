@@ -11,16 +11,16 @@
 
 <body>
     <header><img src="./images/sellerHub/seller-hub-logo.png" id="flipkartsellerhub" class="flipkartsellerhub">
-        <form class="form-inline bootstrap-form-with-validation">
+        <form class="form-inline bootstrap-form-with-validation" action="success.jsp">
             <div class="form-group">
                 <label class="control-label sr-only" for="email-input">Email </label>
-                <input class="form-control" type="email" placeholder="Email" id="email-input">
+                <input class="form-control" type="email" placeholder="Email" id="email-input" required>
             </div>
             <div class="form-group">
                 <label class="control-label sr-only" for="password-input">Password </label>
-                <input class="form-control" type="password" placeholder="Password" id="password-input">
+                <input class="form-control" type="password" placeholder="Password" id="password-input" required>
             </div>
-            <button class="btn btn-default" type="submit" onclick=" return sellerLogin();">Login</button>
+            <input class="btn btn-default" type="submit" onclick="return sellerLogin();" value="Login"/>
         </form>
         
     <div class="container-fluid">
@@ -44,10 +44,10 @@
     <h2><b>Register Today</b></h2>
     <form class="form-horizontal" action="sellerRegistration.jsp">
         <div id="emailid">
-        <input type="email" placeholder="Email Id">
+        <input type="email" placeholder="Email Id" required>
             </div>
         <div id="phoneno" style="padding-top:15px">
-        <input type="text" placeholder="Phone No" >
+        <input type="text" placeholder="Phone No" required>
             </div>
         <div style="padding-top:15px">
             <button id="edit-submit-2" value="Start Selling" type="submit" class="btn btn-default form-submit" style="width:170px">Start Selling</button>
@@ -94,7 +94,8 @@ function formToJSON()
 	var password = $("#password-input").val();
 	var flopkart_user = JSON.stringify({
     	"email":email,
-    	"password":password
+    	"password":password,
+    	"userType":"seller"
     	});
 	alert(flopkart_user);
 	return flopkart_user;
@@ -105,18 +106,27 @@ function sellerLogin(){
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/users/email",
-		dataType : "json", // data type of response
+		url : ctxPath + "/webapi/users/emailSeller",
 		data : formToJSON(),
 		success : render,
-		error : function(){
-			alert("Enter valid login credentials");
-		}
+		error : err
 	});
 }
 
 function render(result) {
-	window.location.href = "success.jsp";
+	alert(result.id)
+	if(result.id==0){
+		alert("Invalid credentials - Register first!")
+		return false;
+	}
+	//alert(JSON.stringify(result))
+	return true;
+}
+
+function err(error) {
+	let x = error;
+	alert(JSON.stringify(error)+" Enter valid login credentials");
+	return false;
 }
 </script>
 </html>
