@@ -13,7 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.iiitb.ooadvoid.pojo.FlopkartSubcategory;
+import com.iiitb.ooadvoid.pojo.FlopkartUser;
 import com.iiitb.ooadvoid.dao.FlopkartSubcategoryDAO;
+import com.iiitb.ooadvoid.dao.FlopkartUserDAO;
 
 @Path("/subcategories")
 public class FlopkartSubcategoryServices 
@@ -69,4 +71,18 @@ public class FlopkartSubcategoryServices
 		}
 		return Response.ok().build();
 	}
+	
+	@POST
+	@Path("/categoryId")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public List<FlopkartSubcategory> getFlopkart_bySubcategoryId(FlopkartSubcategory subcategory)
+	{
+		FlopkartSubcategoryDAO dao = new FlopkartSubcategoryDAO();
+		List<FlopkartSubcategory> subcategory_details = dao.getFlopkartSubcategoryBysubcategoryId(subcategory);
+		if(subcategory_details==null)
+			return null;
+		else
+			return subcategory_details;
+	}	
 }

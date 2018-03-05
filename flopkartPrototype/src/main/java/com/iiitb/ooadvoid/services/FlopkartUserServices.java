@@ -1,7 +1,9 @@
 package com.iiitb.ooadvoid.services;
 
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -45,6 +47,22 @@ public class FlopkartUserServices
 			return user_details;
 	}	
 	
+	@POST
+	@Path("/emailSeller")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Response getFlopkartSeller_UserbyEmail(FlopkartUser user)
+	{
+		FlopkartUserDAO dao = new FlopkartUserDAO();
+		FlopkartUser user_details = dao.getFlopkartSellerByEmail(user);
+		if(user_details==null)
+			return null;
+		if(!(user.encodePassword(user.getPassword()).equals(user_details.getPassword())) || !(user_details.getUserType().equals("seller")))
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		else
+			return Response.ok(user, "application/json").build();
+	}
+	
 /*	@POST
 	@Path("/guest")
 	@Consumes("application/json")
@@ -72,6 +90,7 @@ public class FlopkartUserServices
 			return user_details;
 	}
 	
+	
 	@POST
 	@Path("/create")
 	@Consumes("application/json")
@@ -91,6 +110,25 @@ public class FlopkartUserServices
 		return Response.ok().build();
 	}
 
+	@POST
+	@Path("/createCustomer")
+	@Consumes("application/json")
+	public FlopkartUser addflopkartUser(FlopkartUser user)
+	{
+			user.setFirstName(user.getFirstName());
+			user.setLastName(user.getLastName());
+			user.setUserType("customer");
+			user.setEmail(user.getEmail());
+			user.setPhone(user.getPhone());
+			user.setPic_URL(null);
+			user.setPassword(user.getPassword());
+		
+		FlopkartUser user_details = null;
+		
+		FlopkartUserDAO dao = new FlopkartUserDAO();
+		user_details  = dao.addFlopkartUser(user);
+		return user_details;
+	}
 	@PUT
 	@Path("/update/{id}")
 	@Consumes("application/json")
