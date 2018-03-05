@@ -34,7 +34,7 @@
 	<div class="col-md-6">
 		<div class="container" style="text-align: center; width: 400px">
 			<h3 style="color:white">Enter new subcategory</h3><br/>
-			<form>
+			<form action="success.jsp">
 				<div id="content"></div>
 				<div style="background-color:blue; border-radius: 25px; font-size:20px; color:white" onclick="DispSubCat()">Subcategories
 				<div id="SubCat"></div></div>
@@ -87,7 +87,7 @@ function fetch()
             $('#content').html(data);
     	},
     	error:function() {
-        	alert("error occurred");
+        	//alert("error occurred");
     	}
 	});
 }
