@@ -15,16 +15,15 @@ public class FlopkartUserDAO extends HibernateDAO<FlopkartUser>
 		super.add(user);
 		return user;
 	}
-	
-	
+
 	public List<FlopkartUser> getFlopkartUsers()
 	{
-		return super.list(entity_name);
+		return super.list(new FlopkartUser());
 	}
 
 	public FlopkartUser getFlopkartUserById(int id)
 	{
-		return super.find(entity_name,id);
+		return super.find(new FlopkartUser(),id);
 	}
 
     public FlopkartUser getFlopkartUserByEmail(FlopkartUser user)

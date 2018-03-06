@@ -19,11 +19,34 @@ public class HibernateDAO<E>
 	{
 		session = SessionUtil.getSession();
 		tx = session.beginTransaction();
-		session.save(entity);
+		session.persist(entity);
+		session.flush();
 		tx.commit();
 		session.close();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<E> list(E ent)
+	{
+
+		session = SessionUtil.getSession();
+		Query query = session.createQuery("from "+ent.getClass().getName());
+		List<E> entity = query.list();
+		session.close();
+		return entity;
+	}
+	
+	public E find(E entity, int id)
+	{
+		session = SessionUtil.getSession();
+		tx = session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		E ent = (E) session.load(entity.getClass(), new Integer(id));
+		tx.commit();
+		session.close();
+		return ent;
+	}
+	
 	public void update(E entity, int id)
 	{
 		session = SessionUtil.getSession();
@@ -71,30 +94,6 @@ public class HibernateDAO<E>
 		session.close();
 	}
 
-	public void update(String entity_name, int id, List<String> param, List<String> val)
-	{
-		String conjunction = "";
-		String set_clause = "";
-		String hql ="";
-		int i=0;
-		for(String p :param)
-		{
-			set_clause += conjunction+p +" = :param"+i;
-			i++;
-			conjunction=", ";
-		}
-		hql = "update "+entity_name+" set "+set_clause+" where id = :id";
-		Query query = session.createQuery(hql);
-		i=0;
-		for(String v :val)
-		{
-			query.setParameter("param"+i, v);
-			i++;
-		}
-		query.setParameter("id", id);
-		query.executeUpdate();
-	}
-
 	public void update(E entity, int id, List<Field> fields)
 	{
 		try
@@ -126,7 +125,6 @@ public class HibernateDAO<E>
 		}
 	}
 	
-	
 	public int remove(String entity_name, int key)
 	{
 		session = SessionUtil.getSession();
@@ -138,20 +136,6 @@ public class HibernateDAO<E>
 		tx.commit();
 		session.close();
 		return rowCount;
-	}
-
-	@SuppressWarnings("unchecked")
-	public E find(String entity_name, int key)
-	{
-		session = SessionUtil.getSession();
-		String hql = "from "+ entity_name + " where id = :key";
-		Query query = session.createQuery(hql);
-		query.setParameter("key", key);
-		List<E> entity = query.list();
-		session.close();
-		if (entity.size() == 0)
-			return null;
-		return entity.get(0);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -193,18 +177,6 @@ public class HibernateDAO<E>
 		List<E> entity = query.list();
 		session.close();
 		return entity;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<E> list(String entity_name)
-	{
-
-		session = SessionUtil.getSession();
-		Query query = session.createQuery("from "+entity_name);
-		List<E> entity = query.list();
-		session.close();
-		return entity;
-//		return currentSession().createCriteria(daoType).list();
 	}
 	
 	@SuppressWarnings("unchecked")

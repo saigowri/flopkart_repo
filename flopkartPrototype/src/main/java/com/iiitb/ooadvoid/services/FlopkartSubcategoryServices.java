@@ -13,9 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.iiitb.ooadvoid.pojo.FlopkartSubcategory;
-import com.iiitb.ooadvoid.pojo.FlopkartUser;
 import com.iiitb.ooadvoid.dao.FlopkartSubcategoryDAO;
-import com.iiitb.ooadvoid.dao.FlopkartUserDAO;
 
 @Path("/subcategories")
 public class FlopkartSubcategoryServices 
