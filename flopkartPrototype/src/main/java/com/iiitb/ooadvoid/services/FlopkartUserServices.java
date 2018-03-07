@@ -20,7 +20,7 @@ public class FlopkartUserServices
 
 	@GET
 	@Produces("application/json")
-	public List<FlopkartUser> getFlopkart_Users()
+	public List<FlopkartUser> getFlopkartUsers()
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
 		List<FlopkartUser> users = dao.getFlopkartUsers();
@@ -32,7 +32,7 @@ public class FlopkartUserServices
 	@Path("/email")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public FlopkartUser getFlopkart_UserbyEmail(FlopkartUser user)
+	public FlopkartUser getFlopkartUserbyEmail(FlopkartUser user)
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
 		FlopkartUser user_details = dao.getFlopkartUserByEmail(user);
@@ -48,7 +48,7 @@ public class FlopkartUserServices
 	@Path("/emailSeller")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response getFlopkartSeller_UserbyEmail(FlopkartUser user)
+	public Response getFlopkartSellerUserbyEmail(FlopkartUser user)
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
 		FlopkartUser user_details = dao.getFlopkartSellerByEmail(user);
@@ -75,7 +75,7 @@ public class FlopkartUserServices
 	@Path("/phone")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public FlopkartUser getFlopkart_UserbyPhone(FlopkartUser user)
+	public FlopkartUser getFlopkartUserbyPhone(FlopkartUser user)
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
 		FlopkartUser user_details = dao.getFlopkartUserByPhone(user);
@@ -126,13 +126,14 @@ public class FlopkartUserServices
 		user_details  = dao.addFlopkartUser(user);
 		return user_details;
 	}
+
 	@PUT
 	@Path("/update/{id}")
 	@Consumes("application/json")
-	public Response updateFlopkart_User(@PathParam("id") int id, FlopkartUser user)
+	public Response updateFlopkartUser(@PathParam("id") int id, FlopkartUser user)
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
-		int count = dao.updateFlopkart_User(id, user);
+		int count = dao.updateFlopkartUser(id, user);
 		if (count == 0)
 		{
 			return Response.status(Response.Status.BAD_REQUEST).build();
@@ -143,7 +144,7 @@ public class FlopkartUserServices
 	@DELETE
 	@Path("/delete/{id}")
 	@Consumes("application/json")
-	public Response deleteFlopkart_User(@PathParam("id") int id)
+	public Response deleteFlopkartUser(@PathParam("id") int id)
 	{
 		FlopkartUserDAO dao = new FlopkartUserDAO();
 		int count = dao.deleteFlopkartUser(id);

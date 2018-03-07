@@ -45,7 +45,7 @@ public class FlopkartUserDAO extends HibernateDAO<FlopkartUser>
 		return super.remove(entity_name,id);
 	}
 
-	public int updateFlopkart_User(int id, FlopkartUser user)
+	public int updateFlopkartUser(int id, FlopkartUser user)
 	{
 		if (id <= 0)
 			return 0;	

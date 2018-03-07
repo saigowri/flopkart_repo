@@ -30,8 +30,10 @@ public class HibernateDAO<E>
 	{
 
 		session = SessionUtil.getSession();
+		session.flush();
 		Query query = session.createQuery("from "+ent.getClass().getName());
 		List<E> entity = query.list();
+		session.flush();
 		session.close();
 		return entity;
 	}
@@ -39,10 +41,12 @@ public class HibernateDAO<E>
 	public E find(E entity, int id)
 	{
 		session = SessionUtil.getSession();
+		session.flush();
 		tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		E ent = (E) session.load(entity.getClass(), new Integer(id));
 		tx.commit();
+		session.flush();
 		session.close();
 		return ent;
 	}
@@ -109,6 +113,7 @@ public class HibernateDAO<E>
 				conjunction=", ";
 			}
 			hql = "update "+entity.getClass().getName()+" set "+set_clause+" where id = :id";
+			session.flush();
 			Query query = session.createQuery(hql);
 			i=0;
 			for(Field p :fields)
@@ -129,11 +134,13 @@ public class HibernateDAO<E>
 	{
 		session = SessionUtil.getSession();
 		tx = session.beginTransaction();
+		session.flush();
 		String hql = "delete from "+entity_name+" where id = :id";
 		Query query = session.createQuery(hql);
 		query.setInteger("id", key);
 		int rowCount = query.executeUpdate();
 		tx.commit();
+		session.flush();
 		session.close();
 		return rowCount;
 	}
@@ -142,10 +149,12 @@ public class HibernateDAO<E>
 	public E find(String entity_name, String param, String val)
 	{
 		session = SessionUtil.getSession();
+		session.flush();
 		String hql = "from "+ entity_name + " where "+param+" = :val";
 		Query query = session.createQuery(hql);
 		query.setParameter("val", val);
 		List<E> entity = query.list();
+		session.flush();
 		session.close();
 		if (entity.size() == 0)
 			return null;
@@ -156,11 +165,13 @@ public class HibernateDAO<E>
 	public E find(String entity_name, String param1, String val1, String param2, String val2)
 	{
 		session = SessionUtil.getSession();
+		session.flush();
 		String hql = "from "+ entity_name + " where "+param1+" = :val1" + " and "+param2+" = :val2";
 		Query query = session.createQuery(hql);
 		query.setParameter("val1", val1);
 		query.setParameter("val2", val2);
 		List<E> entity = query.list();
+		session.flush();
 		session.close();
 		if (entity.size() == 0)
 			return null;
@@ -171,10 +182,12 @@ public class HibernateDAO<E>
 	public List<E> findAll(String entity_name, String param1, String val1)
 	{
 		session = SessionUtil.getSession();
+		session.flush();
 		String hql = "from "+ entity_name + " where "+param1+" = :val1";
 		Query query = session.createQuery(hql);
 		query.setParameter("val1", val1);
 		List<E> entity = query.list();
+		session.flush();
 		session.close();
 		return entity;
 	}
@@ -183,10 +196,12 @@ public class HibernateDAO<E>
 	public List<E> findAll(String entity_name, String param1, int val1)
 	{
 		session = SessionUtil.getSession();
+		session.flush();
 		String hql = "from "+ entity_name + " where "+param1+" = :val1";
 		Query query = session.createQuery(hql);
 		query.setParameter("val1", val1);
 		List<E> entity = query.list();
+		session.flush();
 		session.close();
 		return entity;
 	}
