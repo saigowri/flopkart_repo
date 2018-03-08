@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.iiitb.ooadvoid.AccessProperties" %>
     <%@ page import="com.iiitb.ooadvoid.CreateProperties" %>
-    <%@ page import="com.iiitb.ooadvoid.client.FlopkartCategoryClient" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -402,14 +401,17 @@
 						<span id="tooltiptext" class="tooltiptext"></span></div>
                   	
 					<div id="no_dp">		
-					<%if (request.getParameter("i") != null && Integer.parseInt(request.getParameter("i")) == 1) { %>
+					<%if (request.getParameter("imgName") != null) { %>
 						<p style="color:red;"><b>Login again to view uploaded dp</b></p>
 					 <% } else { %>		
-						<form id="update_img" method="post" action="insert-action.jsp" enctype="multipart/form-data">
-							<input type="file"
+						<form id="update_img" method="post" action="UploadServlet" enctype="multipart/form-data">
+						<label for="dpImg" class="custom-file-upload">
+						    <img height="50px" width="50px" src="./images/profile-pic-male_icon.svg">   Choose File
+						</label>
+							<input type="file"  style="display:none"
 								id="dpImg" name="dpImg" accept=".jpg, .jpeg, .png, .JPG, .PNG, .JPEG" required/>
-							<input type="text" id="email1" name="email1" hidden="hidden"/>
-							<input type="submit" value="Set profile picture"/>
+							<input type="submit" class="btn btn-warning btn-block" value="Set profile picture"/>
+							<input type="text" id="ID" name="ID" hidden="hidden"/>
 						</form>
 					<% } %>
 					</div>
@@ -620,11 +622,23 @@ $(document).ready(function()
 {
     $("#gender-row").hide();
 	checkCookie();	
-	
 });
 
-
 function checkCookie() 
+{
+    var user = getCookie("user_details");
+    if (user != "") 
+    {
+		setCookie("user_details", user, 10);
+		diplayUser(JSON.parse(user));
+    } 
+    else 
+    {
+    	logout();
+    }
+}
+
+function resetCookie() 
 {
     var user = getCookie("user_details");
     if (user != "") 
@@ -648,13 +662,13 @@ function diplayUser(user)
 	$('#firstName').val(user.firstName);
 	$('#lastName').val(user.lastName);
 	$('#email').val(user.email);
-	$('#email1').val(user.email);
+	$('#ID').val(user.id);
 	$('#phone').val(user.phone);
 	$('#userID').html(user.firstName+" "+user.lastName);
 <%--     <% CreateProperties cp = new CreateProperties(); %> --%>
     <% AccessProperties ap = new AccessProperties(); %>
     var imgServerURL = "<%=ap.getImageServerURL() %>"; 
-	if(!("pic_URL" in user))
+	if(!("pic_URL" in user) || user.pic_URL=="")
 	{	
 		$("#no_dp").show();
 		$("#dp").hide();
