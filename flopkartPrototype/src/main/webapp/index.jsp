@@ -406,11 +406,12 @@ input:valid ~ .floating-label {
 						<div class="navbar-collapse collapse"
 							id="mc-horizontal-menu-collapse">
 							<div class="nav-outer">
-								<ul class="nav navbar-nav">
-									<li class="active dropdown yamm-fw"><a href="index.jsp"
+								<ul class="nav navbar-nav" id="category_dropdown" name="category_dropdown">
+									<li class="active dropdown yamm-fw"><a href="#"
 										data-hover="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown">Home</a></li>
-									<li class="dropdown yamm mega-menu"><a href="category.jsp"
+									<li class="dropdown yamm mega-menu">
+									<a href="category.jsp"
 										data-hover="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown">Clothing</a>
 										<ul class="dropdown-menu container">
@@ -2463,6 +2464,8 @@ input:valid ~ .floating-label {
 	<script src="./bootstrapFiles/js/wow.min.js"></script>
 	<script src="./bootstrapFiles/js/scripts.js"></script>
 	<script src="./bootstrapFiles/js/cookies.js"></script>
+	
+	
 	<script>
 	$(document).ready(function()
 			{	$("#signup").hide();
@@ -2484,8 +2487,53 @@ input:valid ~ .floating-label {
 				$("#pass_txt").focus(function(){
 	                $('.warning').hide(); // hide error popup
 				});
-				
+				fetch();
 			})
+	
+			function fetch() 
+			{
+			    var ctxPath = "<%=request.getContextPath()%>";
+				$.ajax(
+				{
+					type : 'GET',
+					contentType : 'application/json',
+					url : ctxPath + "/webapi/categories",
+					dataType : "json", // data type of response
+					success : categoryMenu ,
+			    	error:
+			    		function() 
+			    		{
+			        	//alert("error occurred");
+			    		}
+				});
+			}
+	
+	function categoryMenu(result)
+	{
+		for(var i in result)
+		{
+			var li_node = document.createElement("LI");                 // Create a <li> node
+			li_node.className="dropdown yamm-fw mega-menu";
+			li_node.setAttribute("id", result[i].id);
+			li_node.setAttribute("name", result[i].categoryName);
+			var a_node = document.createElement("A");                 // Create a <a> node
+			var textnode = document.createTextNode(result[i].categoryName);         // Create a text node
+			a_node.setAttribute("href","#");
+			a_node.className="dropdown-toggle category-dropdown";
+			a_node.setAttribute("data-hover","dropdown");
+			a_node.setAttribute("data-toggle","dropdown");
+			a_node.appendChild(textnode);                              // Append the text to <a>
+			li_node.appendChild(a_node);                              // Append the <a> to <li>
+			document.getElementById("category_dropdown").appendChild(li_node);
+		}  
+		
+		$(".category-dropdown").hover(function()
+		{
+		    $(this).css("background-color", "yellow");
+		    }, function(){
+		    $(this).css("background-color", "pink");
+		});
+	}
 	
 	
 	function show_signup()
@@ -2571,7 +2619,6 @@ input:valid ~ .floating-label {
 	    var user = getCookie("user_details");
 	    if (user != "") 
 	    {
-		    //alert(document.cookie);
 			setCookie("user_details", user, 10);
 	        showUser(JSON.parse(user));
 	    } 
@@ -2591,12 +2638,6 @@ input:valid ~ .floating-label {
 	{
 		$(".login_user").hide();
 		$('#Login_btn').hide();
-// 		$('#user_btn').val("My Account");
-// 		$('#firstName').val(user.firstName);
-// 		$('#pic_URL').val(user.pic_URL);
-// 		$('#lastName').val(user.lastName);
-// 		$('#email').val(user.email);
-// 		$('#phone').val(user.phone);
 		$('#user_btn').show();
 	}
 
