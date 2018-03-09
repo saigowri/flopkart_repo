@@ -63,7 +63,7 @@ public class UploadServlet extends HttpServlet
 				{
 					itemName = item.getName();
 					AccessProperties ap = new AccessProperties();
-					item.write(new File(ap.getServerPath()+ "/" + itemName));
+					item.write(new File(ap.getServerPath() + itemName));
 				}
 			}
 		}

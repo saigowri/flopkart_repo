@@ -61,110 +61,112 @@
 
 <header class="header-style-1"> 
   
-  <!-- ============================================== TOP MENU ============================================== -->
-  <div class="top-bar animate-dropdown">
-    <div class="container">
-      <div class="header-top-inner">
-        	<div class="cnt-account">
-				<ul class="list-unstyled">
-						<li><a href="underConstruct.html"><i class="fa fa-user"></i> My Account</a></li>
-						<li><a href="underConstruct.html"><i class="fa fa-heart"></i> Wishlist</a></li>
-						<li><a href="underConstruct.html"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
-						<li><a href="underConstruct.html"><i class="fa fa-check"></i> Checkout</a></li>
-					</ul>
-		 </div>
-        <!-- /.cnt-account -->
-        
-        <div class="clearfix"></div>
-      </div>
-      <!-- /.header-top-inner --> 
-    </div>
-    <!-- /.container --> 
-  </div>
-  <!-- /.header-top --> 
-  <!-- ============================================== TOP MENU : END ============================================== -->
   <div class="main-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-2 logo-holder"> 
-          <!-- ============================================================= LOGO ============================================================= -->
-          <div class="logo"> <a href="index.jsp"> <img  height="50px" src="./images/flopkartLogo.jpg" alt=""> </a> </div>
-          <!-- /.logo --> 
-          <!-- ============================================================= LOGO : END ============================================================= --> 
-          </div>
-        <!-- /.logo-holder -->
-        
-        <div class="col-xs-12 col-sm-12 col-md-8 top-search-holder"> 
-          <!-- /.contact-row --> 
-          <!-- ============================================================= SEARCH AREA ============================================================= -->
-          <div class="search-area">
-            <form>
-              <div class="control-group">
-              	<div class="row">
-              	<div class="col-md-10">
-                	<input class="search-field" placeholder="Search here..." />
-                </div>
-              	<div class="col-md-2">
-                <a class="search-button" href="underConstruct.html" ></a> 
-                </div>
-              </div>
-              </div>
-            </form>
-          </div>
-          <!-- /.search-area --> 
-          <!-- ============================================================= SEARCH AREA : END ============================================================= --> 
-          </div>
-        <!-- /.top-search-holder -->
-        
-        <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row"> 
-          <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
-          
-          <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
-            <div class="items-cart-inner">
-              <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-              <div class="basket-item-count"><span class="count">2</span></div>
-              <div class="total-price-basket"> <span class="lbl"> CART </span> </div>
-            </div>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <div class="cart-item product-summary">
-                  <div class="row">
-                    <div class="col-xs-4">
-                      <div class="image"> <a href="detail.html"></a> </div>
-                    </div>
-                    <div class="col-xs-7">
-                      <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                      <div class="price">$600.00</div>
-                    </div>
-                    <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
-                  </div>
-                </div>
-                <!-- /.cart-item -->
-                <div class="clearfix"></div>
-                <hr>
-                <div class="clearfix cart-total">
-                  <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
-                  <div class="clearfix"></div>
-                  <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
-                <!-- /.cart-total--> 
-                
-              </li>
-            </ul>
-            <!-- /.dropdown-menu--> 
-          </div>
-          <!-- /.dropdown-cart --> 
-          
-          <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= --> </div>
-        <!-- /.top-cart-row --> 
-      </div>
-      <!-- /.row --> 
-      
-    </div>
-    <!-- /.container --> 
-    
-  </div>
-  <!-- /.main-header --> 
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-2 logo-holder">
+						<!-- ============================================================= LOGO ============================================================= -->
+						<div class="logo">
+							<a href="index.jsp"> <img height="50px"
+								src="./images/flopkartLogo.jpg" alt="">
+							</a>
+						</div>
+						<!-- /.logo -->
+						<!-- ============================================================= LOGO : END ============================================================= -->
+					</div>
+					<!-- /.logo-holder -->
+
+					<div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
+						<!-- /.contact-row -->
+						<!-- ============================================================= SEARCH AREA ============================================================= -->
+						<div class="search-area">
+							<form>
+								<div class="control-group">
+									<div class="row">
+										<div class="col-md-10">
+											<input class="search-field"
+												placeholder="Search for products, brands and more" />
+										</div>
+										<div class="col-md-2">
+											<a class="search-button" href="underConstruct.html"></a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.search-area -->
+						<!-- ============================================================= SEARCH AREA : END ============================================================= -->
+					</div>
+					<!-- /.top-search-holder -->
+					
+					<div class="col-xs-12 col-sm-12 col-md-4">
+					<ul class="horizontal">
+						
+						<li id="registered"><div>
+						<!-- ============================================================= MY ACCOUNT ============================================================= -->
+						<div class="dropdown">
+								<a href="#" style="font-size: 16px; letter-spacing: 0.1px; font-weight: 600;
+						 		color: white;" id="menu1" data-hover="dropdown" class="dropdown-toggle"
+										data-toggle="dropdown">My Account 
+						 		<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									<li role="presentation"
+											style="display: flex; align-items: center; width: 100%;">
+											<a href="myProfile.jsp"><i style="color: #157ed2"
+												class="fas fa-user-circle"></i> My Profile</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
+									<i style="color: #157ed2" class="fas fa-list"></i> Orders</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
+									<i style="color: #157ed2" class="fas fa-heart"></i> Wishlist</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- ============================================================= MY ACCOUNT END ============================================================= -->
+						</li>
+												
+						<li>
+						<!-- ============================================================= MORE OPTIONS ============================================================= -->
+							<div class="dropdown">
+								<a href="#" style="font-size: 16px; letter-spacing: 0.1px; font-weight: 600;
+						 		color: white;" id="menu1" data-hover="dropdown" class="dropdown-toggle"
+										data-toggle="dropdown">More 
+						 		<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									<li role="presentation"
+											style="display: flex; align-items: center; width: 100%;">
+											<a href="sellerHub.jsp"><i style="color: #157ed2"
+												class="fas fa-briefcase"></i> Sell on Flopkart</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
+									<i style="color: #157ed2" class="fas fa-comments"></i> 24x7
+											Customer Care</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
+									<i style="color: #157ed2" class="fas fa-chart-line"></i> Advertise</a></li>
+								</ul>
+							</div>
+							<!-- ============================================================= MORE OPTIONS END ============================================================= -->
+						</li>
+						
+						<li><div>
+						<!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+							<a style="font-size: 16px; letter-spacing: 0.1px; font-weight: 600;
+						 		color: white;" href="cart.jsp"><i style="color: white" class="fas fa-shopping-cart"></i> Cart</a>
+						<!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+						</div></li>						
+						</ul>
+				</div>
+					<!-- col-md-4 -->
+			</div>
+				<!-- /.row -->
+
+			</div>
+			<!-- /.container -->
+
+		</div>
+		<!-- /.main-header -->
   
   <!-- ============================================== NAVBAR ============================================== -->
   <div class="header-nav animate-dropdown">
