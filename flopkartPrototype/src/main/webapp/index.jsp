@@ -2527,12 +2527,14 @@ input:valid ~ .floating-label {
 			document.getElementById("category_dropdown").appendChild(li_node);
 		}  
 		
-		$(".category-dropdown").hover(function()
-		{
-		    $(this).css("background-color", "yellow");
-		    }, function(){
-		    $(this).css("background-color", "pink");
-		});
+		$(".category-dropdown").hover(
+			function() { $(this).css("background-color", "white");
+						 $(this).css("color","grey");
+						}, 
+			function() { $(this).css("background-color", "");
+						$(this).css("color","");
+						}
+		);
 	}
 	
 	

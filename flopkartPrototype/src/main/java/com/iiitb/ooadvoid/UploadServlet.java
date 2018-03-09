@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,7 +63,7 @@ public class UploadServlet extends HttpServlet
 				{
 					itemName = item.getName();
 					AccessProperties ap = new AccessProperties();
-					item.write(new File(ap.getServerPath() + itemName));
+					item.write(new File(ap.getServerPath()+ "/" + itemName));
 				}
 			}
 		}
