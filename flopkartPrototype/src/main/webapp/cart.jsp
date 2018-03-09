@@ -174,13 +174,13 @@
 			</tr>
 			<tr class="dotted">
 				<td>
-					<div class="price" style="text-align: left; font-size: 14px">Price <span style="padding-left:154px"><i class="fa fa-rupee-sign"></i><span id="totalPrice" ></span></span></div>
-					<div class="delivery-charges" style="text-align: left; font-size: 14px">Delivery Charges<span class="inner-left"><i class="fa fa-rupee-sign"></i><span id="deliveryCharges" >50</span></span></div>
+					<div class="price" style="text-align: left; font-size: 14px">Price <span style="padding-left:154px"><i class="fa fa-rupee-sign"></i><span style="font-weight: normal" id="totalPrice" ></span></span></div>
+					<div class="delivery-charges" style="text-align: left; font-size: 14px">Delivery Charges<span class="inner-left"><i class="fa fa-rupee-sign"></i><span id="deliveryCharges"></span></span></div>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td>
-					<div class="amount-payable" style="font-size: 14px">Amount Payable <span class="inner-left"><i class="fa fa-rupee-sign"></i><span id="amount-payable"></span></span></div>
+					<div class="amount-payable" style="text-align: left;font-size: 14px">Amount Payable <span class="inner-left-md"><i class="fa fa-rupee-sign"></i><span id="amount-payable"></span></span></div>
 				</td>
 			</tr>
 			<tr>
@@ -223,6 +223,13 @@
 $(document).ready(function(){
 	$("#quantity").val(1);
 	$("#totalPrice").text(parseInt($("#price").text()));
+	var value = $("#totalPrice").text();
+    if(parseInt(value)>=1000) {
+    	$("#deliveryCharges").text("0");
+    }
+    else if(parseInt(value)<1000) {
+    	$("#deliveryCharges").text("50");
+    }
 	$("#amount-payable").text(parseInt($("#totalPrice").text())+parseInt($("#deliveryCharges").text()));
 	$("#savings").text(parseInt($("#originalPrice").text())-parseInt($("#price").text()))
 });
@@ -241,6 +248,7 @@ $("#quant-up").click(function(){
 	var origvalue = $("#originalPrice").text();
 	$("#originalPrice").text(origvalue);
 	$("#totalPrice").text(pricevalue);
+	textChange();
 	$("#amount-payable").text(parseInt($("#totalPrice").text())+parseInt($("#deliveryCharges").text()));
 	$("#savings").text(parseInt($("#originalPrice").text())-parseInt($("#price").text()));
 });
@@ -260,10 +268,23 @@ $("#quant-down").click(function(){
 		var origvalue = $("#originalPrice").text();
 		$("#originalPrice").text(origvalue);
 		$("#totalPrice").text(pricevalue);
+		textChange();
 		$("#amount-payable").text(parseInt($("#totalPrice").text())+parseInt($("#deliveryCharges").text()));
 		$("#savings").text(parseInt($("#originalPrice").text())-parseInt($("#price").text()));
 	}
 });
+
+//if total cart amount is more than 1000, delivery charge becomes 0
+function textChange(){
+    var value = $("#totalPrice").text();
+    if(parseInt(value)>=1000) {
+    	$("#deliveryCharges").text("0");
+    }
+    else if(parseInt(value)<1000) {
+    	$("#deliveryCharges").text("50");
+    }
+}
+
 </script>
 </body>
 </html>
