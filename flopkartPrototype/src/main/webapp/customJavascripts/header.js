@@ -31,7 +31,11 @@ function fetch(ctxPath)
 		contentType : 'application/json',
 		url : ctxPath + "/webapi/categories",
 		dataType : "json", // data type of response
-		success : categoryMenu ,
+		success :
+			function(data)
+			{
+				categoryMenu(data,ctxPath);
+			},
     	error:
     		function() 
     		{
@@ -40,16 +44,17 @@ function fetch(ctxPath)
 	});
 }
 	
-function categoryMenu(result)
+function categoryMenu(result,ctxPath)
 {
 	for(var i in result)
 	{
 		var li_node = document.createElement("LI");                 // Create a <li> node
-		li_node.className="dropdown yamm-fw mega-menu";
+		li_node.className="dropdown";
 		li_node.setAttribute("id", "li_"+result[i].id);
 		li_node.setAttribute("name", result[i].categoryName);
+		var dropdownContent = "dropdownContent(this,'"+ctxPath+"')";
 		var data = " <a href='category.jsp'  style='color:black' data-hover='dropdown' "+
-				 "onmouseover='dropdownContent(this)' onmouseout='dropdownBack(this)' "+
+				 "onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,2000, this);' "+
 		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
 		         result[i].id+"'>"+	result[i].categoryName +
 		 		"<span id='span_"+ result[i].id+"' style='color:grey' class='glyphicon glyphicon-chevron-down'></span>"+
@@ -60,18 +65,17 @@ function categoryMenu(result)
 							"<div class='row'>"+
 								"<div class='col-xs-12 col-menu'>"+
 									"<ul class='links' id='ul_"+ result[i].id+"'>"+
-					"<li><a href='index.jsp'>Home</a></li></ul></div></div></li></ul>";
+					"</ul></div></div></li></ul>";
 		document.getElementById("category_dropdown").appendChild(li_node);
 		$(li_node).html(data + data1);
 	} 
 
 }
 	
-	
-function dropdownContent(obj)
+function dropdownContent(obj,ctxPath)
 {
 	var categoryid = obj.id;
-	var ctxPath = "http://localhost:8080/flopkartPrototype";
+//	var ctxPath = "http://localhost:8080/flopkartPrototype";
 		$.ajax(
 		{
 			type : 'POST',
@@ -79,10 +83,10 @@ function dropdownContent(obj)
 			url : ctxPath + "/webapi/subcategories/category/"+categoryid,
 			dataType : "json", // data type of response
 			success : 
-	    		function(data) 
-	    		{
-	        		//alert(data);
-	    		} ,
+				function(data)
+				{
+					subCategoryDropdown(data,categoryid);
+				},
 	    	error:
 	    		function() 
 	    		{
@@ -94,11 +98,37 @@ function dropdownContent(obj)
  	$('#li_'+obj.id).addClass('open');
 }
 
+function subCategoryDropdown(result,categoryid)
+{
+	var data = "";
+	if(Object.keys(result).length>0)
+	{	
+		for(var i in result)
+		{
+//			var li_node = document.createElement("LI");                 // Create a <li> node
+//			li_node.className="dropdown yamm-fw mega-menu";
+//			li_node.setAttribute("id", "li_"+result[i].id);
+//			li_node.setAttribute("name", result[i].subcategoryName);
+			data = data + "<li> <a href='index.jsp'>"+result[i].subcategoryName+"</a></li>";
+//			document.getElementById("ul_"+categoryid).appendChild(li_node);
+//			$(li_node).html(data);
+		}
+		$('#ul_'+categoryid).html(data);
+	}
+ 
+	
+	else
+		$('#li_'+categoryid).removeClass('open');
+		
+
+}
+
 function dropdownBack(obj)
 {
  	$(obj).css("color","black");
  	$('#span_'+obj.id).toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
  	$('#li_'+obj.id).removeClass('open');
+// 	$('#ul_'+obj.id).empty();
 }
 
 function show_signup()
@@ -213,26 +243,26 @@ function showUser(user)
 }
 
 function validate(ctxPath) 
-		{
-$(".warning").hide();
-var email_phone = $("#email_phone").val();
-var len = email_phone.length;
-if(email_phone.match(/^[0-9]/))
 {
-	if (len!=10 || !email_phone.match(/^[0-9]{10}$/))
+	$(".warning").hide();
+	var email_phone = $("#email_phone").val();
+	var len = email_phone.length;
+	if(email_phone.match(/^[0-9]/))
 	{
-		$("#warning_email").show();
-		return false;
-	}
-}
-else if (!email_phone.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
-{
-		$("#warning_email").show();
-		return false;
-}
-else
-	findUser(ctxPath);
+		if (len!=10 || !email_phone.match(/^[0-9]{10}$/))
+		{
+			$("#warning_email").show();
+			return false;
 		}
+	}
+	else if (!email_phone.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
+	{
+			$("#warning_email").show();
+			return false;
+	}
+	else
+		findUser(ctxPath);
+}
 		
 //Helper function to serialize all the form fields into a JSON string
 function formToJSON() 
@@ -246,8 +276,8 @@ function formToJSON()
 	return flipkart_user;
 }
 
-		    function findUser(ctxPath) 
-		    {
+function findUser(ctxPath) 
+{
 	$.ajax(
 	{
 		type : 'POST',
@@ -256,12 +286,11 @@ function formToJSON()
 		dataType : "json", // data type of response
 		data : formToJSON(),
 		success : renderDetails
-	});
+});
 }
 
 function renderDetails(user)
-{
-	alert("success");
+{ 
 	if (user == null)
 	{
 		$("#warning_register").show();
