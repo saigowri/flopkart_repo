@@ -69,4 +69,18 @@ public class FlopkartSubcategoryServices
 		}
 		return Response.ok().build();
 	}
+	
+	@POST
+	@Path("/categoryId")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public List<FlopkartSubcategory> getFlopkart_bySubcategoryId(FlopkartSubcategory subcategory)
+	{
+		FlopkartSubcategoryDAO dao = new FlopkartSubcategoryDAO();
+		List<FlopkartSubcategory> subcategory_details = dao.getFlopkartSubcategoryBysubcategoryId(subcategory);
+		if(subcategory_details==null)
+			return null;
+		else
+			return subcategory_details;
+	}	
 }
