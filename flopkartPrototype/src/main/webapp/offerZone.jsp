@@ -387,7 +387,7 @@
       <div class="col-md-2 sidebar"> 
         <!-- ================================== TOP NAVIGATION ================================== -->
         <div class="side-menu animate-dropdown outer-bottom-xs">
-          <div class="head"></div>
+          <div class="headOfferZone"></div>
           <div style="display: inline-block; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif; color: #000; 
             border-bottom: solid 1px rgba(0, 0, 0, .05); padding: 8px 10px 10px; line-height: 32px;">
              <i style="color:#157ed2; width: 15px; height: 15px; vertical-align: middle;
