@@ -27,6 +27,17 @@ public class FlopkartListingServices
 		List<FlopkartListing> listings = dao.getFlopkartListings();
 		return listings;
 	}
+	
+	@POST
+	@Path("/id")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public FlopkartListing getFlopkartListingById(FlopkartListing listing)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingById(listing.getId());
+		return listing_details;
+}
 
 //	
 //	@POST

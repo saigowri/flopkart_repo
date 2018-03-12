@@ -15,7 +15,7 @@ public class CreateProperties
 
 		try
 		{
-
+//			System.out.println(System.getProperty("user.dir"));
 			output = new FileOutputStream("config.properties");
 
 			// set the properties value
