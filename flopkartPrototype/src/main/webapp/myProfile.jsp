@@ -254,7 +254,7 @@
 <script>
 $(document).ready(function() 
 {
-
+	$("#unregistered").hide();
     var ctxPath = "<%=request.getContextPath()%>";
 	headerFunctions(ctxPath);
 	
