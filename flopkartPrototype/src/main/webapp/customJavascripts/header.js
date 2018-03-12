@@ -59,7 +59,7 @@ function categoryMenu(result)
 							"<div class='row'>"+
 								"<div class='col-xs-12 col-menu'>"+
 									"<ul class='links' id='ul_"+ result[i].id+"'>"+
-					"<li><a href='home.html'>Home</a></li></ul></div></div></li></ul>";
+					"<li><a href='index.jsp'>Home</a></li></ul></div></div></li></ul>";
 		document.getElementById("category_dropdown").appendChild(li_node);
 		$(li_node).html(data + data1);
 	} 

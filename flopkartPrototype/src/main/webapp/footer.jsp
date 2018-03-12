@@ -63,7 +63,7 @@
             <ul class='list-unstyled'>
               <li class="first"><a title="Your Account" href="underConstruct.html">About us</a></li>
               <li><a title="Addresses" href="underConstruct.html">Company</a></li>
-              <li><a href="admin.jsp">Admin</a></li>
+              <li><a href="adminLogin.jsp">Admin</a></li>
               <li><a title="Addresses" href="underConstruct.html">Investor Relations</a></li>
               <li class="last"><a title="Orders History" href="underConstruct.html">Advanced Search</a></li>
             </ul>
