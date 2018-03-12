@@ -31,8 +31,9 @@ public class UploadServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public static final String BASE_URI = "http://localhost:8080/flopkartPrototype/webapi/";
+
+	public static final AccessProperties ap = new AccessProperties();
+	public static String BASE_URI = ap.getServerURL()+ap.getContextPath();
 	public static final String PATH_NAME = "users/update/";
 	@Override
 	
@@ -62,7 +63,6 @@ public class UploadServlet extends HttpServlet
 				else
 				{
 					itemName = item.getName();
-					AccessProperties ap = new AccessProperties();
 					item.write(new File(ap.getServerPath() + itemName));
 				}
 			}

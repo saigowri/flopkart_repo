@@ -1,35 +1,41 @@
 <style>
-input {
-	display: block;
-	border: none;
-	border-bottom: 1px solid #ccc;
-	width: 100%
-}
-
-.floating-div {
-	position: relative; /*  make label relate to div  */
-	padding-top: 5%; /*  make space for label      */
-}
-
-.floating-label {
-	position: absolute;
-	pointer-events: none;
-	top: 20%;
-	color: #878787;
-}
-
-input:focus ~ .floating-label {
-	transition: 0.2s ease all;
-	top: -5%;
-	font-size: 70%;
-}
-
-input:valid ~ .floating-label {
-	transition: 0.2s ease all;
-	top: -5%;
-	font-size: 70%;
-}
+	input 
+	{
+		display: block;
+		border: none;
+		border-bottom: 1px solid #ccc;
+		width: 100%
+	}
+	
+	.floating-div 
+	{
+		position: relative; /*  make label relate to div  */
+		padding-top: 5%; /*  make space for label      */
+	}
+	
+	.floating-label 
+	{
+		position: absolute;
+		pointer-events: none;
+		top: 20%;
+		color: #878787;
+	}
+	
+	input:focus ~ .floating-label 
+	{
+		transition: 0.2s ease all;
+		top: -5%;
+		font-size: 70%;
+	}
+	
+	input:valid ~ .floating-label 
+	{
+		transition: 0.2s ease all;
+		top: -5%;
+		font-size: 70%;
+	}
 </style>
+
 	<header class="header-style-1">
 		<!-- ============================================== Login Modal ============================================== -->
 
@@ -135,7 +141,7 @@ input:valid ~ .floating-label {
 							<button type="button" id="login_btn"
 								class="btn btn-primary btn-lg btn-block"
 								style="border-radius: 0px; background-color: #F26419; border-width: 0mm"
-								value="Login" onclick="signup();">SIGN UP</button>
+								value="Login" onclick="signup('<%=request.getContextPath()%>');">SIGN UP</button>
 			</div>
 	
 			<div class="row"
@@ -323,9 +329,10 @@ input:valid ~ .floating-label {
 
 		</div>
 		<!-- /.main-header -->
-
+		
+		
 		<!-- ============================================== NAVBAR ============================================== -->
-		<div class="header-nav animate-dropdown">
+		<div class="header-nav animate-dropdown" style="background-color:white;color:black">
 			<div class="container">
 				<div class="yamm navbar navbar-default" role="navigation">
 					<div class="navbar-header">
@@ -343,7 +350,7 @@ input:valid ~ .floating-label {
 							<div class="nav-outer">
 								<ul class="nav navbar-nav" id="category_dropdown">
 									<li class="active dropdown yamm-fw">
-									<a href="index.jsp">Home</a></li>
+									<a href="index.jsp" style="color:black">Home</a></li>
 									<li class="dropdown yamm mega-menu">
 									<a href="category.jsp"
 										data-hover="dropdown" class="dropdown-toggle"
@@ -534,7 +541,7 @@ input:valid ~ .floating-label {
 												</div>
 											</li>
 										</ul></li>
-									<li class="dropdown  navbar-right special-menu"><a
+									<li class="dropdown  navbar-right" style="color:black"><a
 										href="underConstruct.html">Offer zone</a></li>
 								</ul>
 								<!-- /.navbar-nav -->
