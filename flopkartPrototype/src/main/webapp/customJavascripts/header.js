@@ -45,37 +45,61 @@ function categoryMenu(result)
 	{
 		var li_node = document.createElement("LI");                 // Create a <li> node
 		li_node.className="dropdown yamm-fw mega-menu";
-		li_node.setAttribute("id", result[i].id);
+		li_node.setAttribute("id", "li_"+result[i].id);
 		li_node.setAttribute("name", result[i].categoryName);
-		var data = " <a href='category.jsp' data-hover='dropdown' class='category-dropdown dropdown-toggle category-dropdown-item'"+
-		         " data-toggle='dropdown' id='l_"+result[i].id+"'>"+
-		 		result[i].categoryName +
-		 		"</a> <ul id=ul_"+result[i].id+
-		 		"' class='dropdown-menu pages'></ul>";
+		var data = " <a href='category.jsp'  style='color:black' data-hover='dropdown' "+
+				 "onmouseover='dropdownContent(this)' onmouseout='dropdownBack(this)' "+
+		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
+		         result[i].id+"'>"+	result[i].categoryName +
+		 		"<span id='span_"+ result[i].id+"' style='color:grey' class='glyphicon glyphicon-chevron-down'></span>"+
+				"</a>";
+		var data1 = "<ul class='dropdown-menu pages'>"+
+					"<li>"+
+						"<div class='yamm-content'>"+
+							"<div class='row'>"+
+								"<div class='col-xs-12 col-menu'>"+
+									"<ul class='links' id='ul_"+ result[i].id+"'>"+
+					"<li><a href='home.html'>Home</a></li></ul></div></div></li></ul>";
 		document.getElementById("category_dropdown").appendChild(li_node);
-		$('#'+result[i].id).html(data);
+		$(li_node).html(data + data1);
 	} 
-			
-	$("#dropdown-test").hover(
-	function() 
-	{ 
-	// 	$(this).css("background-color", "white");
-	// 	$(this).css("color","grey");
-		alert("hi");
-		var data_item = "<ul class='dropdown-menu container'>"+
-			"<li><div class='yamm-content'> 	<div class='row'>"+ 		
-			"<div class='col-xs-12 col-menu'> <ul class='links'>"+
-			"<li><a href='home.html'>Home</a></li> 	<li><a href='category.jsp'>Category</a></li>"+
-			"<li><a href='underConstruct.html'>Detail</a></li> </ul>"+
-			"</div> 	</div> </div> 		</li></ul>";
-		$(this.id).append(data);
-	}, 
-	function() { $(this).css("background-color", "");
-	$(this).css("color","");
-	});
+
 }
 	
 	
+function dropdownContent(obj)
+{
+	var categoryid = obj.id;
+	var ctxPath = "http://localhost:8080/flopkartPrototype";
+		$.ajax(
+		{
+			type : 'POST',
+			contentType : 'application/json',
+			url : ctxPath + "/webapi/subcategories/category/"+categoryid,
+			dataType : "json", // data type of response
+			success : 
+	    		function(data) 
+	    		{
+	        		//alert(data);
+	    		} ,
+	    	error:
+	    		function() 
+	    		{
+	        	//alert("error occurred");
+	    		}
+		});
+ 	$(obj).css("color","blue");
+ 	$('#span_'+obj.id).toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+ 	$('#li_'+obj.id).addClass('open');
+}
+
+function dropdownBack(obj)
+{
+ 	$(obj).css("color","black");
+ 	$('#span_'+obj.id).toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
+ 	$('#li_'+obj.id).removeClass('open');
+}
+
 function show_signup()
 { 
 	$("#old").hide();
@@ -124,12 +148,11 @@ function signup(ctxPath)
 		$("#warning_pass_new").show();
 		return false;
 	}
-		
 		$.ajax(
 		{
 		type : 'POST',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/users/createCustomer",
+		url : ctxPath + "/webapi/users/create",
 		dataType : "json", // data type of response
 		data : signupformToJSON(),
 		success : renderDetails
@@ -137,24 +160,25 @@ function signup(ctxPath)
 	}
 
 function signupformToJSON() 
-	{
-		var fname = $("#f_name").val();
-		var lname = $("#l_name").val();
-		var email = $("#email").val();
-		var password = $("#pass_txt").val();
-		var phone = $("#phone").val();
+{
+	var fname = $("#f_name").val();
+	var lname = $("#l_name").val();
+	var email = $("#email").val();
+	var password = $("#pass_txt").val();
+	var phone = $("#phone").val();
+	var userType = "customer";	
 		
-		
-		var flipkart_user = JSON.stringify({
-"firstName":fname,
-"lastName":lname,
-"phone":phone,
+	var flipkart_user = JSON.stringify({
+				"firstName":fname,
+				"lastName":lname,
+				"phone":phone,
         		"email":email,
-        		"password":password
+        		"password":password,
+        		"userType":userType
         	
-        	});
-		return flipkart_user;
-	}
+    });
+	return flipkart_user;
+}
 	
 function checkCookie() 
 	{
