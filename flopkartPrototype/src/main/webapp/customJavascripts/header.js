@@ -3,6 +3,7 @@ function headerFunctions(ctxPath)
 	$("#signup").hide();
 	$(".warning").hide();
 	checkCookie();	
+	
 	$("#f_name").focus(function(){
 	        $('.warning').hide(); // hide error popup
 	});
@@ -155,7 +156,11 @@ function signup(ctxPath)
 		url : ctxPath + "/webapi/users/create",
 		dataType : "json", // data type of response
 		data : signupformToJSON(),
-		success : renderDetails
+		success : renderDetails,
+		error : function()
+		{
+			alert("err");
+		}
 		});
 	}
 
@@ -191,21 +196,21 @@ function checkCookie()
 	    else 
 	    {
 	    	showLogin();
-$('#loginModal').modal('toggle');
+	    	$('#loginModal').modal('toggle');
 	    }
 	}
 
 function showLogin()
-	{
-		$("#registered").hide();
-		$("#unregistered").show();
-	}
+{
+	$("#registered").hide();
+	$("#unregistered").show();
+}
 
 function showUser(user)
-	{
-		$("#registered").show();
-		$("#unregistered").hide();
-	}
+{
+	$("#registered").show();
+	$("#unregistered").hide();
+}
 
 function validate(ctxPath) 
 		{
@@ -254,22 +259,23 @@ function formToJSON()
 	});
 }
 
-		function renderDetails(user)
-		{
-if (user == null)
+function renderDetails(user)
 {
-	$("#warning_register").show();
-}
-else if (user.id === 0)
-{
-	$("#warning_pass").show();
-}
-else
-{
-	showUser(user);
-	setCookie("user_details", JSON.stringify(user), 1);
-	$('#loginModal').modal('toggle');
-}
+	alert("success");
+	if (user == null)
+	{
+		$("#warning_register").show();
+	}
+	else if (user.id === 0)
+	{	
+		$("#warning_pass").show();
+	}
+	else
+	{
+		showUser(user);
+		setCookie("user_details", JSON.stringify(user), 1);
+		$('#loginModal').modal('toggle');
+	}
 
-return false;
-		}
+	return false;
+}
