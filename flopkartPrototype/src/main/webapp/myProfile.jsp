@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ page import="com.iiitb.ooadvoid.AccessProperties" %>
 <%@ page import="com.iiitb.ooadvoid.CreateProperties" %>
-    
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<%@include file="metaContent.jsp" %>
 	<title>My Profile</title>
@@ -238,10 +237,24 @@
 
 <%@include file="footer.jsp" %>
 
+<!-- JavaScripts placed at the end of the document so the pages load faster --> 
+<script src="./bootstrapFiles/js/jquery-1.11.1.min.js"></script>
+<script src="./bootstrapFiles/js/bootstrap.min.js"></script>
+<script src="./bootstrapFiles/js/bootstrap-hover-dropdown.min.js"></script>
+<script src="./bootstrapFiles/js/owl.carousel.min.js"></script>
+<script src="./bootstrapFiles/js/echo.min.js"></script>
+<script src="./bootstrapFiles/js/jquery.easing-1.3.min.js"></script>
+<script src="./bootstrapFiles/js/bootstrap-slider.min.js"></script>
+<script src="./bootstrapFiles/js/jquery.rateit.min.js"></script>
+<script src="./bootstrapFiles/js/bootstrap-select.min.js"></script>
+<script src="./bootstrapFiles/js/wow.min.js"></script>
+<script src="./bootstrapFiles/js/scripts.js"></script>
+<script src="./customJavascripts/cookies.js"></script>
+<script src="./customJavascripts/header.js"></script>
 <script>
 $(document).ready(function() 
 {
-
+	$("#unregistered").hide();
     var ctxPath = "<%=request.getContextPath()%>";
 	headerFunctions(ctxPath);
 	
