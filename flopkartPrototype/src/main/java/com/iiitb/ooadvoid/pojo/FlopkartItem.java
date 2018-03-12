@@ -3,12 +3,10 @@ package com.iiitb.ooadvoid.pojo;
 public class FlopkartItem
 {
 	private Integer id;
-	private String itemid;
+	private Integer itemid;
 	private String itemname;
 	private String category;
 	private Integer price;
-	private Integer discount;
-	private Integer stars;
 
 	public Integer getId()
 	{
@@ -20,12 +18,12 @@ public class FlopkartItem
 		this.id = id;
 	}
 
-	public String getItemid()
+	public Integer getItemid()
 	{
 		return itemid;
 	}
 
-	public void setItemid(String itemid)
+	public void setItemid(Integer itemid)
 	{
 		this.itemid = itemid;
 	}
@@ -60,24 +58,6 @@ public class FlopkartItem
 		this.price = price;
 	}
 
-	public Integer getDiscount()
-	{
-		return discount;
-	}
-
-	public void setDiscount(Integer discount)
-	{
-		this.discount = discount;
-	}
-
-	public Integer getStars()
-	{
-		return stars;
-	}
-
-	public void setStars(Integer stars)
-	{
-		this.stars = stars;
-	}
+	
 
 }

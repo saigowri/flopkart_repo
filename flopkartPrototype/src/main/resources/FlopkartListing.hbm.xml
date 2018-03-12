@@ -11,14 +11,15 @@
       <id name = "id" type = "int" column = "id">
          <generator class="native"/>
       </id>
-      
+      <property name = "listingid" column = "listingid" type = "int"  unique="true"/>
       <property name = "listingName" column = "listingName" type = "string"  unique="true"/>
+      <property name = "imgUrl" column = "ImgUrl" type = "string"/>
       <property name = "subcategoryId" column = "subcategoryId" type = "int"/>
-      <property name = "available" column = "availaible" type = "int"/>
+      <property name = "quantity" column = "Quantity" type = "int"/>
       <property name = "price" column = "price" type = "int"/>
-      <property name = "discount" column = "discount" type = "int"/>
-      <property name = "stars" column = "stars" type = "int"/>
-	 <property name = "total" column = "total" type = "int"/>
+      <property name = "colour" column = "Colour" type = "string"/>
+      <property name = "brand" column = "Brand" type = "string"/>
+	 <property name = "manufacture_Date" column = "Manufacture_Date" type = "string"/>
 	 <property name = "description" column = "description" type = "string"/>
 	 
 	</class>

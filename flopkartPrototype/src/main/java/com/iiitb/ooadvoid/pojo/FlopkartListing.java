@@ -3,14 +3,15 @@ package com.iiitb.ooadvoid.pojo;
 public class FlopkartListing {
 		
 	private Integer id;
+	private Integer listingid;
 	private String listingName;
+	private String imgUrl;
 	private Integer subcategoryId;
-	private Integer available;
-	private Integer total;
+	private Integer quantity;
 	private Integer price;
-	private Integer discount;
-	
-	private Integer stars;
+	private String colour;
+	private String brand;
+	private String manufacture_Date;
 	private String description;
 	
 	public Integer getId() {
@@ -19,11 +20,23 @@ public class FlopkartListing {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Integer getListingid() {
+		return listingid;
+	}
+	public void setListingid(Integer listingid) {
+		this.listingid = listingid;
+	}
 	public String getListingName() {
 		return listingName;
 	}
 	public void setListingName(String listingName) {
 		this.listingName = listingName;
+	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 	public Integer getSubcategoryId() {
 		return subcategoryId;
@@ -31,17 +44,11 @@ public class FlopkartListing {
 	public void setSubcategoryId(Integer subcategoryId) {
 		this.subcategoryId = subcategoryId;
 	}
-	public Integer getAvailable() {
-		return available;
+	public Integer getQuantity() {
+		return quantity;
 	}
-	public void setAvailable(Integer availaible) {
-		this.available = availaible;
-	}
-	public Integer getTotal() {
-		return total;
-	}
-	public void setTotal(Integer total) {
-		this.total = total;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	public Integer getPrice() {
 		return price;
@@ -49,17 +56,23 @@ public class FlopkartListing {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public Integer getDiscount() {
-		return discount;
+	public String getColour() {
+		return colour;
 	}
-	public void setDiscount(Integer discount) {
-		this.discount = discount;
+	public void setColour(String colour) {
+		this.colour = colour;
 	}
-	public Integer getStars() {
-		return stars;
+	public String getBrand() {
+		return brand;
 	}
-	public void setStars(Integer stars) {
-		this.stars = stars;
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getManufacture_Date() {
+		return manufacture_Date;
+	}
+	public void setManufacture_Date(String manufacture_Date) {
+		this.manufacture_Date = manufacture_Date;
 	}
 	public String getDescription() {
 		return description;

@@ -12,6 +12,7 @@ public class FlopkartListingDAO extends HibernateDAO<FlopkartListing>
 	public FlopkartListing addFlopkartListing(FlopkartListing item)
 	{
 		super.add(item);
+		item = super.find(entity_name , "listingName" , item.getListingName());
 		return item;
 	}
 	

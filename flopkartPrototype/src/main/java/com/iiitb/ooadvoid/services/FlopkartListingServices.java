@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -39,24 +40,29 @@ public class FlopkartListingServices
 //		return listing_details;
 //	}	
 	
-//	@POST
-//	@Path("/create")
-//	@Consumes("application/json")
-//	public Response addFlopkartListing(FlopkartListing listing)
-//	{
-//			listing.setItemid(listing.getItemid());
-//			listing.setItemname(listing.getItemname());
-//			listing.setCategory(listing.getCategory());
-//			listing.setPrice(listing.getPrice());
-//			listing.setDiscount(listing.getDiscount());
-//			listing.setStars(listing.getStars());
-//		
-//		FlopkartListingDAO dao = new FlopkartListingDAO();
-//		dao.addFlopkartListing(listing);
-//
-//		return Response.ok().build();
-//	}
-
+	@POST
+	@Path("/create")
+	@Consumes("application/json")
+	@Produces("application/json")
+	
+	public FlopkartListing addFlopkartListing(FlopkartListing item)
+	{		item.setListingid(item.getListingid());
+			item.setListingName(item.getListingName());
+			item.setImgUrl(item.getImgUrl());
+			item.setSubcategoryId(item.getSubcategoryId());
+			item.setQuantity(item.getQuantity());
+			item.setPrice(item.getPrice());
+	//		item.setDiscount(item.getDiscount());
+			item.setColour(item.getColour());
+			item.setBrand(item.getBrand());
+			item.setManufacture_Date(item.getManufacture_Date());
+			item.setDescription(item.getDescription());
+		
+			FlopkartListingDAO dao = new FlopkartListingDAO();
+			FlopkartListing item_details = dao.addFlopkartListing(item);
+		return item_details;
+	}
+	
 	@PUT
 	@Path("/update/{id}")
 	@Consumes("application/json")
