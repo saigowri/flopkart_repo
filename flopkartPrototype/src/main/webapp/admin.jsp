@@ -14,6 +14,7 @@
 	<header>
 		<nav class="nav navbar-default" style="background-color:#027cd5">
 			<img class="logo" src="./images/flopkartLogo.jpg">
+			<div style="float:right; padding-top:30px; padding-right: 5px"><a style="text-decoration:underline; color:white;font-size: 20px; font-weight:500;" href="adminDeals.jsp">Click here to add new deal category</a></div>
 		</nav>
 	</header>
 	
@@ -21,7 +22,7 @@
 	<div class="col-md-6">
 		<div class="container" style="text-align: center; width: 400px">
 			<h3 style="color:white">Enter new category</h3><br/>
-			<form action="success.jsp">
+			<form>
 				<input class="form-control" type="text" id="catName"
 					placeholder="Enter category name"> 
 				<br/>
@@ -33,7 +34,7 @@
 	<div class="col-md-6">
 		<div class="container" style="text-align: center; width: 400px">
 			<h3 style="color:white">Enter new subcategory</h3><br/>
-			<form action="success.jsp">
+			<form>
 				<div id="content"></div>
 				<div style="background-color:blue; border-radius: 25px; font-size:20px; color:white" onclick="DispSubCat()">Subcategories
 				<div id="SubCat"></div></div>

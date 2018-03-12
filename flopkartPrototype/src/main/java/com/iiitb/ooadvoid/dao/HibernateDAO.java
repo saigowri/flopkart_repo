@@ -74,22 +74,18 @@ public class HibernateDAO<E>
         } 
         catch (NoSuchFieldException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
         catch (SecurityException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
         catch (IllegalArgumentException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         catch (IllegalAccessException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		update(entity, id, fields);

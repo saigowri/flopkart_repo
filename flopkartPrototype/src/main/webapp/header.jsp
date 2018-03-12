@@ -541,8 +541,8 @@
 												</div>
 											</li>
 										</ul></li>
-									<li class="dropdown  navbar-right" style="color:black"><a
-										href="underConstruct.html">Offer zone</a></li>
+									<li class="dropdown navbar-right"><a
+										href="offerZone.jsp" style="color:black">Offer zone</a></li>
 								</ul>
 								<!-- /.navbar-nav -->
 								<div class="clearfix"></div>
