@@ -5,9 +5,9 @@
 	<%@include file="metaContent.jsp" %>
 	<title>Welcome to Flopkart</title>
 </head>
-
 <body>	
     <%@include file="header.jsp" %>
+
 
 	<!-- /.breadcrumb -->
 	<div class="body-content outer-top-xs">
@@ -1705,8 +1705,10 @@
 		</div>
 	</div>
 	
+
     <%@include file="footer.jsp" %>
      
+
 </body>
 <script>
 $(document).ready(function(){
