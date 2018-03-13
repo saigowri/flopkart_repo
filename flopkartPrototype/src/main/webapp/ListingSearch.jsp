@@ -9,13 +9,21 @@
 	<title>Items</title>
 </head>
 <style>
+/* .listingImage { */
+/*    width: 200px; */
+/*    height:200px; */
+/* } */
+
+/* .listingImage { */
+/*    width: 100%; */
+/* } */
 .box {
   transition: box-shadow .3s;
   width: 300px;
   height: 300px;
   background: #fff;
   float: left;
-  
+  margin-bottom: 10px;
 }
 .box:hover {
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
@@ -68,9 +76,13 @@
 	        							    <% AccessProperties ap = new AccessProperties(); %>
 	        							    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 	        								var data="";
-	        								data+="<div class='col-sm-4, box'><a href='#'> <img src='"+imgServerURL+result.imgUrl+"' alt='' height='200px'></a>";
-	        						        data+="<div style = 'font-size:20px; text-align:center'>"+result.listingName+"</div>";
-	        						       	data+="<div style = 'font-size:20px; text-align:center; font-family:verdana'><i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
+	        								data+="<div class='col-sm-4, box'><a href='#'> "+
+	        								"<div style='width: 280px;height: 250px;'>"+
+	        								"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
+	        								imgServerURL+result.imgUrl+"' alt=''></div></a>"+
+	        						        "<div style = 'font-size:20px; text-align:center'>"+result.listingName+"</div>"+
+	        						       	"<div style = 'font-size:20px; text-align:center; font-family:verdana'>"+
+	        						       	"<i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
 	        						       	$('#listing').append(data);
 	        					    	},
 	        					    	error:function() {
