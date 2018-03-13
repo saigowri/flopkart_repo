@@ -11,6 +11,7 @@
       <id name = "id" type = "int" column = "ID">
          <generator class="native"/>
       </id>
+      
       <property name = "listingName" column = "ListingName" type = "string"  unique="true"/>
       <property name = "imgUrl" column = "ImgUrl" type = "string"/>
       <property name = "subcategoryId" column = "subcategoryid" type = "int"/>
@@ -23,7 +24,7 @@
 	  <property name = "description" column = "description" type = "string"/>
 	  <property name = "priority" column = "priority" type = "int"/>
 	  <property name = "discount" column = "discount" type = "int"/>
-	  
+
 	 
 	</class>
 </hibernate-mapping>

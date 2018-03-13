@@ -13,7 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.iiitb.ooadvoid.pojo.FlopkartListing;
+import com.iiitb.ooadvoid.pojo.FlopkartSubcategory;
 import com.iiitb.ooadvoid.dao.FlopkartListingDAO;
+import com.iiitb.ooadvoid.dao.FlopkartSubcategoryDAO;
 
 @Path("/listings")
 public class FlopkartListingServices 
@@ -27,6 +29,27 @@ public class FlopkartListingServices
 		List<FlopkartListing> listings = dao.getFlopkartListings();
 		return listings;
 	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces("application/json")
+	public FlopkartListing getFlopkartListingById(@PathParam("id") int id)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingById(id);
+		return listing_details;
+	}
+	
+/*	@POST
+	@Path("/id")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public FlopkartListing getFlopkartListingById(FlopkartListing listing)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingById(listing.getId());
+		return listing_details;
+}*/
 
 //	
 //	@POST
@@ -64,6 +87,7 @@ public class FlopkartListingServices
 		return item_details;
 	}
 	
+
 	@PUT
 	@Path("/update/{id}")
 	@Consumes("application/json")
@@ -90,6 +114,21 @@ public class FlopkartListingServices
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		return Response.ok().build();
+	}
+	
+
+	
+	@GET
+	@Path("/subcategory/{id}")
+	@Produces("application/json")
+	public List<FlopkartListing> getListingBySubCategoryId(@PathParam("id") int id)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		List<FlopkartListing> listing_details = dao.getFlopkartListingBysubcategoryId(id);
+		if(listing_details==null)
+			return null;
+		else
+			return listing_details;
 	}
 	
 }

@@ -41,10 +41,11 @@ public class FlopkartListing {
 	public void setSubcategoryId(Integer subcategoryId) {
 		this.subcategoryId = subcategoryId;
 	}
-	
+
 	public Integer getSellerid() {
 		return sellerid;
 	}
+	
 	public void setSellerid(Integer sellerid) {
 		this.sellerid = sellerid;
 	}
