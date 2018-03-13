@@ -67,7 +67,7 @@ $(document).ready(function(){
 // 	alert(test);
 	fetch();
 
-})
+});
 function fetch() 
 {
     var ctxPath = "<%=request.getContextPath()%>";
