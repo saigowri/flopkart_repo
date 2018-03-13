@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>My Profile</title>
+	<title>Seller Hub</title>
 		
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="./bootstrapFiles/css/bootstrap.min.css">
@@ -210,7 +210,7 @@
         
             <div class="sidebar-widget  wow fadeInUp outer-top-vs " style="visibility: hidden; animation-name: none;">
             <form id="logout_form" action="./index.jsp">
-              <input class="head btn-link" style="color:black;font-weight:bold" value="LOGOUT" onclick="logout();"></input>
+              <input type="submit" class="head btn-link" style="color:black;font-weight:bold" value="LOGOUT" onclick="logout();"></input>
             </form>
             </div>
             
@@ -446,7 +446,7 @@
 	            
 	           		<input type="submit" style="font-size:18px;color: white;
    							padding: 8px 20px; background-color: #4CAF50;" value="DONE"/>
-					
+					<input type="text" id="sellerid" name="sellerid" hidden="hidden"/>
 	        
 	            </div>   
         		</div>
@@ -478,12 +478,13 @@
 <script src="./bootstrapFiles/js/cookies.js"></script>
 <script>
 $(document).ready(function(){
-
+	$('#sellerid').val(444);
 		var counter = 2;
 		var c = 1;
 		$('#cnt').val(c);
 		$('#sub-cat-content').hide();
 		$('#sub-cat-head').hide();
+		checkCookie();
 		fetch();
 		
 		$("#cat-content").on("change",function() {
@@ -594,42 +595,46 @@ $(document).ready(function(){
 
 //-----------------------------------------------------------------------------------
 
-function add_detail(c) 
-    {	
-        var ctxPath = "<%=request.getContextPath()%>";
-		$.ajax(
-		{
-			type : 'POST',
-			contentType : 'application/json',
-			url : ctxPath + "/webapi/details/create",
-			dataType : "json", // data type of response
-			data : insertDetailsformToJSON(c),
-			success : render
-		});
-	}
-	function render()
-	{	
-		return true;
-	}
-	
-	function insertDetailsformToJSON(c) 
+
+	function checkCookie() 
 	{
-		var listing_id = $("#listing_id").val();
-		var attr_name = $("#key" + c ).val();
-		var attr_val = $("#val" + c ).val();
-		
-		
-		var FlopkartListingDetails = JSON.stringify({
-			
-			"ListingId":listing_id,
-			"attr_name":attr_name,
-			"attr_val":attr_val
-        	
-        	});
-		
-		return FlopkartListingDetails;
+	    var user = getCookie("user_details");
+	    if (user != "") 
+	    {
+			setCookie("user_details", user, 10);
+			setId(JSON.parse(user));
+			return true;
+	    } 
+	    else 
+	    {
+	    	logout();
+	    }
 	}
-	
+	function setuser(user){
+		$('#sellerid').val(444);
+		//$('#sellerid').val(user.id);
+	}
+	function resetCookie() 
+	{
+	    var user = getCookie("user_details");
+	    if (user != "") 
+	    {
+			setCookie("user_details", user, 10);
+			return true;
+	    } 
+	    else 
+	    {
+	    	logout();
+	    }
+	}
+	function logout()
+	{
+		deleteCookie("user_details");
+	}
+	<%if (request.getParameter("imgName") != null) { %>
+		var x = request.getParameter("imgName");
+		alert("Successfull" );
+ 	<% } %>
 	
 	
 </script>

@@ -52,6 +52,7 @@ public class SellerUploadServlet extends HttpServlet
 	String mfd = "";
 	String desptn = "";
 	String pic_url = "";
+	Integer sellerid= 0;
 	Integer cnt= 0;
 	Integer x = 1;
 	Integer y = 1;
@@ -91,6 +92,11 @@ public class SellerUploadServlet extends HttpServlet
 					else if (name.equals("subcatId"))
 					{
 						sub_cat_content =  Integer.parseInt(item.getString());
+						
+					}
+					else if (name.equals("sellerid"))
+					{
+						sellerid =  Integer.parseInt(item.getString());
 						
 					}
 
@@ -180,6 +186,7 @@ public class SellerUploadServlet extends HttpServlet
 		item.setQuantity(qty);
 		item.setPrice(price);
 	//	item.setListingName(dis);
+		item.setSellerid(sellerid);
 		item.setColour(clr);
 		item.setManufacture_Date(mfd);
 		item.setDescription(desptn);
@@ -220,7 +227,7 @@ public class SellerUploadServlet extends HttpServlet
 		}
 		
 		
-		response.sendRedirect("sellerItemInsert.jsp?success");
+		response.sendRedirect("sellerItemInsert.jsp?id="+id);
 		
 	}
 	
