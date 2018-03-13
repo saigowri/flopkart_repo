@@ -7,7 +7,32 @@
 <head>
 	<%@include file="metaContent.jsp" %>
 	<title>My Profile</title>
-</head>
+	<style>
+	.custom-file-upload 
+	{
+		border: 1px solid #ccc;
+		display: inline-block;
+		padding: 6px 12px;
+		cursor: pointer;
+	}
+	.dp .tooltiptext 
+	{
+		visibility: hidden;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		/* Position the tooltip */
+		position: absolute;
+		z-index: 1;
+		overflow:visible;
+	}
+	.dp:hover .tooltiptext 
+	{
+	    visibility: visible;
+	}
+	</style>
+	</head>
 
 <body>
 <!-- ============================================== HEADER ============================================== -->

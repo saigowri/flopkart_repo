@@ -53,8 +53,10 @@ function categoryMenu(result,ctxPath)
 		li_node.setAttribute("id", "li_"+result[i].id);
 		li_node.setAttribute("name", result[i].categoryName);
 		var dropdownContent = "dropdownContent(this,'"+ctxPath+"')";
-		var data = " <a href='category.jsp'  style='color:black' data-hover='dropdown' "+
-				 "onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,2000, this);' "+
+		var scrt_var = 10; 
+		var onclickContent = "location.href=this.href+'?key='+scrt_var;";
+		var data = " <a href='ListingSearch.jsp'  style='color:black' data-hover='dropdown' "+
+				 " onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,2000, this);' "+
 		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
 		         result[i].id+"'>"+	result[i].categoryName +
 		 		"<span id='span_"+ result[i].id+"' style='color:grey' class='glyphicon glyphicon-chevron-down'></span>"+
@@ -105,13 +107,8 @@ function subCategoryDropdown(result,categoryid)
 	{	
 		for(var i in result)
 		{
-//			var li_node = document.createElement("LI");                 // Create a <li> node
-//			li_node.className="dropdown yamm-fw mega-menu";
-//			li_node.setAttribute("id", "li_"+result[i].id);
-//			li_node.setAttribute("name", result[i].subcategoryName);
-			data = data + "<li> <a href='index.jsp'>"+result[i].subcategoryName+"</a></li>";
-//			document.getElementById("ul_"+categoryid).appendChild(li_node);
-//			$(li_node).html(data);
+			data = data + "<li> <a href='ListingSearch.jsp?id="+result[i].id+"'>"
+					+result[i].subcategoryName+"</a></li>";
 		}
 		$('#ul_'+categoryid).html(data);
 	}
