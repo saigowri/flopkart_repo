@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.iiitb.ooadvoid.AccessProperties" %>
 <%@ page import="com.iiitb.ooadvoid.CreateProperties" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -278,12 +279,11 @@
 <script src="./customJavascripts/header.js"></script>
 <script>
 $(document).ready(function() 
-{
+
 	$("#unregistered").hide();
-    var ctxPath = "<%=request.getContextPath()%>";
+  var ctxPath = "<%=request.getContextPath()%>";
 	headerFunctions(ctxPath);
-	
-    $("#gender-row").hide();
+  $("#gender-row").hide();
 	checkCookie();	
 });
 
@@ -327,11 +327,14 @@ function diplayUser(user)
 	$('#ip_email').val(user.email);
 	$('#ID').val(user.id);
 	$('#ip_phone').val(user.phone);
+
 	$('#userID').html(user.firstName+" "+user.lastName);
 <%--     <% CreateProperties cp = new CreateProperties(); %> --%>
     <% AccessProperties ap = new AccessProperties(); %>
     var imgServerURL = "<%=ap.getImageServerURL() %>"; 
+
 	if(!("pic_URL" in user) || user.pic_URL=="")
+
 	{	
 		$("#no_dp").show();
 		$("#dp").hide();

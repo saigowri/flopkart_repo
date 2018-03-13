@@ -66,14 +66,27 @@ public class FlopkartListingServices
 	@POST
 	@Path("/create")
 	@Consumes("application/json")
-	public Response addFlopkartListing(FlopkartListing listing)
-	{
+	@Produces("application/json")
+	
+	public FlopkartListing addFlopkartListing(FlopkartListing item)
+	{		
+			item.setListingName(item.getListingName());
+			item.setImgUrl(item.getImgUrl());
+			item.setSubcategoryId(item.getSubcategoryId());
+			item.setQuantity(item.getQuantity());
+			item.setPrice(item.getPrice());
+			item.setSellerid(item.getSellerid());
+	//		item.setDiscount(item.getDiscount());
+			item.setColour(item.getColour());
+			item.setBrand(item.getBrand());
+			item.setManufacture_Date(item.getManufacture_Date());
+			item.setDescription(item.getDescription());
 		
-		FlopkartListingDAO dao = new FlopkartListingDAO();
-		dao.addFlopkartListing(listing);
-
-		return Response.ok().build();
+			FlopkartListingDAO dao = new FlopkartListingDAO();
+			FlopkartListing item_details = dao.addFlopkartListing(item);
+		return item_details;
 	}
+	
 
 	@PUT
 	@Path("/update/{id}")

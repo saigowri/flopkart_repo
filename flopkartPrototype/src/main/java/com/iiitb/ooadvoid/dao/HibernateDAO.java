@@ -45,7 +45,6 @@ public class HibernateDAO<E>
 		tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		E ent = (E) session.load(entity.getClass(), new Integer(id));
-		System.out.println(ent.toString());
 		tx.commit();
 		session.flush();
 		session.close();
