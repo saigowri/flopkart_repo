@@ -52,6 +52,7 @@ public class FlopkartListingServices
 			item.setSubcategoryId(item.getSubcategoryId());
 			item.setQuantity(item.getQuantity());
 			item.setPrice(item.getPrice());
+			item.setSellerid(item.getSellerid());
 	//		item.setDiscount(item.getDiscount());
 			item.setColour(item.getColour());
 			item.setBrand(item.getBrand());

@@ -14,6 +14,7 @@
       <property name = "listingName" column = "ListingName" type = "string"  unique="true"/>
       <property name = "imgUrl" column = "ImgUrl" type = "string"/>
       <property name = "subcategoryId" column = "subcategoryid" type = "int"/>
+      <property name = "sellerid" column = "sellerid" type = "int"/>
       <property name = "quantity" column = "Quantity" type = "int"/>
       <property name = "price" column = "price" type = "int"/>
       <property name = "colour" column = "colour" type = "string"/>

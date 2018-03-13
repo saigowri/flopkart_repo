@@ -6,6 +6,7 @@ public class FlopkartListing {
 	private String listingName;
 	private String imgUrl;
 	private Integer subcategoryId;
+	private Integer sellerid;
 	private Integer quantity;
 	private Integer price;
 	private String colour;
@@ -39,6 +40,13 @@ public class FlopkartListing {
 	}
 	public void setSubcategoryId(Integer subcategoryId) {
 		this.subcategoryId = subcategoryId;
+	}
+	
+	public Integer getSellerid() {
+		return sellerid;
+	}
+	public void setSellerid(Integer sellerid) {
+		this.sellerid = sellerid;
 	}
 	public Integer getQuantity() {
 		return quantity;
