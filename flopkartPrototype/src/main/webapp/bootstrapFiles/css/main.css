@@ -1670,7 +1670,7 @@ ul.horizontal {
 .sidebar .custom-carousel .owl-controls .owl-next  {top: -20px;}
 
 .sidebar .side-menu .head {
-  -webkit-border-radius: 0px;
+	-webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
   color: #333;
@@ -1683,6 +1683,15 @@ ul.horizontal {
 	font-weight:700;
 	letter-spacing: 0.5px;
 	border-bottom:1px #f1ce3c solid
+}
+
+.sidebar .side-menu .headOfferZone {
+    background: url(../../images/offerZone/logo.png) no-repeat;
+    background-size: 100%;
+    height: 83px;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
 }
 .sidebar .side-menu .head .icon {
   margin-right: 5px;
@@ -3732,7 +3741,8 @@ age-container #owl-main .owl-next {
 
 }
 .search-result-container .category-product {
-
+	padding-top: 20px;
+	padding-left: 10px;
 }
 .search-result-container .category-product .product {
   margin-bottom: 30px;
@@ -4723,9 +4733,6 @@ age-container #owl-main .owl-next {
   }
   .cnt-homepage .container {
     width: 100%;
-  }
-  .body-content .sidebar {
-    margin-bottom: 30px;
   }
   .product .product-image .image img {
     width: 100%;

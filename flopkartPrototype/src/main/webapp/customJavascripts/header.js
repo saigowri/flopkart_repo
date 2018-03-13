@@ -3,6 +3,7 @@ function headerFunctions(ctxPath)
 	$("#signup").hide();
 	$(".warning").hide();
 	checkCookie();	
+	
 	$("#f_name").focus(function(){
 	        $('.warning').hide(); // hide error popup
 	});
@@ -30,7 +31,11 @@ function fetch(ctxPath)
 		contentType : 'application/json',
 		url : ctxPath + "/webapi/categories",
 		dataType : "json", // data type of response
-		success : categoryMenu ,
+		success :
+			function(data)
+			{
+				categoryMenu(data,ctxPath);
+			},
     	error:
     		function() 
     		{
@@ -39,43 +44,93 @@ function fetch(ctxPath)
 	});
 }
 	
-function categoryMenu(result)
+function categoryMenu(result,ctxPath)
 {
 	for(var i in result)
 	{
 		var li_node = document.createElement("LI");                 // Create a <li> node
-		li_node.className="dropdown yamm-fw mega-menu";
-		li_node.setAttribute("id", result[i].id);
+		li_node.className="dropdown";
+		li_node.setAttribute("id", "li_"+result[i].id);
 		li_node.setAttribute("name", result[i].categoryName);
-		var data = " <a href='category.jsp' data-hover='dropdown' class='category-dropdown dropdown-toggle category-dropdown-item'"+
-		         " data-toggle='dropdown' id='l_"+result[i].id+"'>"+
-		 		result[i].categoryName +
-		 		"</a> <ul id=ul_"+result[i].id+
-		 		"' class='dropdown-menu pages'></ul>";
+		var dropdownContent = "dropdownContent(this,'"+ctxPath+"')";
+		var data = " <a href='category.jsp'  style='color:black' data-hover='dropdown' "+
+				 "onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,2000, this);' "+
+		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
+		         result[i].id+"'>"+	result[i].categoryName +
+		 		"<span id='span_"+ result[i].id+"' style='color:grey' class='glyphicon glyphicon-chevron-down'></span>"+
+				"</a>";
+		var data1 = "<ul class='dropdown-menu pages'>"+
+					"<li>"+
+						"<div class='yamm-content'>"+
+							"<div class='row'>"+
+								"<div class='col-xs-12 col-menu'>"+
+									"<ul class='links' id='ul_"+ result[i].id+"'>"+
+					"</ul></div></div></li></ul>";
 		document.getElementById("category_dropdown").appendChild(li_node);
-		$('#'+result[i].id).html(data);
+		$(li_node).html(data + data1);
 	} 
-			
-	$("#dropdown-test").hover(
-	function() 
-	{ 
-	// 	$(this).css("background-color", "white");
-	// 	$(this).css("color","grey");
-		alert("hi");
-		var data_item = "<ul class='dropdown-menu container'>"+
-			"<li><div class='yamm-content'> 	<div class='row'>"+ 		
-			"<div class='col-xs-12 col-menu'> <ul class='links'>"+
-			"<li><a href='home.html'>Home</a></li> 	<li><a href='category.jsp'>Category</a></li>"+
-			"<li><a href='underConstruct.html'>Detail</a></li> </ul>"+
-			"</div> 	</div> </div> 		</li></ul>";
-		$(this.id).append(data);
-	}, 
-	function() { $(this).css("background-color", "");
-	$(this).css("color","");
-	});
+
 }
 	
+function dropdownContent(obj,ctxPath)
+{
+	var categoryid = obj.id;
+//	var ctxPath = "http://localhost:8080/flopkartPrototype";
+		$.ajax(
+		{
+			type : 'POST',
+			contentType : 'application/json',
+			url : ctxPath + "/webapi/subcategories/category/"+categoryid,
+			dataType : "json", // data type of response
+			success : 
+				function(data)
+				{
+					subCategoryDropdown(data,categoryid);
+				},
+	    	error:
+	    		function() 
+	    		{
+	        	//alert("error occurred");
+	    		}
+		});
+ 	$(obj).css("color","blue");
+ 	$('#span_'+obj.id).toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+ 	$('#li_'+obj.id).addClass('open');
+}
+
+function subCategoryDropdown(result,categoryid)
+{
+	var data = "";
+	if(Object.keys(result).length>0)
+	{	
+		for(var i in result)
+		{
+//			var li_node = document.createElement("LI");                 // Create a <li> node
+//			li_node.className="dropdown yamm-fw mega-menu";
+//			li_node.setAttribute("id", "li_"+result[i].id);
+//			li_node.setAttribute("name", result[i].subcategoryName);
+			data = data + "<li> <a href='index.jsp'>"+result[i].subcategoryName+"</a></li>";
+//			document.getElementById("ul_"+categoryid).appendChild(li_node);
+//			$(li_node).html(data);
+		}
+		$('#ul_'+categoryid).html(data);
+	}
+ 
 	
+	else
+		$('#li_'+categoryid).removeClass('open');
+		
+
+}
+
+function dropdownBack(obj)
+{
+ 	$(obj).css("color","black");
+ 	$('#span_'+obj.id).toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
+ 	$('#li_'+obj.id).removeClass('open');
+// 	$('#ul_'+obj.id).empty();
+}
+
 function show_signup()
 { 
 	$("#old").hide();
@@ -124,37 +179,41 @@ function signup(ctxPath)
 		$("#warning_pass_new").show();
 		return false;
 	}
-		
 		$.ajax(
 		{
 		type : 'POST',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/users/createCustomer",
+		url : ctxPath + "/webapi/users/create",
 		dataType : "json", // data type of response
 		data : signupformToJSON(),
-		success : renderDetails
+		success : renderDetails,
+		error : function()
+		{
+			alert("err");
+		}
 		});
 	}
 
 function signupformToJSON() 
-	{
-		var fname = $("#f_name").val();
-		var lname = $("#l_name").val();
-		var email = $("#email").val();
-		var password = $("#pass_txt").val();
-		var phone = $("#phone").val();
+{
+	var fname = $("#f_name").val();
+	var lname = $("#l_name").val();
+	var email = $("#email").val();
+	var password = $("#pass_txt").val();
+	var phone = $("#phone").val();
+	var userType = "customer";	
 		
-		
-		var flipkart_user = JSON.stringify({
-"firstName":fname,
-"lastName":lname,
-"phone":phone,
+	var flipkart_user = JSON.stringify({
+				"firstName":fname,
+				"lastName":lname,
+				"phone":phone,
         		"email":email,
-        		"password":password
+        		"password":password,
+        		"userType":userType
         	
-        	});
-		return flipkart_user;
-	}
+    });
+	return flipkart_user;
+}
 	
 function checkCookie() 
 	{
@@ -167,43 +226,43 @@ function checkCookie()
 	    else 
 	    {
 	    	showLogin();
-$('#loginModal').modal('toggle');
+	    	$('#loginModal').modal('toggle');
 	    }
 	}
 
 function showLogin()
-	{
-		$("#registered").hide();
-		$("#unregistered").show();
-	}
+{
+	$("#registered").hide();
+	$("#unregistered").show();
+}
 
 function showUser(user)
-	{
-		$("#registered").show();
-		$("#unregistered").hide();
-	}
+{
+	$("#registered").show();
+	$("#unregistered").hide();
+}
 
 function validate(ctxPath) 
-		{
-$(".warning").hide();
-var email_phone = $("#email_phone").val();
-var len = email_phone.length;
-if(email_phone.match(/^[0-9]/))
 {
-	if (len!=10 || !email_phone.match(/^[0-9]{10}$/))
+	$(".warning").hide();
+	var email_phone = $("#email_phone").val();
+	var len = email_phone.length;
+	if(email_phone.match(/^[0-9]/))
 	{
-		$("#warning_email").show();
-		return false;
-	}
-}
-else if (!email_phone.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
-{
-		$("#warning_email").show();
-		return false;
-}
-else
-	findUser(ctxPath);
+		if (len!=10 || !email_phone.match(/^[0-9]{10}$/))
+		{
+			$("#warning_email").show();
+			return false;
 		}
+	}
+	else if (!email_phone.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
+	{
+			$("#warning_email").show();
+			return false;
+	}
+	else
+		findUser(ctxPath);
+}
 		
 //Helper function to serialize all the form fields into a JSON string
 function formToJSON() 
@@ -217,8 +276,8 @@ function formToJSON()
 	return flipkart_user;
 }
 
-		    function findUser(ctxPath) 
-		    {
+function findUser(ctxPath) 
+{
 	$.ajax(
 	{
 		type : 'POST',
@@ -227,25 +286,25 @@ function formToJSON()
 		dataType : "json", // data type of response
 		data : formToJSON(),
 		success : renderDetails
-	});
+});
 }
 
-		function renderDetails(user)
-		{
-if (user == null)
-{
-	$("#warning_register").show();
-}
-else if (user.id === 0)
-{
-	$("#warning_pass").show();
-}
-else
-{
-	showUser(user);
-	setCookie("user_details", JSON.stringify(user), 1);
-	$('#loginModal').modal('toggle');
-}
+function renderDetails(user)
+{ 
+	if (user == null)
+	{
+		$("#warning_register").show();
+	}
+	else if (user.id === 0)
+	{	
+		$("#warning_pass").show();
+	}
+	else
+	{
+		showUser(user);
+		setCookie("user_details", JSON.stringify(user), 1);
+		$('#loginModal').modal('toggle');
+	}
 
-return false;
-		}
+	return false;
+}
