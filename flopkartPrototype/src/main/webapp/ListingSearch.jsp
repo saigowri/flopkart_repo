@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.iiitb.ooadvoid.AccessProperties" %>
 <!DOCTYPE html>
 <!-- saved from url=(0060)http://www.themesground.com/flipmart-demo/HTML/category.jsp -->
 <html>
@@ -11,7 +12,7 @@
 .box {
   transition: box-shadow .3s;
   width: 300px;
-  height: 500px;
+  height: 300px;
   background: #fff;
   float: left;
   
@@ -62,11 +63,14 @@
 	        							contentType : 'application/json',
 	        							url : ctxPath + "/webapi/listings/"+result[i].id,
 	        							dataType : "json", // data type of response
-	        							success : function(result){
+	        							success : function(result)
+	        							{
+	        							    <% AccessProperties ap = new AccessProperties(); %>
+	        							    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 	        								var data="";
-	        								data+="<div class='col-sm-4, box'><a href='#'> <img src='"+result.imgUrl+"' alt=''></a>";
-	        						        data+="<div style = 'font-size:20px; text-align:left'>"+result.listingName+"</div>";
-	        						       	data+="<div style = 'font-size:20px; text-align:left; font-family:verdana'><i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
+	        								data+="<div class='col-sm-4, box'><a href='#'> <img src='"+imgServerURL+result.imgUrl+"' alt='' height='200px'></a>";
+	        						        data+="<div style = 'font-size:20px; text-align:center'>"+result.listingName+"</div>";
+	        						       	data+="<div style = 'font-size:20px; text-align:center; font-family:verdana'><i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
 	        						       	$('#listing').append(data);
 	        					    	},
 	        					    	error:function() {
