@@ -64,6 +64,32 @@ input:focus ~ .floating-label {
 input:not (:focus ):valid ~ .floating-label {
 	color: transparent;
 }
+
+.buynow
+{
+	    background: #fb641b;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+    border: none;
+    color: #fff;
+    width:48%;
+    padding: 18px 8px;
+    border-radius: 2px;
+}
+.buynowdiv
+{
+	padding-top:20px;
+}
+.addtocart
+{
+	background: #ff9f00;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+    border: none;
+    color: #fff;
+    width:48%;
+    padding: 18px 8px;
+    border-radius: 2px;
+	
+}
 </style>
 
 <body>
@@ -455,7 +481,7 @@ input:not (:focus ):valid ~ .floating-label {
 			<ul class="list-inline list-unstyled">
 				<li><a href="#">Home</a></li>
 				<li><a href="#">Clothing</a></li>
-				<li class='active'>Floral Print Buttoned Top</li>
+				<li class='active' id="breadcrumblast">Floral Print Buttoned Top</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -472,8 +498,8 @@ input:not (:focus ):valid ~ .floating-label {
 
         <div id="owl-single-product">
             <div class="single-product-gallery-item" id="slide1">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p21.jpg">
-                    <img class="img-responsive" alt="" width="480px" src="./images/blank.gif" data-echo="./images/products/p21.jpg" />
+                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p9.jpg">
+                    <img class="img-responsive" alt="" width="480px" src="./images/blank.gif" data-echo="./images/products/puma1.jpg" />
                 </a>
             </div><!-- /.single-product-gallery-item -->
 
@@ -528,73 +554,23 @@ input:not (:focus ):valid ~ .floating-label {
         </div><!-- /.single-product-slider -->
 
 
-        <div class="single-product-gallery-thumbs gallery-thumbs">
 
-            <div id="owl-single-product-thumbnails">
-                <div class="item">
-                    <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide1">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p21.jpg" />
-                    </a>
-                </div>
-
-                <div class="item">
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide2">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p9.jpg"/>
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="3" href="#slide3">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p10.jpg" />
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="4" href="#slide4">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p11.jpg" />
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="5" href="#slide5">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p12.jpg" />
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="6" href="#slide6">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p13.jpg" />
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="7" href="#slide7">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p14.jpg" />
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="8" href="#slide8">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p4.jpg" />
-                    </a>
-                </div>
-                <div class="item">
-
-                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="9" href="#slide9">
-                        <img class="img-responsive" width="85" alt="" src="./images/blank.gif" data-echo="./images/products/p5.jpg" />
-                    </a>
-                </div>
-            </div><!-- /#owl-single-product-thumbnails -->
-
-            
-
-        </div><!-- /.gallery-thumbs -->
 
     </div><!-- /.single-product-gallery -->
+    <div class="buynowdiv">
+    <form action="underConstruct.html">
+    	<button id="buynow" class="buynow">
+    		Buy Now
+    	</button>
+    	<button class="addtocart" id="buynow">
+    		Add to cart
+    	</button>
+    </form>
+    </div>
 </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
-							<h1 class="name">Floral Print Buttoned Top</h1>
+							<h1 class="name" id="product_title">Floral Print Buttoned Top</h1>
 							
 							<div class="rating-reviews m-t-20">
 								<div class="row">
@@ -618,13 +594,13 @@ input:not (:focus ):valid ~ .floating-label {
 									</div>
 									<div class="col-sm-9">
 										<div class="stock-box">
-											<span class="value">In Stock</span>
+											<span class="value" id="available">In Stock</span>
 										</div>	
 									</div>
 								</div><!-- /.row -->	
 							</div><!-- /.stock-container -->
 
-							<div class="description-container m-t-20">
+							<div class="description-container m-t-20" id="itemdescription">
 								Pink printed woven top, has a round neck, long sleeves<br/>
 								Material and Care : Polyester; Machine-wash
 							</div><!-- /.description-container -->
@@ -635,8 +611,8 @@ input:not (:focus ):valid ~ .floating-label {
 
 									<div class="col-sm-6">
 										<div class="price-box">
-											<span class="price"><i class="fa fa-rupee-sign"></i>800.00</span>
-											<span class="price-strike"><i class="fa fa-rupee-sign"></i>900.00</span>
+											<span class="price" id="discountedprice"><i class="fa fa-rupee-sign"></i>800.00</span>
+											<span class="price-strike" id="price-strike"><i class="fa fa-rupee-sign"></i>900.00</span>
 										</div>
 									</div>
 
@@ -676,10 +652,7 @@ input:not (:focus ):valid ~ .floating-label {
 							            </div>
 									</div>
 
-									<div class="col-sm-7">
-										<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
-									</div>
-
+									
 									</div></div></div></div>
 								</div><!-- /.row -->
 							</div><!-- /.quantity-container -->
@@ -702,4 +675,57 @@ input:not (:focus ):valid ~ .floating-label {
 <script src="./bootstrapFiles/js/bootstrap-select.min.js"></script> 
 <script src="./bootstrapFiles/js/wow.min.js"></script> 
 <script src="./bootstrapFiles/js/scripts.js"></script>
+
+<script>
+$(document).ready(function(){
+
+	<%--     <% FlopkartCategoryClient client = new FlopkartCategoryClient(); %> --%>
+	<%-- 	String test1 = test.getImageURL();%> --%>
+	<%-- 	var test = "<%=test1%>"; --%>
+//	 	alert(test);
+		fetch();
+
+	});
+	function fetch() 
+	{
+	    var ctxPath = "<%=request.getContextPath()%>";
+		$.ajax(
+		{
+			type : 'GET',
+			contentType : 'application/json',
+			url : ctxPath + "/webapi/listings",
+			dataType : "json", // data type of response
+			success : function(result){
+			for(var i in result){
+	               //data+="<option value='"+result[i].id+"'>"+result[i].categoryName+"</option>";
+	        	if(result[i].id==3)
+	        		{
+	        	//	alert("xx");
+	        			document.getElementById("product_title").innerHTML=result[i].listingName;
+	        			document.getElementById("itemdescription").innerHTML=result[i].description;
+	        			if(result[i].quantity==0)
+	        				{
+	        					document.getElementById("available").innerHTML="Out Of Stock";
+	        				}
+	        			var discounted=result[i].price-result[i].price/10;
+	        			var price="<i class='fa fa-rupee-sign'></i>"+discounted;
+	        			document.getElementById("price-strike").innerHTML=result[i].price;
+	        			
+	        			//document.getElementById("discountedprice").innerHTML=result[i].price-result[i].price/10;
+	        			 $('#discountedprice').html(price);
+	        			 var image= "<a data-lightbox='image-1' data-title='Gallery' href='"+result[i].imgUrl+"'>"+
+	        	     " <img class='img-responsive' alt='' width='480px' height='600px'src='./images/blank.gif' data-echo='"+result[i].imgUrl+"' />"+
+	                        "</a>"
+	                        alert(image);
+	        			 $('#slide1').html(image);
+	        		}
+			}
+	            
+	    	},
+	    	error:function() {
+	        	//alert("error occurred");
+	    	}
+		});
+	}
+</script>
 </html>
