@@ -29,23 +29,14 @@ public class FlopkartItemServices
 	}
 
 	
-	@POST
-	@Path("/categoty")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public FlopkartItem getFlopkartItemByCategoty(FlopkartItem item)
-	{
-		FlopkartItemDAO dao = new FlopkartItemDAO();
-		FlopkartItem item_details = (FlopkartItem) dao.getFlopkartItemByCategoty(item);
-		return item_details;
-	}	
+	
 	
 	@POST
 	@Path("/create")
 	@Consumes("application/json")
 	public Response addFlopkartItem(FlopkartItem item)
 	{
-			item.setItemid(item.getItemid());
+			item.setListingid(item.getListingid());
 			//item.setCartId(item.getCartId());
 			
 			

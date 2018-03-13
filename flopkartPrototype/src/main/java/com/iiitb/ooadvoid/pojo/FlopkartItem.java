@@ -3,61 +3,34 @@ package com.iiitb.ooadvoid.pojo;
 public class FlopkartItem
 {
 	private Integer id;
-	private Integer itemid;
-	private String itemname;
-	private String category;
-	private Integer price;
-
-	public Integer getId()
-	{
+	private Integer Listingid;
+	private String CartId;
+	private String status;
+	
+	public Integer getId() {
 		return id;
 	}
-
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Integer getItemid()
-	{
-		return itemid;
+	public Integer getListingid() {
+		return Listingid;
 	}
-
-	public void setItemid(Integer itemid)
-	{
-		this.itemid = itemid;
+	public void setListingid(Integer listingid) {
+		Listingid = listingid;
 	}
-
-	public String getItemname()
-	{
-		return itemname;
+	public String getCartId() {
+		return CartId;
 	}
-
-	public void setItemname(String itemname)
-	{
-		this.itemname = itemname;
+	public void setCartId(String cartId) {
+		CartId = cartId;
 	}
-
-	public String getCategory()
-	{
-		return category;
+	public String getStatus() {
+		return status;
 	}
-
-	public void setCategory(String category)
-	{
-		this.category = category;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
-	public Integer getPrice()
-	{
-		return price;
-	}
-
-	public void setPrice(Integer price)
-	{
-		this.price = price;
-	}
-
 	
-
+	
 }

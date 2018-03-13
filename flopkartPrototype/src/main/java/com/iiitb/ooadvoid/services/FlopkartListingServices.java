@@ -46,7 +46,7 @@ public class FlopkartListingServices
 	@Produces("application/json")
 	
 	public FlopkartListing addFlopkartListing(FlopkartListing item)
-	{		item.setListingid(item.getListingid());
+	{		
 			item.setListingName(item.getListingName());
 			item.setImgUrl(item.getImgUrl());
 			item.setSubcategoryId(item.getSubcategoryId());

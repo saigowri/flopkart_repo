@@ -225,7 +225,7 @@
       <div class="col-md-9"> 
         <!-- ========================================== SECTION – HERO ========================================= -->
 
-	<form id="insert_data" action="UploadImgServlet" method="post"  enctype="multipart/form-data"> 
+	<form id="insert_data" action="SellerUploadServlet" method="post"  enctype="multipart/form-data"> 
         <div class="search-result-container ">
            <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
               <div class="row">
@@ -257,19 +257,7 @@
           
         
       </div>
-       <div class="search-result-container ">
-            <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
-	            <div class="widget-header">
-	                <h4 class="widget-title"><B>ITEM ID</B></h4>
-	            </div>   
-			    <div class="row">
-			      <div class="col-md-5 sidebar"> 
-		              <input type="number" class="form-control input-lg"  name="listing_id" id="listing_id" 
-		              >
-		          </div>
-		         </div> 
-        		</div>
-      	</div>
+      
 		
         <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
@@ -326,6 +314,7 @@
 			      <div class="col-md-5 sidebar"> 
 		              <input type="number" class="form-control input-lg"  name="qty" id="qty" 
 		              autocomplete="name" >
+		              <input type="text" id="cnt" name="cnt" hidden="hidden"/>
 		          </div>
 		         </div> 
         		</div>
@@ -423,13 +412,13 @@
 				   	 <div id='TextBoxesGroup1'>
 						 <div class="row" id="TextBoxDiv1" style="margin-bottom:8px;">
 							      <div class="col-md-5 sidebar"> 
-						              <input type="text" class="form-control input-lg"  name="key" id="key1" >
+						              <input type="text" class="form-control input-lg"  name="key1" id="key1" >
 						          </div>
 						          <div class="col-md-2 sidebar" style="margin-top:10px; ">
 						          	<label ><b>:</b></label>
 						          </div>
 						          <div class="col-md-5 sidebar"> 
-						              <input type="text" class="form-control input-lg"  name="val" id="val1" >
+						              <input type="text" class="form-control input-lg"  name="val1" id="val1" >
 						          </div> 
 					         </div > 
 					</div>
@@ -492,6 +481,7 @@ $(document).ready(function(){
 
 		var counter = 2;
 		var c = 1;
+		$('#cnt').val(c);
 		$('#sub-cat-content').hide();
 		$('#sub-cat-head').hide();
 		fetch();
@@ -508,22 +498,23 @@ $(document).ready(function(){
 		$('#ADD').click(function(){
 			var row1 = '<div class="row"  id="TextBoxDiv'+counter+'" style="margin-bottom:8px;">'+
 				'<div class="col-md-5 sidebar"> '+
-				'<input type="text" class="form-control input-lg"  name="key" id="key'+counter+'" >'+
+				'<input type="text" class="form-control input-lg"  name="key'+counter+'" id="key'+counter+'" >'+
 				'</div>'+
 				'<div class="col-md-2 sidebar" style="margin-top:10px; ">'+
 				'<label ><b>:</b></label>'+
 				'</div>'+
 				'<div class="col-md-5 sidebar"> '+
-				' <input type="text" class="form-control input-lg"  name="val" id="val'+counter+'" >'+
+				' <input type="text" class="form-control input-lg"  name="val'+counter+'" id="val'+counter+'" >'+
 				'</div> '+
 				'</div > ';
 			
 			$('#ADD').data('row1',row1);
+			
 			$('#TextBoxesGroup1').append($(this).data('row1'));
 			counter++;
-		//	alert("b4 add detail");
-			add_detail(c);
+			//add_detail(c);
 			c++;
+			$('#cnt').val(c);
 			
 			
 		});
@@ -617,7 +608,7 @@ function add_detail(c)
 		});
 	}
 	function render()
-	{	alert("render");
+	{	
 		return true;
 	}
 	
@@ -627,7 +618,7 @@ function add_detail(c)
 		var attr_name = $("#key" + c ).val();
 		var attr_val = $("#val" + c ).val();
 		
-		alert(listing_id);
+		
 		var FlopkartListingDetails = JSON.stringify({
 			
 			"ListingId":listing_id,

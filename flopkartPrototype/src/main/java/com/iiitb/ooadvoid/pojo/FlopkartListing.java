@@ -3,7 +3,6 @@ package com.iiitb.ooadvoid.pojo;
 public class FlopkartListing {
 		
 	private Integer id;
-	private Integer listingid;
 	private String listingName;
 	private String imgUrl;
 	private Integer subcategoryId;
@@ -13,6 +12,8 @@ public class FlopkartListing {
 	private String brand;
 	private String manufacture_Date;
 	private String description;
+	private String priority;
+	private String discount;
 	
 	public Integer getId() {
 		return id;
@@ -20,12 +21,7 @@ public class FlopkartListing {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getListingid() {
-		return listingid;
-	}
-	public void setListingid(Integer listingid) {
-		this.listingid = listingid;
-	}
+	
 	public String getListingName() {
 		return listingName;
 	}
@@ -80,6 +76,19 @@ public class FlopkartListing {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getPriority() {
+		return priority;
+	}
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+	
 	
 		
 }
