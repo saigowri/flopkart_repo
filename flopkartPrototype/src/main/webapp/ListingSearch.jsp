@@ -764,7 +764,6 @@ input:valid ~ .floating-label {
             <li><img src="./images/payments/2.png" alt=""></li>
             <li><img src="./images/payments/3.png" alt=""></li>
             <li><img src="./images/payments/4.png" alt=""></li>
-            <li><img src="./images/payments/5.png" alt=""></li>
           </ul>
         </div>
         <!-- /.payment-methods --> 
@@ -787,7 +786,7 @@ input:valid ~ .floating-label {
 	<script src="./bootstrapFiles/js/bootstrap-select.min.js"></script>
 	<script src="./bootstrapFiles/js/wow.min.js"></script>
 	<script src="./bootstrapFiles/js/scripts.js"></script>
-	<script src="./bootstrapFiles/js/cookies.js"></script>
+	<script src="./customJavascripts/cookies.js"></script>
 	<script>
 	$(document).ready(function()
 			{
@@ -1019,8 +1018,8 @@ input:valid ~ .floating-label {
 	        						       	data+="<div style = 'font-size:20px; text-align:left; font-family:verdana'><i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
 	        						       	$('#listing').append(data);
 	        					    	},
-	        					    	error:function() {
-	        					    		alert(error);
+	        					    	error:function(err) {
+	        					    		alert(err);
 	        					    	}
 	        						});
 	        				}

@@ -269,6 +269,7 @@ function signup(ctxPath) {
 
 function renderDetails(){
 	alert("Successfully registered new seller");
+	window.location.reload(true);
 }
 </script>
 </html>
