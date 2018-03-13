@@ -28,10 +28,10 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav">
                 <li class="active" role="presentation"><a href="sellerHub.jsp">HOME</a></li>
-                <li role="presentation"><a href="#">SELL SMART</a></li>
-                <li role="presentation"><a href="#">PRICING</a></li>
-                <li role="presentation"><a href="#">FAQ</a></li>
-                <li role="presentation"><a href="#">BENEFITS</a></li>
+                <li role="presentation"><a href="underConstruct.html">SELL SMART</a></li>
+                <li role="presentation"><a href="underConstruct.html">PRICING</a></li>
+                <li role="presentation"><a href="underConstruct.html">FAQ</a></li>
+                <li role="presentation"><a href="underConstruct.html">BENEFITS</a></li>
                 <li role="presentation"><a href="index.jsp">Flopkart.com</a></li>
             </ul>
         </div>

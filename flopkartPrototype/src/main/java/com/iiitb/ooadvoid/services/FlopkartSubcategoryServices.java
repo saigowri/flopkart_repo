@@ -83,4 +83,19 @@ public class FlopkartSubcategoryServices
 		else
 			return subcategory_details;
 	}	
+
+	
+	@POST
+	@Path("/category/{id}")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public List<FlopkartSubcategory> getFlopkartbyCategoryId(@PathParam("id") int id)
+	{
+		FlopkartSubcategoryDAO dao = new FlopkartSubcategoryDAO();
+		List<FlopkartSubcategory> subcategory_details = dao.getFlopkartSubcategoryBysubcategoryId(id);
+		if(subcategory_details==null)
+			return null;
+		else
+			return subcategory_details;
+	}
 }
