@@ -10,7 +10,7 @@
       
       <property name = "Listingid" column = "ListingId" type = "int"  />
       <property name = "CartId" column = "CartId" type = "int"/>
-      <property name = "CartId" column = "OrderId" type = "int"/>
+      <property name = "OrderId" column = "OrderId" type = "int"/>
        <property name = "status" column = "status" type = "string"/>
 	 
 	</class>
