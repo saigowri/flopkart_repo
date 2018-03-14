@@ -196,6 +196,7 @@ public class HibernateDAO<E>
 		String hql = "from "+ entity_name + " where "+param1+" = :val1" + " and "+param2+" = :val2";
 		Query query = session.createQuery(hql);
 		query.setParameter("val1", val1);
+		query.setParameter("val2", val2);
 		List<E> entity = query.list();
 		session.flush();
 		session.close();

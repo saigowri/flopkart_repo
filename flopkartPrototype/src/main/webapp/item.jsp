@@ -10,7 +10,7 @@
 <style>
 .buynow
 {
-	    background: #fb641b;
+	background: #fb641b;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
     border: none;
     color: #fff;
@@ -133,14 +133,14 @@
 </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info" id="product-info">
-						</div></div>
-								</div><!-- /.row -->
-							</div><!-- /.quantity-container -->
-						</div><!-- /.product-info -->
-					</div><!-- /.col-sm-7 -->
-				</div><!-- /.row -->
-                </div>
-	
+						</div>
+					</div>
+					</div><!-- /.row -->
+				</div><!-- /.quantity-container -->
+			</div><!-- /.product-info -->
+		</div><!-- /.col-sm-7 -->
+	</div><!-- /.row -->
+  </div>
 </body>
 
     <%@include file="footer.jsp" %>
@@ -202,6 +202,7 @@ $(document).ready(function(){
 									result.price+
 				"					</span>"+
 				"				</div>"+
+				"				<div style='font-size:15px; color: blue' id='discount'>Discount: "+result.discount+"%</div>"+
 				"			</div>"+
 				"			<div class='col-sm-6'>"+
 				"				<div class='favorite-button m-t-10'>"+
@@ -237,7 +238,7 @@ $(document).ready(function(){
 				"			</div>"+
 				"			</div></div>";
 				
-			var img_data = "<div id='owl-single-product'>"+
+				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
 				"        <a data-lightbox='image-1' data-title='Gallery' href='./images/products/p9.jpg'>"+
 				"            <img class='img-responsive' alt='' width='480px' src='./images/blank.gif' data-echo='"+imgServerURL+result.imgUrl+"' />"+
@@ -247,6 +248,21 @@ $(document).ready(function(){
 				$("#product-info").html(data);
 				$("#gallery").html(img_data);
 // 				alert(JSON.stringify(result));
+				$.ajax({
+					type : 'GET',
+					contentType : 'application/json',
+					url : ctxPath + "/webapi/users/"+result.sellerid,
+					dataType : "json", // data type of response
+					success : function(res)
+					{
+						alert(res.firstName);
+						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+res.firstName+" "+res.lastName+"</span>";
+						$("#product-info").append(sellerData);
+					},
+					error : function(){
+						//alert("error");
+					}
+				});
 			},
 	    	error:function() {
 	        	//alert("error occurred");
