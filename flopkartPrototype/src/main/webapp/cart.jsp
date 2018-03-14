@@ -539,7 +539,7 @@ function textChange(){
 function checkCookie() 
 {
 	var user = getCookie("user_details");
-	alert(user);
+	//alert(user);
     if (user != "") 
     {
     	setCookie("user_details", user, 10);
@@ -548,7 +548,7 @@ function checkCookie()
     else 
     {
     	showLogin();
-		$('#loginModal').modal('toggle');
+		//$('#loginModal').modal('toggle');
     }
 }
 function showLogin()

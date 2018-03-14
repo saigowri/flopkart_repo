@@ -56,7 +56,7 @@ function categoryMenu(result,ctxPath)
 		var scrt_var = 10; 
 		var onclickContent = "location.href=this.href+'?key='+scrt_var;";
 		var data = " <a href='ListingSearch.jsp'  style='color:black' data-hover='dropdown' "+
-				 " onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,2000, this);' "+
+				 " onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,3000, this);' "+
 		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
 		         result[i].id+"'>"+	result[i].categoryName +
 		 		"<span id='span_"+ result[i].id+"' style='color:grey' class='glyphicon glyphicon-chevron-down'></span>"+
@@ -244,7 +244,7 @@ function checkCookie()
     else 
     {
     	showLogin();
-    	$('#loginModal').modal('toggle');
+    	//$('#loginModal').modal('toggle');
     }
 }
 

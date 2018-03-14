@@ -10,7 +10,7 @@
 <style>
 .buynow
 {
-	    background: #fb641b;
+	background: #fb641b;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
     border: none;
     color: #fff;
@@ -133,125 +133,173 @@
 </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info" id="product-info">
-						</div></div>
-								</div><!-- /.row -->
-							</div><!-- /.quantity-container -->
-						</div><!-- /.product-info -->
-					</div><!-- /.col-sm-7 -->
-				</div><!-- /.row -->
-                </div>
-	
+							<h1 class='name' id='product_title'></h1>
+					<div class='rating-reviews m-t-20'>
+						<div class='row'>
+							<div class='col-sm-3'>
+								<div class='rating rateit-small'></div>
+							</div>
+							<div class='col-sm-8'>
+								<div class='reviews'>
+									<a href='#' class='lnk'></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='stock-container info-container m-t-10'>
+						<div class='row'>
+							<div class='col-sm-2'>
+								<div class='stock-box'>
+									<span class='label'>Availability :</span>
+								</div>	
+							</div>
+							<div class='col-sm-9'>
+								<div class='stock-box'>
+									<span style="color:red;font-size:15px" id='available'></span>
+								</div>	
+							</div>
+						</div>	
+					</div>
+					<div class='description-container m-t-20' style="font-size: 15px" id='itemdescription'>
+					</div>
+					<div class='price-container info-container m-t-20'>
+						<div class='row'>
+							<div class='col-sm-6'>
+								<div class='price-box' style="display: inline-flex;">
+									<div class='price' style="margin-right: 15px"><i class='fa fa-rupee-sign'></i>
+										<span id='discountedprice'></span>
+									</div>
+									<div class='price-strike'><i class='fa fa-rupee-sign'></i>
+										<span id='price-strike'></span>
+									</div>
+								</div>
+								<div style='font-size:15px; color: blue' id='discount'></div>
+							</div>
+							<div class='col-sm-6'>
+								<div class='favorite-button m-t-10'>
+									<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Wishlist' href='#'>
+									    <i class='fa fa-heart'></i>
+									</a>
+									<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Add to Compare' href='#'>
+									   <i class='fa fa-signal'></i>
+									</a>
+									<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='E-mail' href='#'>
+									    <i class='fa fa-envelope'></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='quantity-container info-container'>
+						<div class='row'>
+							<div class='col-sm-2'>
+								<span class='label'>Qty :</span>
+							</div>
+							<div class='col-sm-2'>
+								<div class='cart-quantity'>
+									<div class="quant-input">
+						                <div class="arrows">
+						                  <div id="quant-up" class="arrow plus gradient"><span ><i class="icon fa fa-sort-asc"></i></span></div>
+						                  <div id="quant-down" class="arrow minus gradient"><span ><i class="icon fa fa-sort-desc"></i></span></div>
+						                </div>
+						                <input type="number" id="quantity" min="1">
+			             		     </div>
+					            </div>
+							</div>
+							</div></div>
+					</div>
+					</div>
+					</div><!-- /.row -->
+				</div><!-- /.quantity-container -->
+			</div><!-- /.product-info -->
+		</div><!-- /.col-sm-7 -->
+	</div><!-- /.row -->
+  </div>
 </body>
 
     <%@include file="footer.jsp" %>
 
 <script>
 $(document).ready(function(){
-
-//	 	alert(test);
+	$("#quantity").val("1");
 	<% AccessProperties ap = new AccessProperties(); %>
 	var imgServerURL = "<%=ap.getImageServerURL() %>"; 
     var ctxPath = "<%=request.getContextPath()%>";
-    var itemid = "<%=request.getParameter("id")%>";
+    var listingid = "<%=request.getParameter("id")%>";
 	headerFunctions(ctxPath);
 		$.ajax(
 		{
 			type : 'GET',
 			contentType : 'application/json',
-			url : ctxPath + "/webapi/listings/"+itemid,
+			url : ctxPath + "/webapi/listings/"+listingid,
 			dataType : "json", // data type of response
 			success : function(result){
+				$.ajax({
+					type : 'GET',
+					contentType : 'text/plain',
+					url : ctxPath + "/webapi/items/availableListing/"+listingid,
+					success : function(res)
+					{
+						if(res==0){
+							$("#available").text("Out of Stock");
+						}
+						else{
+							$("#available").text("In Stock ("+res+")");
+						}
+					},
+					error : function(){
+						//alert("error");
+					}
+				});
 				var amount = result.price - (result.discount*result.price/100);
-				data = "<h1 class='name' id='product_title'>"+result.listingName+"</h1>"+
-				"	<div class='rating-reviews m-t-20'>"+
-				"		<div class='row'>"+
-				"			<div class='col-sm-3'>"+
-				"				<div class='rating rateit-small'></div>"+
-				"			</div>"+
-				"			<div class='col-sm-8'>"+
-				"				<div class='reviews'>"+
-				"					<a href='#' class='lnk'></a>"+
-				"				</div>"+
-				"			</div>"+
-				"		</div>"+
-				"	</div>"+
-				"	<div class='stock-container info-container m-t-10'>"+
-				"		<div class='row'>"+
-				"			<div class='col-sm-2'>"+
-				"				<div class='stock-box'>"+
-				"					<span class='label'>Availability :</span>"+
-				"				</div>	"+
-				"			</div>"+
-				"			<div class='col-sm-9'>"+
-				"				<div class='stock-box'>"+
-				"					<span class='value' id='available'></span>"+
-				"				</div>	"+
-				"			</div>"+
-				"		</div>	"+
-				"	</div>"+
-				"	<div class='description-container m-t-20' id='itemdescription'>"+result.description+
-				"	</div>"+
-				"	<div class='price-container info-container m-t-20'>"+
-				"		<div class='row'>"+
-				"			<div class='col-sm-6'>"+
-				"				<div class='price-box'>"+
-				"					<span class='price' id='discountedprice'><i class='fa fa-rupee-sign'></i>"+
-									amount+
-				"					</span>"+
-				"					<span class='price-strike' id='price-strike'><i class='fa fa-rupee-sign'></i>"+
-									result.price+
-				"					</span>"+
-				"				</div>"+
-				"			</div>"+
-				"			<div class='col-sm-6'>"+
-				"				<div class='favorite-button m-t-10'>"+
-				"					<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Wishlist' href='#'>"+
-				"					    <i class='fa fa-heart'></i>"+
-				"					</a>"+
-				"					<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Add to Compare' href='#'>"+
-				"					   <i class='fa fa-signal'></i>"+
-				"					</a>"+
-				"					<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='E-mail' href='#'>"+
-				"					    <i class='fa fa-envelope'></i>"+
-				"					</a>"+
-				"				</div>"+
-				"			</div>"+
-				"		</div>"+
-				"	</div>"+
-				"	<div class='quantity-container info-container'>"+
-				"		<div class='row'>"+
-				"			"+
-				"			<div class='col-sm-2'>"+
-				"				<span class='label'>Qty :</span>"+
-				"			</div>"+
-				"			<div class='col-sm-2'>"+
-				"				<div class='cart-quantity'>"+
-				"					<div class='quant-input'>"+
-				"		                <div class='arrows'>"+
-				"		                  <div class='arrow plus gradient'><span class='ir'><i class='icon fa fa-sort-asc'></i></span></div>"+
-				"		                  <div class='arrow minus gradient'><span class='ir'><i class='icon fa fa-sort-desc'></i></span></div>"+
-				"		                </div>"+
-				"		                <input type='text' value='1'>"+
-				"	              </div>"+
-				"	            </div>"+
-				"			</div>"+
-				"			</div></div>";
+				$("#product_title").text(result.listingName);
+				$("#itemdescription").text(result.description);
+				$("#discountedprice").text(amount);
+				$("#price-strike").text(result.price);
+				$("#discount").text("Discount: "+result.discount+"%");
 				
-			var img_data = "<div id='owl-single-product'>"+
+				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
 				"        <a data-lightbox='image-1' data-title='Gallery' href='./images/products/p9.jpg'>"+
 				"            <img class='img-responsive' alt='' width='480px' src='./images/blank.gif' data-echo='"+imgServerURL+result.imgUrl+"' />"+
 				"        </a>"+
 				"    </div>"+
 				"</div>";
-				$("#product-info").html(data);
 				$("#gallery").html(img_data);
 // 				alert(JSON.stringify(result));
+				$.ajax({
+					type : 'GET',
+					contentType : 'application/json',
+					url : ctxPath + "/webapi/users/"+result.sellerid,
+					dataType : "json", // data type of response
+					success : function(res)
+					{
+						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+res.firstName+" "+res.lastName+"</span>";
+						$("#product-info").append(sellerData);
+					},
+					error : function(){
+						//alert("error");
+					}
+				});
 			},
 	    	error:function() {
 	        	//alert("error occurred");
 	    	}
 		});
+});
+
+$("#quant-up").click(function(){
+	var value = $("#quantity").val();
+	value++;
+	$("#quantity").val(value);
+});
+
+$("#quant-down").click(function(){
+	var value = $("#quantity").val();
+	if(value>1){
+		value--;
+		$("#quantity").val(value);
+	}
 });
 </script>
 </html>
