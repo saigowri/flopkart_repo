@@ -185,14 +185,36 @@ function signup(ctxPath)
 		data : signupformToJSON(),
 		success : renderDetails,
 		error : function()
-		{
-			alert("err");
-		}
+				{
+					findUser(ctxPath);
+				}
 		});
+}
+
+function renderDetails(user)
+{ 
+	if (user == null)
+	{
+		$("#warning_register").show();
 	}
+	else if (user.id === 0)
+	{	
+		$("#warning_pass").show();
+	}
+	else
+	{
+		showUser(user);
+		setCookie("user_details", JSON.stringify(user), 1);
+		$('#loginModal').modal('toggle');
+	}
+
+	return false;
+}
 
 function signupformToJSON() 
 {
+    $("#email_phone").val($("#email").val());
+	$("#pass_text").val($("#pass_txt").val());
 	var fname = $("#f_name").val();
 	var lname = $("#l_name").val();
 	var email = $("#email").val();
@@ -207,25 +229,24 @@ function signupformToJSON()
         		"email":email,
         		"password":password,
         		"userType":userType
-        	
     });
 	return flipkart_user;
 }
 	
 function checkCookie() 
-	{
-	    var user = getCookie("user_details");
-	    if (user != "") 
-	    {
-	    	setCookie("user_details", user, 10);
-	        showUser(JSON.parse(user));
-	    } 
-	    else 
-	    {
-	    	showLogin();
-	    	$('#loginModal').modal('toggle');
-	    }
-	}
+{
+    var user = getCookie("user_details");
+    if (user != "") 
+    {
+    	setCookie("user_details", user, 10);
+        showUser(JSON.parse(user));
+    } 
+    else 
+    {
+    	showLogin();
+    	$('#loginModal').modal('toggle');
+    }
+}
 
 function showLogin()
 {
@@ -264,12 +285,12 @@ function validate(ctxPath)
 //Helper function to serialize all the form fields into a JSON string
 function formToJSON() 
 {
-		        var email = $("#email_phone").val();
+    var email = $("#email_phone").val();
 	var password = $("#pass_text").val();
 	var flipkart_user = JSON.stringify({
-		        	"email":email,
-		        	"password":password
-		        	});
+    	"email":email,
+    	"password":password
+    	});
 	return flipkart_user;
 }
 
@@ -284,24 +305,4 @@ function findUser(ctxPath)
 		data : formToJSON(),
 		success : renderDetails
 });
-}
-
-function renderDetails(user)
-{ 
-	if (user == null)
-	{
-		$("#warning_register").show();
-	}
-	else if (user.id === 0)
-	{	
-		$("#warning_pass").show();
-	}
-	else
-	{
-		showUser(user);
-		setCookie("user_details", JSON.stringify(user), 1);
-		$('#loginModal').modal('toggle');
-	}
-
-	return false;
 }
