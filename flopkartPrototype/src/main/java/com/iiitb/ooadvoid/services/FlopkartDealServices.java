@@ -45,8 +45,6 @@ public class FlopkartDealServices
 	public Response addFlopkartDeal(FlopkartDeal deal)
 	{
 		deal.setDealname(deal.getDealname());
-		deal.setStartdate(deal.getStartdate());
-		deal.setEnddate(deal.getEnddate());
 		FlopkartDealDAO dao = new FlopkartDealDAO();
 		dao.addFlopkartDeal(deal);
 		return Response.ok().build();

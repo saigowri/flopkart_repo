@@ -13,7 +13,7 @@
   background-size: 100%;">
 	<header>
 		<nav class="nav navbar-default" style="background-color:#027cd5">
-			<img class="logo" src="./images/flopkartLogo.jpg">
+			<a href="index.jsp"><img class="logo" src="./images/flopkartLogo.jpg"></a>
 			<div style="float:right; padding-top:30px; padding-right: 5px"><a style="text-decoration:underline; color:white;font-size: 20px; font-weight:500;" href="adminDeals.jsp">Click here to add new deal category</a></div>
 		</nav>
 	</header>

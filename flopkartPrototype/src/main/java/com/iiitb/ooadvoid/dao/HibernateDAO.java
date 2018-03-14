@@ -44,7 +44,7 @@ public class HibernateDAO<E>
 		session.flush();
 		tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		E ent = (E) session.load(entity.getClass(), new Integer(id));
+		E ent = (E) session.get(entity.getClass(), new Integer(id));
 		tx.commit();
 		session.flush();
 		session.close();
@@ -173,9 +173,9 @@ public class HibernateDAO<E>
 			return null;
 		return entity.get(0);
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public List<E> findAll(String entity_name, String param1, String val1)
+	public List<E> findAll(String entity_name, String param1, int val1)
 	{
 		session = SessionUtil.getSession();
 		session.flush();
@@ -189,13 +189,14 @@ public class HibernateDAO<E>
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<E> findAll(String entity_name, String param1, int val1)
+	public List<E> findAll(String entity_name, String param1, int val1, String param2, int val2)
 	{
 		session = SessionUtil.getSession();
 		session.flush();
-		String hql = "from "+ entity_name + " where "+param1+" = :val1";
+		String hql = "from "+ entity_name + " where "+param1+" = :val1" + " and "+param2+" = :val2";
 		Query query = session.createQuery(hql);
 		query.setParameter("val1", val1);
+		query.setParameter("val2", val2);
 		List<E> entity = query.list();
 		session.flush();
 		session.close();
