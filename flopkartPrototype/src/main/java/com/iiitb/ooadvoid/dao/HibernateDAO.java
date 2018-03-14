@@ -44,7 +44,7 @@ public class HibernateDAO<E>
 		session.flush();
 		tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		E ent = (E) session.load(entity.getClass(), new Integer(id));
+		E ent = (E) session.get(entity.getClass(), new Integer(id));
 		tx.commit();
 		session.flush();
 		session.close();
@@ -74,22 +74,18 @@ public class HibernateDAO<E>
         } 
         catch (NoSuchFieldException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
         catch (SecurityException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
         catch (IllegalArgumentException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         catch (IllegalAccessException e) 
         {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		update(entity, id, fields);
