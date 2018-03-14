@@ -36,32 +36,10 @@ public class FlopkartListingServices
 	public FlopkartListing getFlopkartListingById(@PathParam("id") int id)
 	{
 		FlopkartListingDAO dao = new FlopkartListingDAO();
-		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingById(id);
+		FlopkartListing listing_details = dao.getFlopkartListingById(id);
 		return listing_details;
 	}
 	
-/*	@POST
-	@Path("/id")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public FlopkartListing getFlopkartListingById(FlopkartListing listing)
-	{
-		FlopkartListingDAO dao = new FlopkartListingDAO();
-		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingById(listing.getId());
-		return listing_details;
-}*/
-
-//	
-//	@POST
-//	@Path("/categoty")
-//	@Consumes("application/json")
-//	@Produces("application/json")
-//	public FlopkartListing getFlopkartListingByCategoty(FlopkartListing listing)
-//	{
-//		FlopkartListingDAO dao = new FlopkartListingDAO();
-//		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingByCategoty(listing);
-//		return listing_details;
-//	}	
 	
 	@POST
 	@Path("/create")
