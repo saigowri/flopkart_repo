@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -168,12 +167,11 @@ public class SellerUploadServlet extends HttpServlet
 				{   
 					pic_url = item.getName();
 					AccessProperties ap = new AccessProperties();
-					File f = new File(ap.getServerPath() + pic_url);
 					item.write(new File(ap.getServerPath() + pic_url));
 				}
 			}
-			x=1;
-			y=1;
+		x=1;
+		y=1;
 		}
 		catch (Exception e)
 		{
@@ -212,6 +210,7 @@ public class SellerUploadServlet extends HttpServlet
 		FlopkartItem item1 = new FlopkartItem();
 		
 		item1.setListingid(id);
+		item1.setStatus("Available");
 		for(int i = 1 ; i <= qty; i++) {
 			System.out.println("qty loop");
 			System.out.println(i);
