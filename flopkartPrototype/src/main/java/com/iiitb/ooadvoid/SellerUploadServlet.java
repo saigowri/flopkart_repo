@@ -172,6 +172,8 @@ public class SellerUploadServlet extends HttpServlet
 					item.write(new File(ap.getServerPath() + pic_url));
 				}
 			}
+			x=1;
+			y=1;
 		}
 		catch (Exception e)
 		{
