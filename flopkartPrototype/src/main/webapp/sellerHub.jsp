@@ -192,14 +192,23 @@ function sellerLogin(){
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/users/emailSeller",
+		url : ctxPath + "/webapi/users/email",
 		data : formToJSON(),
-		success : function(result) {
-			if(result.id==0){
-// 				alert("Invalid credentials - Register first!")
+		success : function(result) 
+		{
+			if(result.id==0)
+			{
+ 				alert("Invalid credentials");
+ 				window.location.reload(true);
 				return false;
 			}
-			setCookie("user_details",JSON.stringify(result),10);
+			else if(result.userType != "seller")
+			{
+ 				alert("Register as seller first");
+ 				window.location.reload(true);
+				return false;
+			}
+			setCookie("seller_details",JSON.stringify(result),10);
 			return true;
 		},
 		error : err
@@ -208,9 +217,10 @@ function sellerLogin(){
 
 
 
-function err(error) {
+function err(error) 
+{
 	let x = error;
-// 	alert(JSON.stringify(error)+" Enter valid login credentials");
+ 	alert(JSON.stringify(error)+" Enter valid login credentials");
 	return false;
 }
 
