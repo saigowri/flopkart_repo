@@ -4,9 +4,17 @@ public class FlopkartItem
 {
 	private Integer id;
 	private Integer Listingid;
-	private String CartId; // Contains value only if status is 'Ordered','Dispatched','Delivered' or 'Returned'
+	private String CartId; 
+	private String OrderId; // Contains value only if status is 'Ordered','Dispatched','Delivered' or 'Returned'
 	private String status; // Takes values - 'Available','Ordered','Dispatched','Delivered','Returned','Deleted'
 	
+	
+	public String getOrderId() {
+		return OrderId;
+	}
+	public void setOrderId(String orderId) {
+		OrderId = orderId;
+	}
 	public Integer getId() {
 		return id;
 	}

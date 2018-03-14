@@ -48,9 +48,6 @@ public class FlopkartItemServices
 	public Response addFlopkartItem(FlopkartItem item)
 	{
 			item.setListingid(item.getListingid());
-			//item.setCartId(item.getCartId());
-			
-			
 		
 		FlopkartItemDAO dao = new FlopkartItemDAO();
 		dao.addFlopkartItem(item);
