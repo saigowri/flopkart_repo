@@ -75,10 +75,10 @@
 	        							    <% AccessProperties ap = new AccessProperties(); %>
 	        							    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 	        								var data="";
-	        								data+="<div class='col-sm-4, box'><a href='#'> "+
-	        								"<div style='width: 280px;height: 250px;'>"+
+	        								data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result.id+
+	        								"'> <div style='width: 280px;height: 250px;'>"+
 	        								"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
-	        								imgServerURL+result.imgUrl+"' alt=''></div></a>"+
+	        								imgServerURL+result.imgUrl+"' alt=''></div>"+
 	        						        "<div style = 'font-size:20px; text-align:center'>"+result.listingName+"</div>"+
 	        						       	"<div style = 'font-size:20px; text-align:center; font-family:verdana'>"+
 	        						       	"<i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";

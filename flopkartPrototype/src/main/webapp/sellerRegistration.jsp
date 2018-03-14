@@ -129,7 +129,7 @@ label {
   background-size: 100%;">
 	<header>
 		<nav class="nav navbar-default" style="background-color:#027cd5">
-			<img class="logo" src="./images/sellerHub/seller-hub-logo.png">
+			<a href='sellerHub.jsp'><img class="logo" src="./images/sellerHub/seller-hub-logo.png"></a>
 		</nav>
 	</header>
 	
@@ -262,14 +262,14 @@ function signup(ctxPath) {
 		data : signupformToJSON(),
 		success : renderDetails(),
 		error : function(){
-			alert("NOOOO");
+// 			alert("NOOOO");
 		}
 	});
 }
 
 function renderDetails(){
 	alert("Successfully registered new seller");
-	window.location.reload(true);
+	window.location.href="sellerHub.jsp";
 }
 </script>
 </html>
