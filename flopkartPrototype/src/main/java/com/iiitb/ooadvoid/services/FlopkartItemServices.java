@@ -28,7 +28,18 @@ public class FlopkartItemServices
 		return items;
 	}
 
-	
+	@GET
+	@Path("/availableListing/{id}")
+	@Produces("text/plain")
+	public int countFlopkartAvailableItemsByListingId(@PathParam("id") int listingid)
+	{
+		FlopkartItemDAO dao = new FlopkartItemDAO();
+		List<FlopkartItem> items = dao.getFlopkartAvailableItemsByListingId(listingid);
+		if(items.isEmpty()) {
+			return 0;
+		}
+		return items.size();
+	}
 	
 	
 	@POST
