@@ -17,6 +17,9 @@
       <property name = "subcategoryId" column = "subcategoryId" type = "int"/>
       <property name = "quantity" column = "Quantity" type = "int"/>
       <property name = "price" column = "price" type = "int"/>
+      <property name = "sellerID" column = "sellerid" type = "int"/>
+      <property name = "priority" column = "priority" type = "int"/>
+      <property name = "discount" column = "discount" type = "int"/>
       <property name = "colour" column = "Colour" type = "string"/>
       <property name = "brand" column = "Brand" type = "string"/>
 	 <property name = "manufacture_Date" column = "Manufacture_Date" type = "string"/>

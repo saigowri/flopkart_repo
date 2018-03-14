@@ -639,10 +639,50 @@ input:valid ~ .floating-label {
 	</header>
     
     
-    <div class=row id="body">
-      <div class=col-sm-2 id="filters"></div>
+    <div class=row id="body" style="margin-top: 10px;margin-left:10px;margin-right:40px">
+      <div class=col-sm-2 id="filters" style="background-color: white;border: 1px solid black">
+        <div style = 'font-size:30px; text-align:center; font-family:bold'>Filters</div>
+        <section>
+           <div style = 'font-size:25px; text-align:left; font-family:bold; margin-top:40px'>price</div>
+           <div style = 'font-size:20px; text-align:center; font-family:bold; margin-top:20px'>Minimum</div>
+           <div align="center">
+           <select style="width:100px" id = "MinPrice">
+                <option value="0">0</option>
+                <option value="2000">2000</option>
+                <option value="4000">4000</option>
+                <option value="6000">6000</option>
+                <option value="8000">8000</option>
+                <option value="10000">10000</option>
+                <option value="15000">15000</option>
+           </select>
+           </div>
+              <div style = 'font-size:20px; text-align:center; font-family:bold; margin-top:20px'>Maximum</div>
+              <div align="center">
+              <select style="width:100px" id = "MaxPrice">
+                <option value="max">35000+</option>
+                <option value="10000">10000</option>
+                <option value="15000">15000</option>
+                <option value="20000">20000</option>
+                <option value="25000">25000</option>
+                <option value="30000">30000</option>
+                <option value="35000">35000</option>
+           </select>
+           </div>
+              <button type="button" style="margin:auto;display:block;margin-top:40px" onclick="InitialLoad()"><b>Apply Filter</b></button>
+        </section>
+        
+      </div>
       <div class=col-sm-10 id="listingDisplay" style="background-color:white">
          <div class=row style="text-align:center">
+           <section style="text-align:left; font-family:bold; font-size:20px">
+             <span>
+              <span>Sort By</span>
+             </span>
+             <ul>
+              <li style="display:inline-block;margin-right:5px;border: 1px solid black;cursor:pointer;background-color:red" onclick="SortAsscending('ActualPrice')">Price -- Low to High</li>
+              <li style="display:inline-block;margin-right:5px;border: 1px solid black;cursor:pointer;background-color:red" onclick="SortDescending('ActualPrice')">Price -- High to low</li>
+             </ul>
+            </section>
            <div id="listing"></div>
          </div>
       </div>
@@ -994,7 +1034,12 @@ input:valid ~ .floating-label {
 			return false;
 		}
 		
-	    $(window).on('load',function(){
+		$(window).on('load',function(){
+			InitialLoad();
+		})
+	    
+		function InitialLoad(){
+			$('#listing').empty();
 	    	var ctxPath = "<%=request.getContextPath()%>";
 	        $.ajax(
 	        		{
@@ -1003,7 +1048,10 @@ input:valid ~ .floating-label {
 	        			url : ctxPath + "/webapi/listings",
 	        			dataType : "json", // data type of response
 	        			success : function(result){
-	        				for (var i in result){
+	        				for (i=0;i<result.length;i++){
+	        					var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+	        					if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val())
+	        						continue;
 	        					var item = itemJson(result[i].id);
 	        				$.ajax(
 	        						{
@@ -1013,10 +1061,15 @@ input:valid ~ .floating-label {
 	        							dataType : "json", // data type of response
 	        							data : item,
 	        							success : function(result){
+	        								
+	        								var ActualPrice = Math.round(result.price - (result.discount/100)*result.price);
+	        								result["ActualPrice"]=ActualPrice;
 	        								var data="";
 	        								data+="<div class='col-sm-4, box'><a href='#'> <img src='"+result.imgUrl+"' alt=''></a>";
-	        						        data+="<div style = 'font-size:20px; text-align:left'>"+result.listingName+"</div>";
-	        						       	data+="<div style = 'font-size:20px; text-align:left; font-family:verdana'><i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
+	        						        data+="<div style = 'font-size:20px; text-align:left'>"+result.listingName+"</div>"; 
+	        						       	data+="<div style = 'font-size:20px; position:left; font-family:verdana;margin-right:10px;display:inline-block'><i class='fa fa-inr' style='font-size:20px'></i>"+result.ActualPrice+"</div>";
+	        						       	data+="<del style = 'font-size:20px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'><i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</del>";
+	        						       	data+="<div style = 'font-size:20px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+result.discount+"% off</div></div>";
 	        						       	$('#listing').append(data);
 	        					    	},
 	        					    	error:function() {
@@ -1032,14 +1085,75 @@ input:valid ~ .floating-label {
 	        	    	}
 	        		});
 	        
-	    });
+	    };
+	    function SortAsscending(prop)
+	    {
+	    	$('#listing').empty();
+	    	var ctxPath = "<%=request.getContextPath()%>";
+	        $.ajax(
+	        		{
+	        			type : 'GET',
+	        			contentType : 'application/json',
+	        			url : ctxPath + "/webapi/listings",
+	        			dataType : "json", // data type of response
+	        			success : function(result){
+	        				for (i=0;i<result.length;i++)
+        					{
+        					    var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+        		    		    result[i]["ActualPrice"]=ActualPrice;
+        					}
+	        				result.sort(GetSortOrderAsscending(prop));//Pass the attribute to be sorted on
+	        				load(result);
+	        	    	},
+	        	    	error:function(){
+	        	    		alert("error occurred");
+	        	        	
+	        	    	}
+	        		});
+	    }
+	    function SortDescending(prop)
+	    {
+	    	$('#listing').empty();
+	    	var ctxPath = "<%=request.getContextPath()%>";
+	        $.ajax(
+	        		{
+	        			type : 'GET',
+	        			contentType : 'application/json',
+	        			url : ctxPath + "/webapi/listings",
+	        			dataType : "json", // data type of response
+	        			success : function(result){
+	        				for (i=0;i<result.length;i++)
+	        					{
+	        					var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+	        		    		result[i]["ActualPrice"]=ActualPrice;
+	        					}
+	        				result.sort(GetSortOrderDescending(prop));//Pass the attribute to be sorted on
+	        				load(result);
+	        	    	},
+	        	    	error:function(){
+	        	    		alert("error occurred");
+	        	        	
+	        	    	}
+	        		});
+	    }
+	    function load(result)
+	    {
+	    	for (i=0;i<result.length;i++)
+	    		{
+	    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+	    		result[i]["ActualPrice"]=ActualPrice;
+	    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val())
+	    			continue;
+	    		var data="";
+				data+="<div class='col-sm-4, box'><a href='#'> <img src='"+result[i].imgUrl+"' alt=''></a>";
+		        data+="<div style = 'font-size:20px; text-align:left'>"+result[i].listingName+"</div>";
+		        data+="<div style = 'font-size:20px; position:left; font-family:verdana;margin-right:10px;display:inline-block'><i class='fa fa-inr' style='font-size:20px'></i>"+result[i].ActualPrice+"</div>";
+		       	data+="<del style = 'font-size:20px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'><i class='fa fa-inr' style='font-size:20px'></i>"+result[i].price+"</del>";
+		       	data+="<div style = 'font-size:20px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+result[i].discount+"% off</div></div>";
+		       	$('#listing').append(data);
+	    		};
+	    };
 	    
-	    //for(var i in result){
-        //	data+="<div class='col-sm-4, box'><a href='#'> <img src='"+result[i].imgUrl+"' alt=''></a>";
-        //	data+="<div style = 'font-size:20px; text-align:left'>"+result[i].listingName+"</div>";
-        //	data+="<div style = 'font-size:20px; text-align:left; font-family:verdana'><i class='fa fa-inr' style='font-size:20px'></i>"+result[i].price+"</div></div>"
-        //}
-        //$('#listing').html(data);
 	    
 	    function itemJson(id)
 	    {
@@ -1048,7 +1162,72 @@ input:valid ~ .floating-label {
 	    	    "subcategoryId": 1
 	    	});
 	    	return Item
+	    };
+	    
+	    function starJson(listing)
+	    {
+	    	var review = JSON.stringify({
+	    		"id" : 1,
+	    	    "listingId" : listing.id,
+	    	    "userId" : 1
+	    	});
+	    	return review;
 	    }
+	    
+	    function GetSortOrderAsscending(prop) { 
+	        return function(a, b) {  
+	            if (a[prop] > b[prop]) {  
+	                return 1;  
+	            } else if (a[prop] < b[prop]) {  
+	                return -1;  
+	            }  
+	            return 0;  
+	        }  
+	    } 
+	    
+	    function GetSortOrderDescending(prop) { 
+	        return function(a, b) {  
+	            if (a[prop] < b[prop]) {  
+	                return 1;  
+	            } else if (a[prop] > b[prop]) {  
+	                return -1;  
+	            }  
+	            return 0;  
+	        }  
+	    }  
+	    
+	    function AvgStars(listing)
+	    {
+	    	var ctxPath = "<%=request.getContextPath()%>";
+	    	$.ajax(
+					{
+						type : 'POST',
+						contentType : 'application/json',
+						url : ctxPath + "/webapi/reviews/listingId",
+						dataType : "json", // data type of response
+						data : starJson(listing[i]),
+						success : function(result){
+							var rating;
+							var total=0;
+							for(i=0;i<result.length;i++)
+								{ 
+								    total+=result[i].stars;
+								}
+							if(result.length==0)
+								rating=3;
+							else
+							    rating = total / (result.length);
+							listing["rating"]=rating;
+				    	},
+				    	error:function() {
+				    		alert(error);
+				    	}
+					});
+	    		alert(JSON.stringify(listing));
+	    		alert(JSON.stringify(listing));
+	    }
+	    
+	    
 		
 	</script>
 

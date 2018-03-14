@@ -8,6 +8,9 @@ public class FlopkartListing {
 	private Integer subcategoryId;
 	private Integer quantity;
 	private Integer price;
+	private Integer sellerID;
+	private Integer priority;
+	private Integer discount;
 	private String colour;
 	private String brand;
 	private String manufacture_Date;
@@ -48,6 +51,24 @@ public class FlopkartListing {
 	}
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+	public Integer getSellerID() {
+		return sellerID;
+	}
+	public void setSellerID(Integer sellerID) {
+		this.sellerID = sellerID;
+	}
+	public Integer getPriority() {
+		return priority;
+	}
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+	public Integer getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
 	}
 	public String getColour() {
 		return colour;
