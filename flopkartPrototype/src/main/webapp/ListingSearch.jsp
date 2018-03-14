@@ -43,15 +43,14 @@
          </div>
       </div>
     </div>
-	
-	
 
     <%@include file="footer.jsp" %>
     <script>
 	$(document).ready(function()
 			{
 	    var ctxPath = "<%=request.getContextPath()%>";
-		headerFunctions(ctxPath);		})
+		headerFunctions(ctxPath);		
+		})
 	
 	$(window).on('load',function(){
     	var ctxPath = "<%=request.getContextPath()%>";
@@ -85,8 +84,8 @@
 	        						       	"<i class='fa fa-inr' style='font-size:20px'></i>"+result.price+"</div></div>";
 	        						       	$('#listing').append(data);
 	        					    	},
-	        					    	error:function() {
-	        					    		alert(error);
+	        					    	error:function(err) {
+	        					    		alert(err);
 	        					    	}
 	        						});
 	        				}
