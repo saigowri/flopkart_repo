@@ -13,7 +13,7 @@
   background-size: 100%;">
 	<header>
 		<nav class="nav navbar-default" style="background-color:#027cd5">
-			<img class="logo" src="./images/flopkartLogo.jpg">
+			<a href="index.jsp"><img class="logo" src="./images/flopkartLogo.jpg"></a>
 		</nav>
 	</header>
 		
@@ -24,12 +24,6 @@
 			<form>
 				<input class="form-control" type="text" id="dealName"
 					placeholder="Enter deal name"> 
-				<br/>
-				<input class="form-control" type="date" id="startDate"
-					placeholder="Enter start date"> 
-				<br/>
-				<input class="form-control" type="date" id="endDate"
-					placeholder="Enter end date"> 
 				<br/>
 				<input type="submit"
 					onclick="insertDealCategory();" />
@@ -73,8 +67,6 @@ function fetch()
             for(var i in result){
                data+="<br/>"+(parseInt(i)+1)+") "
                data+="Deal Name: "+result[i].dealname+"<br/>";
-               data+="Start Date: "+result[i].startdate+"<br/>";
-               data+="End Date: "+result[i].enddate+"<br/>";
             }
             data += "</p>";
             $("#content").html(data);
@@ -88,12 +80,8 @@ function fetch()
 function formToJSON() 
 {
 	var dealName = $("#dealName").val();
-	var startDate = $("#startDate").val();
-	var endDate = $("#endDate").val();
 	var flopkartDeal = JSON.stringify({
-	    "dealname" : dealName,
-	    "startdate" : startDate,
-	    "enddate" : endDate
+	    "dealname" : dealName
 	});
 	alert(flopkartDeal);
 	return flopkartDeal;

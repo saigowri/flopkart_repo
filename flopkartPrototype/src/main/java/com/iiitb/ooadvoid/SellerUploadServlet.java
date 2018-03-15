@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,13 +40,12 @@ public class SellerUploadServlet extends HttpServlet
 	public static final String PATH_NAME = "listings/create";
 	public static final String PATH_NAME2 = "items/create";
 	public static final String PATH_NAME3 = "details/create";
-	Integer listing_id = 0;
 	String listingName = "";
 	Integer sub_cat_content = 0;
 	String brand = "";
 	Integer qty = 0;
 	Integer price = 0;
-	String dis = "";
+	Integer dis = 0;
 	String clr = "";
 	String mfd = "";
 	String desptn = "";
@@ -82,21 +80,20 @@ public class SellerUploadServlet extends HttpServlet
 					if (name.equals("listingname"))
 					{
 						listingName = (String) item.getString();
-						
+						System.out.println("listingANME"+listingName);
 					}
-					else if (name.equals("listing_id"))
-					{
-						listing_id =  Integer.parseInt(item.getString());
-					}
+					
 
 					else if (name.equals("subcatId"))
 					{
 						sub_cat_content =  Integer.parseInt(item.getString());
+						System.out.println("SUB CAT CONTENT"+sub_cat_content);
 						
 					}
 					else if (name.equals("sellerid"))
 					{
 						sellerid =  Integer.parseInt(item.getString());
+						System.out.println("SUB CAT sellrid"+sellerid);
 						
 					}
 
@@ -109,6 +106,7 @@ public class SellerUploadServlet extends HttpServlet
 					else if (name.equals("qty"))
 					{
 						qty =  Integer.parseInt(item.getString());
+						System.out.println("QTY"+qty);
 						
 					}
 
@@ -118,13 +116,12 @@ public class SellerUploadServlet extends HttpServlet
 						
 					}
 
-				/*	else if (name.equalsIgnoreCase("dis"))
+				else if (name.equalsIgnoreCase("dis"))
 					{
-						dis = (String) item.getString();
-					
+						dis = Integer.parseInt(item.getString());
 					}
 
-				*/
+				
 					else if (name.equals("clr"))
 					{
 						clr = (String) item.getString();
@@ -148,17 +145,21 @@ public class SellerUploadServlet extends HttpServlet
 						cnt =  Integer.parseInt(item.getString());
 						key = new String[cnt+1];
 						val = new String[cnt+1];
+						System.out.println("cnt"+cnt);
 						
 					}
 					
 					else if (name.equals("key"+x))
 					{
 							key[x]=  (String) item.getString();
+							System.out.println("key:"+ key[x] );
 							x++;
+							
 					}
 					else if (name.equals("val"+y))
 					{
 							val[y]=  (String) item.getString();
+							System.out.println("key:"+ val[y] );
 							y++;
 					}
 				}
@@ -166,10 +167,11 @@ public class SellerUploadServlet extends HttpServlet
 				{   
 					pic_url = item.getName();
 					AccessProperties ap = new AccessProperties();
-					File f = new File(ap.getServerPath() + pic_url);
 					item.write(new File(ap.getServerPath() + pic_url));
 				}
 			}
+		x=1;
+		y=1;
 		}
 		catch (Exception e)
 		{
@@ -185,7 +187,7 @@ public class SellerUploadServlet extends HttpServlet
 		item.setBrand(brand);
 		item.setQuantity(qty);
 		item.setPrice(price);
-	//	item.setListingName(dis);
+		item.setDiscount(dis);
 		item.setSellerid(sellerid);
 		item.setColour(clr);
 		item.setManufacture_Date(mfd);
@@ -202,13 +204,15 @@ public class SellerUploadServlet extends HttpServlet
 	//	System.out.println(response1.readEntity(String.class));
 		FlopkartListing fl = response1.readEntity(FlopkartListing.class);
 		Integer id = fl.getId();
-		
+		System.out.println("Id"+ id);
 		
 		WebTarget target2 = client.target(BASE_URI+PATH_NAME2);
 		FlopkartItem item1 = new FlopkartItem();
 		
 		item1.setListingid(id);
+		item1.setStatus("Available");
 		for(int i = 1 ; i <= qty; i++) {
+			System.out.println("qty loop");
 			System.out.println(i);
 			target2.request(MediaType.APPLICATION_JSON).post(Entity.entity(item1, MediaType.APPLICATION_JSON));
 		}
@@ -218,15 +222,18 @@ public class SellerUploadServlet extends HttpServlet
 		
 		
 		for(int j = 1 ; j <= cnt; j++) {
-			
+			System.out.println("details loop");
+			System.out.println("id:"+ id);
+			System.out.println("key:"+ key[j] );
+			System.out.println("val:"+ val[j] );
 			listDet.setListingId(id);
 			listDet.setAttr_name(key[j]);
 			listDet.setAttr_val(val[j]);
+		
+					
 			
 			target3.request(MediaType.APPLICATION_JSON).post(Entity.entity(listDet, MediaType.APPLICATION_JSON));
 		}
-		
-		
 		response.sendRedirect("sellerItemInsert.jsp?id="+id);
 		
 	}

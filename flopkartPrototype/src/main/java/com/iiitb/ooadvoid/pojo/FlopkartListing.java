@@ -14,7 +14,7 @@ public class FlopkartListing {
 	private String manufacture_Date;
 	private String description;
 	private String priority;
-	private String discount;
+	private Integer discount;
 	
 	public Integer getId() {
 		return id;
@@ -91,10 +91,10 @@ public class FlopkartListing {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-	public String getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
-	public void setDiscount(String discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 	

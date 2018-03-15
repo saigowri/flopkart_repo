@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +13,7 @@
 
 <body>
     <header><img src="./images/sellerHub/seller-hub-logo.png" id="flipkartsellerhub" class="flipkartsellerhub">
-        <form class="form-inline bootstrap-form-with-validation" action="success.jsp">
+        <form class="form-inline bootstrap-form-with-validation" action="sellerItemInsert.jsp">
             <div class="form-group">
                 <label class="control-label sr-only" for="email-input">Email </label>
                 <input class="form-control" type="email" placeholder="Email" id="email-input" required>
@@ -141,6 +143,7 @@
 $(document).ready(function(){
 	$("#warning_email_new").hide();
 	$("#warning_phone_new").hide();
+	
 });
 
 $("#emailid").keyup(function(){
@@ -180,7 +183,7 @@ function formToJSON()
     	"password":password,
     	"userType":"seller"
     	});
-	alert(flopkart_user);
+//	alert(flopkart_user);
 	return flopkart_user;
 }
 
@@ -189,27 +192,38 @@ function sellerLogin(){
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/users/emailSeller",
+		url : ctxPath + "/webapi/users/email",
 		data : formToJSON(),
-		success : render,
+		success : function(result) 
+		{
+			if(result.id==0)
+			{
+ 				alert("Invalid credentials");
+ 				window.location.reload(true);
+				return false;
+			}
+			else if(result.userType != "seller")
+			{
+ 				alert("Register as seller first");
+ 				window.location.reload(true);
+				return false;
+			}
+			setCookie("seller_details",JSON.stringify(result),10);
+			return true;
+		},
 		error : err
 	});
 }
 
-function render(result) {
-	alert(result.id)
-	if(result.id==0){
-		alert("Invalid credentials - Register first!")
-		return false;
-	}
-	//alert(JSON.stringify(result))
-	return true;
-}
 
-function err(error) {
+
+function err(error) 
+{
 	let x = error;
-	alert(JSON.stringify(error)+" Enter valid login credentials");
+ 	alert(JSON.stringify(error)+" Enter valid login credentials");
 	return false;
 }
+
+
 </script>
 </html>

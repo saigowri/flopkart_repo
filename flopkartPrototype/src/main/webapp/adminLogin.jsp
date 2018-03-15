@@ -12,7 +12,7 @@
   background-size: 100%;">
   <header>
 		<nav class="nav navbar-default" style="background-color:#027cd5">
-			<img class="logo" src="./images/flopkartLogo.jpg">
+			<a href="index.jsp"><img class="logo" src="./images/flopkartLogo.jpg"></a>
 		</nav>
 	</header>
 	<br/><br/>

@@ -77,7 +77,7 @@
         	<div class="cnt-account">
 				<ul class="list-unstyled">
 						<li><a href="underConstruct.html"><i class="fa fa-bell" ></i> Notification</a></li>
-						<li><a href="underConstruct.html"><i class="fa fa-check"></i> Logout</a></li>
+						<li><a href="sellerHub.jsp" onclick="logout()"><i class="fa fa-check"></i> Logout</a></li>
 					</ul>
 		 </div>
         <!-- /.cnt-account -->
@@ -163,7 +163,11 @@
   <!-- ============================================== NAVBAR : END ============================================== --> 
   
 </header>
-
+  <%if (request.getParameter("id") != null) { 
+		String x = request.getParameter("id");
+		out.println("Successful "+ x );
+ 	 } %>
+		
 <div class="body-content outer-top-xs">
   <div class="container">
     <div class="row">
@@ -208,7 +212,7 @@
            
         
             <div class="sidebar-widget  wow fadeInUp outer-top-vs " style="visibility: hidden; animation-name: none;">
-            <form id="logout_form" action="./index.jsp">
+            <form id="logout_form" action="./sellerHub.jsp">
               <input type="submit" class="head btn-link" style="color:black;font-weight:bold" value="LOGOUT" onclick="logout();"></input>
             </form>
             </div>
@@ -256,8 +260,7 @@
           
         
       </div>
-      
-		
+  
         <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	              <div class= "row">
@@ -331,20 +334,20 @@
 		         </div> 
         		</div>
       	</div>
-     <!--  	 <div class="search-result-container ">
+       	 <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
 	                <h4 class="widget-title"><B>DISCOUNT %</B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
-		              <input type="number" class="form-control input-lg"  name="dis" id="dis"  max="99"
+		              <input type="number" class="form-control input-lg"  name="dis" id="dis" value="0"  max="99"
 		              autocomplete="name" >
 		          </div>
 		         </div> 
         		</div>
       	</div>
-      -->
+   
       	 <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
@@ -474,16 +477,16 @@
 <script src="./bootstrapFiles/js/bootstrap-select.min.js"></script> 
 <script src="./bootstrapFiles/js/wow.min.js"></script> 
 <script src="./bootstrapFiles/js/scripts.js"></script>
-<script src="./bootstrapFiles/js/cookies.js"></script>
+<script src="./customJavascripts/cookies.js"></script>
 <script>
 $(document).ready(function(){
-	$('#sellerid').val(444);
+	
+ 	 checkCookie();
 		var counter = 2;
 		var c = 1;
 		$('#cnt').val(c);
 		$('#sub-cat-content').hide();
 		$('#sub-cat-head').hide();
-		checkCookie();
 		fetch();
 		
 		$("#cat-content").on("change",function() {
@@ -526,7 +529,52 @@ $(document).ready(function(){
 		});
 		
 	})
+ function checkCookie() 
+{
+    var result = getCookie("seller_details");
+    var user = JSON.parse(result);
+    alert(user.id);
+    if (user != "") 
+    {
+		setCookie("seller_details", user, 10);
+		sellerId(user);
+    } 
+    else 
+    {
+    	logout();
+    }
+} 
+
+
+
+function resetCookie() 
+{
+    var user = getCookie("user_details");
+    if (user != "") 
+    {
+		setCookie("user_details", user, 10);
+		sellerId(JSON.parse(user));
+    } 
+    else 
+    {
+    	logout();
+    }
+}
+
+
+function sellerId(user)
+{
+	$('#sellerid').val(user.id);
+	//alert(user.id);
+	return true;
 	
+}
+
+function logout()
+{
+	deleteCookie("seller_details");
+}
+
 	function fetch() 
 	{
 	    var ctxPath = "<%=request.getContextPath()%>";
@@ -575,7 +623,7 @@ $(document).ready(function(){
 		            $('#sub-cat-content').html(data);
 		    		},
 			    	error:function(data,status) {
-			        	//alert("error occurred");
+			      
 			    	}
 			});
 		}
@@ -594,48 +642,9 @@ $(document).ready(function(){
 
 //-----------------------------------------------------------------------------------
 
-
-	function checkCookie() 
-	{
-	    var user = getCookie("user_details");
-	    if (user != "") 
-	    {
-			setCookie("user_details", user, 10);
-			setId(JSON.parse(user));
-			return true;
-	    } 
-	    else 
-	    {
-	    	logout();
-	    }
-	}
-	function setuser(user){
-		$('#sellerid').val(444);
-		//$('#sellerid').val(user.id);
-	}
-	function resetCookie() 
-	{
-	    var user = getCookie("user_details");
-	    if (user != "") 
-	    {
-			setCookie("user_details", user, 10);
-			return true;
-	    } 
-	    else 
-	    {
-	    	logout();
-	    }
-	}
-	function logout()
-	{
-		deleteCookie("user_details");
-	}
-	<%if (request.getParameter("imgName") != null) { %>
-		var x = request.getParameter("imgName");
-		alert("Successfull" );
- 	<% } %>
-	
 	
 </script>
+	
+	
 </body>
 </html>
