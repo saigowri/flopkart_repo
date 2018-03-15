@@ -22,5 +22,6 @@
   <mapping resource="FlopkartListingDetails.hbm.xml"/>
   <mapping resource="FlopkartDeal.hbm.xml"/>
   <mapping resource="FlopkartListingDeal.hbm.xml"/>
+  <mapping resource="FlopkartOrder.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
