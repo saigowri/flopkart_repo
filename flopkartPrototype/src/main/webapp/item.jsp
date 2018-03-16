@@ -62,7 +62,7 @@
         <div id="owl-single-product">
             <div class="single-product-gallery-item" id="slide1">
                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p9.jpg">
-                    <img class="img-responsive" alt="" width="480px" src="./images/blank.gif" data-echo="./images/products/puma1.jpg" />
+                    <img class="img-responsive" alt="" width="480px" src="./images/blank.gif" />
                 </a>
             </div><!-- /.single-product-gallery-item -->
 
@@ -121,19 +121,98 @@
 
     </div><!-- /.single-product-gallery -->
     <div class="buynowdiv">
-    <form action="underConstruct.html">
+    <form action="buynow.jsp">
     	<button id="buynow" class="buynow">
     		Buy Now
     	</button>
     	<button class="addtocart" id="addtocart">
     		Add to cart
     	</button>
+    	<input type="text" name="listingid" value='<%=request.getParameter("id") %>' hidden="hidden">
+    	<input type="number" id="quant" name="quant" hidden="hidden">
+    	<input type="text" name="listingname" id="listingname" hidden="hidden">
+    	<input type="number" id="listingamount" name="listingamount" hidden="hidden">
     </form>
     </div>
 </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info" id="product-info">
+							<h1 class='name' id='product_title'></h1>
+					<div class='rating-reviews m-t-20'>
+						<div class='row'>
+							<div class='col-sm-3'>
+								<div class='rating rateit-small'></div>
+							</div>
+							<div class='col-sm-8'>
+								<div class='reviews'>
+									<a href='#' class='lnk'></a>
+								</div>
+							</div>
 						</div>
+					</div>
+					<div class='stock-container info-container m-t-10'>
+						<div class='row'>
+							<div class='col-sm-2'>
+								<div class='stock-box'>
+									<span class='label'>Availability :</span>
+								</div>	
+							</div>
+							<div class='col-sm-9'>
+								<div class='stock-box'>
+									<span style="color:red;font-size:15px" id='available'></span>
+									<span hidden="hidden" id='available_quant'></span>
+								</div>	
+							</div>
+						</div>	
+					</div>
+					<div class='description-container m-t-20' style="font-size: 15px" id='itemdescription'>
+					</div>
+					<div class='price-container info-container m-t-20'>
+						<div class='row'>
+							<div class='col-sm-6'>
+								<div class='price-box' style="display: inline-flex;">
+									<div class='price' style="margin-right: 15px"><i class='fa fa-rupee-sign'></i>
+										<span id='discountedprice'></span>
+									</div>
+									<div class='price-strike'><i class='fa fa-rupee-sign'></i>
+										<span id='price-strike'></span>
+									</div>
+								</div>
+								<div style='font-size:15px; color: blue' id='discount'></div>
+							</div>
+							<div class='col-sm-6'>
+								<div class='favorite-button m-t-10'>
+									<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Wishlist' href='#'>
+									    <i class='fa fa-heart'></i>
+									</a>
+									<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Add to Compare' href='#'>
+									   <i class='fa fa-signal'></i>
+									</a>
+									<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='E-mail' href='#'>
+									    <i class='fa fa-envelope'></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='quantity-container info-container'>
+						<div class='row'>
+							<div class='col-sm-2'>
+								<span class='label'>Qty :</span>
+							</div>
+							<div class='col-sm-2'>
+								<div class='cart-quantity'>
+									<div class="quant-input">
+						                <div class="arrows">
+						                  <div id="quant-up" class="arrow plus gradient"><span ><i class="icon fa fa-sort-asc"></i></span></div>
+						                  <div id="quant-down" class="arrow minus gradient"><span ><i class="icon fa fa-sort-desc"></i></span></div>
+						                </div>
+						                <input type="number" id="quantity" min="1">
+			             		     </div>
+					            </div>
+							</div>
+							</div></div>
+					</div>
 					</div>
 					</div><!-- /.row -->
 				</div><!-- /.quantity-container -->
@@ -147,96 +226,49 @@
 
 <script>
 $(document).ready(function(){
-
-//	 	alert(test);
+	$("#quantity").val("1");
+	$("#quant").val("1");
 	<% AccessProperties ap = new AccessProperties(); %>
 	var imgServerURL = "<%=ap.getImageServerURL() %>"; 
     var ctxPath = "<%=request.getContextPath()%>";
-    var itemid = "<%=request.getParameter("id")%>";
+    var listingid = "<%=request.getParameter("id")%>";
 	headerFunctions(ctxPath);
 		$.ajax(
 		{
 			type : 'GET',
 			contentType : 'application/json',
-			url : ctxPath + "/webapi/listings/"+itemid,
+			url : ctxPath + "/webapi/listings/"+listingid,
 			dataType : "json", // data type of response
 			success : function(result){
+				$.ajax({
+					type : 'GET',
+					contentType : 'text/plain',
+					url : ctxPath + "/webapi/items/availableListing/"+listingid,
+					success : function(res)
+					{
+						if(res==0){
+							$("#available").text("Out of Stock");
+							$("#buynow").hide();
+							$("#addtocart").hide();
+							
+						}
+						else{
+							$("#available").text("In Stock "+"("+res+")");
+							$("#available_quant").text(res);
+						}
+					},
+					error : function(){
+						//alert("error");
+					}
+				});
 				var amount = result.price - (result.discount*result.price/100);
-				data = "<h1 class='name' id='product_title'>"+result.listingName+"</h1>"+
-				"	<div class='rating-reviews m-t-20'>"+
-				"		<div class='row'>"+
-				"			<div class='col-sm-3'>"+
-				"				<div class='rating rateit-small'></div>"+
-				"			</div>"+
-				"			<div class='col-sm-8'>"+
-				"				<div class='reviews'>"+
-				"					<a href='#' class='lnk'></a>"+
-				"				</div>"+
-				"			</div>"+
-				"		</div>"+
-				"	</div>"+
-				"	<div class='stock-container info-container m-t-10'>"+
-				"		<div class='row'>"+
-				"			<div class='col-sm-2'>"+
-				"				<div class='stock-box'>"+
-				"					<span class='label'>Availability :</span>"+
-				"				</div>	"+
-				"			</div>"+
-				"			<div class='col-sm-9'>"+
-				"				<div class='stock-box'>"+
-				"					<span class='value' id='available'></span>"+
-				"				</div>	"+
-				"			</div>"+
-				"		</div>	"+
-				"	</div>"+
-				"	<div class='description-container m-t-20' id='itemdescription'>"+result.description+
-				"	</div>"+
-				"	<div class='price-container info-container m-t-20'>"+
-				"		<div class='row'>"+
-				"			<div class='col-sm-6'>"+
-				"				<div class='price-box'>"+
-				"					<span class='price' id='discountedprice'><i class='fa fa-rupee-sign'></i>"+
-									amount+
-				"					</span>"+
-				"					<span class='price-strike' id='price-strike'><i class='fa fa-rupee-sign'></i>"+
-									result.price+
-				"					</span>"+
-				"				</div>"+
-				"				<div style='font-size:15px; color: blue' id='discount'>Discount: "+result.discount+"%</div>"+
-				"			</div>"+
-				"			<div class='col-sm-6'>"+
-				"				<div class='favorite-button m-t-10'>"+
-				"					<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Wishlist' href='#'>"+
-				"					    <i class='fa fa-heart'></i>"+
-				"					</a>"+
-				"					<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='Add to Compare' href='#'>"+
-				"					   <i class='fa fa-signal'></i>"+
-				"					</a>"+
-				"					<a class='btn btn-primary' data-toggle='tooltip' data-placement='right' title='E-mail' href='#'>"+
-				"					    <i class='fa fa-envelope'></i>"+
-				"					</a>"+
-				"				</div>"+
-				"			</div>"+
-				"		</div>"+
-				"	</div>"+
-				"	<div class='quantity-container info-container'>"+
-				"		<div class='row'>"+
-				"			"+
-				"			<div class='col-sm-2'>"+
-				"				<span class='label'>Qty :</span>"+
-				"			</div>"+
-				"			<div class='col-sm-2'>"+
-				"				<div class='cart-quantity'>"+
-				"					<div class='quant-input'>"+
-				"		                <div class='arrows'>"+
-				"		                  <div class='arrow plus gradient'><span class='ir'><i class='icon fa fa-sort-asc'></i></span></div>"+
-				"		                  <div class='arrow minus gradient'><span class='ir'><i class='icon fa fa-sort-desc'></i></span></div>"+
-				"		                </div>"+
-				"		                <input type='text' value='1'>"+
-				"	              </div>"+
-				"	            </div>"+
-				"			</div>"+
-				"			</div></div>";
+				$("#product_title").text(result.listingName);
+				$("#itemdescription").text(result.description);
+				$("#discountedprice").text(amount);
+				$("#price-strike").text(result.price);
+				$("#discount").text("Discount: "+result.discount+"%");
+				$("#listingamount").val(amount);
+				$("#listingname").val(result.listingName);
 				
 				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
@@ -245,7 +277,6 @@ $(document).ready(function(){
 				"        </a>"+
 				"    </div>"+
 				"</div>";
-				$("#product-info").html(data);
 				$("#gallery").html(img_data);
 // 				alert(JSON.stringify(result));
 				$.ajax({
@@ -255,7 +286,6 @@ $(document).ready(function(){
 					dataType : "json", // data type of response
 					success : function(res)
 					{
-						alert(res.firstName);
 						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+res.firstName+" "+res.lastName+"</span>";
 						$("#product-info").append(sellerData);
 					},
@@ -268,6 +298,27 @@ $(document).ready(function(){
 	        	//alert("error occurred");
 	    	}
 		});
+});
+
+$("#quant-up").click(function(){
+	var value = $("#quantity").val();
+	var available_quant = $("#available_quant").text();
+	if(value<available_quant)
+	{
+		value++;
+		$("#quantity").val(value);
+		$("#quant").val(value);
+		
+	}
+});
+
+$("#quant-down").click(function(){
+	var value = $("#quantity").val();
+	if(value>1){
+		value--;
+		$("#quantity").val(value);
+		$("#quant").val(value);
+	}
 });
 </script>
 </html>
