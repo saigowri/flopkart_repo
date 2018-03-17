@@ -136,7 +136,7 @@
       </div>
       <!-- /.sidebar -->
       <div class="col-md-9"> 
-        <!-- ========================================== SECTION â HERO ========================================= -->
+        <!-- ========================================== SECTION – HERO ========================================= -->
 
 		
         <div class="search-result-container ">
@@ -274,12 +274,22 @@
             </div>
         <!-- /.search-result-container --> 
         
-      </div>
+  
       <!-- /.col -->             
       
+		    </div>
+		
+		
       
-      
-      <div class="modal" id="changeModal"  role="dialog" align="center">
+    </div>
+    <!-- /.row --> 
+     </div>
+  <!-- /.container --> 
+  </div>
+</div>
+<!-- /.body-content --> 
+</div>
+<div class="modal" id="changeModal"  role="dialog" align="center">
 			<div class="modal-dialog" >
 
 				<!-- Modal content-->
@@ -375,25 +385,14 @@
 		</div>
 			</div>
 			
-				</div>
+				
 			<div class="col-sm-1">
 					<button type="button" class="close" data-dismiss="modal">x</button>
 			</div>
+			
 			</div>
 		</div>
-		
-		
-		
-		
-      
-    </div>
-    <!-- /.row --> 
-     </div>
-  <!-- /.container --> 
-  </div>
 </div>
-<!-- /.body-content --> 
-
 <%@include file="footer.jsp" %>
 
 
@@ -430,6 +429,7 @@ $(document).ready(function()
   var ctxPath = "<%=request.getContextPath()%>";
 	headerFunctions(ctxPath);
   	$("#gender-row").hide();
+  	
 	checkCookie();	
 	$('#myModal').modal('hide');
 	var sm = document.getElementById('edit_name');
@@ -547,7 +547,7 @@ function changeinfo(ctxPath)
 		},
 		error : function()
 				{
-				//	alert("abcerror");			
+			deleteCookie("user_details");	
 					}
 		});
 }
