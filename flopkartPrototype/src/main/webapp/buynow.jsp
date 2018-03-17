@@ -240,6 +240,7 @@ function order_formToJSON()
 	var OrderDate = "2018-03-15";
 	var Status = "Ordered";
 	var TotalAmount =<%=total %>;
+	<%session.setAttribute("totalamount","TotalAmount");%>
 	var flopkartOrder = JSON.stringify({
 	    "shippingAddress" : shipAddress,
 	    "userId" : userid,
