@@ -53,8 +53,10 @@ function categoryMenu(result,ctxPath)
 		li_node.setAttribute("id", "li_"+result[i].id);
 		li_node.setAttribute("name", result[i].categoryName);
 		var dropdownContent = "dropdownContent(this,'"+ctxPath+"')";
-		var data = " <a href='category.jsp'  style='color:black' data-hover='dropdown' "+
-				 "onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,2000, this);' "+
+		var scrt_var = 10; 
+		var onclickContent = "location.href=this.href+'?key='+scrt_var;";
+		var data = " <a href='ListingSearch.jsp'  style='color:black' data-hover='dropdown' "+
+				 " onmouseover="+dropdownContent+" onmouseout='setTimeout(dropdownBack,3000, this);' "+
 		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
 		         result[i].id+"'>"+	result[i].categoryName +
 		 		"<span id='span_"+ result[i].id+"' style='color:grey' class='glyphicon glyphicon-chevron-down'></span>"+
@@ -105,13 +107,8 @@ function subCategoryDropdown(result,categoryid)
 	{	
 		for(var i in result)
 		{
-//			var li_node = document.createElement("LI");                 // Create a <li> node
-//			li_node.className="dropdown yamm-fw mega-menu";
-//			li_node.setAttribute("id", "li_"+result[i].id);
-//			li_node.setAttribute("name", result[i].subcategoryName);
-			data = data + "<li> <a href='index.jsp'>"+result[i].subcategoryName+"</a></li>";
-//			document.getElementById("ul_"+categoryid).appendChild(li_node);
-//			$(li_node).html(data);
+			data = data + "<li> <a href='ListingSearch.jsp?id="+result[i].id+"'>"
+					+result[i].subcategoryName+"</a></li>";
 		}
 		$('#ul_'+categoryid).html(data);
 	}
@@ -188,14 +185,36 @@ function signup(ctxPath)
 		data : signupformToJSON(),
 		success : renderDetails,
 		error : function()
-		{
-			alert("err");
-		}
+				{
+					findUser(ctxPath);
+				}
 		});
+}
+
+function renderDetails(user)
+{ 
+	if (user == null)
+	{
+		$("#warning_register").show();
 	}
+	else if (user.id === 0)
+	{	
+		$("#warning_pass").show();
+	}
+	else
+	{
+		showUser(user);
+		setCookie("user_details", JSON.stringify(user), 1);
+		$('#loginModal').modal('toggle');
+	}
+
+	return false;
+}
 
 function signupformToJSON() 
 {
+    $("#email_phone").val($("#email").val());
+	$("#pass_text").val($("#pass_txt").val());
 	var fname = $("#f_name").val();
 	var lname = $("#l_name").val();
 	var email = $("#email").val();
@@ -210,25 +229,24 @@ function signupformToJSON()
         		"email":email,
         		"password":password,
         		"userType":userType
-        	
     });
 	return flipkart_user;
 }
 	
 function checkCookie() 
-	{
-	    var user = getCookie("user_details");
-	    if (user != "") 
-	    {
-	    	setCookie("user_details", user, 10);
-	        showUser(JSON.parse(user));
-	    } 
-	    else 
-	    {
-	    	showLogin();
-	    	$('#loginModal').modal('toggle');
-	    }
-	}
+{
+    var user = getCookie("user_details");
+    if (user != "") 
+    {
+    	setCookie("user_details", user, 10);
+        showUser(JSON.parse(user));
+    } 
+    else 
+    {
+    	showLogin();
+    	//$('#loginModal').modal('toggle');
+    }
+}
 
 function showLogin()
 {
@@ -267,12 +285,12 @@ function validate(ctxPath)
 //Helper function to serialize all the form fields into a JSON string
 function formToJSON() 
 {
-		        var email = $("#email_phone").val();
+    var email = $("#email_phone").val();
 	var password = $("#pass_text").val();
 	var flipkart_user = JSON.stringify({
-		        	"email":email,
-		        	"password":password
-		        	});
+    	"email":email,
+    	"password":password
+    	});
 	return flipkart_user;
 }
 
@@ -287,24 +305,4 @@ function findUser(ctxPath)
 		data : formToJSON(),
 		success : renderDetails
 });
-}
-
-function renderDetails(user)
-{ 
-	if (user == null)
-	{
-		$("#warning_register").show();
-	}
-	else if (user.id === 0)
-	{	
-		$("#warning_pass").show();
-	}
-	else
-	{
-		showUser(user);
-		setCookie("user_details", JSON.stringify(user), 1);
-		$('#loginModal').modal('toggle');
-	}
-
-	return false;
 }

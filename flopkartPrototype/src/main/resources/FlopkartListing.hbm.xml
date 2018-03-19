@@ -8,22 +8,23 @@
          This class contains the Flopkart user detail. 
       </meta>
       
-      <id name = "id" type = "int" column = "id">
+      <id name = "id" type = "int" column = "ID">
          <generator class="native"/>
       </id>
       
-      <property name = "listingName" column = "listingName" type = "string"  unique="true"/>
+      <property name = "listingName" column = "ListingName" type = "string"  unique="true"/>
       <property name = "imgUrl" column = "ImgUrl" type = "string"/>
-      <property name = "subcategoryId" column = "subcategoryId" type = "int"/>
+      <property name = "subcategoryId" column = "subcategoryid" type = "int"/>
+      <property name = "sellerid" column = "sellerid" type = "int"/>
       <property name = "quantity" column = "Quantity" type = "int"/>
       <property name = "price" column = "price" type = "int"/>
-      <property name = "sellerID" column = "sellerid" type = "int"/>
-      <property name = "priority" column = "priority" type = "int"/>
-      <property name = "discount" column = "discount" type = "int"/>
-      <property name = "colour" column = "Colour" type = "string"/>
+      <property name = "colour" column = "colour" type = "string"/>
       <property name = "brand" column = "Brand" type = "string"/>
-	 <property name = "manufacture_Date" column = "Manufacture_Date" type = "string"/>
-	 <property name = "description" column = "description" type = "string"/>
+    	  <property name = "manufacture_Date" column = "Manufacture_date" type = "string"/>
+	  <property name = "description" column = "description" type = "string"/>
+	  <property name = "priority" column = "priority" type = "int"/>
+	  <property name = "discount" column = "discount" type = "int"/>
+
 	 
 	</class>
 </hibernate-mapping>

@@ -27,6 +27,27 @@ public class FlopkartUserServices
 		return users;
 	}
 
+	@GET
+	@Path("/{id}")
+	@Produces("application/json")
+	public FlopkartUser getFlopkartUserById(@PathParam("id") int id)
+	{
+		FlopkartUserDAO dao = new FlopkartUserDAO();
+		FlopkartUser user = dao.getFlopkartUserById(id);
+		return user;
+	}
+	
+	@GET
+	@Path("/getfirstname/{firstname}")
+	@Produces("application/json")
+	public FlopkartUser getFlopkartUserByName(@PathParam("firstname") String firstname)
+	{
+		System.out.println("x");
+		FlopkartUserDAO dao=new FlopkartUserDAO();
+		System.out.println("x");
+		FlopkartUser user=dao.getFlopkartUserByName(firstname);
+		return user;
+	}
 	
 	@POST
 	@Path("/email")
@@ -43,33 +64,6 @@ public class FlopkartUserServices
 		else
 			return user_details;
 	}	
-	
-	@POST
-	@Path("/emailSeller")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public Response getFlopkartSellerUserbyEmail(FlopkartUser user)
-	{
-		FlopkartUserDAO dao = new FlopkartUserDAO();
-		FlopkartUser user_details = dao.getFlopkartSellerByEmail(user);
-		if(user_details==null)
-			return null;
-		if(!(user.encodePassword(user.getPassword()).equals(user_details.getPassword())) || !(user_details.getUserType().equals("seller")))
-			return Response.status(Response.Status.BAD_REQUEST).build();
-		else
-			return Response.ok(user, "application/json").build();
-	}
-	
-/*	@POST
-	@Path("/guest")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public FlopkartUser getFlopkart_UserGuest()
-	{
-		FlopkartUserDAO dao = new FlopkartUserDAO();
-		FlopkartUser user_details = dao.getFlopkart_UserGuest();
-		return user_details;
-	}*/
 	
 	@POST
 	@Path("/phone")
@@ -105,29 +99,7 @@ public class FlopkartUserServices
 		dao.addFlopkartUser(user);
 
 		return Response.ok().build();
-	}
-//
-//	@POST
-//	@Path("/createCustomer")
-//	@Consumes("application/json")
-//	public FlopkartUser addflopkartUser(FlopkartUser user)
-//	{
-//			user.setFirstName(user.getFirstName());
-//			user.setLastName(user.getLastName());
-//			user.setUserType("customer");
-//			user.setEmail(user.getEmail());
-//			user.setPhone(user.getPhone());
-//			user.setPic_URL(null);
-//			user.setPassword(user.getPassword());
-//		
-//		FlopkartUser user_details = null;
-//		
-//		FlopkartUserDAO dao = new FlopkartUserDAO();
-//		user_details  = dao.addFlopkartUser(user);
-//		return user_details;
-//	}
-
-	@PUT
+	}	@PUT
 	@Path("/update/{id}")
 	@Consumes("application/json")
 	public Response updateFlopkartUser(@PathParam("id") int id, FlopkartUser user)

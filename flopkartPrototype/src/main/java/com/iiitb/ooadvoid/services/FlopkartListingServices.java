@@ -13,7 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.iiitb.ooadvoid.pojo.FlopkartListing;
+import com.iiitb.ooadvoid.pojo.FlopkartSubcategory;
 import com.iiitb.ooadvoid.dao.FlopkartListingDAO;
+import com.iiitb.ooadvoid.dao.FlopkartSubcategoryDAO;
 
 @Path("/listings")
 public class FlopkartListingServices 
@@ -28,46 +30,41 @@ public class FlopkartListingServices
 		return listings;
 	}
 	
-	@POST
-	@Path("/id")
-	@Consumes("application/json")
+	@GET
+	@Path("/{id}")
 	@Produces("application/json")
-	public FlopkartListing getFlopkartListingById(FlopkartListing listing)
+	public FlopkartListing getFlopkartListingById(@PathParam("id") int id)
 	{
 		FlopkartListingDAO dao = new FlopkartListingDAO();
-		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingById(listing.getId());
+		FlopkartListing listing_details = dao.getFlopkartListingById(id);
 		return listing_details;
-}
-
-//	
-//	@POST
-//	@Path("/categoty")
-//	@Consumes("application/json")
-//	@Produces("application/json")
-//	public FlopkartListing getFlopkartListingByCategoty(FlopkartListing listing)
-//	{
-//		FlopkartListingDAO dao = new FlopkartListingDAO();
-//		FlopkartListing listing_details = (FlopkartListing) dao.getFlopkartListingByCategoty(listing);
-//		return listing_details;
-//	}	
+	}
 	
-//	@POST
-//	@Path("/create")
-//	@Consumes("application/json")
-//	public Response addFlopkartListing(FlopkartListing listing)
-//	{
-//			listing.setItemid(listing.getItemid());
-//			listing.setItemname(listing.getItemname());
-//			listing.setCategory(listing.getCategory());
-//			listing.setPrice(listing.getPrice());
-//			listing.setDiscount(listing.getDiscount());
-//			listing.setStars(listing.getStars());
-//		
-//		FlopkartListingDAO dao = new FlopkartListingDAO();
-//		dao.addFlopkartListing(listing);
-//
-//		return Response.ok().build();
-//	}
+	
+	@POST
+	@Path("/create")
+	@Consumes("application/json")
+	@Produces("application/json")
+	
+	public FlopkartListing addFlopkartListing(FlopkartListing item)
+	{		
+			item.setListingName(item.getListingName());
+			item.setImgUrl(item.getImgUrl());
+			item.setSubcategoryId(item.getSubcategoryId());
+			item.setQuantity(item.getQuantity());
+			item.setPrice(item.getPrice());
+			item.setSellerid(item.getSellerid());
+	//		item.setDiscount(item.getDiscount());
+			item.setColour(item.getColour());
+			item.setBrand(item.getBrand());
+			item.setManufacture_Date(item.getManufacture_Date());
+			item.setDescription(item.getDescription());
+		
+			FlopkartListingDAO dao = new FlopkartListingDAO();
+			FlopkartListing item_details = dao.addFlopkartListing(item);
+		return item_details;
+	}
+	
 
 	@PUT
 	@Path("/update/{id}")
@@ -95,6 +92,34 @@ public class FlopkartListingServices
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		return Response.ok().build();
+	}
+	
+
+	
+	@GET
+	@Path("/subcategory/{id}")
+	@Produces("application/json")
+	public List<FlopkartListing> getListingBySubCategoryId(@PathParam("id") int id)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		List<FlopkartListing> listing_details = dao.getFlopkartListingBysubcategoryId(id);
+		if(listing_details==null)
+			return null;
+		else
+			return listing_details;
+	}
+	
+	@GET
+	@Path("/seller/{id}")
+	@Produces("application/json")
+	public List<FlopkartListing> getListingBySellerId(@PathParam("id") int id)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		List<FlopkartListing> listing_details = dao.getFlopkartListingBysellerId(id);
+		if(listing_details==null)
+			return null;
+		else
+			return listing_details;
 	}
 	
 }

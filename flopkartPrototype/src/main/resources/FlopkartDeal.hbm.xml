@@ -13,8 +13,6 @@
       </id>
       
       <property name = "dealname" column = "dealname" type = "string" unique="true"/>
-      <property name = "startdate" column = "startdate" type = "string"/>
-      <property name = "enddate" column = "enddate" type = "string"/>
 	 
 	</class>
 </hibernate-mapping>

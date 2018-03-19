@@ -5,9 +5,9 @@
 	<%@include file="metaContent.jsp" %>
 	<title>Welcome to Flopkart</title>
 </head>
-
 <body>	
     <%@include file="header.jsp" %>
+
 
 	<!-- /.breadcrumb -->
 	<div class="body-content outer-top-xs">
@@ -24,11 +24,10 @@
 								style="background-image: url(./images/cat-banner-1.jpg);">
 								<div class="container-fluid">
 									<div class="caption bg-color vertical-center text-left">
-										<div class="slider-header fadeInDown-1">Top Brands</div>
-										<div class="big-text fadeInDown-1">New Collections</div>
+										<div class="slider-header fadeInDown-1">Top Clothing Brands</div>
+										<div class="big-text fadeInDown-1">Get 50% off!</div>
 										<div class="excerpt fadeInDown-2 hidden-xs">
-											<span>Lorem ipsum dolor sit amet, consectetur
-												adipisicing elit.</span>
+											<span>Formal wear, Long kurtas and so many more!</span>
 										</div>
 										<div class="button-holder fadeInDown-3">
 											<a href="underConstruct.html"
@@ -46,13 +45,12 @@
 								style="background-image: url(./images/fashion-banner.jpg);">
 								<div class="container-fluid">
 									<div class="caption bg-color vertical-center text-left">
-										<div class="slider-header fadeInDown-1">Spring 2018</div>
+										<div class="slider-header fadeInDown-1">Women Fashion Spring 2018</div>
 										<div class="big-text fadeInDown-1">
-											Women <span class="highlight">Fashion</span>
+											<span class="highlight"> Rs. 100 off</span>
 										</div>
 										<div class="excerpt fadeInDown-2 hidden-xs">
-											<span>Nemo enim ipsam voluptatem quia voluptas sit
-												aspernatur aut odit aut fugit</span>
+											<span>New Spring collection! Floral designs and more!</span>
 										</div>
 										<div class="button-holder fadeInDown-3">
 											<a href="underConstruct.html"
@@ -70,7 +68,7 @@
 						<!-- /.owl-carousel -->
 					</div>
 
-					<!-- ========================================= SECTION – HERO : END ========================================= -->
+					<!-- ========================================= SECTION HERO : END ========================================= -->
 
 					<!-- ============================================== INFO BOXES ============================================== -->
 					<div class="info-boxes wow fadeInUp">
@@ -1707,8 +1705,10 @@
 		</div>
 	</div>
 	
+
     <%@include file="footer.jsp" %>
      
+
 </body>
 <script>
 $(document).ready(function(){
