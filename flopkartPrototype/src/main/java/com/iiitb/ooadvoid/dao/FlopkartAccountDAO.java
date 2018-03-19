@@ -15,15 +15,12 @@ public class FlopkartAccountDAO extends HibernateDAO<FlopkartAccount>{
 	
 	public FlopkartAccount getFlopkartAccountById(int id)
 	{
-		System.out.println("x");
-		
 		
 		return super.find(new FlopkartAccount(),id);
 	}
 	
 	public FlopkartAccount getFlopkartAccountByAccountno(int accountno)
 	{
-		//System.out.println("x");
 		return super.find(entity_name,"accountno",accountno);
 		
 	}
