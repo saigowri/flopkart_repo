@@ -8,7 +8,7 @@ public class FlopkartOrder
 	private String shippingAddress;
 	private Integer userId;
 	private String itemId;
-	private int orderId;
+	private Integer orderId;
 	private String status;
 	private String orderDate;
 	private Integer totalAmount;
@@ -38,12 +38,12 @@ public class FlopkartOrder
 		this.itemId = itemId;
 	}
 
-	public int getOrderId()
+	public Integer getOrderId()
 	{
 		return orderId;
 	}
 
-	public void setOrderId(int orderId)
+	public void setOrderId(Integer orderId)
 	{
 		this.orderId = orderId;
 	}
