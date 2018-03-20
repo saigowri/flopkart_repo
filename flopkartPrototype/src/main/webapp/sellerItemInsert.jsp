@@ -419,7 +419,7 @@
 			         </div>
 		          </div>
 				   	 <div id='TextBoxesGroup1'>
-						 <div class="row" id="TextBoxDiv1" style="margin-bottom:8px;">
+						<!--  <div class="row" id="TextBoxDiv1" style="margin-bottom:8px;">
 							      <div class="col-md-5 sidebar"> 
 						              <input type="text" class="form-control input-lg"  name="key1" id="key1" >
 						          </div>
@@ -429,7 +429,7 @@
 						          <div class="col-md-5 sidebar"> 
 						              <input type="text" class="form-control input-lg"  name="val1" id="val1" >
 						          </div> 
-					         </div > 
+					         </div >  -->
 					</div>
 					<div class="row" style="text-align:center;">
 						 <div class="col-md-2 sidebar"></div>
@@ -489,9 +489,8 @@
 $(document).ready(function(){
 	
  	 	checkCookie();
-		var counter = 2;
-		var c = 1;
-		$('#cnt').val(c);
+		var counter = 0;
+		$('#cnt').val(counter);
 		$('#sub-cat-content').hide();
 		$('#sub-cat-head').hide();
 		fetch();
@@ -506,6 +505,8 @@ $(document).ready(function(){
 		 });
 
 		$('#ADD').click(function(){
+			counter++;
+			$('#cnt').val(counter);
 			var row1 = '<div class="row"  id="TextBoxDiv'+counter+'" style="margin-bottom:8px;">'+
 				'<div class="col-md-5 sidebar"> '+
 				'<input type="text" class="form-control input-lg"  name="key'+counter+'" id="key'+counter+'" >'+
@@ -521,10 +522,8 @@ $(document).ready(function(){
 			$('#ADD').data('row1',row1);
 			
 			$('#TextBoxesGroup1').append($(this).data('row1'));
-			counter++;
-			//add_detail(c);
-			c++;
-			$('#cnt').val(c);
+			
+			
 			
 			
 		});
@@ -536,23 +535,7 @@ $(document).ready(function(){
 		});
 		
 	})
-/*  function checkCookie() 
-{
-    var result = getCookie("seller_details");
-    var user = JSON.parse(result);
-    document.getElementById("sellername").innerText = user.firstName;
 
-    if (user != "") 
-    {	
-		setCookie("seller_details", user, 10);
-		sellerId(user);
-    } 
-    else 
-    {
-   // 	window.location = "sellerHub.jsp";
-    	logout();
-    }
-}  */
 function checkCookie() 
 {
     var result = getCookie("seller_details");
