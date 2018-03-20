@@ -206,24 +206,23 @@ public class SellerUploadServlet extends HttpServlet
 		
 		Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON);
 		Response response1 = invocationBuilder.post(Entity.entity(item, MediaType.APPLICATION_JSON));
-
+    
+	//	System.out.println(response1.readEntity(String.class));
+		FlopkartListing fl = response1.readEntity(FlopkartListing.class);
+		Integer id = fl.getId();
+		System.out.println("Id"+ id);
 		
-//	//	System.out.println(response1.readEntity(String.class));
-//	//	FlopkartListing fl = response1.readEntity(FlopkartListing.class);
-//	//	Integer id = fl.getId();
-//	//	System.out.println("Id"+ id);
-//		
-//	//	WebTarget target2 = client.target(BASE_URI+PATH_NAME2);
-//		
-//		FlopkartItem item1 = new FlopkartItem();
-//		item1.setListingid(sellerid+itemid);
-//		item1.setStatus("Available");
-//		for(int i = 1 ; i <= qty; i++) {
-//			System.out.println("qty loop");
-//			System.out.println(i);
-//			target2.request(MediaType.APPLICATION_JSON).post(Entity.entity(item1, MediaType.APPLICATION_JSON));
-//		}
-//		
+		WebTarget target2 = client.target(BASE_URI+PATH_NAME2);
+		FlopkartItem item1 = new FlopkartItem();
+		
+		item1.setListingid(id);
+		item1.setStatus("Available");
+		for(int i = 1 ; i <= qty; i++) {
+			System.out.println("qty loop");
+			System.out.println(i);
+			target2.request(MediaType.APPLICATION_JSON).post(Entity.entity(item1, MediaType.APPLICATION_JSON));
+		}
+
 		WebTarget target3 = client.target(BASE_URI+PATH_NAME3);
 		FlopkartListingDetails listDet = new FlopkartListingDetails();
 		

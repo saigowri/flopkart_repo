@@ -47,6 +47,7 @@
            <div style = 'font-size:25px; text-align:left; font-family:bold; margin-top:40px'>price</div>
            <div style = 'font-size:20px; text-align:center; font-family:bold; margin-top:20px'>Minimum</div>
            <div align="center">
+
             <input type="number" style = 'font-size:20px; text-align:center;' value="0" name="MinPrice" id="MinPrice" >
             
            </div>
