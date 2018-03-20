@@ -5,221 +5,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Seller Hub</title>
-		
-<!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="./bootstrapFiles/css/bootstrap.min.css">
-
-<!-- Customizable CSS -->
-<link rel="stylesheet" href="./bootstrapFiles/css/main.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/blue.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/owl.carousel.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/owl.transitions.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/animate.min.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/rateit.css">
-<link rel="stylesheet" href="./bootstrapFiles/css/bootstrap-select.min.css">
-
-<!-- Icons/Glyphs -->
-<link rel="stylesheet" href="./bootstrapFiles/css/font-awesome.css">
-<link rel="stylesheet" href="./bootstrapFiles/fontawesome-all.css">
-
-<!-- Fonts -->
-<link href="./bootstrapFiles/css(3).css" rel="stylesheet" type="text/css">
-<link href="./bootstrapFiles/css(1).css" rel="stylesheet" type="text/css">
-<link href="./bootstrapFiles/css(2).css" rel="stylesheet" type="text/css">
-<style>
-
-.custom-file-upload {
-	border: 1px solid #ccc;
-	display: inline-block;
-	padding: 6px 12px;
-	cursor: pointer;
-}
-.dropdwn{
-  background-color: transparent;
-  border-color: #fff;
-  border-style: solid;
-  border-top: none;
-  text-color: red;
-  padding: 6px 12px; 
-  border-right: none;
-  border-left: none;
-}
-.dp .tooltiptext {
-	visibility: hidden;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 3px 0;
-	/* Position the tooltip */
-	position: absolute;
-	z-index: 1;
-	overflow:visible;
-}
-
-.dp:hover .tooltiptext {
-    visibility: visible;
-}
-</style>
+<title>Seller Hub</title>
+<%@include file="metaContent.jsp" %>
 </head>
-
 <body>
-<!-- ============================================== HEADER ============================================== -->
+<%@include file="headerSeller.jsp" %>	
 
-<header class="header-style-1"> 
-  
-  <!-- ============================================== TOP MENU ============================================== -->
-  <div class="top-bar animate-dropdown">
-    <div class="container">
-      <div class="header-top-inner">
-        	<div class="cnt-account">
-				<ul class="list-unstyled">
-						<li><a href="underConstruct.html"><i class="fa fa-bell" ></i> Notification</a></li>
-						<li><a href="sellerHub.jsp" onclick="logout()"><i class="fa fa-check"></i> Logout</a></li>
-					</ul>
-		 </div>
-        <!-- /.cnt-account -->
-        
-        <div class="clearfix"></div>
-      </div>
-      <!-- /.header-top-inner --> 
-    </div>
-    <!-- /.container --> 
-  </div>
-  <!-- /.header-top --> 
-  <!-- ============================================== TOP MENU : END ============================================== -->
-  <div class="main-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-2 logo-holder"> 
-          <!-- ============================================================= LOGO ============================================================= -->
-          <div class="logo"> <a href="index.jsp"> <img  height="50px" src="./images/sellerHub/seller-hub-logo.png" alt=""> </a> </div>
-          <!-- /.logo --> 
-          <!-- ============================================================= LOGO : END ============================================================= --> 
-          </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 top-search-holder">
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row"> 
-        </div>
-      </div>
-      <!-- /.row --> 
-    </div>
-    <!-- /.container --> 
-  </div>
-  <!-- /.main-header --> 
-  
-  <!-- ============================================== NAVBAR ============================================== -->
-  <div class="header-nav animate-dropdown" style="background-color:white;color:black">
-			<div class="container">
-				<div class="yamm navbar navbar-default" role="navigation">
-					<div class="navbar-header">
-						<button data-target="#mc-horizontal-menu-collapse"
-							data-toggle="collapse" class="navbar-toggle collapsed"
-							type="button">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-					</div>
-					<div class="nav-bg-class">
-						<div class="navbar-collapse collapse"
-							id="mc-horizontal-menu-collapse">
-							<div class="nav-outer">
-								<ul class="nav navbar-nav" id="category_dropdown">
-									<li class="active dropdown yamm-fw">
-										<a href="sellerhome.jsp" style="color:black">Welcome</a></li>
-									<li class="active dropdown yamm-fw">
-										<a	href="sellerItemInsert.jsp" style="color:black">Add ITEM</a></li>
-										
-									<li class="active dropdown yamm-fw">
-										<a	href="sellerViewItem.jsp" style="color:black">VIEW YOUR ITEMS</a></li>
-									<li class="active dropdown yamm-fw">
-										<a	href="#" style="color:black">VIEW ORDERS</a></li>
-									
-								</ul>
-								<!-- /.navbar-nav -->
-								<div class="clearfix"></div>
-							</div>
-							<!-- /.nav-outer -->
-						</div>
-						<!-- /.navbar-collapse -->
-
-					</div>
-					<!-- /.nav-bg-class -->
-				</div>
-				<!-- /.navbar-default -->
-			</div>
-			<!-- /.container-class -->
-
-		</div>
-		<!-- /.header-nav -->
-  <!-- ============================================== NAVBAR : END ============================================== --> 
-  
-</header>
-  <%-- <%if (request.getParameter("id") != null) { 
-		String x = request.getParameter("id");
-		out.println("Successful "+ x );
- 	 } %> --%>
-		
 <div class="body-content outer-top-xs">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 sidebar"> 
-        <div class="sidebar-module-container">
-          <div class="sidebar-filter"> 
-            <!-- ============================================== IMAGE============================================== -->
-            <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
-            	
-              <h5 class="section-title">Hello <label id="sellername"/></label></h5>
-              <div class="widget-header">
-                <h4 class="widget-title" id="userID"></h4>
-              </div>
-              
-              <!-- /.sidebar-widget-body --> 
-            </div>
-            <!-- /.sidebar-widget --> 
-            <!-- ============================================== IMAGE: END ============================================== --> 
-            
-            
-            <!-- ============================================== Other TAGS ============================================== -->
-          <!----------- Account------------->
-          <div class="side-menu animate-dropdown outer-bottom-xs" style="margin-top:30px;">
-          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Account Settings</div>
-			<div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
-            	
-              <div class="sidebar-widget-body">
-                <ul class="list">
-                  <li><h5><a href="underConstruct.html">Profile Information</a></h5></li>
-                  <li><h5><a href="underConstruct.html">Manage Addresses</a></h5></li>
-                  <li><h5><a href="underConstruct.html">Notification Preferences</a></h5></li>
-                </ul>
-              </div>
-              <!-- /.sidebar-widget-body --> 
-            </div>
-            <!-- /.sidebar-widget --> 
-          <!-- /.megamenu-horizontal --> 
-        </div>
-        
-            
-             
-           
-        
-            <div class="sidebar-widget  wow fadeInUp outer-top-vs " style="visibility: hidden; animation-name: none;">
-            <form id="logout_form" action="./sellerHub.jsp">
-              <input type="submit" class="head btn-link" style="color:black;font-weight:bold" value="LOGOUT" onclick="logout();"></input>
-            </form>
-            </div>
-            
-            <!-- ============================================== Other: END ============================================== -->
-
-          </div>
-          <!-- /.sidebar-filter --> 
-        </div>
-        <!-- /.sidebar-module-container --> 
-      </div>
-      <!-- /.sidebar -->
+      <%@include file="sidebarSeller.jsp" %>
       <input type="text" id="sellerid" name="sellerid" hidden="hidden"/>
       <div class="col-md-9"> 
         <!-- ========================================== SECTION – HERO ========================================= -->
@@ -320,57 +115,84 @@ function checkCookie()
 		        	    	}
 		        		});
 		}
+	
+		function getDeals(result){
+			var ctxPath = "<%=request.getContextPath()%>";
+			
+           	alert(data1)
+           	return data1;
+		}
+		
 		function displayListings(result)
 		{
+			var ctxPath = "<%=request.getContextPath()%>";
 		    <% AccessProperties ap = new AccessProperties(); %>
 		    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 		    var ActualPrice = Math.round(result.price);
 			result["ActualPrice"]=ActualPrice;
-			var data="";
-			data+="<div class = 'row' style = 'font-size:15px; text-align:left; padding-left:20px;' ><div class='col-sm-4' style = 'font-size:15px; text-align:left; padding-top: 40px ; padding-left:40px;'>"+
-			" <div style='width: 260px;height: 250px;'>"+
-			"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
-			imgServerURL+result.imgUrl+"' alt=''></div></div>"+
-	        "<div class='col-sm-8'style ='font-size:15px; text-align:left; padding-top: 70px ; padding-left:60px;' ><div style = 'font-size:15px;'>Item Name :  "+result.listingName+"</div>"+
-	        "<div style = 'font-size:15px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>Discount :  "+
-	        result.discount+"% off</div><br/>"+
-	        "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
-	        "<i class='fa fa-inr' style='font-size:15px'></i>Actual Price :  "+result.ActualPrice+"</div>"+
-	        "<div style = 'font-size:15px;'>Quantity :  "+result.quantity+"</div>"+
-	       	"</div></div>";
-	       	$('#listing').append(data);
+			var listingid = result.id;
+			var data = "";
+           	$.ajax({
+           		type : 'GET',
+           		contentType : 'application/json',
+           		url : ctxPath + "/webapi/listingDeals/listing/"+listingid,
+           		dataType : "json", // data type of response
+           		success : function(res){
+        			data+="<div class = 'row' style = 'font-size:15px; text-align:left; padding-left:20px;' ><div class='col-sm-4' style = 'font-size:15px; text-align:left; padding-top: 40px ; padding-left:40px;'>"+
+           			" <div style='width: 260px;height: 250px;'>"+
+           			"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
+           			imgServerURL+result.imgUrl+"' alt=''></div></div>"+
+           		    "<div class='col-sm-8'style ='font-size:15px; text-align:left; padding-top: 70px ; padding-left:60px;' ><div style = 'font-size:15px;'>Item Name :  "+result.listingName+"</div>"+
+           		    "<div style = 'font-size:15px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>Discount :  "+
+           		    result.discount+"% off</div><br/>"+
+           		    "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
+           		    "<i class='fa fa-inr' style='font-size:15px'></i>Actual Price :  "+result.ActualPrice+"</div>"+
+           		    "<div style = 'font-size:15px;'>Quantity :  "+result.quantity+"</div>"+
+           		    "<div style = 'font-size:15px;color:red'>Deal:  ";
+           		 	if(res!=null){
+           		    	for(var j=0; j<res.length; j++) {
+           					data += res[j].dealid+" ";
+           				}
+           			}
+           			data += "</div></div></div>";
+        	       	$('#listing').append(data);
+           		},
+           		error : function() {
+           			alert("error")
+           		}
+           	 });
 		}
 		
 		
 		
 	    
 	   
-	    function load(result)
-	    {
-		    <% AccessProperties ap1 = new AccessProperties(); %>
-		    var imgServerURL = "<%=ap1.getImageServerURL() %>"; 
-	    	for (i=0;i<result.length;i++)
-	    		{
-	    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
-	    		result[i]["ActualPrice"]=ActualPrice;
-	    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val())
-	    			continue;
-	    		var data="";
-	    		data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result[i].id+
-	    		"'> <div style='width: 260px;height: 250px;'>"+
-	    		"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
-	    		imgServerURL+result[i].imgUrl+"' alt=''></div>"+
-	            "<div style = 'font-size:15px; text-align:center'>"+result[i].listingName+"</div>"+
-	            "<div style = 'font-size:10px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+
-	            result[i].discount+"% off</div><br/>"+
-	            "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
-	            "<i class='fa fa-inr' style='font-size:15px'></i>"+result[i].ActualPrice+"</div>"+
-	           	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
-	           	"<i class='fa fa-inr' style='font-size:10px'></i>"+result[i].price+"</del>"+
-	           	"</div>";
-		       	$('#listing').append(data);
-	    		};
-	    };
+// 	    function load(result)
+// 	    {
+<%-- 		    <% AccessProperties ap1 = new AccessProperties(); %> --%>
+<%-- 		    var imgServerURL = "<%=ap1.getImageServerURL() %>";  --%>
+// 	    	for (i=0;i<result.length;i++)
+// 	    		{
+// 	    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+// 	    		result[i]["ActualPrice"]=ActualPrice;
+// 	    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val())
+// 	    			continue;
+// 	    		var data="";
+// 	    		data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result[i].id+
+// 	    		"'> <div style='width: 260px;height: 250px;'>"+
+// 	    		"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
+// 	    		imgServerURL+result[i].imgUrl+"' alt=''></div>"+
+// 	            "<div style = 'font-size:15px; text-align:center'>"+result[i].listingName+"</div>"+
+// 	            "<div style = 'font-size:10px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+
+// 	            result[i].discount+"% off</div><br/>"+
+// 	            "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
+// 	            "<i class='fa fa-inr' style='font-size:15px'></i>"+result[i].ActualPrice+"</div>"+
+// 	           	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
+// 	           	"<i class='fa fa-inr' style='font-size:10px'></i>"+result[i].price+"</del>"+
+// 	           	"</div>";
+// 		       	$('#listing').append(data);
+// 	    	};
+// 	    };
 
 	    function starJson(listing)
 	    {

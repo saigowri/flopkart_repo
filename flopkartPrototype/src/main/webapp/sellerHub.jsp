@@ -209,7 +209,7 @@ function sellerLogin(){
 				return false;
 			}
 			setCookie("seller_details",JSON.stringify(result),10);
-			
+			//alert(result)
 			return true;
 		},
 		error : err
