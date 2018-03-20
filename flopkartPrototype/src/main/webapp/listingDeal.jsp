@@ -16,7 +16,7 @@
        <div class="col-md-9"> 
         <!-- ========================================== SECTION – HERO ========================================= -->
 	  
-	  <form id="addDeal"> 
+	  <form id="addDeal" action="#"> 
         <div class="search-result-container ">
            <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
               <div class="row">
@@ -29,10 +29,13 @@
 	              <h4 class="widget-title"><B>LISTING<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	              <div id="listing-content"></div>
 	            </div>
-	            <div class="col-sm-5 sidebar" id ="sub-cat-head"> 
+	            <div class="col-sm-5 sidebar"> 
 	              <h4 class="widget-title"><B>DEAL<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	              <div id="deal-content"></div>	
 	            </div>
+	            <div class="col-sm-5 sidebar" id="reqd" style="color:red; margin-left: 170px"> 
+					All * fields must be entered.
+		     	</div>
 	          </div>
 	       </div>
 	     </div>
@@ -45,6 +48,7 @@
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="date" id="startDate" name="startDate" required/>
+		              <div style="color:red;" id="dateErr2">Start date cannot be before today's date</div>
 		          </div>
 		         </div> 
         		</div>
@@ -58,6 +62,7 @@
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="date" id="endDate" name="endDate" required/>
+		              <div style="color:red;" id="dateErr1">End date cannot be before start date</div>
 		          </div>
 		         </div> 
         		</div>
@@ -100,6 +105,9 @@
 $(document).ready(function(){
 	checkCookie();
 	var ctxPath = "<%=request.getContextPath()%>";
+	$("#dateErr1").hide();
+	$("#dateErr2").hide();
+	$("#reqd").hide();
 	fetch();
 });
 
@@ -131,7 +139,7 @@ function fetch()
 		url : ctxPath + "/webapi/listings/seller/"+sellerId,
 		dataType : "json", // data type of response
 		success : function(result){
-			var data="<select id='listingId' style=\" background-color:white; font-size:20px;\">"+"<option value=' "+0+" '>Select a listing</option>";
+			var data="<select id='listingId' style=\" background-color:white; font-size:20px;\" required>"+"<option value=' "+0+" '>Select a listing</option>";
             for(var i in result){
                data+="<option value='"+result[i].id+"'>"+result[i].listingName+"</option>";
             }
@@ -150,7 +158,7 @@ function fetch()
 				url : ctxPath + "/webapi/deals",
 				dataType : "json", // data type of response
 				success : function(result){
-					var data="<select id='dealId' style=\" background-color:white; font-size:20px;\">"+"<option value=' "+0+" '>Select a deal</option>";
+					var data="<select id='dealId' style=\" background-color:white; font-size:20px;\" required>"+"<option value=' "+0+" '>Select a deal</option>";
 		            for(var i in result){
 		               data+="<option value='"+result[i].id+"'>"+result[i].dealname+"</option>";
 		            }
@@ -163,22 +171,27 @@ function fetch()
 			});
 }
 
-$("#submitListingDeal").click(function(){
-	alert('hi');
-	var ctxPath = "<%=request.getContextPath()%>";
-	$.ajax({
-				type : 'POST',
-				contentType : 'application/json',
-				url : ctxPath + "/webapi/listingDeals/create",
-				data : toJSON(),
-				dataType : "json", // data type of response
-				success : function(result){
-					alert("success");
-		    	},
-		    	error:function(err) {
-		        	alert(JSON.stringify(err));
-		    	}
-			});
+$("#submitListingDeal").click(function(evt) {
+	var val = validate();
+	if(val==true){
+		var ctxPath = "<%=request.getContextPath()%>";
+		$.ajax({
+					type : 'POST',
+					contentType : 'application/json',
+					url : ctxPath + "/webapi/listingDeals/create",
+					data : toJSON(),
+					dataType : "json", // data type of response
+					success : function(){
+						alert("success");
+			    	},
+			    	error:function(err) {
+			        	//alert(JSON.stringify(err));
+			    	}
+		});	
+	}
+	else {
+		evt.preventDefault(); //prevents the default action
+	}
 });
 
 function toJSON() 
@@ -193,8 +206,40 @@ function toJSON()
 	    "startdate" : stDate,
 	    "enddate" : enDate
 	});
-	alert(listingDeal);
+	//alert(listingDeal);
 	return listingDeal;
+}
+
+function validate(){
+	var start = new Date($("#startDate").val());
+	var end = new Date($("#endDate").val());
+	var dealid = $("#dealId").val();
+	var listingid = $("#listingId").val();
+	var today = new Date();
+	//alert(dealid+" "+listingid)
+	var bool1 = (end - start < 0);
+	var bool2 = (start - today < 0);
+	if(bool1==true){ //end < start
+		$("#startDate").val("");
+		$("#endDate").val("");
+		$("#dateErr1").show();
+		return false;
+	}
+	else if(bool2==true){ //start before current date
+		$("#startDate").val("");
+		$("#endDate").val("");
+		$("#dateErr2").show();
+		return false;
+	}
+	else {
+		$("#dateErr1").hide();
+		$("#dateErr2").hide();
+		if(dealid==0 || listingid==0) {
+			$("#reqd").show();
+			return false;
+		}
+		return true;
+	}
 }
 </script>		
 </body>

@@ -115,57 +115,84 @@ function checkCookie()
 		        	    	}
 		        		});
 		}
+	
+		function getDeals(result){
+			var ctxPath = "<%=request.getContextPath()%>";
+			
+           	alert(data1)
+           	return data1;
+		}
+		
 		function displayListings(result)
 		{
+			var ctxPath = "<%=request.getContextPath()%>";
 		    <% AccessProperties ap = new AccessProperties(); %>
 		    var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 		    var ActualPrice = Math.round(result.price);
 			result["ActualPrice"]=ActualPrice;
-			var data="";
-			data+="<div class = 'row' style = 'font-size:15px; text-align:left; padding-left:20px;' ><div class='col-sm-4' style = 'font-size:15px; text-align:left; padding-top: 40px ; padding-left:40px;'>"+
-			" <div style='width: 260px;height: 250px;'>"+
-			"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
-			imgServerURL+result.imgUrl+"' alt=''></div></div>"+
-	        "<div class='col-sm-8'style ='font-size:15px; text-align:left; padding-top: 70px ; padding-left:60px;' ><div style = 'font-size:15px;'>Item Name :  "+result.listingName+"</div>"+
-	        "<div style = 'font-size:15px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>Discount :  "+
-	        result.discount+"% off</div><br/>"+
-	        "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
-	        "<i class='fa fa-inr' style='font-size:15px'></i>Actual Price :  "+result.ActualPrice+"</div>"+
-	        "<div style = 'font-size:15px;'>Quantity :  "+result.quantity+"</div>"+
-	       	"</div></div>";
-	       	$('#listing').append(data);
+			var listingid = result.id;
+			var data = "";
+           	$.ajax({
+           		type : 'GET',
+           		contentType : 'application/json',
+           		url : ctxPath + "/webapi/listingDeals/listing/"+listingid,
+           		dataType : "json", // data type of response
+           		success : function(res){
+        			data+="<div class = 'row' style = 'font-size:15px; text-align:left; padding-left:20px;' ><div class='col-sm-4' style = 'font-size:15px; text-align:left; padding-top: 40px ; padding-left:40px;'>"+
+           			" <div style='width: 260px;height: 250px;'>"+
+           			"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
+           			imgServerURL+result.imgUrl+"' alt=''></div></div>"+
+           		    "<div class='col-sm-8'style ='font-size:15px; text-align:left; padding-top: 70px ; padding-left:60px;' ><div style = 'font-size:15px;'>Item Name :  "+result.listingName+"</div>"+
+           		    "<div style = 'font-size:15px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>Discount :  "+
+           		    result.discount+"% off</div><br/>"+
+           		    "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
+           		    "<i class='fa fa-inr' style='font-size:15px'></i>Actual Price :  "+result.ActualPrice+"</div>"+
+           		    "<div style = 'font-size:15px;'>Quantity :  "+result.quantity+"</div>"+
+           		    "<div style = 'font-size:15px;color:red'>Deal:  ";
+           		 	if(res!=null){
+           		    	for(var j=0; j<res.length; j++) {
+           					data += res[j].dealid+" ";
+           				}
+           			}
+           			data += "</div></div></div>";
+        	       	$('#listing').append(data);
+           		},
+           		error : function() {
+           			alert("error")
+           		}
+           	 });
 		}
 		
 		
 		
 	    
 	   
-	    function load(result)
-	    {
-		    <% AccessProperties ap1 = new AccessProperties(); %>
-		    var imgServerURL = "<%=ap1.getImageServerURL() %>"; 
-	    	for (i=0;i<result.length;i++)
-	    		{
-	    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
-	    		result[i]["ActualPrice"]=ActualPrice;
-	    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val())
-	    			continue;
-	    		var data="";
-	    		data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result[i].id+
-	    		"'> <div style='width: 260px;height: 250px;'>"+
-	    		"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
-	    		imgServerURL+result[i].imgUrl+"' alt=''></div>"+
-	            "<div style = 'font-size:15px; text-align:center'>"+result[i].listingName+"</div>"+
-	            "<div style = 'font-size:10px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+
-	            result[i].discount+"% off</div><br/>"+
-	            "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
-	            "<i class='fa fa-inr' style='font-size:15px'></i>"+result[i].ActualPrice+"</div>"+
-	           	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
-	           	"<i class='fa fa-inr' style='font-size:10px'></i>"+result[i].price+"</del>"+
-	           	"</div>";
-		       	$('#listing').append(data);
-	    		};
-	    };
+// 	    function load(result)
+// 	    {
+<%-- 		    <% AccessProperties ap1 = new AccessProperties(); %> --%>
+<%-- 		    var imgServerURL = "<%=ap1.getImageServerURL() %>";  --%>
+// 	    	for (i=0;i<result.length;i++)
+// 	    		{
+// 	    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+// 	    		result[i]["ActualPrice"]=ActualPrice;
+// 	    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val())
+// 	    			continue;
+// 	    		var data="";
+// 	    		data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result[i].id+
+// 	    		"'> <div style='width: 260px;height: 250px;'>"+
+// 	    		"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
+// 	    		imgServerURL+result[i].imgUrl+"' alt=''></div>"+
+// 	            "<div style = 'font-size:15px; text-align:center'>"+result[i].listingName+"</div>"+
+// 	            "<div style = 'font-size:10px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+
+// 	            result[i].discount+"% off</div><br/>"+
+// 	            "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
+// 	            "<i class='fa fa-inr' style='font-size:15px'></i>"+result[i].ActualPrice+"</div>"+
+// 	           	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
+// 	           	"<i class='fa fa-inr' style='font-size:10px'></i>"+result[i].price+"</del>"+
+// 	           	"</div>";
+// 		       	$('#listing').append(data);
+// 	    	};
+// 	    };
 
 	    function starJson(listing)
 	    {
