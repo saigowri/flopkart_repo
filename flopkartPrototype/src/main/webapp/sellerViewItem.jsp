@@ -136,7 +136,7 @@
 									<li class="active dropdown yamm-fw">
 										<a	href="sellerViewItem.jsp" style="color:black">VIEW YOUR ITEMS</a></li>
 									<li class="active dropdown yamm-fw">
-										<a	href="#" style="color:black">VIEW ORDERS</a><div class="yamm-content"></li>
+										<a	href="#" style="color:black">VIEW ORDERS</a></li>
 									
 								</ul>
 								<!-- /.navbar-nav -->
@@ -172,7 +172,7 @@
             <!-- ============================================== IMAGE============================================== -->
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
             	
-              <h5 class="section-title">Hello <label id="sellername" name="sellername" /></label></h5>
+              <h5 class="section-title">Hello <label id="sellername"/></label></h5>
               <div class="widget-header">
                 <h4 class="widget-title" id="userID"></h4>
               </div>
@@ -236,6 +236,7 @@
   </div>
 </div>
 <!-- /.body-content --> 
+</div>
 
 
 <!-- JavaScripts placed at the end of the document so the pages load faster --> 
@@ -276,8 +277,8 @@ function checkCookie()
 	
     } 
     else 
-    {	alert("no cookie");
-      	window.location = "sellerHome.jsp";
+    {	alert("Login failed. Try again.");
+      	window.location = "sellerHub.jsp";
     		logout();
     }
 }

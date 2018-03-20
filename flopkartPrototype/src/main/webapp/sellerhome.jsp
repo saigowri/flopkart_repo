@@ -138,8 +138,9 @@
 									<li class="active dropdown yamm-fw">
 										<a	href="sellerViewItem.jsp" style="color:black">VIEW YOUR ITEMS</a></li>
 									<li class="active dropdown yamm-fw">
-										<a	href="#" style="color:black">VIEW ORDERS</a><div class="yamm-content"></li>
-									
+										<a	href="listingDeal.jsp" style="color:black">ADD DEAL TO LISTING</a></li>
+									<li class="active dropdown yamm-fw">
+										<a	href="#" style="color:black">VIEW ORDERS</a></li>
 								</ul>
 								<!-- /.navbar-nav -->
 								<div class="clearfix"></div>
@@ -228,7 +229,7 @@
             <!-- ============================================== IMAGE============================================== -->
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
             	
-              <h5 class="section-title">Hello <label id="sellername" name="sellername" /></label></h5>
+              <h5 class="section-title">Hello <label id="sellername"/></label></h5>
               <div class="widget-header">
                 <h4 class="widget-title" id="userID"></h4>
               </div>
@@ -285,7 +286,7 @@
 		  <div class="search-result-container"  style="text-align:center;">
              <div class="widget-header" style="padding-top:40px">
 	           
-	           		<button style="font-size:18px ;border-color:#777 ;border-radius: 2px; color:#000; padding:15px 50px; background-color: #ffdb4d;" onClick="window.location='sellerItemInsert.jsp';"/>
+	           		<button style="font-size:18px ;border-color:#777 ;border-radius: 2px; color:#000; padding:15px 50px; background-color: #ffdb4d;" onClick="window.location='sellerItemInsert.jsp';">
 					 ADD ITEMS
 					 </button>
 	            </div>   
@@ -295,7 +296,7 @@
       	 <div class="search-result-container"  style="text-align:center;">
                <div class="widget-header" style="padding-top:60px">
 	            
-	           		<button style="font-size:18px ;border-color:#777 ;border-radius: 2px; color:#000; padding:15px 50px; background-color: #ffdb4d;" onClick="window.location='sellerViewItem.jsp';"/>
+	           		<button style="font-size:18px ;border-color:#777 ;border-radius: 2px; color:#000; padding:15px 50px; background-color: #ffdb4d;" onClick="window.location='sellerViewItem.jsp';">
 					 VIEW ITEMS
 					 </button>
 	            </div>   
@@ -305,7 +306,7 @@
        	<div class="search-result-container"  style="text-align:center;">
                <div class="widget-header" style="padding-top:60px">
 	            
-	           		<button style="font-size:18px ;border-color:#777 ;border-radius: 2px; color:#000; padding:15px 50px; background-color: #ffdb4d;" onClick="window.location='sellerViewOrder.jsp';"/>
+	           		<button style="font-size:18px ;border-color:#777 ;border-radius: 2px; color:#000; padding:15px 50px; background-color: #ffdb4d;" onClick="window.location='sellerViewOrder.jsp';">
 					 VIEW ACTIVE ORDERS
 					 </button>
 	            </div>   
@@ -319,6 +320,7 @@
      </div>
   <!-- /.container --> 
   </div>
+</div>
 </div>
 <!-- /.body-content --> 
 
@@ -355,8 +357,8 @@ function checkCookie()
 	
     } 
     else 
-    {	alert("no cookie");
-      	window.location = "sellerHome.jsp";
+    {	alert("Login failed. Try again.");
+      	window.location = "sellerHub.jsp";
     		logout();
     }
 } 

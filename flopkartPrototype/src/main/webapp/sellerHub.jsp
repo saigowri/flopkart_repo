@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header><img src="./images/sellerHub/seller-hub-logo.png" id="flipkartsellerhub" class="flipkartsellerhub">
+    <header><a href="#"><img src="./images/sellerHub/seller-hub-logo.png" id="flipkartsellerhub" class="flipkartsellerhub"></a>
         <form class="form-inline bootstrap-form-with-validation" action="sellerhome.jsp">
             <div class="form-group">
                 <label class="control-label sr-only" for="email-input">Email </label>
