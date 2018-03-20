@@ -30,7 +30,7 @@
 <script>
 $(document).ready(function(){
     var ctxPath = "<%=request.getContextPath()%>";
-    <%session.setAttribute("totalamount",5000);%>
+    <%session.setAttribute("totalamount",1000);%>
 	headerFunctions(ctxPath);
 })
 	

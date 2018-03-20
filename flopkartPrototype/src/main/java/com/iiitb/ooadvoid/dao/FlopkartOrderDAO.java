@@ -15,28 +15,28 @@ String entity_name = "FlopkartOrder";
 	public FlopkartOrder addFlopkartOrder(FlopkartOrder order)
 	{
 		super.add(order);
+		order = super.find(entity_name , 
+				"orderId" , String.valueOf(order.getOrderId()),
+				"userId" , String.valueOf(order.getUserId()));
 		return order;
 	}
-/*	public FlopkartOrder getFlopkartOrderById(int id)
-	{
-		return super.find(new FlopkartOrder(),id);
-	}*/
+	
 	public List<FlopkartOrder> getFlopkartOrderByUserId(Integer UserId)
-	{
-		
+	{		
 		return super.findAll(entity_name,"userid", UserId);
 	}
-   /* public List<FlopkartOrder> getFlopkartOrderByorderDate(String orderDate)
-	{
-		return super.findAll(entity_name,"orderDate", orderDate);
+	
+	public List<FlopkartOrder> getFlopkartOrderByItemId(String itemId)
+	{		
+		return super.findAll(entity_name,"itemId", itemId);
 	}
-*/
+	
 	public int deleteFlopkartOrder(int id)
 	{
 		return super.remove(entity_name,id);
 	}
 
-	public int updateFlopkart_Order(int id, FlopkartOrder order)
+	public int updateFlopkartOrder(int id, FlopkartOrder order)
 	{
 		if (id <= 0)
 			return 0;	

@@ -203,6 +203,20 @@ public class HibernateDAO<E>
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<E> findAll(String entity_name, String param1, String val1)
+	{
+		session = SessionUtil.getSession();
+		session.flush();
+		String hql = "from "+ entity_name + " where "+param1+" = :val1";
+		Query query = session.createQuery(hql);
+		query.setParameter("val1", val1);
+		List<E> entity = query.list();
+		session.flush();
+		session.close();
+		return entity;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<E> findAll(String entity_name, String param1, int val1, String param2, int val2)
 	{
 		session = SessionUtil.getSession();
