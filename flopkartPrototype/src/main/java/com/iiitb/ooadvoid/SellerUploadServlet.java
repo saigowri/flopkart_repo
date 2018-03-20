@@ -19,12 +19,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-import com.iiitb.ooadvoid.pojo.FlopkartItem;
 import com.iiitb.ooadvoid.pojo.FlopkartListing;
 import com.iiitb.ooadvoid.pojo.FlopkartListingDetails;
 
@@ -186,7 +183,6 @@ public class SellerUploadServlet extends HttpServlet
 		}
 		String splid = sellerid+itemid;
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target(BASE_URI+PATH_NAME);
 		FlopkartListing item = new FlopkartListing();
 		item.setListingName(listingName);
 		item.setItemId(splid);    // creating unique itemid as (sellerid+itemid)
@@ -205,8 +201,8 @@ public class SellerUploadServlet extends HttpServlet
 		
 	//	target.request(MediaType.APPLICATION_JSON).post(Entity.entity(item, MediaType.APPLICATION_JSON));
 		
-		Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON);
-		Response response1 = invocationBuilder.post(Entity.entity(item, MediaType.APPLICATION_JSON));
+//		Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON);
+//		Response response1 = invocationBuilder.post(Entity.entity(item, MediaType.APPLICATION_JSON));
 
 		WebTarget target3 = client.target(BASE_URI+PATH_NAME3);
 		FlopkartListingDetails listDet = new FlopkartListingDetails();

@@ -1,14 +1,13 @@
 package com.iiitb.ooadvoid.pojo;
 
-import java.util.Date;
-
 public class FlopkartOrder
 {
 	private Integer id;
 	private String shippingAddress;
 	private Integer userId;
 	private String itemId;
-	private int orderId;
+	private Integer orderId;
+	private Integer quantity;
 	private String status;
 	private String orderDate;
 	private Integer totalAmount;
@@ -38,14 +37,22 @@ public class FlopkartOrder
 		this.itemId = itemId;
 	}
 
-	public int getOrderId()
+	public Integer getOrderId()
 	{
 		return orderId;
 	}
 
-	public void setOrderId(int orderId)
+	public void setOrderId(Integer orderId)
 	{
 		this.orderId = orderId;
+	}
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getStatus()

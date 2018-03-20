@@ -15,9 +15,9 @@ String entity_name = "FlopkartOrder";
 	public FlopkartOrder addFlopkartOrder(FlopkartOrder order)
 	{
 		super.add(order);
-		order = super.find(entity_name , 
-				"orderId" , String.valueOf(order.getOrderId()),
-				"userId" , String.valueOf(order.getUserId()));
+//		order = super.find(entity_name , 
+//				"orderId" , String.valueOf(order.getOrderId()),
+//				"userId" , String.valueOf(order.getUserId()));
 		return order;
 	}
 	

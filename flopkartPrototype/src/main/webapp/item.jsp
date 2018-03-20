@@ -132,6 +132,10 @@
     	<input type="number" id="quant" name="quant" hidden="hidden">
     	<input type="text" name="listingname" id="listingname" hidden="hidden">
     	<input type="number" id="listingamount" name="listingamount" hidden="hidden">
+    	<input type="number" id="listingdiscount" name="listingdiscount" hidden="hidden">
+    	<input type="text" id="sellername" name="sellername" hidden="hidden">
+    	<input type="number" id="listingquant" name="listingquant" hidden="hidden">
+    	<input type="text" id="itemid" name="itemid" hidden="hidden">
     </form>
     </div>
 </div><!-- /.gallery-holder -->        			
@@ -248,13 +252,9 @@ $(document).ready(function(){
 					{
 						if(res==0){
 							$("#available").text("Out of Stock");
-							$("#buynow").hide();
-							$("#addtocart").hide();
-							
 						}
 						else{
-							$("#available").text("In Stock "+"("+res+")");
-							$("#available_quant").text(res);
+							$("#available").text("In Stock ("+res+")");
 						}
 					},
 					error : function(){
@@ -267,8 +267,11 @@ $(document).ready(function(){
 				$("#discountedprice").text(amount);
 				$("#price-strike").text(result.price);
 				$("#discount").text("Discount: "+result.discount+"%");
-				$("#listingamount").val(amount);
+				$("#listingamount").val(result.price);
+				$("#listingquant").val(result.quantity);
+				$("#listingdiscount").val(result.discount);
 				$("#listingname").val(result.listingName);
+				$("#itemid").val(result.itemId);
 				
 				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
@@ -288,6 +291,8 @@ $(document).ready(function(){
 					{
 						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+res.firstName+" "+res.lastName+"</span>";
 						$("#product-info").append(sellerData);
+						//alert(res.firstName+" "+res.lastName);
+						$("#sellername").val(res.firstName+" "+res.lastName);
 					},
 					error : function(){
 						//alert("error");
