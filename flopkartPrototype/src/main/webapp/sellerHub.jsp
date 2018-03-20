@@ -13,7 +13,7 @@
 
 <body>
     <header><img src="./images/sellerHub/seller-hub-logo.png" id="flipkartsellerhub" class="flipkartsellerhub">
-        <form class="form-inline bootstrap-form-with-validation" action="sellerItemInsert.jsp">
+        <form class="form-inline bootstrap-form-with-validation" action="sellerhome.jsp">
             <div class="form-group">
                 <label class="control-label sr-only" for="email-input">Email </label>
                 <input class="form-control" type="email" placeholder="Email" id="email-input" required>
@@ -209,6 +209,7 @@ function sellerLogin(){
 				return false;
 			}
 			setCookie("seller_details",JSON.stringify(result),10);
+			
 			return true;
 		},
 		error : err
@@ -218,9 +219,9 @@ function sellerLogin(){
 
 
 function err(error) 
-{
+{	window.location.reload(true);
 	let x = error;
- 	alert(JSON.stringify(error)+" Enter valid login credentials");
+ //	alert(JSON.stringify(error)+" Enter valid login credentials");
 	return false;
 }
 

@@ -41,6 +41,19 @@ public class FlopkartOrderServices
 		else
 			return order_details;
 	}
+	
+	@GET
+	@Path("/item/{id}")
+	@Produces("application/json")
+	public List<FlopkartOrder> getFlopkartbyItemId(@PathParam("id") String Itemid)
+	{
+		FlopkartOrderDAO dao = new FlopkartOrderDAO();
+		List<FlopkartOrder> order_details = dao.getFlopkartOrderByItemId(Itemid);
+		if(order_details==null)
+			return null;
+		else
+			return order_details;
+	}
 	/*@POST
 	@Path("/categoty")
 	@Consumes("application/json")

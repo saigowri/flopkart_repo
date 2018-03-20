@@ -3,7 +3,7 @@ package com.iiitb.ooadvoid.pojo;
 public class FlopkartListingDetails {
 	
 		private Integer ID;
-		private Integer ListingId;
+		private String ListingId;
 		private String attr_name;
 		private String attr_val;
 		
@@ -13,10 +13,10 @@ public class FlopkartListingDetails {
 		public void setID(Integer ID) {
 			this.ID = ID;
 		}
-		public Integer getListingId() {
+		public String getListingId() {
 			return ListingId;
 		}
-		public void setListingId(Integer listingId) {
+		public void setListingId(String listingId) {
 			ListingId = listingId;
 		}
 		public String getAttr_name() {

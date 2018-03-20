@@ -9,6 +9,7 @@
       </id>
 
       <property name = "UserId" column = "UserId" type = "int"/>
+       <property name = "orderId" column = "OrderId" type = "int"/>
       <property name = "shippingAddress" column = "shippingAddress" type = "string"/>
       <property name = "itemId" column = "itemId" type = "string"/>
       <property name = "status" column = "status" type = "string"/>

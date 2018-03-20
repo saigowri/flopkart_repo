@@ -26,9 +26,11 @@ String entity_name = "FlopkartOrder";
 		return super.findAll(entity_name,"userid", UserId);
 	}
 	
+	
+	
 	public List<FlopkartOrder> getFlopkartOrderByItemId(String itemId)
 	{		
-		return super.findAll(entity_name,"itemId", itemId);
+		return super.findAll(entity_name,"ItemId", itemId);
 	}
 	
 	public int deleteFlopkartOrder(int id)
