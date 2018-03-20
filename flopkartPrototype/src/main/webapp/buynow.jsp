@@ -70,7 +70,7 @@
 					  	<div class="panel panel-default checkout-step-03">
 						    <div class="panel-heading">
 						      <h4 class="unicase-checkout-title">
-						        <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseThree">
+						        <a data-toggle="collapse" class="collapsed" id="collapse2" data-parent="#accordion" href="#collapseThree">
 						       		<span>2</span>Shipping Address
 						        </a>
 						      </h4>
@@ -80,7 +80,7 @@
 						      <textarea rows="4" style="width:100%" id="shipAddress" required>
                               </textarea>
                               <br/>
-                              <button type="submit" class="btn btn-primary">Next</button>
+                              <button type="submit" class="btn btn-primary" onclick="orderSummary()">Next</button>
 						      </div>
 						    </div>
 					  	</div>
@@ -90,7 +90,7 @@
 					    <div class="panel panel-default checkout-step-04">
 						    <div class="panel-heading">
 						      <h4 class="unicase-checkout-title">
-						        <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseFour">
+						        <a data-toggle="collapse" class="collapsed"  id="collapse3" data-parent="#accordion" href="#collapseFour">
 						        	<span>3</span>Order Summary
 						        </a>
 						      </h4>
@@ -106,12 +106,14 @@
 							    		<th>Marked Price</th>
 							    		<th>Discount</th>
 							    		<th>Discounted Price</th>
-							    	</tr>
+								    
+									</tr>
 							    	</thead>
 							    	<tbody>
 							    	<tr>
 							    	<% int quant = Integer.parseInt(request.getParameter("quant"));%>
 							    	<% int listingamount = Integer.parseInt(request.getParameter("listingamount"));%>
+
 							    	<% int discount=Integer.parseInt(request.getParameter("discounted"));%>
 							    	<% int price=Integer.parseInt(request.getParameter("priced"));%>
 							    		<td><%=request.getParameter("listingname") %></td>
@@ -121,20 +123,23 @@
 							    		<td><%=listingamount%></td>
 							    	</tr>
 							    	<tr>
-							    		<th colspan="2">Total Price:</th>
+							    		<th colspan="4">Total Price:</th>
 							    		<% int total = quant * listingamount;%>
-							    		<th></th>
-							    		
-							    		<th></th>
+
+
+
 							    		<th><%=total %></th>
 							    	</tr>
 							    	</tbody>
-							    </table>
-							   </div>
+							    </table></div>
+
+
 							   <div class="seller-info" id="seller-info" style='color:green; font-size:15px'>
 							   <% String sname=request.getParameter("sellername");%>
 							   Seller Name: <%=sname %>
-							   </div>
+							   </div>                              <br/>
+                              <button type="submit" class="btn btn-primary" onclick="paymentOption()">Next</button>
+
 							    </div>
 					    	</div>
 						</div>
@@ -144,7 +149,7 @@
 					  	<div class="panel panel-default checkout-step-05">
 						    <div class="panel-heading">
 						      <h4 class="unicase-checkout-title">
-						        <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseFive">
+						        <a data-toggle="collapse" class="collapsed" id="collapse4" data-parent="#accordion" href="#collapseFive">
 						        	<span>4</span>Payment Option
 						        </a>
 						      </h4>
@@ -152,10 +157,10 @@
 						    <div id="collapseFive" class="panel-collapse collapse">
 						      <div class="panel-body">
 						      <div class="radio">
-								  <label><input checked="checked"  type="radio" name="payment">Cash on delivery</label>
+								  <label><input  type="radio" name="payment" disabled>Cash on delivery</label>
 								</div>
-								<div class="radio disabled">
-								  <label><input type="radio" name="payment" disabled>Flopkart Bank</label>
+								<div class="radio">
+								  <label><input checked="checked" type="radio" name="payment">Flopkart Bank</label>
 								</div>
 						      <button type="submit" class="btn btn-primary" onclick="insertOrder();">Submit</button>
 						      </div>
@@ -194,6 +199,13 @@ $(document).ready(function(){
     var ctxPath = "<%=request.getContextPath()%>";
 	headerFunctions(ctxPath);
 	show_Welcome();
+
+	document.getElementById("login_btn").onclick = 
+		function(l_data) 
+		{
+			validate(ctxPath);
+			window.location.reload(true);
+		}
 })
 function buynowvalidation() 
 {
@@ -201,8 +213,12 @@ function buynowvalidation()
     checkCookie();
     show_Welcome();
 }
+
+
+
 function show_Welcome()
 {
+
     var user = getCookie("user_details");
     if (user != "") 
     {
@@ -215,8 +231,27 @@ function show_Welcome()
 	    	"</div>"
     	$("#login_panel").html(data);
     	$("#shipAddress").val((JSON.parse(user)).address);
+    	$("#collapse2").removeClass("collapsed");
+    	$("#collapseThree").addClass("in");
     } 
 }
+
+function orderSummary()
+{
+	$("#collapse2").addClass("collapsed");
+	$("#collapseThree").removeClass("in");
+	$("#collapse3").removeClass("collapsed");
+	$("#collapseFour").addClass("in");
+}
+
+function paymentOption()
+{
+	$("#collapse3").addClass("collapsed");
+	$("#collapseFour").removeClass("in");
+	$("#collapse4").removeClass("collapsed");
+	$("#collapseFive").addClass("in");
+}
+
 function buynowsignup()
 {
 	$('#loginModal').modal('toggle');
@@ -239,6 +274,7 @@ function submit_order()
     	}
 	});
 }
+
 function order_formToJSON() 
 {
 	var shipAddress = $("#shipAddress").val().trim();
@@ -253,6 +289,7 @@ function order_formToJSON()
 	var OrderDate = "2018-03-15";
 	var Status = "Ordered";
 	var TotalAmount =<%=total %>;
+	<%session.setAttribute("totalamount","TotalAmount");%>
 	var flopkartOrder = JSON.stringify({
 	    "shippingAddress" : shipAddress,
 	    "userId" : userid,
@@ -263,12 +300,13 @@ function order_formToJSON()
 	//alert(flopkartOrder);
 	return flopkartOrder;
 }
+
 function render(){
 	var listingid = '<%=request.getParameter("listingid")%>';
 	var quant = '<%=quant%>';
 	var price='<%=price%>';
-	var discount='<%=discount%>';    
-	var ctxPath = "<%=request.getContextPath()%>";
+	var discount='<%=discount%>'; 
+    var ctxPath = "<%=request.getContextPath()%>";
 	$.ajax(
 			{
 				type : 'GET',
@@ -301,6 +339,7 @@ function render(){
 			});
 	window.location.href="myorder.jsp";
 }
+
 function update_item_formtoJSON() 
 {
 	var flipkart_item = JSON.stringify({
@@ -308,6 +347,7 @@ function update_item_formtoJSON()
     	});
 	return flipkart_item;
 }
+
 function insertOrder()
 {
 	var ctxPath = "<%=request.getContextPath()%>";
