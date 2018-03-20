@@ -47,27 +47,13 @@
            <div style = 'font-size:25px; text-align:left; font-family:bold; margin-top:40px'>price</div>
            <div style = 'font-size:20px; text-align:center; font-family:bold; margin-top:20px'>Minimum</div>
            <div align="center">
-           <select style="width:100px" id = "MinPrice">
-                <option value="0">0</option>
-                <option value="500">500</option>
-                <option value="1000">1000</option>
-                <option value="2000">2000</option>
-                <option value="5000">5000</option>
-                <option value="10000">10000</option>
-                <option value="20000">20000</option>
-           </select>
+
+            <input type="number" style = 'font-size:20px; text-align:center;' value="0" name="MinPrice" id="MinPrice" >
+            
            </div>
               <div style = 'font-size:20px; text-align:center; font-family:bold; margin-top:20px'>Maximum</div>
               <div align="center">
-              <select style="width:100px" id = "MaxPrice">
-                <option value="max">35000+</option>
-                <option value="500">500</option>
-                <option value="1000">1000</option>
-                <option value="2000">2000</option>
-                <option value="5000">5000</option>
-                <option value="10000">10000</option>
-                <option value="20000">20000</option>
-           </select>
+              <input type="number" style = 'font-size:20px; text-align:center;' value="100000" name="MaxPrice" id="MaxPrice" >
            </div>
               <button type="button" style="margin:auto;display:block;margin-top:40px" onclick="loadListings()"><b>Apply Filter</b></button>
         </section>

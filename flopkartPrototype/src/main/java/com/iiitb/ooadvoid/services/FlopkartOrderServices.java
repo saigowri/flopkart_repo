@@ -30,12 +30,25 @@ public class FlopkartOrderServices
 	}
 
 	@GET
-	@Path("/order/{id}")
+	@Path("/user/{id}")
 	@Produces("application/json")
 	public List<FlopkartOrder> getFlopkartbyUserId(@PathParam("id") int Userid)
 	{
 		FlopkartOrderDAO dao = new FlopkartOrderDAO();
 		List<FlopkartOrder> order_details = dao.getFlopkartOrderByUserId(Userid);
+		if(order_details==null)
+			return null;
+		else
+			return order_details;
+	}
+	
+	@GET
+	@Path("/item/{id}")
+	@Produces("application/json")
+	public List<FlopkartOrder> getFlopkartbyItemId(@PathParam("id") String Itemid)
+	{
+		FlopkartOrderDAO dao = new FlopkartOrderDAO();
+		List<FlopkartOrder> order_details = dao.getFlopkartOrderByItemId(Itemid);
 		if(order_details==null)
 			return null;
 		else
@@ -58,12 +71,13 @@ public class FlopkartOrderServices
 	@Consumes("application/json")
 	public Response addFlopkartOrder(FlopkartOrder order)
 	{
-		    
-			order.setUserId(order.getUserId());
-			order.setshippingAddress(order.getshippingAddress());
-			order.setstatus(order.getstatus());
-			order.setorderDate(order.getorderDate());
-			order.settotalAmount(order.gettotalAmount());
+
+//			order.setUserId(order.getUserId());
+//			order.setUserId(order.getUserId());
+//			order.setShippingAddress(order.getShippingAddress());
+//			order.setStatus(order.getStatus());
+//			order.setOrderDate(order.getOrderDate());
+//			order.setTotalAmount(order.getTotalAmount());
 		
 		FlopkartOrderDAO dao = new FlopkartOrderDAO();
 		dao.addFlopkartOrder(order);
@@ -77,7 +91,7 @@ public class FlopkartOrderServices
 	public Response updateFlopkart_Order(@PathParam("id") int id, FlopkartOrder order)
 	{
 		FlopkartOrderDAO dao = new FlopkartOrderDAO();
-		int count = dao.updateFlopkart_Order(id, order);
+		int count = dao.updateFlopkartOrder(id, order);
 		if (count == 0)
 		{
 			return Response.status(Response.Status.BAD_REQUEST).build();

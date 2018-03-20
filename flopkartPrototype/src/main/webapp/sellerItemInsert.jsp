@@ -111,55 +111,50 @@
   <!-- /.main-header --> 
   
   <!-- ============================================== NAVBAR ============================================== -->
-  <div class="header-nav animate-dropdown">
-    <div class="container">
-      <div class="yamm navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-       <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> 
-       <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        </div>
-        <div class="nav-bg-class">
-          <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
-            <div class="nav-outer">
-              <ul class="nav navbar-nav">
-                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Welcome</a> </li>
-                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Listings</a> </li>
-            		<li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">ORDERS</a>
-                  <ul class="dropdown-menu pages">
-                    <li>
-                      <div class="yamm-content">
-                        <div class="row">
-                          <div class="col-xs-12 col-menu">
-                            <ul class="links">
-                              <li><a href="#">ACTIVE ORDERS</a></li>
-                              <li><a href="#">COMPLETED ORDERS</a></li>
-                              <li><a href="#">CANCELLED ORDERS</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Advertising</a> </li>
-                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Returns</a> </li>
-              </ul>
-              <!-- /.navbar-nav -->
-              <div class="clearfix"></div>
-            </div>
-            <!-- /.nav-outer --> 
-          </div>
-          <!-- /.navbar-collapse --> 
-          
-        </div>
-        <!-- /.nav-bg-class --> 
-      </div>
-      <!-- /.navbar-default --> 
-    </div>
-    <!-- /.container-class --> 
-    
-  </div>
-  <!-- /.header-nav --> 
+  <div class="header-nav animate-dropdown" style="background-color:white;color:black">
+			<div class="container">
+				<div class="yamm navbar navbar-default" role="navigation">
+					<div class="navbar-header">
+						<button data-target="#mc-horizontal-menu-collapse"
+							data-toggle="collapse" class="navbar-toggle collapsed"
+							type="button">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="nav-bg-class">
+						<div class="navbar-collapse collapse"
+							id="mc-horizontal-menu-collapse">
+							<div class="nav-outer">
+								<ul class="nav navbar-nav" id="category_dropdown">
+									<li class="active dropdown yamm-fw">
+										<a href="sellerhome.jsp" style="color:black">Welcome</a></li>
+									<li class="active dropdown yamm-fw">
+										<a	href="sellerItemInsert.jsp" style="color:black">Add ITEM</a></li>
+										
+									<li class="active dropdown yamm-fw">
+										<a	href="sellerViewItem.jsp" style="color:black">VIEW YOUR ITEMS</a></li>
+									<li class="active dropdown yamm-fw">
+										<a	href="#" style="color:black">VIEW ORDERS</a><div class="yamm-content"></li>
+									
+								</ul>
+								<!-- /.navbar-nav -->
+								<div class="clearfix"></div>
+							</div>
+							<!-- /.nav-outer -->
+						</div>
+						<!-- /.navbar-collapse -->
+
+					</div>
+					<!-- /.nav-bg-class -->
+				</div>
+				<!-- /.navbar-default -->
+			</div>
+			<!-- /.container-class -->
+
+		</div>
+		<!-- /.header-nav -->
   <!-- ============================================== NAVBAR : END ============================================== --> 
   
 </header>
@@ -177,7 +172,7 @@
             <!-- ============================================== IMAGE============================================== -->
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
             	
-              <h5 class="section-title">Hello Seller</h5>
+              <h5 class="section-title">Hello <label id="sellername" name="sellername" /></label></h5>
               <div class="widget-header">
                 <h4 class="widget-title" id="userID"></h4>
               </div>
@@ -238,11 +233,11 @@
               </div>
 		     <div class="row">
 		      	<div class="col-sm-5 sidebar"> 
-	              <h4 class="widget-title"><B>CATEGORY</B></h4>
+	              <h4 class="widget-title"><B>CATEGORY<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>
 	            
 		      	<div class="col-sm-5 sidebar" id ="sub-cat-head"> 
-	              <h4 class="widget-title"><B>SUB-CATEGORY</B></h4>
+	              <h4 class="widget-title"><B>SUB-CATEGORY<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>
 	            <div class="col-md-2 sidebar"> </div>
 	        </div>         
@@ -260,25 +255,37 @@
           
         
       </div>
+       <div class="search-result-container ">
+            <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
+	            <div class="widget-header">
+	                <h4 class="widget-title"><B>ITEM ID<label style="color:red; padding-left:3px;">  *</label></B></h4>
+	            </div>   
+			    <div class="row">
+			      <div class="col-md-5 sidebar"> 
+		              <input type="text" class="form-control input-lg"  name="itemid" id="itemid" required>
+		          </div>
+		         </div> 
+        		</div>
+      	</div>
   
         <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	              <div class= "row">
 	             	 <div class="col-md-5 sidebar"> 
 			            <div class="widget-header">
-		                		<h4 class="widget-title"><B>ITEM NAME</B></h4>
+		                		<h4 class="widget-title"><B>ITEM NAME<label style="color:red; padding-left:3px;">  *</label></B></h4>
 		              	</div>
 			         </div>
 			         <div class="col-md-5 sidebar"> 
 			              <div class="widget-header">
-		                		<h4 class="widget-title"><B>ITEM IMAGE</B></h4>
+		                		<h4 class="widget-title"><B>ITEM IMAGE<label style="color:red; padding-left:3px;">  *</label></B></h4>
 		              	  </div>
 			         </div>
 		          </div>
 		          
 				  <div class="row">
 				     <div class="col-md-5 sidebar"> 
-			              <input type="text" class="form-control input-lg" id="listingname" name="listingname"  >
+			              <input type="text" class="form-control input-lg" id="listingname" name="listingname"  required>
 			         </div>
 			         <div class="col-md-5 sidebar"> 
 			            <input type="file"
@@ -296,12 +303,12 @@
         <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
-	                <h4 class="widget-title"><B>BRAND</B></h4>
+	                <h4 class="widget-title"><B>BRAND<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="text" class="form-control input-lg"  name="brand" id="brand" 
-		              autocomplete="name" >
+		              autocomplete="name" required>
 		          </div>
 		         </div> 
         		</div>
@@ -310,12 +317,12 @@
         <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
-	                <h4 class="widget-title"><B>QUANTITY</B></h4>
+	                <h4 class="widget-title"><B>QUANTITY<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="number" class="form-control input-lg"  name="qty" id="qty" 
-		              autocomplete="name" >
+		              autocomplete="name" required>
 		              <input type="text" id="cnt" name="cnt" hidden="hidden"/>
 		          </div>
 		         </div> 
@@ -324,12 +331,12 @@
       	 <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
-	                <h4 class="widget-title"><B>PRICE</B></h4>
+	                <h4 class="widget-title"><B>PRICE<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="text" class="form-control input-lg"  name="price" id="price" 
-		              autocomplete="name" >
+		              autocomplete="name" required >
 		          </div>
 		         </div> 
         		</div>
@@ -337,12 +344,12 @@
        	 <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
-	                <h4 class="widget-title"><B>DISCOUNT %</B></h4>
+	                <h4 class="widget-title"><B>DISCOUNT % <label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="number" class="form-control input-lg"  name="dis" id="dis" value="0"  max="99"
-		              autocomplete="name" >
+		              autocomplete="name" required>
 		          </div>
 		         </div> 
         		</div>
@@ -351,12 +358,12 @@
       	 <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
-	                <h4 class="widget-title"><B>COLOR</B></h4>
+	                <h4 class="widget-title"><B>COLOR<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="text" class="form-control input-lg"  name="clr" id="clr" 
-		              autocomplete="name" >
+		              autocomplete="name"required >
 		          </div>
 		         </div> 
         		</div>
@@ -364,12 +371,12 @@
       	 <div class="search-result-container ">
             <div class="sidebar-widget wow fadeInUp" style="visibility: hidden; animation-name: none;">
 	            <div class="widget-header">
-	                <h4 class="widget-title"><B>MANUFACTURING DATE</B></h4>
+	                <h4 class="widget-title"><B>MANUFACTURING DATE<label style="color:red; padding-left:3px;">  *</label></B></h4>
 	            </div>   
 			    <div class="row">
 			      <div class="col-md-5 sidebar"> 
 		              <input type="date" class="form-control input-lg"  name="mfd" id="mfd" 
-		              autocomplete="name" >
+		              autocomplete="name" required >
 		          </div>
 		         </div> 
         		</div>
@@ -481,7 +488,7 @@
 <script>
 $(document).ready(function(){
 	
- 	 checkCookie();
+ 	 	checkCookie();
 		var counter = 2;
 		var c = 1;
 		$('#cnt').val(c);
@@ -529,21 +536,40 @@ $(document).ready(function(){
 		});
 		
 	})
- function checkCookie() 
+/*  function checkCookie() 
 {
     var result = getCookie("seller_details");
     var user = JSON.parse(result);
-    alert(user.id);
+    document.getElementById("sellername").innerText = user.firstName;
+
     if (user != "") 
-    {
+    {	
 		setCookie("seller_details", user, 10);
 		sellerId(user);
     } 
     else 
     {
+   // 	window.location = "sellerHub.jsp";
     	logout();
     }
-} 
+}  */
+function checkCookie() 
+{
+    var result = getCookie("seller_details");
+    if (result != "") 
+    {	
+    		var user = JSON.parse(result);
+		setCookie("seller_details", result, 10);
+		document.getElementById("sellername").innerText = user.firstName;
+		sellerId(user);
+	
+    } 
+    else 
+    {	alert("no cookie");
+      	window.location = "sellerHome.jsp";
+    		logout();
+    }
+}
 
 
 
@@ -563,7 +589,8 @@ function resetCookie()
 
 
 function sellerId(user)
-{
+{	
+	
 	$('#sellerid').val(user.id);
 	//alert(user.id);
 	return true;
