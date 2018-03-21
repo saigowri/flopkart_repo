@@ -12,6 +12,17 @@ public class FlopkartOrder
 	private String status;
 	private String orderDate;
 	private Integer totalAmount;
+	private Integer quantity;
+
+	public Integer getQuantity()
+	{
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity)
+	{
+		this.quantity = quantity;
+	}
 
 	public Integer getId()
 	{
