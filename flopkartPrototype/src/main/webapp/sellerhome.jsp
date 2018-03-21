@@ -109,6 +109,11 @@ function checkCookie()
     		logout();
     }
 } 
+
+function logout()
+{
+	deleteCookie("seller_details");
+}
 	</script>		
 </body>
 </html>

@@ -138,6 +138,11 @@ function checkCookie()
 	       	"</div></div>";
 	       	$('#listing').append(data);
 		}
+		
+		function logout()
+		{
+			deleteCookie("seller_details");
+		}
 </script>		
 </body>
 </html>
