@@ -105,9 +105,9 @@
 									<li class="active dropdown yamm-fw">
 										<a	href="sellerViewItem.jsp" style="color:black">VIEW YOUR ITEMS</a></li>
 									<li class="active dropdown yamm-fw">
-										<a	href="listingDeal.jsp" style="color:black">ADD DEAL TO LISTING</a></li>
-									<li class="active dropdown yamm-fw">
 										<a	href="sellerViewOrder.jsp" style="color:black">VIEW ORDERS</a></li>
+									<li class="active dropdown yamm-fw">
+										<a	href="listingDeal.jsp" style="color:black">ADD DEAL TO LISTING</a></li>
 								</ul>
 								<!-- /.navbar-nav -->
 								<div class="clearfix"></div>
