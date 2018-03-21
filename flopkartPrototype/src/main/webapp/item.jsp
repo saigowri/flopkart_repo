@@ -246,31 +246,24 @@ $(document).ready(function(){
 			contentType : 'application/json',
 			url : ctxPath + "/webapi/listings/"+listingid,
 			dataType : "json", // data type of response
-			success : function(result)
-			{
-				if(result.quantity==0)
-				{
-					$("#available").text("Out of Stock");
-					$("#buynow").hide();
-					$("#addtocart").hide();
-					
-				}
-				else
-				{
-					$("#available").text("In Stock "+"("+result.quantity+")");
-					$("#available_quant").text(result.quantity);
-				}
-// 				$.ajax({
-// 					type : 'GET',
-// 					contentType : 'text/plain',
-// 					url : ctxPath + "/webapi/items/availableListing/"+listingid,
-// 					success : function(res)
-// 					{
-// 					},
-// 					error : function(){
-// 						//alert("error");
-// 					}
-// 				});
+			success : function(result){
+				$.ajax({
+					type : 'GET',
+					contentType : 'text/plain',
+					url : ctxPath + "/webapi/items/availableListing/"+listingid,
+					success : function(res)
+					{
+						if(res==0){
+							$("#available").text("Out of Stock");
+						}
+						else{
+							$("#available").text("In Stock ("+res+")");
+						}
+					},
+					error : function(){
+						//alert("error");
+					}
+				});
 				var amount = result.price - (result.discount*result.price/100);
 				$("#product_title").text(result.listingName);
 				$("#itemdescription").text(result.description);

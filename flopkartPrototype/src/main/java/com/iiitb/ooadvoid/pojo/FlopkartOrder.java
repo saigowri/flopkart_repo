@@ -1,7 +1,5 @@
 package com.iiitb.ooadvoid.pojo;
 
-import java.util.Date;
-
 public class FlopkartOrder
 {
 	private Integer id;
@@ -13,17 +11,7 @@ public class FlopkartOrder
 	private String orderDate;
 	private Integer totalAmount;
 	private Integer quantity;
-
-	public Integer getQuantity()
-	{
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity)
-	{
-		this.quantity = quantity;
-	}
-
+	
 	public Integer getId()
 	{
 		return id;
@@ -57,6 +45,14 @@ public class FlopkartOrder
 	public void setOrderId(Integer orderId)
 	{
 		this.orderId = orderId;
+	}
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getStatus()

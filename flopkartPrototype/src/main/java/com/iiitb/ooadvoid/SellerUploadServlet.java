@@ -24,7 +24,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.iiitb.ooadvoid.pojo.FlopkartItem;
 import com.iiitb.ooadvoid.pojo.FlopkartListing;
 import com.iiitb.ooadvoid.pojo.FlopkartListingDetails;
 
@@ -60,9 +59,6 @@ public class SellerUploadServlet extends HttpServlet
 	@Override
 	public  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
-		
-		
-
 		try
 		{	
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -81,14 +77,14 @@ public class SellerUploadServlet extends HttpServlet
 					if (name.equals("listingname"))
 					{
 						listingName = (String) item.getString();
-						System.out.println("listingANME"+listingName);
+						System.out.println("listing name "+listingName);
 					}
 					
 
 					else if (name.equals("subcatId"))
 					{
 						sub_cat_content =  Integer.parseInt(item.getString());
-						System.out.println("SUB CAT CONTENT"+sub_cat_content);
+						System.out.println("SUB CAT CONTENT "+sub_cat_content);
 						
 					}
 					else if (name.equals("sellerid"))
@@ -184,11 +180,12 @@ public class SellerUploadServlet extends HttpServlet
 		{
 			e.printStackTrace();
 		}
+		String splid = sellerid+itemid;
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(BASE_URI+PATH_NAME);
 		FlopkartListing item = new FlopkartListing();
 		item.setListingName(listingName);
-		item.setItemId(sellerid+itemid);    // creating unique itemid as (sellerid+itemid)
+		item.setItemId(splid);    // creating unique itemid as (sellerid+itemid)
 		item.setImgUrl(pic_url);
 		item.setSubcategoryId(sub_cat_content);
 		item.setBrand(brand);
@@ -200,46 +197,26 @@ public class SellerUploadServlet extends HttpServlet
 		item.setManufacture_Date(mfd);
 		item.setDescription(desptn);
 		
-		
-		
-	//	target.request(MediaType.APPLICATION_JSON).post(Entity.entity(item, MediaType.APPLICATION_JSON));
-		
-		Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON);
-		Response response1 = invocationBuilder.post(Entity.entity(item, MediaType.APPLICATION_JSON));
+		Invocation.Builder invocationBuilder =
+				target.request(MediaType.APPLICATION_JSON);
+		Response response1 = invocationBuilder.post(Entity.entity(item,
+				MediaType.APPLICATION_JSON));
 
-		
-//	//	System.out.println(response1.readEntity(String.class));
-//	//	FlopkartListing fl = response1.readEntity(FlopkartListing.class);
-//	//	Integer id = fl.getId();
-//	//	System.out.println("Id"+ id);
-//		
-//	//	WebTarget target2 = client.target(BASE_URI+PATH_NAME2);
-//		
-//		FlopkartItem item1 = new FlopkartItem();
-//		item1.setListingid(sellerid+itemid);
-//		item1.setStatus("Available");
-//		for(int i = 1 ; i <= qty; i++) {
-//			System.out.println("qty loop");
-//			System.out.println(i);
-//			target2.request(MediaType.APPLICATION_JSON).post(Entity.entity(item1, MediaType.APPLICATION_JSON));
-//		}
-//		
 		WebTarget target3 = client.target(BASE_URI+PATH_NAME3);
 		FlopkartListingDetails listDet = new FlopkartListingDetails();
 		
-		
-		for(int j = 1 ; j <= cnt; j++) {
-			System.out.println("details loop");
-			System.out.println("id:"+ sellerid+itemid);
-			System.out.println("key:"+ key[j] );
-			System.out.println("val:"+ val[j] );
-			listDet.setListingId(sellerid+itemid);
-			listDet.setAttr_name(key[j]);
-			listDet.setAttr_val(val[j]);
-		
-					
+		if(cnt != 0) {
+			for(int j = 1 ; j <= cnt; j++) {
+				System.out.println("details loop");
+				System.out.println("id:"+ splid);
+				System.out.println("key:"+ key[j] );
+				System.out.println("val:"+ val[j] );
+				listDet.setItemId(splid);
+				listDet.setAttr_name(key[j]);
+				listDet.setAttr_val(val[j]);
 			
-			target3.request(MediaType.APPLICATION_JSON).post(Entity.entity(listDet, MediaType.APPLICATION_JSON));
+				target3.request(MediaType.APPLICATION_JSON).post(Entity.entity(listDet, MediaType.APPLICATION_JSON));
+			}
 		}
 		//response.sendRedirect("sellerItemInsert.jsp?id="+id);
 		response.sendRedirect("sellerhome.jsp?id="+itemid);
