@@ -9,6 +9,7 @@
 <%@include file="metaContent.jsp" %>
 </head>
 <body>
+
 <%@include file="headerSeller.jsp" %>		
 		
 <div class="body-content outer-top-xs">

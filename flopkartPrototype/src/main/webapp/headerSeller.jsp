@@ -43,8 +43,7 @@
       <div class="header-top-inner">
         	<div class="cnt-account">
 				<ul class="list-unstyled">
-						<li><a href="underConstruct.html"><i class="fa fa-bell" ></i> Notification</a></li>
-						<li><a href="sellerHub.jsp" onclick="logout()"><i class="fa fa-check"></i> Logout</a></li>
+<!-- 						<li><a href="underConstruct.html"><i class="fa fa-bell" ></i> Notification</a></li> -->
 					</ul>
 		 </div>
         <!-- /.cnt-account -->
