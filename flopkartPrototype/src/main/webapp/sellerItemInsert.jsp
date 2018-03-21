@@ -340,7 +340,7 @@ function checkCookie()
     var result = getCookie("seller_details");
     if (result != "") 
     {	
-    		var user = JSON.parse(result);
+    	var user = JSON.parse(result);
 		setCookie("seller_details", result, 10);
 		document.getElementById("sellername").innerText = user.firstName;
 		sellerId(user);
