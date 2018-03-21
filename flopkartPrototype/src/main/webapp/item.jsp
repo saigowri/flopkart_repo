@@ -59,62 +59,62 @@
 					     <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
     <div id="gallery" class="product-item-holder size-big single-product-gallery small-gallery">
 
-        <div id="owl-single-product">
-            <div class="single-product-gallery-item" id="slide1">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p9.jpg">
-                    <img class="img-responsive" alt="" width="480px" src="./images/blank.gif" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--         <div id="owl-single-product"> -->
+<!--             <div class="single-product-gallery-item" id="slide1"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p9.jpg"> -->
+<!--                     <img class="img-responsive" alt="" width="480px" src="./images/blank.gif" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide2">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p9.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p9.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide2"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p9.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p9.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide3">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p10.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p10.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide3"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p10.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p10.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide4">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p11.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p11.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide4"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p11.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p11.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide5">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p12.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p12.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide5"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p12.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p12.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide6">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p13.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p13.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide6"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p13.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p13.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide7">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p14.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p14.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide7"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p14.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p14.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide8">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p4.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p4.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide8"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p4.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p4.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-            <div class="single-product-gallery-item" id="slide9">
-                <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p5.jpg">
-                    <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p5.jpg" />
-                </a>
-            </div><!-- /.single-product-gallery-item -->
+<!--             <div class="single-product-gallery-item" id="slide9"> -->
+<!--                 <a data-lightbox="image-1" data-title="Gallery" href="./images/products/p5.jpg"> -->
+<!--                     <img class="img-responsive" alt="" src="./images/blank.gif" data-echo="./images/products/p5.jpg" /> -->
+<!--                 </a> -->
+<!--             </div>/.single-product-gallery-item -->
 
-        </div><!-- /.single-product-slider -->
+<!--         </div>/.single-product-slider -->
 
 
 
@@ -278,7 +278,7 @@ $(document).ready(function(){
 				
 				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
-				"        <a data-lightbox='image-1' data-title='Gallery' href='./images/products/p9.jpg'>"+
+				"        <a data-lightbox='image-1' data-title='Gallery' href='"+imgServerURL+result.imgUrl+"'>"+
 				"            <img class='img-responsive' alt='' width='480px' src='./images/blank.gif' data-echo='"+imgServerURL+result.imgUrl+"' />"+
 				"        </a>"+
 				"    </div>"+
