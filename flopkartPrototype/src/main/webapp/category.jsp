@@ -79,7 +79,6 @@ $(document).ready(function(){
     var ctxPath = "<%=request.getContextPath()%>";
 	headerFunctions(ctxPath);
 	fetchCateg(ctxPath);
-	getTodayDeals(ctxPath);
 })
 
 // Update the count down every 1 second

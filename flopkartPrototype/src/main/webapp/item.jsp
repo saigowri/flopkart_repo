@@ -140,6 +140,7 @@
 										<input type="number" id="listingquant" name="listingquant"
 											hidden="hidden"> <input type="text" id="itemid"
 											name="itemid" hidden="hidden">
+										<input type="number" id="dealid" name="dealid" hidden="hidden">
 									</form>
 								</div>
 							</div>
@@ -189,6 +190,7 @@
 													</div>
 												</div>
 												<div style='font-size: 15px; color: blue' id='discount'></div>
+												<div style='font-size: 20px; color: purple' id='dealname'></div>
 											</div>
 											<div class='col-sm-6'>
 												<div class='favorite-button m-t-10'>
@@ -269,6 +271,7 @@ $(document).ready(function(){
 	var imgServerURL = "<%=ap.getImageServerURL()%>"; 
     var ctxPath = "<%=request.getContextPath()%>";
     var listingid = "<%=request.getParameter("id")%>";
+    getDealDetails(ctxPath);
 	headerFunctions(ctxPath);
 		$.ajax(
 		{
@@ -391,5 +394,40 @@ $("#quant-down").click(function(){
 		$("#quant").val(value);
 	}
 });
+
+function getDealDetails(ctxPath){
+	var listingid = "<%=request.getParameter("id")%>";
+	$.ajax({
+		type : 'GET',
+		async:false,
+		url : ctxPath + "/webapi/listingDeals/listing/"+listingid,
+		dataType : "json", // data type of response
+		success : function(deal){
+			if(deal!=null){
+				$("#dealid").val(deal[0].dealid);
+				getDealName(ctxPath);
+			}
+		},
+		error: function(){
+			//alert("error occurred"); 
+		}
+	});
+}
+
+function getDealName(ctxPath){
+	var dealid = $("#dealid").val();
+	$.ajax({
+		type : 'GET',
+		async:false,
+		url : ctxPath + "/webapi/deals/"+dealid,
+		dataType : "json", // data type of response
+		success : function(deal){
+			$("#dealname").text("SUPER DEAL: "+deal.dealname+"!");
+		},
+		error: function(){
+			//alert("error occurred"); 
+		}
+	});
+}
 </script>
 </html>
