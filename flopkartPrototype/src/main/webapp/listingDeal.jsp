@@ -182,7 +182,7 @@ $("#submitListingDeal").click(function(evt) {
 					data : toJSON(),
 					dataType : "json", // data type of response
 					success : function(){
-						alert("success");
+						//alert("success");
 			    	},
 			    	error:function(err) {
 			        	//alert(JSON.stringify(err));
@@ -213,7 +213,6 @@ function toJSON()
 function validate(){
 	var start = new Date($("#startDate").val());
 	var end = new Date($("#endDate").val());
-	alert(start)
 	var dealid = $("#dealId").val();
 	var listingid = $("#listingId").val();
 	var today = new Date();
