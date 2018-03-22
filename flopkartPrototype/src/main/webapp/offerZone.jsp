@@ -59,12 +59,8 @@
 					<p id="timer" style="position: relative; display: inline-block; margin-right: 8px; 
 					font-size: 16px; color: #7f7f7f;padding-top: 7px;"></p>
 				</div>
-				
-				<div id="test"></div>
-				
-				<div class="category-product">
-					<div id="category-product">
-					</div>
+
+				<div id="category-product" class="category-product">
 				</div> <!-- category-product -->
               </div> <!-- row -->
            </div> <!-- tab-content category-list -->
@@ -260,7 +256,7 @@ function getListingDets(data,ctxPath){
 			         "<div style='font-size: 14px; font-weight: 500; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>"+
 			         "<a href='item.jsp?id="+res.id+"'>"+res.listingName+"</a></div>"+
 			         "<div style='color: #388e3c; padding-top: 8px; white-space: nowrap; overflow: hidden;"+
-			           "text-overflow: ellipsis;' id='"+i+"'>"+"</div></div></div></div></div>"
+			           "text-overflow: ellipsis;' id='demo"+i+"'>"+"</div></div></div></div></div>"
 				$("#category-product").append(valu);
 			},
 			error: function(){
@@ -278,15 +274,12 @@ function getDealDets(data,ctxPath){
 				url : ctxPath + "/webapi/deals/"+data[i].dealid,
 				dataType : "json", // data type of response
 				success : function(resul){
-					document.getElementById(i).innerHTML = resul.dealname+" ";	
+					document.getElementById("demo"+i).innerHTML = resul.dealname+" ";	
 				},
 				error: function(){
 					//alert("error occurred"); 
 				}
 			});
-	}
-	for(var i=0; i<data.length; i++){
-		$("#test").append($("#"+i).text());
 	}
 }
 </script>
