@@ -403,9 +403,13 @@ function getDealDetails(ctxPath){
 		url : ctxPath + "/webapi/listingDeals/listing/"+listingid,
 		dataType : "json", // data type of response
 		success : function(deal){
-			if(deal!=null){
+			var jsonDeal = JSON.stringify(deal);
+			if(jsonDeal !="[]"){
 				$("#dealid").val(deal[0].dealid);
 				getDealName(ctxPath);
+			}
+			else {
+				$("#dealid").val(0);
 			}
 		},
 		error: function(){
@@ -415,19 +419,22 @@ function getDealDetails(ctxPath){
 }
 
 function getDealName(ctxPath){
-	var dealid = $("#dealid").val();
-	$.ajax({
-		type : 'GET',
-		async:false,
-		url : ctxPath + "/webapi/deals/"+dealid,
-		dataType : "json", // data type of response
-		success : function(deal){
-			$("#dealname").text("SUPER DEAL: "+deal.dealname+"!");
-		},
-		error: function(){
-			//alert("error occurred"); 
-		}
-	});
+	//alert($("#dealid").val());
+	if($("#dealid").val()!=""){
+		var dealid = $("#dealid").val();
+		$.ajax({
+			type : 'GET',
+			async:false,
+			url : ctxPath + "/webapi/deals/"+dealid,
+			dataType : "json", // data type of response
+			success : function(deal){
+				$("#dealname").text("SUPER DEAL: "+deal.dealname+"!");
+			},
+			error: function(){
+				//alert("error occurred"); 
+			}
+		});
+	}
 }
 </script>
 </html>
