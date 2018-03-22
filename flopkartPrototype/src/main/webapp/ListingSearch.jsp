@@ -231,7 +231,6 @@ $(document).ready(function()
 	       	$('#listing').append(data);
     		};
     };
-
     function starJson(listing)
     {
     	var review = JSON.stringify({
