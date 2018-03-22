@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.iiitb.ooadvoid.AccessProperties" %>
 <!DOCTYPE html>
-<!-- saved from url=(0060)http://www.themesground.com/flipmart-demo/HTML/category.jsp -->
 <html>
 <head>
 	<%@include file="metaContent.jsp" %>
