@@ -152,7 +152,7 @@ function categorySideMenu(result,ctxPath)
 		var dropdownCont = "dropdownCont(this,'"+ctxPath+"')";
 		var scrt_var = 10; 
 		var onclickContent = "location.href=this.href+'?key='+scrt_var;";
-		var data = " <a href='ListingSearch.jsp' style='color:black' data-hover='dropdown' "+
+		var data = " <a href='category.jsp' style='color:black' data-hover='dropdown' "+
 				 " onmouseover="+dropdownCont+" onmouseout='setTimeout(dropdownBak,2000, this);' "+
 		         "class='category-dropdown dropdown-toggle' data-toggle='dropdown' id='"+
 		         result[i].id+"'>"+	result[i].categoryName +
@@ -202,7 +202,7 @@ function subCategoryDrop(result,categoryid)
 	{	
 		for(var i in result)
 		{
-			data = data + "<li> <a href='ListingSearch.jsp?id="+result[i].id+"'>"
+			data = data + "<li> <a href='category.jsp?id="+result[i].id+"'>"
 					+result[i].subcategoryName+"</a></li>";
 		}
 		$('#ul__'+categoryid).html(data);
@@ -251,7 +251,7 @@ function getListingDets(data,ctxPath){
 				var valu = "";
 				valu = "<div class='col-sm-6 col-md-3 box fadeInUp'><div class='products'>"+
 	    		"<div class='product'><div class='product-image'><div class='image'><a href='item.jsp?id="+res.id+"'>"+
-	    		"<img style='display: block; max-width:250px; max-height:250px; width: auto; height: auto;' src='"+ (imgServerURL+res.imgUrl) +"' alt=''>"+
+	    		"<img style='display: block; object-fit: contain; width: 250px; height: 250px;' src='"+ (imgServerURL+res.imgUrl) +"' alt=''>"+
 	    		"</a></div></div><div class='product-info text-center'>"+
 			         "<div style='font-size: 14px; font-weight: 500; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>"+
 			         "<a href='item.jsp?id="+res.id+"'>"+res.listingName+"</a></div>"+
