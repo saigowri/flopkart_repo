@@ -56,7 +56,7 @@
               <input type="number" style = 'font-size:20px; text-align:center;' value="100000" name="MaxPrice" id="MaxPrice" >
            </div>
            <div id="priceError" style="font-size:15px;color:red">Minimum price cannot be larger than maximum price</div>
-              <button type="button" id="applyFilter" style="margin:auto;display:block;margin-top:40px" onclick="loadListings()"><b>Apply Filter</b></button>
+              <button type="button" class="btn btn-primary" id="applyFilter" style="margin:auto;display:block;margin-top:40px;" onclick="loadListings()"><b>Apply Filter</b></button>
         </section>
         
       </div>

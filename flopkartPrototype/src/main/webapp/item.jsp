@@ -408,6 +408,9 @@ function getDealDetails(ctxPath){
 				$("#dealid").val(deal[0].dealid);
 				getDealName(ctxPath);
 			}
+			else {
+				$("#dealid").val(0);
+			}
 		},
 		error: function(){
 			//alert("error occurred"); 
@@ -416,7 +419,7 @@ function getDealDetails(ctxPath){
 }
 
 function getDealName(ctxPath){
-	alert($("#dealid").val());
+	//alert($("#dealid").val());
 	if($("#dealid").val()!=""){
 		var dealid = $("#dealid").val();
 		$.ajax({
