@@ -307,7 +307,7 @@ $(document).ready(function(){
 				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
 				"        <a data-lightbox='image-1' data-title='Gallery' href='"+imgServerURL+listing_json.imgUrl+"'>"+
-				"            <img class='img-responsive' alt='' width='480px' src='./images/blank.gif' data-echo='"+imgServerURL+listing_json.imgUrl+"' />"+
+				"            <img class='img-responsive' alt='' style='display: block; object-fit: contain; width: 480px; height: 500px;' src='./images/blank.gif' data-echo='"+imgServerURL+listing_json.imgUrl+"' />"+
 				"        </a>"+
 				"    </div>"+
 				"</div>";
