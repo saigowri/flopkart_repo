@@ -21,6 +21,13 @@ public class FlopkartListingDAO extends HibernateDAO<FlopkartListing>
 	{
 		return super.list(new FlopkartListing());
 	}
+	
+	
+	public List<FlopkartListing> getFlopkartListingsSortedByDate(int n)
+	{
+		return super.listSorted(new FlopkartListing(),"manufacture_Date",n);
+	}
+	
 
 	public FlopkartListing getFlopkartListingById(int id)
 	{
