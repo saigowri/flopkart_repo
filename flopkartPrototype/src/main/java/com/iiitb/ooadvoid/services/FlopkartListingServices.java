@@ -40,6 +40,16 @@ public class FlopkartListingServices
 		return listing_details;
 	}
 	
+	@GET
+	@Path("/date/{id}")
+	@Produces("application/json")
+	public List<FlopkartListing> getFlopkartListingByDate(@PathParam("id") int id)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		List<FlopkartListing> listing_details = dao.getFlopkartListingsSortedByDate(id);
+		return listing_details;
+	}
+	
 	
 	@POST
 	@Path("/create")
