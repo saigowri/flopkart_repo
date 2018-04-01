@@ -280,7 +280,7 @@
 									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="myOrder.jsp">
 									<i style="color: #157ed2" class="fas fa-list"></i> Orders</a></li>
 									<li role="presentation" class="divider"></li>
-									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
+									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="wishlist.jsp">
 									<i style="color: #157ed2" class="fas fa-heart"></i> Wishlist</a></li>
 								</ul>
 							</div>
