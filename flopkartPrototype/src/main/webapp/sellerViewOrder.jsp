@@ -51,6 +51,7 @@
 <script src="./bootstrapFiles/js/scripts.js"></script>
 <script src="./customJavascripts/cookies.js"></script>
 <script src="./customJavascripts/cookies.js"></script>
+<script src="./bootstrapFiles/js/sweetalert.min.js"></script>
 <script>
 $(document).ready(function(){
 	
@@ -75,7 +76,7 @@ function checkCookie()
 	
     } 
     else 
-    {	alert("no cookie");
+    {	swal("no cookie");
       	window.location = "sellerHome.jsp";
     		logout();
     }
@@ -85,7 +86,7 @@ function checkCookie()
 	    	var ctxPath = "<%=request.getContextPath()%>";
 	<%--     	var subcategoryid = "<%=request.getParameter("id")%>"; --%>
 	   var sellerid = $("#sellerid").val();
-	  //	alert(sellerid);
+	  //	swal(sellerid);
 	    	
 		        $.ajax(
 		        		{
@@ -95,7 +96,7 @@ function checkCookie()
 		        			dataType : "json", // data type of response
 		        			success : function(result1){
 		        				for (var i in result1){
-		        					//alert("ItemId: "+result1[i].itemId); success
+		        					//swal("ItemId: "+result1[i].itemId); success
 							$.ajax(
 									{	
 		        							type : 'GET',
@@ -109,14 +110,14 @@ function checkCookie()
 		        								}
 		        							},
 		        					    		error:function(err) {
-			        					    		alert(err);
+			        					    		swal(err);
 			        					    	}
 		        						});
 		        				}
 		        	            
 		        	    	},
 		        	    	error:function(){
-		        	    		alert("error occurred");
+		        	    		swal("error occurred");
 		        	    	}
 		        		});
 		}

@@ -481,7 +481,7 @@ $("#dp1").hover(function(){
 
 function diplayUser(user)
 {	
-	//alert(JSON.stringify(user));
+	//swal(JSON.stringify(user));
 	$('#firstName').val(user.firstName);
 	$('#lastName').val(user.lastName);
 	$('#ip_email').val(user.email);
@@ -609,12 +609,12 @@ function changepswd(ctxPath)
 		data : updatepswdJSON(),
 		success : function()
 		{
-			alert("Password SuccessFully Updated");
+			swal("Password SuccessFully Updated");
 			
 		},
 		error : function()
 		{
-				alert("Error");		
+				swal("Error");		
 		}
 		});
 }

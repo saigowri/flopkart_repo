@@ -439,7 +439,7 @@ function paymentOption()
 				$("#arrow").hide();
 			},
 			error: function() {
-				alert(JSON.stringify(err));
+				swal(JSON.stringify(err));
 			}
 	});
 }
@@ -470,7 +470,7 @@ function insertOrder()
 					data : order_formToJSON(),
 					success : paymentOption,
 					error: function(err) {
-						alert(JSON.stringify(err));
+						swal(JSON.stringify(err));
 					}
 			});
 		}
@@ -499,7 +499,7 @@ function order_formToJSON()
 	    "status" : "Ordered",
 	    "totalAmount" : TotalAmount  
 	});
-	//alert(flopkartOrder);
+	//swal(flopkartOrder);
 	return flopkartOrder;
 }
 
@@ -534,7 +534,7 @@ function displayDetails(id)
 				},
 				error: function(err) 
 				{
-					alert(JSON.stringify(err));
+					swal(JSON.stringify(err));
 				}
 		});
 }
@@ -549,7 +549,7 @@ function applyDeal()
 			test_val=true;	
 	}
 	if(test_val)
-		alert("Select appropriate items to avail deal");
+		swal("Select appropriate items to avail deal");
 	else
 	{
 		var total = parseInt($("#total_th").text());
@@ -623,27 +623,27 @@ function fetchDeal()
 													success : function(listing_json)
 													{
 														var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
-														//alert(listing_json.listingName);
+														//swal(listing_json.listingName);
 														var l_data = "<option value='"+JSON.stringify(listing_json)+"'>"+
 															listing_json.listingName+" - "+actualPrice+"</option>";
 														$(".itemlist").append(l_data);
 													},
 													error: function(err) 
 													{
-														alert(JSON.stringify(err));
+														swal(JSON.stringify(err));
 													}
 											});
 									},
 									error: function(err) 
 									{
-										alert(JSON.stringify(err));
+										swal(JSON.stringify(err));
 									}
 							});
 					}
 				},
 				error: function(err) 
 				{
-					alert(JSON.stringify(err));
+					swal(JSON.stringify(err));
 				}
 			});
 		}
@@ -723,7 +723,7 @@ function proceedToPay()
 							},
 							error: function(err) 
 							{
-								alert(JSON.stringify(err));
+								swal(JSON.stringify(err));
 							}
 					});
 				}
@@ -761,7 +761,7 @@ function deductBalance(amt,id)
 			},
 			error: function(err) 
 			{
-				alert(JSON.stringify(err));
+				swal(JSON.stringify(err));
 			}
 	});
 }
@@ -790,13 +790,13 @@ function addBalanceFlopkart(amt)
 							},
 							error: function(err) 
 							{
-								alert(JSON.stringify(err));
+								swal(JSON.stringify(err));
 							}
 					});
 				},
 				error: function(err) 
 				{
-					alert(JSON.stringify(err));
+					swal(JSON.stringify(err));
 				}
 		});
 }
@@ -821,17 +821,17 @@ function updateOrder(status)
 							}),
 							success : function(data)
 							{
-								alert(data[0].id);
+								swal(data[0].id);
 							},
 							error: function(err) 
 							{
-								alert(JSON.stringify(err));
+								swal(JSON.stringify(err));
 							}
 					});
 			},
 			error: function(err) 
 			{
-				alert(JSON.stringify(err));
+				swal(JSON.stringify(err));
 			}
 	});
 }

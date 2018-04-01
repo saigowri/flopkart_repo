@@ -198,9 +198,6 @@
 														data-placement='right' title='Wishlist' href='#'> <i
 														class='fa fa-heart'></i>
 													</a> <a class='btn btn-primary' data-toggle='tooltip'
-														data-placement='right' title='Add to Compare' href='#'>
-														<i class='fa fa-signal'></i>
-													</a> <a class='btn btn-primary' data-toggle='tooltip'
 														data-placement='right' title='E-mail' href='#'> <i
 														class='fa fa-envelope'></i>
 													</a>
@@ -320,7 +317,7 @@ $(document).ready(function(){
 					dataType : "json", // data type of response
 					success : function(seller_json)
 					{
-						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+seller_json.firstName+" "+seller_json.lastName+"</span>";
+						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+seller_json.firstName+" "+seller_json.lastName+" (id: "+listing_json.sellerid+" )</span>";
 						$("#product-info").append(sellerData);
 						//alert(seller_json.firstName+" "+seller_json.lastName);
 						$("#sellername").val(seller_json.firstName+" "+seller_json.lastName);
@@ -441,7 +438,7 @@ function checkLogin()
 {
 	if(getCookie("user_details")=="") 
 	{
-		alert("Please Login");
+		swal("Please Login");
 		return false;
 	}
 }
