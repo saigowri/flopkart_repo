@@ -86,7 +86,7 @@ $(document).ready(function(){
 var x = setInterval(function() {
 	
 	//Set the date we're counting down to
-	var countDownDate = new Date("Mar 24, 2018 23:59:59").getTime();
+	var countDownDate = new Date("Apr 30, 2018 23:59:59").getTime();
 	
     // Get todays date and time
     var now = new Date().getTime();
@@ -249,7 +249,7 @@ function getListingDets(data,ctxPath){
 			dataType : "json", // data type of response
 			success : function(res){
 				var valu = "";
-				valu = "<div class='col-sm-6 col-md-3 box fadeInUp'><div class='products'>"+
+				valu = "<div class='col-sm-6 col-md-4 box fadeInUp'><div class='products'>"+
 	    		"<div class='product'><div class='product-image'><div class='image'><a href='item.jsp?id="+res.id+"'>"+
 	    		"<img style='display: block; object-fit: contain; width: 250px; height: 250px;' src='"+ (imgServerURL+res.imgUrl) +"' alt=''>"+
 	    		"</a></div></div><div class='product-info text-center'>"+
