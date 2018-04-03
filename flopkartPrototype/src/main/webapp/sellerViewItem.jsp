@@ -49,6 +49,7 @@
 <script src="./bootstrapFiles/js/scripts.js"></script>
 <script src="./customJavascripts/cookies.js"></script>
 <script src="./customJavascripts/cookies.js"></script>
+<script src="./bootstrapFiles/js/sweetalert.min.js"></script>
 <script>
 $(document).ready(function(){
 	
@@ -72,7 +73,7 @@ function checkCookie()
 	
     } 
     else 
-    {	alert("Login failed. Try again.");
+    {	swal("Login failed. Try again.");
       	window.location = "sellerHub.jsp";
     		logout();
     }
@@ -103,14 +104,14 @@ function checkCookie()
 		        							dataType : "json", // data type of response
 		        							success : displayListings,
 		        					    	error:function(err) {
-		        					    		alert(err);
+		        					    		swal(err);
 		        					    	}
 		        						});
 		        				}
 		        	            
 		        	    	},
 		        	    	error:function(){
-		        	    		alert("error occurred");
+		        	    		swal("error occurred");
 		        	        	
 		        	    	}
 		        		});
@@ -119,7 +120,7 @@ function checkCookie()
 		function getDeals(result){
 			var ctxPath = "<%=request.getContextPath()%>";
 			
-           	alert(data1)
+           	swal(data1)
            	return data1;
 		}
 		
@@ -158,7 +159,7 @@ function checkCookie()
            			}
            		},
            		error : function() {
-           			alert("error")
+           			swal("error")
            		}
            	 });
 		}

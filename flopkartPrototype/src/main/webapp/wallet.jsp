@@ -4,13 +4,14 @@
 <!-- Use this page as a template to create new pages-->
 <head>
 	<%@include file="metaContent.jsp" %>
-	<title>Welcome to Flopkart</title>
+	<title>My Flopkart Wallet</title>
 </head>
 <body>
      
     <%@include file="header.jsp" %>
      
-  	<div>Your Content</div>
+  	<div class="col-md-12" style="margin:10px"> 
+	</div>
   	
      
     <%@include file="footer.jsp" %>
