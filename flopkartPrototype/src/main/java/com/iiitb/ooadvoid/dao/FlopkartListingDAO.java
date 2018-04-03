@@ -21,12 +21,23 @@ public class FlopkartListingDAO extends HibernateDAO<FlopkartListing>
 	{
 		return super.list(new FlopkartListing());
 	}
+	
+	
+	public List<FlopkartListing> getFlopkartListingsSortedByDate(int n)
+	{
+		return super.listSorted(new FlopkartListing(),"manufacture_Date",n);
+	}
+	
 
 	public FlopkartListing getFlopkartListingById(int id)
 	{
 		return super.find(new FlopkartListing(),id);
 	}
 
+	public FlopkartListing getFlopkartListingByItemId(String id) {
+		return super.find(entity_name,"itemId",id);
+	}
+	
   /*  public List<FlopkartListing> getFlopkartListingByCategoty(FlopkartListing item)
 	{
 		return super.findAll(entity_name,"category", item.getSubcategoryId());

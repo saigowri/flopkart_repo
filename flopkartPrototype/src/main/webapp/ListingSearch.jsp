@@ -121,7 +121,7 @@ $(document).ready(function()
 	        	            $('#Filter').append(data);
 	        	    	},
 	        	    	error:function(){
-	        	    		alert("error occurred");
+	        	    		swal("error occurred");
 	        	        	
 	        	    	}
 	        		});
@@ -151,14 +151,14 @@ $(document).ready(function()
 	        							dataType : "json", // data type of response
 	        							success : displayListings,
 	        					    	error:function(err) {
-	        					    		alert(err);
+	        					    		swal(err);
 	        					    	}
 	        						});
 	        				}
 	        	            
 	        	    	},
 	        	    	error:function(){
-	        	    		alert("error occurred");
+	        	    		swal("error occurred");
 	        	        	
 	        	    	}
 	        		});
@@ -208,7 +208,7 @@ $(document).ready(function()
         				load(result);
         	    	},
         	    	error:function(){
-        	    		alert("error occurred");
+        	    		swal("error occurred");
         	        	
         	    	}
         		});
@@ -234,7 +234,7 @@ $(document).ready(function()
         				load(result);
         	    	},
         	    	error:function(){
-        	    		alert("error occurred");
+        	    		swal("error occurred");
         	        	
         	    	}
         		});
@@ -321,17 +321,16 @@ $(document).ready(function()
 						listing["rating"]=rating;
 			    	},
 			    	error:function() {
-			    		alert(error);
+			    		swal(error);
 			    	}
 				});
-    		alert(JSON.stringify(listing));
-    		alert(JSON.stringify(listing));
+    		swal(JSON.stringify(listing));
     }
     
     $("#applyFilter").click(function(){
     	var maxVal = parseInt($("#MaxPrice").val());
     	var minVal = parseInt($("#MinPrice").val());
-    	//alert(minVal + " " + maxVal)
+    	//swal(minVal + " " + maxVal)
     	if(minVal>maxVal){
     		$("#MinPrice").val("0");
     		$("#priceError").show();

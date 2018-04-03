@@ -52,7 +52,7 @@ function myorder(ctxPath)
            	$('#orders').append(data); 
     	},
     	error:function() {
-        	alert("error occurred");
+        	swal("error occurred");
     	}
 	});
 }
