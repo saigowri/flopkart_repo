@@ -1,9 +1,11 @@
 
 package com.iiitb.ooadvoid.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.iiitb.ooadvoid.pojo.FlopkartListing;
+import com.iiitb.ooadvoid.pojo.FlopkartSubcategory;
 
 public class FlopkartListingDAO extends HibernateDAO<FlopkartListing>
 {
@@ -43,6 +45,19 @@ public class FlopkartListingDAO extends HibernateDAO<FlopkartListing>
 	 public List<FlopkartListing> getFlopkartListingBysubcategoryId(Integer id)
 	{
 		return super.findAll(entity_name,"subcategoryId", id);
+	}
+	
+	public List<FlopkartListing> getFlopkartListingBycategoryId(Integer id)
+	{
+		 List<FlopkartListing> items = null;
+		 List<FlopkartListing> all_items = new ArrayList<FlopkartListing>();
+		 List<FlopkartSubcategory> subcategories = new FlopkartSubcategoryDAO().getFlopkartSubcategoryBycategoryId(id);
+		 for(FlopkartSubcategory subcategory : subcategories)
+		 {
+			 items = super.findAll(entity_name,"subcategoryId", subcategory.getId());
+			 all_items.addAll(items);
+		 }
+		return all_items;
 	}
 	 
 	 public List<FlopkartListing> getFlopkartListingBysellerId(Integer id)

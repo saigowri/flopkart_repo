@@ -264,7 +264,7 @@ function signup(ctxPath) {
 		data : signupformToJSON(),
 		success : renderDetails(fname,ctxPath),
 		error : function(){
-			//alert("NOOOO");
+			//swal("NOOOO");
 		}
 	});
 }
@@ -289,9 +289,10 @@ function renderDetails(fname,ctxpath){
 					console.log("err in renderDeails");
 					}
 	});
-	
-	console.log("after ajax call");
-	window.location.href="sellerHub.jsp";
+
+	setTimeout(function(){
+		window.location.href="sellerHub.jsp";
+	}, 2000);
 }
 </script>
 </html>
