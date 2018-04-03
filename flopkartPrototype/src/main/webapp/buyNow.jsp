@@ -23,7 +23,6 @@
 	<div class="container">
 		<div class="checkout-box ">
 			<div class="row" style="margin-top:20px">
-<!-- 			<form action="Payment.jsp"> -->
 				<div class="col-md-8">
 					<div class="panel-group checkout-steps" id="accordion">
 						<!-- checkout-step-01  -->
@@ -280,7 +279,6 @@
 				</div>
 				
 				
-<!-- 				</form> -->
 				<div class="col-md-4">
 					<!-- checkout-progress-sidebar -->
 					<div class="checkout-progress-sidebar ">

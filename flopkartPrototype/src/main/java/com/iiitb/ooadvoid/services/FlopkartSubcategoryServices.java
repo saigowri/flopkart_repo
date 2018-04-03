@@ -85,7 +85,7 @@ public class FlopkartSubcategoryServices
 //	}	
 
 	
-	@POST
+	@GET
 	@Path("/category/{id}")
 	@Consumes("application/json")
 	@Produces("application/json")
