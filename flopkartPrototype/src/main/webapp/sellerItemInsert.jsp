@@ -64,6 +64,8 @@
 		              <input type="text" class="form-control input-lg"  name="itemid" id="itemid" required>
 		          </div>
 		         </div> 
+		         <input type="text" id="catname1" name="catname1" hidden="hidden"/>
+		         <input type="text" id="subcatname1" name="subcatname1" hidden="hidden"/>
         		</div>
       	</div>
   
@@ -268,6 +270,7 @@
 	           		<input type="submit" style="font-size:18px;color: white;
    							padding: 8px 20px; background-color: #4CAF50;" value="DONE"/>
 					<input type="text" id="sellerid" name="sellerid" hidden="hidden"/>
+	        			<input type="text" id="selleremail" name="selleremail" hidden="hidden"/>
 	        
 	            </div>   
         		</div>
@@ -315,7 +318,15 @@ $(document).ready(function(){
 
 		    $('#sub-cat-content').show();
 		    $('#sub-cat-head').show();
+		    var catId1 = getSelectedText('catId');
+		    $('#catname1').val(catId1);
 		    DispSubCat();
+		 });
+		
+		$("#sub-cat-content").on("change",function() {
+		    
+		    var subcatId1 = getSelectedText('subcatId');
+		    $('#subcatname1').val(subcatId1);
 		 });
 
 		$('#ADD').click(function(){
@@ -363,6 +374,7 @@ function checkCookie()
 		setCookie("seller_details", result, 30);
 		document.getElementById("sellername").innerText = user.firstName;
 		sellerId(user);
+		$('#selleremail').val(user.email);
 	
     } 
     else 
@@ -387,7 +399,14 @@ function resetCookie()
     	logout();
     }
 }
+function getSelectedText(elementId) {
+    var elt = document.getElementById(elementId);
 
+    if (elt.selectedIndex == -1)
+        return null;
+
+    return elt.options[elt.selectedIndex].text;
+}
 
 function sellerId(user)
 {	
