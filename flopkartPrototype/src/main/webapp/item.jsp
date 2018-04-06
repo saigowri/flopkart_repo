@@ -127,15 +127,15 @@
 								<!-- /.single-product-gallery -->
 								<div class="buynowdiv">
 									<form action="buyNow.jsp">
-										<button id="buynow" onclick="return checkLogin()" class="buynow">Buy Now</button>
-										<a href="#" onmouseover="style='color:white'" class="addtocart" id="addtocart">Add to cart </a>
+										<button id="buynow" onclick="return addToCart()" class="buynow">Buy Now</button>
+										<button id="buynow_incart" class="buynow">Buy Now</button>
+										<a href="#" onclick="return addToCart()" onmouseover="style='color:white'" class="addtocart" id="addtocart">Add to cart </a>
 										<a href="cart.jsp" onmouseover="style='color:white'" class="addtocart" id="gotocart">Go to cart </a>
 										<input type="text" name="listingid"
 											value='<%=request.getParameter("id")%>' hidden="hidden">
 										<input type="number" id="quant" name="quant" hidden="hidden">
 										<input type="text" name="listingname" id="listingname"
-											hidden="hidden"> <input type="number"
-											id="listingamount" name="listingamount" hidden="hidden">
+											hidden="hidden"> 
 										<input type="number" id="listingdiscount"
 											name="listingdiscount" hidden="hidden"> <input
 											type="text" id="sellername" name="sellername" hidden="hidden">
@@ -263,7 +263,8 @@
 <%@include file="footer.jsp"%>
 
 <script>
-$(document).ready(function(){
+$(document).ready(function()
+{
 	$("#quantity").val("1");
 	$("#quant").val("1");
 	<%AccessProperties ap = new AccessProperties();%>
@@ -297,12 +298,16 @@ $(document).ready(function(){
 				$("#discountedprice").text(amount);
 				$("#price-strike").text(listing_json.price);
 				$("#discount").text("Discount: "+listing_json.discount+"%");
-				$("#listingamount").val(listing_json.price);
 				$("#listingquant").val(listing_json.quantity);
 				$("#listingdiscount").val(listing_json.discount);
 				$("#listingname").val(listing_json.listingName);
 				$("#itemid").val(listing_json.itemId);
-				
+				$("#gotocart").hide();	
+				$("#buynow_incart").hide();	
+				if(getCookie("user_details")!="") 
+				{
+					getCartId(ctxPath, listing_json.itemId);
+				}			
 				var img_data = "<div id='owl-single-product'>"+
 				"    <div class='single-product-gallery-item' id='slide1'>"+
 				"        <a data-lightbox='image-1' data-title='Gallery' href='"+imgServerURL+listing_json.imgUrl+"'>"+
@@ -356,8 +361,42 @@ $(document).ready(function(){
 	    	}
 		});
 		
-		$("#gotocart").hide();
 });
+
+
+function getCartId(ctxPath, itemId) 
+{
+	var listingid = "<%=request.getParameter("id")%>";
+	$.ajax(
+		{
+			type : 'POST',
+			contentType : 'application/json',
+			url : ctxPath + "/webapi/cart/user/listingid/"+listingid,
+			data : itemToJSON(itemId, 0),
+			success : function(cart,status,code) 
+			{
+				//nocontent
+				cartCheck(code.status);
+			},
+			error: function() 
+			{
+				swal(JSON.stringify(err));
+			}
+	});
+}
+
+
+function cartCheck(status) 
+{
+	if(JSON.stringify(status)!="204")
+	{
+		$("#addtocart").hide();
+		$("#gotocart").show();
+		$("#buynow_incart").show();
+		$("#buynow").hide();
+		
+	}
+}
 
 $("#quant-up").click(function(){
 	$("#quantwarning").hide();
@@ -459,7 +498,7 @@ function itemToJSON()
 	    "itemId" : itemId,
 	    "quantity" : quant
 	});
-	alert(flopkartCart);
+//	alert(flopkartCart);
 	return flopkartCart;
 }
 
@@ -469,11 +508,12 @@ function successCart(){
 	$("#gotocart").show();
 }
 
-$("#addtocart").click(function(){
+function addToCart()
+{
 	if(getCookie("user_details")=="") 
 	{
 		swal("Please Login");
-		return;
+		return false;
 	}
 	var ctxPath = "<%=request.getContextPath()%>";
 	$.ajax(
@@ -487,6 +527,6 @@ $("#addtocart").click(function(){
 				swal(JSON.stringify(err));
 			}
 	});
-});
+}
 </script>
 </html>
