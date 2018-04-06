@@ -333,7 +333,7 @@ input:valid ~ .floating-label {
 				<div class="shopping-cart-table">
 	<div class="table-responsive">
 		<input type="number" id="noOfItems" hidden="hidden">
-		<table class="table">
+		<table class="table" id="myTable">
 			<thead>
 				<tr>
 					<th class="cart-quantity item" colspan="7" style="text-align: left; font-size: 16px" id="cartQuant"></th>
@@ -456,12 +456,16 @@ function quantup(i){
 	var origprice = parseFloat(document.getElementById("originalPrice"+i).innerHTML);
 	var totalprice = parseFloat($("#totalPrice").text());
 	var actualtotal = parseFloat($("#actualcarttotal").val()); 
-	alert($("#actualcarttotal").val())
 	totalprice -= price;
 	actualtotal -= origprice;
-	
+	var maxquantity = parseFloat(document.getElementById("maxquantity"+i).value); 
 	value++;
+	if(value>maxquantity){
+		swal("Sorry, you cannot buy more than "+maxquantity+" of this item!");
+		return;
+	}
 	document.getElementById("quantity"+i).value = value;
+	updateQuant(i);
 	onecost *= value;
 	oneactual *= value;
 	document.getElementById("price"+i).innerHTML = onecost;
@@ -469,11 +473,11 @@ function quantup(i){
 	totalprice += onecost;
 	actualtotal += oneactual;
 	var savings = actualtotal - totalprice;
-	$("#totalPrice").text(totalprice.toFixed(1));
-	$("#actualcarttotal").val(actualtotal.toFixed(1));
+	$("#totalPrice").text(totalprice.toFixed(2));
+	$("#actualcarttotal").val(actualtotal.toFixed(2));
 	textChange();
 	$("#amount-payable").text(parseFloat($("#totalPrice").text())+parseFloat($("#deliveryCharges").text()));
-	$("#savings").text(savings.toFixed(1));
+	$("#savings").text(savings.toFixed(2));
 }
 
 function quantdown(i){
@@ -489,6 +493,7 @@ function quantdown(i){
 	if(value>1){
 		value--;
 		document.getElementById("quantity"+i).value = value;
+		updateQuant(i);
 		onecost *= value;
 		oneactual *= value;
 		document.getElementById("price"+i).innerHTML = onecost;
@@ -496,11 +501,11 @@ function quantdown(i){
 		totalprice += onecost;
 		actualtotal += oneactual;
 		var savings = actualtotal - totalprice;
-		$("#totalPrice").text(totalprice.toFixed(1));
-		$("#actualcarttotal").val(actualtotal.toFixed(1));
+		$("#totalPrice").text(totalprice.toFixed(2));
+		$("#actualcarttotal").val(actualtotal.toFixed(2));
 		textChange();
 		$("#amount-payable").text(parseFloat($("#totalPrice").text())+parseFloat($("#deliveryCharges").text()));
-		$("#savings").text(savings.toFixed(1));
+		$("#savings").text(savings.toFixed(2));
 	}
 }
 
@@ -729,7 +734,7 @@ function renderCartItem(cartItems){
 			            data += "<td class='cart-image'>"+
 						"<a class='entry-thumbnail' href='item.jsp?id="+item.id+"'>"+
 					    "<img src='"+imgServerURL+item.imgUrl+"' alt=''>"+
-					"</a>"+
+					"</a>"+"<input type='number' id='cartId"+i+"' hidden='hidden' value='"+cartItems[i].id+"'>"+
 				"</td>"+
 				"<td class='cart-product-name-info'>"+
 					"<h4 class='cart-product-description'>"+"<a href='item.jsp?id="+item.id+"'>"+item.listingName+"</a>"+"</h4>"+
@@ -751,12 +756,13 @@ function renderCartItem(cartItems){
 			                  "<div id='quant-up"+i+"' class='arrow plus gradient' onclick='quantup("+i+")'>"+"<span >"+"<i class='icon fa fa-sort-asc'>"+"</i>"+"</span>"+"</div>"+
 			                  "<div id='quant-down"+i+"' class='arrow minus gradient' onclick='quantdown("+i+")'>"+"<span >"+"<i class='icon fa fa-sort-desc'>"+"</i>"+"</span>"+"</div>"+
 			                "</div>"+
-			                "<input type='number' id='quantity"+i+"' min='1' value='"+cartItems[i].quantity+"'>"+
+			                "<input type='number' id='quantity"+i+"' min='1' value='"+cartItems[i].quantity+"' onchange='updateQuant("+i+")'>"+
 		              "</div>"+
+		              "<input type='number' id='maxquantity"+i+"' hidden='hidden' value='"+item.quantity+"'>"+
 	            "</td>"+
 				"<td class='cart-product-grand-total'>"+"<input type='number' id='oneCost"+i+"' hidden='hidden' value='"+amount+"'>"+"<input type='number' id='oneActualCost"+i+"' hidden='hidden' value='"+item.price+"'>"+
 				"<span>"+"<i class='fa fa-rupee-sign'>"+"</i>"+ "<span id='price"+i+"'>"+amount+ "</span>"+  "</span>"+"<span>"+"&nbsp; <del>"+  "<i class='fa fa-rupee-sign'>"+"</i>"+ "<span id='originalPrice"+i+"'>"+item.price+"</span>"+"</del>"+"</span>"+"</td>"
-			    data += "<td><a style='color:black' href='#'><i class='fa fa-trash'></i></a></td>"        
+			    data += "<td><a style='color:black' href='#' onclick='deleteRow(this,"+i+")'><i class='fa fa-trash'></i></a></td>"        
 				data += "</tr>";
 			            $("#cartQuant").text("MY CART ("+(parseFloat(i)+1)+")");
 			            $("#noOfItems").val(parseFloat(i)+1);
@@ -783,12 +789,14 @@ function calculate(){
 		actualprice = parseFloat(document.getElementById("originalPrice"+i).innerHTML);
 		quant = parseFloat(document.getElementById("quantity"+i).value);
 		price = price * quant;
+		document.getElementById("price"+i).innerHTML = price;
 		actualprice = actualprice * quant;
+		document.getElementById("originalPrice"+i).innerHTML = actualprice;
 		total += price;
 		actualtotal += actualprice;
 		savings += actualprice - price;
 	}
-	$("#totalPrice").text(total.toFixed(1));
+	$("#totalPrice").text(total.toFixed(2));
 	var value = $("#totalPrice").text();
     if(parseFloat(value)>=1000) {
     	$("#deliveryCharges").text("0");
@@ -796,9 +804,69 @@ function calculate(){
     else if(parseFloat(value)<1000) {
     	$("#deliveryCharges").text("50");
     }
-    $("#actualcarttotal").val(actualtotal.toFixed(1));
+    $("#actualcarttotal").val(actualtotal.toFixed(2));
 	$("#amount-payable").text(parseFloat($("#totalPrice").text())+parseFloat($("#deliveryCharges").text()));
 	$("#savings").text(savings);
+}
+
+function deleteRow(r, i) {
+	var ctxPath = "<%=request.getContextPath()%>";
+	swal({
+		  title: "Are you sure?",
+		  text: "This item will be removed from the cart",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			var rowno = r.parentNode.parentNode.rowIndex;
+			var id = document.getElementById("cartId"+i).value;
+			document.getElementById("myTable").deleteRow(rowno);
+			$.ajax(
+					{
+						type : 'DELETE',
+						contentType : 'application/json',
+						url : ctxPath + "/webapi/cart/delete/"+id,
+						success : function(){
+							swal("Item removed!", {
+							      icon: "success",
+							});
+						},
+						error : function(){
+							swal("Could not remove from cart");
+						}
+				});
+		  } else {
+		    swal("Your item is safe");
+		  }
+	   });
+}
+
+function updateQuant(i){
+	var id = document.getElementById("cartId"+i).value
+	var quant = parseFloat(document.getElementById("quantity"+i).value);
+	var maxquant = parseFloat(document.getElementById("maxquantity"+i).value); 
+	if(quant>maxquant){
+		swal("Sorry, you cannot buy more than "+maxquant+" of this item!");
+		document.getElementById("quantity"+i).value = 1;
+		return;
+	}
+	var ctxPath = "<%=request.getContextPath()%>";
+	$.ajax({
+		type : 'PUT',
+		contentType : 'application/json',
+		url :  ctxPath +"/webapi/cart/update/"+id,
+		data : JSON.stringify({ "quantity": quant }),
+		success : function()
+		{
+			//do nothing
+		},
+		error : function()
+		{
+			swal("Error");		
+		}
+	});
 }
 </script>
 </body>
