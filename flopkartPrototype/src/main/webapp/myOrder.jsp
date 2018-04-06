@@ -231,7 +231,7 @@ function reduceFromFlopkart(amt)
 						{
 							type : 'GET',
 							contentType : 'application/json',
-							url : ctxPath + "/webapi/accounts/accountno/"+sellerid,
+							url : ctxPath + "/webapi/accounts/user/"+sellerid,
 							success : function(res)
 							{
 								var amount = amt + res.balance ;

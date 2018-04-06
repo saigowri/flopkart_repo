@@ -2,6 +2,9 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
+<% int quant = Integer.parseInt(request.getParameter("quant"));%>
+<% int dealid = Integer.parseInt(request.getParameter("dealid"));%>
+<% int new_quant = Integer.parseInt(request.getParameter("listingquant")) - quant;%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,34 +139,22 @@
 								  <div class="table-responsive">          
 									  <table id="order_table" class="table">
 									  <thead>
-								    	<tr>
+								    	<tr align="center">
 								    		<th>Item Name</th>
 								    		<th>Quantity</th>
 								    		<th>Marked Price</th>
 								    		<th>Discount</th>
 								    		<th>Discounted Price</th>
+								    		<th style="color:green">Seller Name</th>
 										</tr>
 								    	</thead>
 								    	<tbody id="orderSummary_body">
 								    	<tr>
-								    	<% int quant = Integer.parseInt(request.getParameter("quant"));%>
-								    	<% int listingamount = Integer.parseInt(request.getParameter("listingamount"));%>
-	
-								    	<% int discount=Integer.parseInt(request.getParameter("listingdiscount"));%>
-								    	<% int price=listingamount - (discount*listingamount/100); %>
-								    		<td><%=request.getParameter("listingname") %></td>
-								    		<td><%=quant%></td>
-								    		<td><%=listingamount%></td>
-								    		<td><%=discount%> %</td>
-								    		<td class="classPrice"><%=price%></td>
-								    	</tr>
-								    	<tr>
 								    		<th colspan="3">Total Price:</th>
-								    		<% int total = quant * price;%>
-											<td id="calc"></td>
+								    		<td id="calc"></td>
 	
 	
-								    		<th id="total_th"><%=total %></th>
+								    		<th id="total_th">0</th>
 								    	</tr>
 								    	</tbody>
 								    </table>
@@ -173,16 +164,10 @@
 		                            <div id="dealDetails_div" class="row">
 									</div>
 		                            <div class="col-md-3 pull-right">
-		                              <% int dealid = Integer.parseInt(request.getParameter("dealid"));%>
 								    	<input type="button" id="applydeal" 
 								    	class="btn btn-warning" onclick="applyDeal()" value="Apply Deal" >
 									</div>
-								</div>
-							   <div class="seller-info row" id="seller-info" style='color:green; 
-							   font-size:15px; margin:10px 10px 10px 10px'>
-							   <% String sname=request.getParameter("sellername");%>
-							   Seller Name: <%=sname %>
-							   </div>                             
+								</div>                        
 							   
 	                              <div class="row">
 		                            <div class="col-md-3">
@@ -192,7 +177,7 @@
 		                            <div class="col-md-3 pull-right" style="margin-top:5px;color:red" 
 		                              id="orderWarning" hidden="hidden">Please Confirm the order</div>	
 		                          </div>
-							<label hidden="hidden" id="itemid"><%=request.getParameter("itemid") %></label>
+							<label hidden="hidden" id="itemid"></label>
                             </div>					
 							</div>
 							<!-- panel-body  -->
@@ -308,12 +293,133 @@
      
 </body>
 <script>
-$(document).ready(function(){
+$(document).ready(function()
+{
     var ctxPath = "<%=request.getContextPath()%>";
+    var listingid = "<%=request.getParameter("listingid")%>";
 	headerFunctions(ctxPath);
 	show_Welcome();
+	if(listingid!="0")
+	{
+		displayOrderSummary(listingid);
+	}
+	else
+	{
+		fetchCart();
+	}
 	fetchDeal();
 })
+
+
+function fetchCart()
+{
+	var ctxPath = "<%=request.getContextPath()%>";
+	var user = getCookie("user_details");
+	user = JSON.parse(user);
+	var userId = user.id;
+	$.ajax(
+	{
+				type : 'GET',
+				contentType : 'application/json',
+				url : ctxPath + "/webapi/cart/user/"+userId,
+				success : function(cart_json)
+				{
+					swal(JSON.stringify(cart_json));
+					for(i = 0; i< cart_json.length; i++)
+					{
+						swal(cart_json[i].id);
+					}
+				},
+				error: function(err) 
+				{
+					swal(JSON.stringify(err));
+				}
+		});
+}
+
+function displayOrderSummary(id)
+{
+	var ctxPath = "<%=request.getContextPath()%>";
+	var total = parseInt($("#total_th").text());
+	var user = getCookie("user_details");
+	user = JSON.parse(user);
+	var userId = user.id;
+	$.ajax(
+			{
+				type : 'GET',
+				contentType : 'application/json',
+				url : ctxPath + "/webapi/listings/"+id,
+				success : function(listing_json)
+				{
+					var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
+					$.ajax(
+							{
+								type : 'GET',
+								contentType : 'application/json',
+								url : ctxPath + "/webapi/users/"+listing_json.sellerid,
+								success : function(seller_json)
+								{
+									var table_data =  	"<tr style='text-align: left'>"+
+							    	"	<td class='pull-right'>"+listing_json.listingName+"</td>"+
+							    	"	<td id='quant'></td>"+
+							    	"	<td>"+listing_json.price+"</td>"+
+							    	"	<td>"+listing_json.discount+"%</td>"+
+							    	"	<td class='classPrice'>"+actualPrice+"</td>"+
+							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
+							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
+							    	"</tr>";
+							    	$("#orderSummary_body").prepend(table_data);
+							    	total = total + actualPrice;
+							    	$("#total_th").html(total);
+							    	$("#itemid").html(listing_json.itemId);
+								},
+								error: function(err) 
+								{
+									swal(JSON.stringify(err));
+								}
+						});
+					$.ajax(
+							{
+								type : 'POST',
+								contentType : 'application/json',
+								url : ctxPath + "/webapi/cart/user/listingid/"+id,
+								data: JSON.stringify(
+										{
+											"userId":userId
+										}
+										);
+								success : function(cart_json)
+								{
+									var table_data =  	"<tr style='text-align: left'>"+
+							    	"	<td class='pull-right'>"+listing_json.listingName+"</td>"+
+							    	"	<td id='quant'></td>"+
+							    	"	<td>"+listing_json.price+"</td>"+
+							    	"	<td>"+listing_json.discount+"%</td>"+
+							    	"	<td class='classPrice'>"+actualPrice+"</td>"+
+							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
+							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
+							    	"</tr>";
+							    	$("#orderSummary_body").prepend(table_data);
+							    	total = total + (actualPrice*cart_json.quantity);
+							    	$("#quant").html(cart_json.quantity);
+							    	$("#total_th").html(total);
+							    	$("#itemid").html(listing_json.itemId);
+								},
+								error: function(err) 
+								{
+									swal(JSON.stringify(err));
+								}
+						});
+				},
+				error: function(err) 
+				{
+					swal(JSON.stringify(err));
+				}
+		});
+	alert("something");
+}
+
+
 
 function buynowvalidation() 
 {
@@ -418,7 +524,7 @@ function paymentOption()
 	hideOrder();
 	showPayment();
 	var ctxPath = "<%=request.getContextPath()%>";
-	<%int new_quant = Integer.parseInt(request.getParameter("listingquant")) - Integer.parseInt(request.getParameter("quant"));%>
+	
 	$.ajax(
 		{
 			type : 'PUT',
@@ -480,7 +586,7 @@ function order_formToJSON()
 {
 	var shipAddress = $("#shipAddress").val().trim();	
 	<%Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-	  int orderid = (int)timeStamp.getTime();%>
+	  int orderid = Math.abs((int)timeStamp.getTime());%>
     var user = getCookie("user_details");
 	var userid = JSON.parse(user).id;
 	var TotalAmount = parseInt($("#total_th").text());
@@ -488,7 +594,7 @@ function order_formToJSON()
 	Date myDate = new Date();
 	String today = new SimpleDateFormat("yyyy-MM-dd").format(myDate);%>
 	var flopkartOrder = JSON.stringify({
-        "itemId": "<%=request.getParameter("itemid") %>",
+        "itemId": $("#itemid").text(),
         "orderId": <%=orderid%>,
 	    "shippingAddress" : shipAddress,
 	    "userId" : userid,
@@ -756,6 +862,7 @@ function deductBalance(amt,id)
 				$("#arrow").show();
 				$("#paymentStatus").show();
  				updateOrder("Money Paid");
+ 				swal("Order placed successfully");
 			},
 			error: function(err) 
 			{
