@@ -369,8 +369,6 @@ function displayOrderSummary(id)
 							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
 							    	"</tr>";
 							    	$("#orderSummary_body").prepend(table_data);
-							    	total = total + actualPrice;
-							    	$("#total_th").html(total);
 							    	$("#itemid").html(listing_json.itemId);
 								},
 								error: function(err) 
@@ -387,23 +385,12 @@ function displayOrderSummary(id)
 										{
 											"userId":userId
 										}
-										);
+										),
 								success : function(cart_json)
 								{
-									var table_data =  	"<tr style='text-align: left'>"+
-							    	"	<td class='pull-right'>"+listing_json.listingName+"</td>"+
-							    	"	<td id='quant'></td>"+
-							    	"	<td>"+listing_json.price+"</td>"+
-							    	"	<td>"+listing_json.discount+"%</td>"+
-							    	"	<td class='classPrice'>"+actualPrice+"</td>"+
-							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
-							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
-							    	"</tr>";
-							    	$("#orderSummary_body").prepend(table_data);
 							    	total = total + (actualPrice*cart_json.quantity);
 							    	$("#quant").html(cart_json.quantity);
 							    	$("#total_th").html(total);
-							    	$("#itemid").html(listing_json.itemId);
 								},
 								error: function(err) 
 								{
