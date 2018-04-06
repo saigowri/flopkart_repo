@@ -210,9 +210,10 @@ function sellerLogin(){
 				return false;
 			}
 			setCookie("seller_details",JSON.stringify(result),30);
-			
-// 			swal(getCookie("seller_details"));
-			window.location.href = "sellerhome.jsp";
+
+			setTimeout(function(){
+				window.location.href = "sellerhome.jsp";
+			}, 2000);
 			return true;
 		},
 		error : err

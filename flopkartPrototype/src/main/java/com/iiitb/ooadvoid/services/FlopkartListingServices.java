@@ -127,6 +127,21 @@ public class FlopkartListingServices
 			return listing_details;
 	}
 	
+
+	
+	@GET
+	@Path("/category/{id}")
+	@Produces("application/json")
+	public List<FlopkartListing> getListingByCategoryId(@PathParam("id") int id)
+	{
+		FlopkartListingDAO dao = new FlopkartListingDAO();
+		List<FlopkartListing> listing_details = dao.getFlopkartListingBycategoryId(id);
+		if(listing_details==null)
+			return null;
+		else
+			return listing_details;
+	}
+	
 	@GET
 	@Path("/seller/{id}")
 	@Produces("application/json")

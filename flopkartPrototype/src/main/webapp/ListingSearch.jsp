@@ -71,6 +71,9 @@
               <li onclick="SortDescending('ActualPrice')">
               	<a data-transition-type="backSlide" href="#laptop" data-toggle="tab">Price -- High to low</a>
               </li>
+              <li onclick="SortDescending('manufacture_Date')">
+              	<a data-transition-type="backSlide" href="#laptop" data-toggle="tab">Recent</a>
+              </li>
             </ul>
             <!-- /.nav-tabs --> 
           </div>
@@ -181,10 +184,38 @@ $(document).ready(function()
         "<i class='fa fa-inr' style='font-size:15px'></i>"+result.ActualPrice+"</div>"+
        	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
        	"<i class='fa fa-inr' style='font-size:10px'></i>"+result.price+"</del>"+
+       	"("+result.manufacture_Date+")"+
        	"</div>";
        	$('#listing').append(data);
 	}
-	
+
+    function load(result)
+    {
+	    <% AccessProperties ap1 = new AccessProperties(); %>
+	    var imgServerURL = "<%=ap1.getImageServerURL() %>"; 
+    	for (i=0;i<result.length;i++)
+    		{
+    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
+    		result[i]["ActualPrice"]=ActualPrice;
+    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val()||($("#brand_Filter option:selected").text() != result[i].brand && $("#brand_Filter").val()!=0)||($("#colour_Filter option:selected").text() != result[i].colour && $("#colour_Filter").val()!=0))
+    			continue;
+    		var data="";
+    		data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result[i].id+
+    		"'> <div style='width: 250px;height: 250px;'>"+
+    		"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
+    		imgServerURL+result[i].imgUrl+"' alt=''></div>"+
+            "<div style = 'font-size:15px; text-align:center'>"+result[i].listingName+"</div>"+
+            "<div style = 'font-size:10px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+
+            result[i].discount+"% off</div><br/>"+
+            "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
+            "<i class='fa fa-inr' style='font-size:15px'></i>"+result[i].ActualPrice+"</div>"+
+           	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
+           	"<i class='fa fa-inr' style='font-size:10px'></i>"+result[i].price+"</del>"+
+           	"("+result[i].manufacture_Date+")"+
+           	"</div>";
+	       	$('#listing').append(data);
+    		}
+    }
 	
 	
     function SortAsscending(prop)
@@ -239,32 +270,7 @@ $(document).ready(function()
         	    	}
         		});
     }
-    function load(result)
-    {
-	    <% AccessProperties ap1 = new AccessProperties(); %>
-	    var imgServerURL = "<%=ap1.getImageServerURL() %>"; 
-    	for (i=0;i<result.length;i++)
-    		{
-    		var ActualPrice = Math.round(result[i].price - (result[i].discount/100)*result[i].price);
-    		result[i]["ActualPrice"]=ActualPrice;
-    		if(ActualPrice <  $("#MinPrice").val() || ActualPrice > $("#MaxPrice").val()||($("#brand_Filter option:selected").text() != result[i].brand && $("#brand_Filter").val()!=0)||($("#colour_Filter option:selected").text() != result[i].colour && $("#colour_Filter").val()!=0))
-    			continue;
-    		var data="";
-    		data+="<div class='col-sm-4, box'><a href='item.jsp?id="+result[i].id+
-    		"'> <div style='width: 250px;height: 250px;'>"+
-    		"<img class='listingImage' style='max-height:100%; max-width:100%;' src='"+
-    		imgServerURL+result[i].imgUrl+"' alt=''></div>"+
-            "<div style = 'font-size:15px; text-align:center'>"+result[i].listingName+"</div>"+
-            "<div style = 'font-size:10px; text-align:left; font-family:verdana;display:inline-block;margin-right:10px;color:green'>"+
-            result[i].discount+"% off</div><br/>"+
-            "<div style = 'font-size:15px; position:left; font-family:verdana;margin-right:10px;display:inline-block'>"+
-            "<i class='fa fa-inr' style='font-size:15px'></i>"+result[i].ActualPrice+"</div>"+
-           	"<del style = 'font-size:10px; text-align:left; font-family:verdana; color:grey;margin-right:10px;display:inline-block'>"+
-           	"<i class='fa fa-inr' style='font-size:10px'></i>"+result[i].price+"</del>"+
-           	"</div>";
-	       	$('#listing').append(data);
-    		};
-    };
+    
     function starJson(listing)
     {
     	var review = JSON.stringify({
