@@ -289,10 +289,17 @@ function highlight(el,val,itemId,userId)
 	var ctxPath = "<%=request.getContextPath()%>";
 	var parent = $(el).attr("id");
 	var stars =$("#"+parent).find("span");
+	var color;
+	if(val<=2)
+		color = "red";
+	else if(val<=4)
+		color = "orange";
+	else
+		color = "green";
 	var i;
 	for(i=0;i<val;i++)
 		{
-		   $(stars[i]).css('color','orange');
+		   $(stars[i]).css('color',color);
 		}
 	for(;i<5;i++)
 	{
@@ -443,12 +450,19 @@ function check(ctxPath,listingid,userId,el)
 
 function renderstars(el,val)
 {
+	var color;
+	if(val<=2)
+		color = "red";
+	else if(val<=4)
+		color = "orange";
+	else
+		color = "green";
 	var parent = $(el).attr("id");
 	var stars =$("#"+parent).find("span");
 	var i;
 	for(i=0;i<val;i++)
 		{
-		   $(stars[i]).css('color','orange');
+		   $(stars[i]).css('color',color);
 		}
 	for(;i<5;i++)
 	{

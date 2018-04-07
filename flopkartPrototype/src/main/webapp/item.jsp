@@ -150,18 +150,18 @@
 							<div class='col-sm-6 col-md-7 product-info-block'>
 								<div class="product-info" id="product-info">
 									<h1 class='name' id='product_title'></h1>
-									<div class='rating-reviews m-t-20'>
-										<div class='row'>
-											<div class='col-sm-3'>
-												<div class='rating rateit-small'></div>
-											</div>
-											<div class='col-sm-8'>
-												<div class='reviews'>
-													<a href='#' class='lnk'></a>
-												</div>
-											</div>
-										</div>
-									</div>
+						            <div id="seller_rating" style="font-size:20px">
+						                 <span>Seller Rating:</span>
+						                 <span class='fa fa-star'></span>
+						                 <span class='fa fa-star'></span>
+						                 <span class='fa fa-star'></span>
+						                 <span class='fa fa-star'></span>
+						                 <span class='fa fa-star'></span>
+						            </div>
+						            <div id="seller_rating_unavailable" style="font-size:20px" hidden>
+						                 <span>Seller Rating:</span>
+                                         <span style="color:red">Seller currently does not have enough ratings</span> 
+						            </div>
 									<div class='stock-container info-container m-t-10'>
 										<div class='row'>
 											<div class='col-sm-2'>
@@ -317,6 +317,7 @@ $(document).ready(function()
 				"</div>";
 				$("#gallery").html(img_data);
 // 				alert(JSON.stringify(listing_json));
+                rating(ctxPath,listing_json.sellerid);
 				$.ajax({
 					type : 'GET',
 					contentType : 'application/json',
@@ -527,6 +528,53 @@ function addToCart()
 				swal(JSON.stringify(err));
 			}
 	});
+}
+
+function rating(ctxPath,id)
+{
+	$.ajax({
+		type : 'GET',
+		url : ctxPath + "/webapi/reviews/seller/"+id,
+		dataType : "json", // data type of response
+		success : function(results){
+			if(results.length==0)
+				{
+				   $("#seller_rating").hide()
+				   $("#seller_rating_unavailable").show()
+				}
+			else
+				{
+				   var sum=0;
+				   for(var i in results)
+					   sum=sum+results[i].stars
+				   var val = Math.round(sum/results.length);
+				   renderSeller(val);
+				}
+		},
+		error: function(){
+			//alert("error occurred"); 
+		}
+	});
+}
+function renderSeller(val)
+{
+	var color;
+	if(val<=2)
+		color = "red";
+	else if(val<=4)
+		color = "orange";
+	else
+		color = "green";
+	var stars =$("#seller_rating").find("span");
+	var i;
+	for(i=1;i<val+1;i++)
+		{
+		   $(stars[i]).css('color',color);
+		}
+	for(;i<6;i++)
+	{
+	   $(stars[i]).css('color','black');
+	}
 }
 </script>
 </html>
