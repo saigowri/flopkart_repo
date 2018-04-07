@@ -31,7 +31,7 @@
 						<div class="shopping-cart-btn">
 							<span class="">
 								<button type="button" id="continueShopping_btn"
-									class="btn btn-primary"
+									class="btn btn-primary" onclick="window.location.href='index.jsp'"
 									style="text-align: center; margin-left: 180px; background-color: #fff; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .1); color: #212121; font-size: 15px; font-weight: 800; height: 50px; width: 300px;">
 									<i class="fa fa-chevron-left"></i> CONTINUE SHOPPING
 								</button>
@@ -318,6 +318,10 @@ function deleteRow(r, i) {
 							swal("Item removed!", {
 							      icon: "success",
 							});
+							var num = $("#noOfItems").val();
+							num--;
+							$("#noOfItems").val(num);
+							$("#cartQuant").text("MY CART ("+num+")");
 						},
 						error : function(){
 							swal("Could not remove from cart");

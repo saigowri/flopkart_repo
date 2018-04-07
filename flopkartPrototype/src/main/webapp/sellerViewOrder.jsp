@@ -79,7 +79,7 @@ function checkCookie()
     } 
     else 
     {	swal("no cookie");
-      	window.location = "sellerHome.jsp";
+      	window.location = "sellerHub.jsp";
     		logout();
     }
 }
