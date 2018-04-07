@@ -179,7 +179,7 @@ function checkCookie()
 			//alert($('#img1').val());
 			data+="<div class = 'row' style = 'margin:5px 25px;border-style: groove;border-width: 7px;font-size:15px; text-align:left; padding-left:70px;' >"+
 			"<div class='col-sm-4' style = 'font-size:15px; text-align:left; padding-top: 40px ; padding-left:0px;'>"+
-				" <div style='width: 260px;height: 250px;'>"+
+				" <div style='height: 250px;'>"+
 					"<img class='listingImage' id ="+ result[0].itemId +" style='max-height:100%; max-width:100%;' src='"+xxx+"' alt=''>"+
 				"</div>"+
 			"</div>"+
