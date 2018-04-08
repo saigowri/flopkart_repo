@@ -403,7 +403,7 @@ function displayOrderSummary(id)
 					swal(JSON.stringify(err));
 				}
 		});
-	alert("something");
+	
 }
 
 
@@ -850,6 +850,7 @@ function deductBalance(amt,id)
 				$("#paymentStatus").show();
  				updateOrder("Money Paid");
  				swal("Order placed successfully");
+ 				addwalletmoney();
 			},
 			error: function(err) 
 			{
@@ -857,7 +858,76 @@ function deductBalance(amt,id)
 			}
 	});
 }
-
+function addwalletmoney()
+{	
+	var listingid = "<%=request.getParameter("listingid")%>";
+	var ctxPath = "<%=request.getContextPath()%>";
+	var amt = parseInt($("#total_th").text());				// to get amount paid
+	amt = amt /2;
+	
+	$.ajax(
+			{	
+				type : 'GET',
+				contentType : 'application/json',
+				url : ctxPath + "/webapi/listingDeals/listing/"+listingid,		//chk tht item is in a deal
+				success : function(res)
+				{	
+					if (res != [ ] )
+					{	var deal_id = res[0].dealid;	
+						$.ajax({   
+									type : 'GET',
+									contentType : 'application/json',
+									url : ctxPath + "/webapi/deals/"+deal_id,		//gets dealid and  go to dealtable
+									success : function(data)
+									{	
+										if(data.dealname =="50% Cash Back On Wallet")	//chks wheather its the 50% cashbak deal
+										{
+											var ctxPath = "<%=request.getContextPath()%>";
+										    var user = getCookie("user_details");
+										    if (user != "") 
+										    { 
+												var user_json = JSON.parse(user);
+												var amount = parseInt(amt) + parseInt(user_json.wallet);
+												
+												$.ajax(
+													{
+														type : 'PUT',
+														contentType : 'application/json',
+														url : ctxPath + "/webapi/users/update/"+user_json.id,
+														data : JSON.stringify({
+															"wallet": amount
+														}),
+														success : function(data)
+														{	alert("succss");
+															user_json.wallet = amount;
+															user = JSON.stringify(user_json);
+															setCookie("user_details", user, 30);
+															swal("Succesfully added Money to  your wallet")
+														},
+														error: function(err) 
+														{
+															swal(JSON.stringify(err));
+														}
+												});
+										    }
+									    }
+									},
+									error: function(err) 
+									{
+										swal(JSON.stringify(err));
+									}
+							});
+						
+					}
+					else
+						swal("no such itemid");
+				},
+				error: function(err) 
+				{
+					swal(JSON.stringify(err));
+				}
+		});
+}
 function addBalanceFlopkart(amt)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
