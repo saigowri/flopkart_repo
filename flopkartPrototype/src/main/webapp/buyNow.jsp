@@ -427,7 +427,7 @@ function displayOrderSummary(id)
 							    	"<input type='number' id='listingid0' value='"+listing_json.id+"' hidden='hidden'>"+
 							    	"<input type='text' id='itemid0' value='"+listing_json.itemId+"' hidden='hidden'>"+
 							    	"<input type='number' id='new_quant0' value='"+listing_json.quantity+"' hidden='hidden'>"+
-							    	"<input type='number' id='cartid' hidden='hidden'>"+
+							    	"<input type='number' id='cartid0' hidden='hidden'>"+
 							    	"</td>"+
 							    	"	<td id='quant0'></td>"+
 							    	"	<td>"+listing_json.price+"</td>"+
@@ -456,12 +456,12 @@ function displayOrderSummary(id)
 								success : function(cart_json)
 								{
 									var curr_quant = $("#new_quant0").val();
-							    	alert("Curr quant: "+ $("#new_quant0").val());
+							    	//alert("Curr quant: "+ $("#new_quant0").val());
 							    	$("#quant0").html(cart_json.quantity);
 							    	total = total + (actualPrice*cart_json.quantity);
 							    	$("#new_quant0").val(curr_quant - cart_json.quantity);
-							    	alert("New quant: "+ $("#new_quant0").val());
-							    	$("#cartid").val(cart_json.id)
+							    	//alert("New quant: "+ $("#new_quant0").val());
+							    	$("#cartid0").val(cart_json.id)
 							    	$("#total_th").html(total);
 								},
 								error: function(err) 
@@ -916,7 +916,7 @@ function proceedToPay()
 												       	{
 												    		var listingid = $("#listingid"+rowid).val();
 												    		var new_quant = $("#new_quant"+rowid).val();
-											 				updateOrder("Failed",listingid,parseInt(rowid));
+											 				updateOrder("Failed",parseInt(rowid));
 												        }
 												 });
 									}
@@ -966,13 +966,13 @@ function deductBalance(amt,id)
 					       	{
 					    		var listingid = $("#listingid"+rowid).val();
 					    		var new_quant = $("#new_quant"+rowid).val();
-				 				updateOrder("Money Paid",listingid,parseInt(rowid));
+				 				updateOrder("Money Paid",parseInt(rowid));
+				 				deleteFromCart(parseInt(rowid));
 					        }
 					 });
 				swal("Order placed successfully!", {
 				      icon: "success",
 				});
- 				deleteFromCart();
  				addwalletmoney();
  				
 			},
@@ -984,10 +984,10 @@ function deductBalance(amt,id)
 }
 
 
-function deleteFromCart()
+function deleteFromCart(rowid)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
-	var cartid = $("#cartid").val();
+	var cartid = $("#cartid"+rowid).val();
 	$.ajax(
 			{
 				type : 'DELETE',
@@ -1107,17 +1107,18 @@ function addBalanceFlopkart(amt)
 		});
 }
 
-function updateOrder(status)
+function updateOrder(status,rowid)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
+	var orderid = <%=orderid%> + rowid;
 	$.ajax(
 		{
 			type : 'GET',
 			contentType : 'application/json',
-			url : ctxPath + "/webapi/orders/order/"+"<%=orderid%>",
+			url : ctxPath + "/webapi/orders/order/"+orderid,
 			success : function(data)
 			{
-				swal(data[0].itemId);
+				//swal(data[0].itemId);
 				$.ajax(
 						{
 							type : 'PUT',
