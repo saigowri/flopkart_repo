@@ -19,6 +19,32 @@
 .box:hover {
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
+.buynow {
+	background: #fb641b;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+	border: none;
+	color: #fff;
+	width: 10%;
+	padding: 18px 8px;
+	border-radius: 2px;
+ 	float: right; 
+/* 	margin-left: 30px; */
+}
+.addtocart {
+	background: #ff9f00;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+	border: none;
+	color: #fff;
+	text-align: center;
+	display: inline-block;
+	width: 10%;
+	padding: 18px 8px;
+	border-radius: 2px;
+	margin-left: 500px;
+}
+.addtocart:hover {
+	color : white;
+}
 </style>
 <body>
     <%@include file="header.jsp" %>
@@ -67,20 +93,17 @@
           <div id="myTabContent" class="tab-content category-list">
 			<div class="row">
 				<div style="border-bottom: 1px solid rgba(0, 0, 0, .1);">
-					<h2 style="margin-top:0; margin-left: 20px; font-size: 22px; font-family: Roboto, Arial, sans-serif; line-height: 32px; display: inline-block; font-weight: 500;">Deals</h2>
+					<h2 style="margin-top:0; margin-left: 20px; font-size: 25px; font-family: Roboto, Arial, sans-serif; line-height: 32px; display: inline-block; font-weight: 500; font-style: italic; color: blue" id="dealname"></h2>
 					<img src="./images/offerZone/timer.svg" height="24" width="24" style="position: relative; display: inline-block; margin-right: 8px; 
 					margin-left: 20px;"/>
 					<p id="timer" style="position: relative; display: inline-block; margin-right: 8px; 
-					font-size: 16px; color: #7f7f7f;padding-top: 7px;"></p>
+					font-size: 16px; padding-top: 7px;"></p>
 				</div>
 				
-				<input type="number" id="dealid" hidden="hidden">
-				<input type="number" id="listingid" hidden="hidden">
-				<input type="text" id="listingname" hidden="hidden">
-				<input type="text" id="imgurl" hidden="hidden">
+				<div class="alert alert-danger" id="dealdesc"></div>
 				
-				<div id="category-product" class="category-product">
-				</div> <!-- category-product -->
+				<div id="deal-product" class="deal-product">
+				</div> <!-- deal-product -->
               </div> <!-- row -->
            </div> <!-- tab-content category-list -->
           </div>  <!-- search-result-container -->
@@ -99,10 +122,9 @@ $(document).ready(function(){
 	headerFunctions(ctxPath);
 	fetchCateg(ctxPath);
 	fetchDeals(ctxPath);
-	getListingDet(ctxPath);
-})
+});
 
-// Update the count down every 1 second
+//Update the count down every 1 second
 var x = setInterval(function() {
 	
 	//Set the date we're counting down to
@@ -242,17 +264,34 @@ function dropdownBak(obj)
 // 	$('#ul_'+obj.id).empty();
 }
 
-function getListingDet(ctxPath){
-	var subcatid = <%=request.getParameter("id")%>;
+function getDealDet(ctxPath,mod,col){
+	var dealid = <%=request.getParameter("id")%>;
 	$.ajax({
 		type : 'GET',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/listings/subcategory/"+subcatid,
+		url : ctxPath + "/webapi/listingDeals/deal/"+dealid,
 		dataType : "json", // data type of response
-		success : function(listings)
+		success : function(listingDeal)
 			{
-				for(var i=0;i<listings.length;i++){
-					getDealDet(listings[i],ctxPath);
+				var num = listingDeal.length/mod;
+				for(var i=0; i<num; i++){
+					var data = "<div class='panel panel-default' style='border-width:2px; border-color: black'><div class='panel-heading' id='panelHead"+i+"'>COMBO OFFER "+(parseInt(i)+1)+"</div>"+
+					  "<div class='panel-body'>"+
+					  "<div id='panelBody"+i+"'></div>"+
+					  "</div>"+
+					  "<div class='panel-footer'>"+
+					  "<div style='font-size: 20px;color: red; display:inline-flex'> OFFER PRICE: &nbsp; <i class='fa fa-rupee-sign'></i> &nbsp; ( <div id='total"+i+"'></div>"+"  &nbsp; -  &nbsp; "+"<div id='minimum"+i+"'></div> )</div>"+
+					  "<button id='buynow' onclick='return addToCart()' class='buynow'>Buy Now</button>"+
+					  "<a href='#' onclick='return addToCart()' class='addtocart' id='addtocart'>Add to cart</a>"+
+					  "</div>"+
+					  "</div>";
+					$("#deal-product").append(data);
+				}
+				var j = -1;
+				for(var i=0;i<listingDeal.length;i++){
+					if(i%mod==0)
+						j = parseInt(j)+1;
+					loadInfo(listingDeal[i].listingid, j,col);
 				}
 			},
 	   	error: function() 
@@ -262,31 +301,28 @@ function getListingDet(ctxPath){
 	});
 }
 
-function getDealDet(listings,ctxPath){
-	var listingid = listings.id;
-	var listingname = listings.listingName;
-	var imgurl = listings.imgUrl;
+function loadInfo(listingId,i,j){
+	var ctxPath = "<%=request.getContextPath()%>";
 	<% AccessProperties ap = new AccessProperties(); %>
     var imgServerURL = "<%=ap.getImageServerURL() %>"; 
 	$.ajax({
 		type : 'GET',
 		contentType : 'application/json',
-		url : ctxPath + "/webapi/listingDeals/listing/"+listingid,
+		url : ctxPath + "/webapi/listings/"+listingId,
 		dataType : "json", // data type of response
-		success : function(listingDeal)
+		success : function(listingJson)
 			{
-				if(listingDeal!=null){
-					var data = "<div class='col-sm-6 col-md-3 box fadeInUp'><div class='products'>"+
-		    		"<div class='product'><div class='product-image'><div class='image'><a href='item.jsp?id="+listingDeal[0].listingid+"'>"+
-		    		"<img style='display: block; object-fit: contain; width: 250px; height: 250px;' src='"+ (imgServerURL+imgurl) +"' alt=''>"+
-		    		"</a></div></div><div class='product-info text-center'>"+
-				         "<div style='font-size: 14px; font-weight: 500; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>"+
-				         "<a href='item.jsp?id="+listingDeal[0].listingid+"'>"+listingname+"</a></div>"+
-				         "<div style='color: #388e3c; padding-top: 8px; white-space: nowrap; overflow: hidden;"+
-				           "text-overflow: ellipsis;' id='demo"+listingDeal[0].listingid+"'>"+"</div></div></div></div></div>"
-				    $("#category-product").append(data);
-					loadItems(listingDeal[0].listingid,listingDeal[0].dealid,ctxPath);
-				}
+				var name = listingJson.listingName;
+	    		var price = listingJson.price - (listingJson.discount*listingJson.price/100);
+				var data = "<div class='col-sm-"+j+"'><div class='product'><div class='product-image'><div class='image'><a href='item.jsp?id="+listingJson.id+"'>"+
+	    		"<img style='display: block; object-fit: contain; width: 250px; height: 250px;' src='"+ (imgServerURL+listingJson.imgUrl) +"' alt=''>"+
+	    		"</a></div></div>"+
+	    		"<div style='margin-left:20px;font-size: 14px; font-weight: 500; margin-top: 15px;'>"+
+		         "<a href='item.jsp?id="+listingJson.id+"'>"+name+"</a></div>"+
+		        "<div style='margin-left:20px;font-size: 14px; font-weight: 500;'><i class='fa fa-rupee-sign'></i>"+price+"</div>"+
+	    		"</div></div>"
+	    		minSumCalc(price,i);
+	    		$("#panelBody"+i).append(data);
 			},
 	   	error: function() 
 	   		{
@@ -295,22 +331,22 @@ function getDealDet(listings,ctxPath){
 	});
 }
 
-function loadItems(listid,dealid,ctxPath){
-	//alert(dealid)
-	$.ajax({
-		type : 'GET',
-		contentType : 'application/json',
-		url : ctxPath + "/webapi/deals/"+dealid,
-		dataType : "json", // data type of response
-		success : function(deal)
-			{
-				document.getElementById("demo"+listid).innerHTML = deal.dealname+" ";	
-			},
-	   	error: function() 
-	   		{
-	       	//alert("error occurred");
-	   		}
-	});
+function minSumCalc(price, i){
+	if($("#minimum"+i).text()==""){
+		$("#minimum"+i).text(price);
+	}
+	if(price < parseFloat($("#minimum"+i).text())){
+		$("#minimum"+i).text(price);
+    }
+	var sum;
+	if($("#total"+i).text()==""){
+		sum = 0.0;
+	}
+	else {
+		sum = parseFloat($("#total"+i).text());
+	}
+	sum += price;
+	$("#total"+i).text(sum);
 }
 
 function fetchDeals(ctxPath) 
@@ -327,10 +363,28 @@ function fetchDeals(ctxPath)
 				var data = "";
 				for(var i in deals)
 				{
+					if(deals[i].dealname === "50% off" || deals[i].dealname === "15% cashback")
+						continue;
 					data += "<li><a href='offerZoneDeal.jsp?id="+deals[i].id+"'>"
 							+deals[i].dealname+"</a></li>";
+					var dealid = <%=request.getParameter("id")%>;
+					if(dealid == deals[i].id){
+						$("#dealname").text(deals[i].dealname);
+						$("#dealdesc").text(deals[i].description);
+					}
 				}
 				$("#sidebarDeal").html(data);
+
+				if($("#dealname").text()==="Buy 3 Get 1"){
+					getDealDet(ctxPath,4,3);
+				}
+				else if($("#dealname").text()==="Buy 2 Get 1"){
+					getDealDet(ctxPath,3,4);
+				}
+				else if($("#dealname").text()==="Buy 1 Get 1"){
+					getDealDet(ctxPath,2,6);
+				} 
+				
 			},
     	error:
     		function() 
