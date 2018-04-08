@@ -280,11 +280,13 @@ $(document).ready(function()
 			url : ctxPath + "/webapi/listings/"+listingid,
 			dataType : "json", // data type of response
 			success : function(listing_json){
-				if(listing_json.quantity==0)
+				if(listing_json.quantity<1)
 				{
 					$("#available").text("Out of Stock");
 					$("#buynow").hide();
 					$("#addtocart").hide();
+					$("#gotocart").hide();	
+					$("#buynow_incart").hide();	
 					
 				}
 				else
@@ -325,7 +327,7 @@ $(document).ready(function()
 					dataType : "json", // data type of response
 					success : function(seller_json)
 					{
-						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+seller_json.firstName+" "+seller_json.lastName+" (id: "+listing_json.sellerid+" )</span>";
+						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+seller_json.firstName+" "+seller_json.lastName+" (id: "+seller_json.email+" )</span>";
 						$("#product-info").append(sellerData);
 						//alert(seller_json.firstName+" "+seller_json.lastName);
 						$("#sellername").val(seller_json.firstName+" "+seller_json.lastName);
@@ -389,7 +391,7 @@ function getCartId(ctxPath, itemId)
 
 function cartCheck(status) 
 {
-	if(JSON.stringify(status)!="204")
+	if(JSON.stringify(status)!="204" && ($("#available").text()!="Out of Stock"))
 	{
 		$("#addtocart").hide();
 		$("#gotocart").show();

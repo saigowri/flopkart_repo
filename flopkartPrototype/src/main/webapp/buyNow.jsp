@@ -2,9 +2,8 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
-<% int quant = Integer.parseInt(request.getParameter("quant"));%>
+<% int quant = Integer.parseInt(request.getParameter("dealid"));%>
 <% int dealid = Integer.parseInt(request.getParameter("dealid"));%>
-<% int new_quant = Integer.parseInt(request.getParameter("listingquant")) - quant;%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +21,6 @@
     <%@include file="header.jsp" %>
      
    <div class="body-content">
-     
 	<div class="container">
 		<div class="checkout-box ">
 			<div class="row" style="margin-top:20px">
@@ -172,12 +170,11 @@
 	                              <div class="row">
 		                            <div class="col-md-3">
 		                              <button id="confirmOrder" type="button" class="btn btn-success" style='margin:0px 10px 10px 10px'
-		                              onclick="return insertOrder()">Confirm Order</button>
+		                              onclick="return insertOrders()">Confirm Order</button>
 									</div>
 		                            <div class="col-md-3 pull-right" style="margin-top:5px;color:red" 
 		                              id="orderWarning" hidden="hidden">Please Confirm the order</div>	
 		                          </div>
-							<label hidden="hidden" id="itemid"></label>
                             </div>					
 							</div>
 							<!-- panel-body  -->
@@ -275,6 +272,10 @@
 							    <div class="">
 									<ul id="orderProgress" class="nav nav-checkout-progress list-unstyled">
 										<li><a href="#" class="progress-class"><b>Order In Progress</b></a></li>
+										<li hidden="hidden" id="arrow_order" ><a href="#" class="progress-class glyphicon glyphicon-arrow-down"></a></li>
+										<li hidden="hidden" id="orderStatus"><a href="#" class="orderPlaced progress-class"><b>Order Placed</b></a></li>
+										<li><a href="#" hidden="hidden" id="arrow" class="progress-class glyphicon glyphicon-arrow-down"></a></li>
+										<li><a href="#" hidden="hidden" id="payStatus" class="progress-class"><b id="paymentStatus"></b></a></li>
 									</ul>		
 								</div>
 							</div>
@@ -295,9 +296,17 @@
 <script>
 $(document).ready(function()
 {
+	$("#arrow_order").hide();
+	$("#orderStatus").hide();
     var ctxPath = "<%=request.getContextPath()%>";
     var listingid = "<%=request.getParameter("listingid")%>";
-	headerFunctions(ctxPath);
+	headerFunctions(ctxPath);    
+	var user = getCookie("user_details");
+    if (user == "") 
+    {
+    	swal("Please Login");
+    	document.location.href="index.jsp";
+    }
 	show_Welcome();
 	if(listingid!="0")
 	{
@@ -324,11 +333,64 @@ function fetchCart()
 				url : ctxPath + "/webapi/cart/user/"+userId,
 				success : function(cart_json)
 				{
-					swal(JSON.stringify(cart_json));
 					for(i = 0; i< cart_json.length; i++)
 					{
-						swal(cart_json[i].id);
+						dispOrders(cart_json[i],i);
 					}
+				},
+				error: function(err) 
+				{
+					swal(JSON.stringify(err));
+				}
+		});
+}
+
+function dispOrders(cart_json,i)
+{
+	var ctxPath = "<%=request.getContextPath()%>";
+	var user = getCookie("user_details");
+	user = JSON.parse(user);
+	var userId = user.id;
+	$.ajax(
+			{
+				type : 'GET',
+				contentType : 'application/json',
+				url : ctxPath + "/webapi/listings/item/"+cart_json.itemId,
+				success : function(listing_json)
+				{
+					var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
+					$.ajax(
+							{
+								type : 'GET',
+								contentType : 'application/json',
+								url : ctxPath + "/webapi/users/"+listing_json.sellerid,
+								success : function(seller_json)
+								{
+									var total = parseInt($("#total_th").text());
+									var newQuant = listing_json.quantity - cart_json.quantity;
+									var table_data =  	"<tr id='"+i+"' style='text-align: left'>"+
+							    	"	<td>"+listing_json.listingName+
+							    	"<input type='number' id='listingid"+i+"' value='"+listing_json.id+"' hidden='hidden'>"+
+							    	"<input type='text' id='itemid"+i+"' value='"+listing_json.itemId+"' hidden='hidden'>"+
+							    	"<input type='number' id='new_quant"+i+"' value='"+newQuant+"' hidden='hidden'>"+
+							    	"<input type='number' id='cartid"+i+"'  value='"+cart_json.id+"' hidden='hidden'>"+
+							    	"</td>"+
+							    	"	<td id='quant"+i+"'>"+cart_json.quantity+"</td>"+
+							    	"	<td>"+listing_json.price+"</td>"+
+							    	"	<td>"+listing_json.discount+"%</td>"+
+							    	"	<td id='price"+i+"' class='classPrice'>"+actualPrice+"</td>"+
+							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
+							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
+							    	"</tr>";
+							    	$("#orderSummary_body").prepend(table_data);
+							    	total = total + (actualPrice*cart_json.quantity);
+							    	$("#total_th").html(total);
+								},
+								error: function(err) 
+								{
+									swal(JSON.stringify(err));
+								}
+						});
 				},
 				error: function(err) 
 				{
@@ -359,17 +421,22 @@ function displayOrderSummary(id)
 								url : ctxPath + "/webapi/users/"+listing_json.sellerid,
 								success : function(seller_json)
 								{
-									var table_data =  	"<tr style='text-align: left'>"+
-							    	"	<td class='pull-right'>"+listing_json.listingName+"</td>"+
-							    	"	<td id='quant'></td>"+
+							    	alert("Listing quant: "+ listing_json.quantity);
+									var table_data =  	"<tr id='0' style='text-align: left'>"+
+							    	"	<td>"+listing_json.listingName+
+							    	"<input type='number' id='listingid0' value='"+listing_json.id+"' hidden='hidden'>"+
+							    	"<input type='text' id='itemid0' value='"+listing_json.itemId+"' hidden='hidden'>"+
+							    	"<input type='number' id='new_quant0' value='"+listing_json.quantity+"' hidden='hidden'>"+
+							    	"<input type='number' id='cartid0' hidden='hidden'>"+
+							    	"</td>"+
+							    	"	<td id='quant0'></td>"+
 							    	"	<td>"+listing_json.price+"</td>"+
 							    	"	<td>"+listing_json.discount+"%</td>"+
-							    	"	<td class='classPrice'>"+actualPrice+"</td>"+
+							    	"	<td id='price0' class='classPrice'>"+actualPrice+"</td>"+
 							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
 							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
 							    	"</tr>";
 							    	$("#orderSummary_body").prepend(table_data);
-							    	$("#itemid").html(listing_json.itemId);
 								},
 								error: function(err) 
 								{
@@ -388,8 +455,13 @@ function displayOrderSummary(id)
 										),
 								success : function(cart_json)
 								{
+									var curr_quant = $("#new_quant0").val();
+							    	//alert("Curr quant: "+ $("#new_quant0").val());
+							    	$("#quant0").html(cart_json.quantity);
 							    	total = total + (actualPrice*cart_json.quantity);
-							    	$("#quant").html(cart_json.quantity);
+							    	$("#new_quant0").val(curr_quant - cart_json.quantity);
+							    	//alert("New quant: "+ $("#new_quant0").val());
+							    	$("#cartid0").val(cart_json.id)
 							    	$("#total_th").html(total);
 								},
 								error: function(err) 
@@ -506,7 +578,7 @@ function orderSummary()
 	showOrder();
 }
 
-function paymentOption()
+function updateQuant(listingid,new_quant)
 { 
 	hideOrder();
 	showPayment();
@@ -516,25 +588,23 @@ function paymentOption()
 		{
 			type : 'PUT',
 			contentType : 'application/json',
-			url : ctxPath + "/webapi/listings/update/"+"<%=request.getParameter("listingid") %>",
+			url : ctxPath + "/webapi/listings/update/"+listingid,
 			data : JSON.stringify({
-		        "quantity": "<%=new_quant %>"
+		        "quantity": new_quant
 			}),
 			success : function() {
-				$("#orderProgress").append('<li><a href="#" class="progress-class glyphicon glyphicon-arrow-down"></a></li>');
-				$("#orderProgress").append('<li><a href="#" class="orderPlaced progress-class"><b>Order Placed</b></a></li>');
-				$("#orderProgress").append('<li><a href="#" id="arrow" class="progress-class glyphicon glyphicon-arrow-down"></a></li>');
-				$("#orderProgress").append('<li><a href="#" id="payStatus" class="progress-class"><b id="paymentStatus"></b></a></li>');
 				$("#confirmOrder").prop('disabled', true);
 				$("#applydeal").prop('disabled', true);
-				$("#arrow").hide();
+				$("#arrow_order").show();
+				$("#orderStatus").show();
 			},
 			error: function() {
 				swal(JSON.stringify(err));
 			}
 	});
 }
-function insertOrder()
+
+function insertOrders()
 {
 	if ($(".login-class")[0])
 	{
@@ -552,41 +622,71 @@ function insertOrder()
 		}
 		else
 		{
-			var ctxPath = "<%=request.getContextPath()%>";
-			$.ajax(
-				{
-					type : 'POST',
-					contentType : 'application/json',
-					url : ctxPath + "/webapi/orders/create",
-					data : order_formToJSON(),
-					success : paymentOption,
-					error: function(err) {
-						swal(JSON.stringify(err));
-					}
-			});
+		    var listingid = "<%=request.getParameter("listingid")%>";
+			if(listingid!="0")
+			{
+				var listingid = $("#listingid0").val();
+				var new_quant = $("#new_quant0").val();
+				insertOrder(listingid,new_quant,0);
+			}
+			else
+			{      
+				$('#order_table > tbody > tr').each(function(i,row) 
+					{
+					var rowid = row.id;
+					        if(rowid!="")
+					       	{
+					    		var listingid = $("#listingid"+rowid).val();
+					    		var new_quant = $("#new_quant"+rowid).val();
+					    		insertOrder(listingid,new_quant,parseInt(rowid));
+					        	
+					        }
+					 });
+			}
 		}
 	}
 }
 
-
-function order_formToJSON() 
+function insertOrder(listingid,new_quant,rowid)
 {
+	var ctxPath = "<%=request.getContextPath()%>";
+	$.ajax(
+		{
+			type : 'POST',
+			contentType : 'application/json',
+			url : ctxPath + "/webapi/orders/create",
+			data : order_formToJSON(rowid),
+			success : function(data) 
+			{
+				updateQuant(listingid,new_quant);
+			},
+			error: function(err) 
+			{
+				swal(JSON.stringify(err));
+			}
+	});
+}
+
+
+function order_formToJSON(rowid) 
+{
+	//alert( $("#itemid"+rowid).val());
 	var shipAddress = $("#shipAddress").val().trim();	
 	<%Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
 	  int orderid = Math.abs((int)timeStamp.getTime());%>
+	var orderid = <%=orderid%> + rowid;
     var user = getCookie("user_details");
 	var userid = JSON.parse(user).id;
-	var TotalAmount = parseInt($("#total_th").text());
-	<%session.setAttribute("totalamount","TotalAmount");
+	var TotalAmount = parseInt($("#quant"+rowid).text()) * parseInt($("#price"+rowid).text());
+	<%
 	Date myDate = new Date();
 	String today = new SimpleDateFormat("yyyy-MM-dd").format(myDate);%>
 	var flopkartOrder = JSON.stringify({
-        "itemId": $("#itemid").text(),
-        "orderId": <%=orderid%>,
+        "itemId": $("#itemid"+rowid).val(),
+        "orderId": orderid,
 	    "shippingAddress" : shipAddress,
 	    "userId" : userid,
-	    "quantity": <%=quant%>,
-	   // ="orderDate" : OrderDate,
+	    "quantity": $("#quant"+rowid).text(),
 	    "status" : "Ordered",
 	    "totalAmount" : TotalAmount  
 	});
@@ -808,7 +908,17 @@ function proceedToPay()
 											$("#accWarning").show();
 											$("#arrow").show();
 											$("#paymentStatus").show();
-											updateOrder("Failed");
+										      
+											$('#order_table > tbody > tr').each(function(i,row) 
+												{
+												var rowid = row.id;
+												        if(rowid!="")
+												       	{
+												    		var listingid = $("#listingid"+rowid).val();
+												    		var new_quant = $("#new_quant"+rowid).val();
+											 				updateOrder("Failed",parseInt(rowid));
+												        }
+												 });
 									}
 								}
 							},
@@ -848,9 +958,23 @@ function deductBalance(amt,id)
 				$("#arrow").attr("style","color:green");
 				$("#arrow").show();
 				$("#paymentStatus").show();
- 				updateOrder("Money Paid");
- 				swal("Order placed successfully");
+			      
+				$('#order_table > tbody > tr').each(function(i,row) 
+					{
+					var rowid = row.id;
+					        if(rowid!="")
+					       	{
+					    		var listingid = $("#listingid"+rowid).val();
+					    		var new_quant = $("#new_quant"+rowid).val();
+				 				updateOrder("Money Paid",parseInt(rowid));
+				 				deleteFromCart(parseInt(rowid));
+					        }
+					 });
+				swal("Order placed successfully!", {
+				      icon: "success",
+				});
  				addwalletmoney();
+ 				
 			},
 			error: function(err) 
 			{
@@ -858,13 +982,31 @@ function deductBalance(amt,id)
 			}
 	});
 }
+
+
+function deleteFromCart(rowid)
+{
+	var ctxPath = "<%=request.getContextPath()%>";
+	var cartid = $("#cartid"+rowid).val();
+	$.ajax(
+			{
+				type : 'DELETE',
+				contentType : 'application/json',
+				url : ctxPath + "/webapi/cart/delete/"+cartid,
+				success : function(){
+				},
+				error : function(){
+					swal("Could not remove from cart");
+				}
+		});
+}
+
 function addwalletmoney()
 {	
 	var listingid = "<%=request.getParameter("listingid")%>";
 	var ctxPath = "<%=request.getContextPath()%>";
 	var amt = parseInt($("#total_th").text());				// to get amount paid
 	amt = amt /2;
-	
 	$.ajax(
 			{	
 				type : 'GET',
@@ -872,8 +1014,8 @@ function addwalletmoney()
 				url : ctxPath + "/webapi/listingDeals/listing/"+listingid,		//chk tht item is in a deal
 				success : function(res)
 				{	
-					if (res != [ ] )
-					{	var deal_id = res[0].dealid;	
+					if (res != [] )
+					{	var deal_id = res[0].dealid;				
 						$.ajax({   
 									type : 'GET',
 									contentType : 'application/json',
@@ -898,7 +1040,7 @@ function addwalletmoney()
 															"wallet": amount
 														}),
 														success : function(data)
-														{	alert("succss");
+														{	
 															user_json.wallet = amount;
 															user = JSON.stringify(user_json);
 															setCookie("user_details", user, 30);
@@ -928,6 +1070,8 @@ function addwalletmoney()
 				}
 		});
 }
+
+
 function addBalanceFlopkart(amt)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
@@ -963,16 +1107,18 @@ function addBalanceFlopkart(amt)
 		});
 }
 
-function updateOrder(status)
+function updateOrder(status,rowid)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
+	var orderid = <%=orderid%> + rowid;
 	$.ajax(
 		{
 			type : 'GET',
 			contentType : 'application/json',
-			url : ctxPath + "/webapi/orders/order/"+"<%=orderid%>",
+			url : ctxPath + "/webapi/orders/order/"+orderid,
 			success : function(data)
 			{
+				//swal(data[0].itemId);
 				$.ajax(
 						{
 							type : 'PUT',
@@ -983,7 +1129,7 @@ function updateOrder(status)
 							}),
 							success : function(data)
 							{
-								swal(data[0].id);
+								
 							},
 							error: function(err) 
 							{
