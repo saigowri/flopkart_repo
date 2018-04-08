@@ -28,19 +28,24 @@
 			<tfoot>
 				<tr>
 					<td colspan="7">
+
+						<form action="buyNow.jsp">
 						<div class="shopping-cart-btn">
 							<span class="">
+						<input type='number' id='listingid' name='listingid' value='0' hidden='hidden'>
+						<input type='number' id='dealid' name='dealid' value='0' hidden='hidden'>
 								<button type="button" id="continueShopping_btn"
-									class="btn btn-primary" onclick="window.location.href='index.jsp'"
+									class="btn btn-primary" onclick='document.location.href="index.jsp"'
 									style="text-align: center; margin-left: 180px; background-color: #fff; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .1); color: #212121; font-size: 15px; font-weight: 800; height: 50px; width: 300px;">
 									<i class="fa fa-chevron-left"></i> CONTINUE SHOPPING
 								</button>
-								<button type="button" id="placeOrder_btn"
+								<button type="submit" id="placeOrder_btn"
 									class="btn btn-primary pull-right outer-right-xs btn-block"
 									style="text-align: center; font-size: 15px; font-weight: 800; height: 50px; width: 300px; background-color: #F26419">PLACE
 									ORDER</button>
 							</span>
 						</div>
+						</form>
 						<!-- /.shopping-cart-btn -->
 					</td>
 				</tr>
@@ -58,13 +63,13 @@
 			</tr>
 			<tr class="dotted">
 				<td>
-					<div class="price" style="text-align: left; font-size: 14px">Price <span style="padding-left:154px"><i class="fa fa-rupee-sign"></i><span style="font-weight: normal" id="totalPrice" ></span></span></div>
-					<div class="delivery-charges" style="text-align: left; font-size: 14px">Delivery Charges<span class="inner-left"><i class="fa fa-rupee-sign"></i><span id="deliveryCharges"></span></span></div>
+					<div class="price" style="text-align: left; font-size: 14px">Price <span class="pull-right"><i class="fa fa-rupee-sign"></i><span style="font-weight: normal" id="totalPrice" ></span></span></div>
+					<div class="delivery-charges" style="text-align: left; font-size: 14px">Delivery Charges<span class="pull-right"><i class="fa fa-rupee-sign"></i><span id="deliveryCharges"></span></span></div>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td>
-					<div class="amount-payable" style="text-align: left;font-size: 14px">Amount Payable <span class="inner-left-md"><i class="fa fa-rupee-sign"></i><span id="amount-payable"></span></span></div>
+					<div class="amount-payable" style="text-align: left;font-size: 14px">Amount Payable <span class="pull-right"><i class="fa fa-rupee-sign"></i><span id="amount-payable"></span></span></div>
 				</td>
 			</tr>
 			<tr>

@@ -325,7 +325,7 @@ $(document).ready(function()
 					dataType : "json", // data type of response
 					success : function(seller_json)
 					{
-						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+seller_json.firstName+" "+seller_json.lastName+" (id: "+listing_json.sellerid+" )</span>";
+						var sellerData = "<div id='sellerData' style='color:green; font-size:15px'>Seller name:   "+seller_json.firstName+" "+seller_json.lastName+" (id: "+seller_json.email+" )</span>";
 						$("#product-info").append(sellerData);
 						//alert(seller_json.firstName+" "+seller_json.lastName);
 						$("#sellername").val(seller_json.firstName+" "+seller_json.lastName);
