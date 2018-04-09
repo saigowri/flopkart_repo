@@ -358,8 +358,10 @@ function dispOrders(cart_json,i)
 				url : ctxPath + "/webapi/listings/item/"+cart_json.itemId,
 				success : function(listing_json)
 				{
-					var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
-					$.ajax(
+					if(listing_json.quantity>0)
+					{
+							var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
+							$.ajax(
 							{
 								type : 'GET',
 								contentType : 'application/json',
@@ -367,7 +369,7 @@ function dispOrders(cart_json,i)
 								success : function(seller_json)
 								{
 									var total = parseInt($("#total_th").text());
-									var newQuant = listing_json.quant - cart_json.quantity;
+									var newQuant = listing_json.quantity - cart_json.quantity;
 									var table_data =  	"<tr id='"+i+"' style='text-align: left'>"+
 							    	"	<td>"+listing_json.listingName+
 							    	"<input type='number' id='listingid"+i+"' value='"+listing_json.id+"' hidden='hidden'>"+
@@ -378,7 +380,7 @@ function dispOrders(cart_json,i)
 							    	"	<td id='quant"+i+"'>"+cart_json.quantity+"</td>"+
 							    	"	<td>"+listing_json.price+"</td>"+
 							    	"	<td>"+listing_json.discount+"%</td>"+
-							    	"	<td class='classPrice'>"+actualPrice+"</td>"+
+							    	"	<td id='price"+i+"' class='classPrice'>"+actualPrice+"</td>"+
 							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
 							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
 							    	"</tr>";
@@ -390,7 +392,8 @@ function dispOrders(cart_json,i)
 								{
 									swal(JSON.stringify(err));
 								}
-						});
+							});
+					}
 				},
 				error: function(err) 
 				{
@@ -421,22 +424,22 @@ function displayOrderSummary(id)
 								url : ctxPath + "/webapi/users/"+listing_json.sellerid,
 								success : function(seller_json)
 								{
-									var table_data =  	"<tr style='text-align: left'>"+
+							    	//alert("Listing quant: "+ listing_json.quantity);
+									var table_data =  	"<tr id='0' style='text-align: left'>"+
 							    	"	<td>"+listing_json.listingName+
-							    	"<input type='number' id='listingid' value='"+listing_json.id+"' hidden='hidden'>"+
+							    	"<input type='number' id='listingid0' value='"+listing_json.id+"' hidden='hidden'>"+
 							    	"<input type='text' id='itemid0' value='"+listing_json.itemId+"' hidden='hidden'>"+
-							    	"<input type='number' id='new_quant' value='"+listing_json.quant+"' hidden='hidden'>"+
-							    	"<input type='number' id='cartid' hidden='hidden'>"+
+							    	"<input type='number' id='new_quant0' value='"+listing_json.quantity+"' hidden='hidden'>"+
+							    	"<input type='number' id='cartid0' hidden='hidden'>"+
 							    	"</td>"+
 							    	"	<td id='quant0'></td>"+
 							    	"	<td>"+listing_json.price+"</td>"+
 							    	"	<td>"+listing_json.discount+"%</td>"+
-							    	"	<td class='classPrice'>"+actualPrice+"</td>"+
+							    	"	<td id='price0' class='classPrice'>"+actualPrice+"</td>"+
 							    	"	<td class='pull-right' style='text-align: right;color:green'>"+
 							    	seller_json.firstName+" "+seller_json.lastName+"</td>"+
 							    	"</tr>";
 							    	$("#orderSummary_body").prepend(table_data);
-							    	$("#itemid0").html(listing_json.itemId);
 								},
 								error: function(err) 
 								{
@@ -455,11 +458,13 @@ function displayOrderSummary(id)
 										),
 								success : function(cart_json)
 								{
-									var curr_quant = $("#new_quant").val();
-							    	total = total + (actualPrice*cart_json.quantity);
+									var curr_quant = $("#new_quant0").val();
+							    	//alert("Curr quant: "+ $("#new_quant0").val());
 							    	$("#quant0").html(cart_json.quantity);
-							    	$("#new_quant").val(curr_quant - cart_json.quantity)
-							    	$("#cartid").val(cart_json.id)
+							    	total = total + (actualPrice*cart_json.quantity);
+							    	$("#new_quant0").val(curr_quant - cart_json.quantity);
+							    	//alert("New quant: "+ $("#new_quant0").val());
+							    	$("#cartid0").val(cart_json.id)
 							    	$("#total_th").html(total);
 								},
 								error: function(err) 
@@ -576,7 +581,7 @@ function orderSummary()
 	showOrder();
 }
 
-function paymentOption(listingid,new_quant)
+function updateQuant(listingid,new_quant)
 { 
 	hideOrder();
 	showPayment();
@@ -591,10 +596,6 @@ function paymentOption(listingid,new_quant)
 		        "quantity": new_quant
 			}),
 			success : function() {
-				$("#confirmOrder").prop('disabled', true);
-				$("#applydeal").prop('disabled', true);
-				$("#arrow_order").show();
-				$("#orderStatus").show();
 			},
 			error: function() {
 				swal(JSON.stringify(err));
@@ -623,15 +624,16 @@ function insertOrders()
 		    var listingid = "<%=request.getParameter("listingid")%>";
 			if(listingid!="0")
 			{
-				var listingid = $("#listingid").val();
-				var new_quant = $("#new_quant").val();
+				var listingid = $("#listingid0").val();
+				var new_quant = $("#new_quant0").val();
 				insertOrder(listingid,new_quant,0);
 			}
 			else
 			{      
 				$('#order_table > tbody > tr').each(function(i,row) 
 					{
-					var rowid = row.id;
+		
+						var rowid = row.id;
 					        if(rowid!="")
 					       	{
 					    		var listingid = $("#listingid"+rowid).val();
@@ -656,7 +658,10 @@ function insertOrder(listingid,new_quant,rowid)
 			data : order_formToJSON(rowid),
 			success : function(data) 
 			{
-				paymentOption(listingid,new_quant);
+				$("#confirmOrder").prop('disabled', true);
+				$("#applydeal").prop('disabled', true);
+				$("#arrow_order").show();
+				$("#orderStatus").show();
 			},
 			error: function(err) 
 			{
@@ -675,7 +680,7 @@ function order_formToJSON(rowid)
 	var orderid = <%=orderid%> + rowid;
     var user = getCookie("user_details");
 	var userid = JSON.parse(user).id;
-	var TotalAmount = parseInt($("#total_th").text());
+	var TotalAmount = parseInt($("#quant"+rowid).text()) * parseInt($("#price"+rowid).text());
 	<%
 	Date myDate = new Date();
 	String today = new SimpleDateFormat("yyyy-MM-dd").format(myDate);%>
@@ -906,7 +911,17 @@ function proceedToPay()
 											$("#accWarning").show();
 											$("#arrow").show();
 											$("#paymentStatus").show();
-											updateOrder("Failed");
+										      
+											$('#order_table > tbody > tr').each(function(i,row) 
+												{
+												var rowid = row.id;
+												        if(rowid!="")
+												       	{
+												    		var listingid = $("#listingid"+rowid).val();
+												    		var new_quant = $("#new_quant"+rowid).val();
+											 				updateOrder("Failed",parseInt(rowid));
+												        }
+												 });
 									}
 								}
 							},
@@ -946,11 +961,22 @@ function deductBalance(amt,id)
 				$("#arrow").attr("style","color:green");
 				$("#arrow").show();
 				$("#paymentStatus").show();
- 				updateOrder("Money Paid");
+			      
+				$('#order_table > tbody > tr').each(function(i,row) 
+					{
+					var rowid = row.id;
+					        if(rowid!="")
+					       	{
+					    		var listingid = $("#listingid"+rowid).val();
+					    		var new_quant = $("#new_quant"+rowid).val();
+				 				updateOrder("Money Paid",parseInt(rowid));
+				 				deleteFromCart(parseInt(rowid));
+								updateQuant(listingid,new_quant);
+					        }
+					 });
 				swal("Order placed successfully!", {
 				      icon: "success",
 				});
- 				deleteFromCart();
  				addwalletmoney();
  				
 			},
@@ -962,10 +988,10 @@ function deductBalance(amt,id)
 }
 
 
-function deleteFromCart()
+function deleteFromCart(rowid)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
-	var cartid = $("#cartid").val();
+	var cartid = $("#cartid"+rowid).val();
 	$.ajax(
 			{
 				type : 'DELETE',
@@ -1085,16 +1111,18 @@ function addBalanceFlopkart(amt)
 		});
 }
 
-function updateOrder(status)
+function updateOrder(status,rowid)
 {
 	var ctxPath = "<%=request.getContextPath()%>";
+	var orderid = <%=orderid%> + rowid;
 	$.ajax(
 		{
 			type : 'GET',
 			contentType : 'application/json',
-			url : ctxPath + "/webapi/orders/order/"+"<%=orderid%>",
+			url : ctxPath + "/webapi/orders/order/"+orderid,
 			success : function(data)
 			{
+				//swal(data[0].itemId);
 				$.ajax(
 						{
 							type : 'PUT',

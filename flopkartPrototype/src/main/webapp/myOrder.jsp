@@ -23,7 +23,8 @@
 <%@include file="footer.jsp" %>
 </body>
 <script>
-$(document).ready(function(){
+$(document).ready(function()
+{
 	 var ctxPath = "<%=request.getContextPath()%>";
 	 $('#count').val(0);
      headerFunctions(ctxPath);
@@ -41,13 +42,11 @@ function myorder(ctxPath)
 		contentType : 'application/json',
 		url : ctxPath + "/webapi/orders/user/"+userid,
 		dataType : "json", // data type of response
-		success : function(results){
-			
-			var data="";
-			/* data+="<div class = 'row' style = 'margin:5px 50px;border-style: groove;border-width: 7px;font-size:15px; text-align:left; padding-left:70px;' >"+
-			"<div class='col-sm-12' style ='font-size:15px; text-align:left; padding:20px;' >"; */
-            for(var i in results){
-           		 	displayListings(results[i],userid);
+		success : function(orders_json)
+		{
+            for(var i in orders_json)
+            {
+           		 	displayListings(orders_json[i],userid);
             }
           },
     	error:function() {
@@ -58,7 +57,7 @@ function myorder(ctxPath)
 
 function displayListings(result,userid)
 {	
-	
+
 	var ctxPath = "<%=request.getContextPath()%>";
     <% AccessProperties ap = new AccessProperties(); %>
     var imgServerURL = "<%=ap.getImageServerURL() %>"; 
@@ -66,11 +65,11 @@ function displayListings(result,userid)
 	var j = $("#count").val();
 	j++;
 	$('#count').val(j);
-	var minnu = 123;
 	var xxx = document.getElementById("img1").value;
 	var itid = result.itemId;
 	
-	data+="<div id='divi"+j+"' class = 'row' style = 'margin:5px 25px;border-style: groove;border-width: 7px;font-size:15px; text-align:left; padding-left:70px;' >"+
+	data+="<div id='divi"+j+"' class = 'row'"+
+	"style = 'margin:5px 25px;border-style: groove;border-width: 7px;font-size:15px; text-align:left; padding-left:70px;' >"+
 	"<div class='col-sm-4' style = 'font-size:15px; text-align:left; padding-top: 40px ; padding-left:0px;'>"+
 		" <div style='width: 260px;height: 250px;'>"+
 			"<img class='listingImage' id ="+ result.itemId+""+j +" style='max-height:100%; max-width:100%;' src='"+xxx+"' alt=''>"+
