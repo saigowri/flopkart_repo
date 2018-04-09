@@ -358,8 +358,10 @@ function dispOrders(cart_json,i)
 				url : ctxPath + "/webapi/listings/item/"+cart_json.itemId,
 				success : function(listing_json)
 				{
-					var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
-					$.ajax(
+					if(listing_json.quantity>0)
+					{
+							var actualPrice = listing_json.price - (listing_json.discount*listing_json.price/100);
+							$.ajax(
 							{
 								type : 'GET',
 								contentType : 'application/json',
@@ -390,7 +392,8 @@ function dispOrders(cart_json,i)
 								{
 									swal(JSON.stringify(err));
 								}
-						});
+							});
+					}
 				},
 				error: function(err) 
 				{
@@ -421,7 +424,7 @@ function displayOrderSummary(id)
 								url : ctxPath + "/webapi/users/"+listing_json.sellerid,
 								success : function(seller_json)
 								{
-							    	alert("Listing quant: "+ listing_json.quantity);
+							    	//alert("Listing quant: "+ listing_json.quantity);
 									var table_data =  	"<tr id='0' style='text-align: left'>"+
 							    	"	<td>"+listing_json.listingName+
 							    	"<input type='number' id='listingid0' value='"+listing_json.id+"' hidden='hidden'>"+
@@ -593,10 +596,6 @@ function updateQuant(listingid,new_quant)
 		        "quantity": new_quant
 			}),
 			success : function() {
-				$("#confirmOrder").prop('disabled', true);
-				$("#applydeal").prop('disabled', true);
-				$("#arrow_order").show();
-				$("#orderStatus").show();
 			},
 			error: function() {
 				swal(JSON.stringify(err));
@@ -633,7 +632,8 @@ function insertOrders()
 			{      
 				$('#order_table > tbody > tr').each(function(i,row) 
 					{
-					var rowid = row.id;
+		
+						var rowid = row.id;
 					        if(rowid!="")
 					       	{
 					    		var listingid = $("#listingid"+rowid).val();
@@ -658,7 +658,10 @@ function insertOrder(listingid,new_quant,rowid)
 			data : order_formToJSON(rowid),
 			success : function(data) 
 			{
-				updateQuant(listingid,new_quant);
+				$("#confirmOrder").prop('disabled', true);
+				$("#applydeal").prop('disabled', true);
+				$("#arrow_order").show();
+				$("#orderStatus").show();
 			},
 			error: function(err) 
 			{
@@ -968,6 +971,7 @@ function deductBalance(amt,id)
 					    		var new_quant = $("#new_quant"+rowid).val();
 				 				updateOrder("Money Paid",parseInt(rowid));
 				 				deleteFromCart(parseInt(rowid));
+								updateQuant(listingid,new_quant);
 					        }
 					 });
 				swal("Order placed successfully!", {
