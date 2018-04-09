@@ -28,19 +28,24 @@
 			<tfoot>
 				<tr>
 					<td colspan="7">
+
+						<form action="buyNow.jsp">
 						<div class="shopping-cart-btn">
 							<span class="">
+						<input type='number' id='listingid' name='listingid' value='0' hidden='hidden'>
+						<input type='number' id='dealid' name='dealid' value='0' hidden='hidden'>
 								<button type="button" id="continueShopping_btn"
-									class="btn btn-primary"
+									class="btn btn-primary" onclick='document.location.href="index.jsp"'
 									style="text-align: center; margin-left: 180px; background-color: #fff; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .1); color: #212121; font-size: 15px; font-weight: 800; height: 50px; width: 300px;">
 									<i class="fa fa-chevron-left"></i> CONTINUE SHOPPING
 								</button>
-								<button type="button" id="placeOrder_btn"
+								<button type="submit" id="placeOrder_btn"
 									class="btn btn-primary pull-right outer-right-xs btn-block"
 									style="text-align: center; font-size: 15px; font-weight: 800; height: 50px; width: 300px; background-color: #F26419">PLACE
 									ORDER</button>
 							</span>
 						</div>
+						</form>
 						<!-- /.shopping-cart-btn -->
 					</td>
 				</tr>
@@ -58,13 +63,13 @@
 			</tr>
 			<tr class="dotted">
 				<td>
-					<div class="price" style="text-align: left; font-size: 14px">Price <span style="padding-left:154px"><i class="fa fa-rupee-sign"></i><span style="font-weight: normal" id="totalPrice" ></span></span></div>
-					<div class="delivery-charges" style="text-align: left; font-size: 14px">Delivery Charges<span class="inner-left"><i class="fa fa-rupee-sign"></i><span id="deliveryCharges"></span></span></div>
+					<div class="price" style="text-align: left; font-size: 14px">Price <span class="pull-right"><i class="fa fa-rupee-sign"></i><span style="font-weight: normal" id="totalPrice" ></span></span></div>
+					<div class="delivery-charges" style="text-align: left; font-size: 14px">Delivery Charges<span class="pull-right"><i class="fa fa-rupee-sign"></i><span id="deliveryCharges"></span></span></div>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td>
-					<div class="amount-payable" style="text-align: left;font-size: 14px">Amount Payable <span class="inner-left-md"><i class="fa fa-rupee-sign"></i><span id="amount-payable"></span></span></div>
+					<div class="amount-payable" style="text-align: left;font-size: 14px">Amount Payable <span class="pull-right"><i class="fa fa-rupee-sign"></i><span id="amount-payable"></span></span></div>
 				</td>
 			</tr>
 			<tr>
@@ -219,7 +224,7 @@ function renderCartItem(cartItems){
 						var data = "<tr>";
 			            data += "<td class='cart-image'>"+
 						"<a class='entry-thumbnail' href='item.jsp?id="+item.id+"'>"+
-					    "<img src='"+imgServerURL+item.imgUrl+"' alt=''>"+
+					    "<img src='"+imgServerURL+item.imgUrl+"'>"+
 					"</a>"+"<input type='number' id='cartId"+i+"' hidden='hidden' value='"+cartItems[i].id+"'>"+
 				"</td>"+
 				"<td class='cart-product-name-info'>"+
@@ -234,30 +239,34 @@ function renderCartItem(cartItems){
 					"</div>"+"<!-- /.row -->"+
 					"<div class='cart-product-info'>"+
 					"COLOR: "+item.colour+"<br/>"+"Seller id: "+item.sellerid+
+					"<input type='number' id='dealId"+i+"' hidden='hidden'>"+
+					"<div id='dealName"+i+"'></div>"+
 					"</div>"+
 				"</td>"+
 				"<td class='cart-product-quantity'>"+
-					"<div class='quant-input'>"+
+					"<div class='quant-input' id='quant-input"+i+"'>"+
 			                "<div class='arrows'>"+
 			                  "<div id='quant-up"+i+"' class='arrow plus gradient' onclick='quantup("+i+")'>"+"<span >"+"<i class='icon fa fa-sort-asc'>"+"</i>"+"</span>"+"</div>"+
 			                  "<div id='quant-down"+i+"' class='arrow minus gradient' onclick='quantdown("+i+")'>"+"<span >"+"<i class='icon fa fa-sort-desc'>"+"</i>"+"</span>"+"</div>"+
 			                "</div>"+
 			                "<input type='number' id='quantity"+i+"' min='1' value='"+cartItems[i].quantity+"' onchange='updateQuant("+i+")'>"+
 		              "</div>"+
+		              "<div style='color:red; font-size:13px' id='outofstock"+i+"' hidden='hidden'>Out of Stock</div>"+
 		              "<input type='number' id='maxquantity"+i+"' hidden='hidden' value='"+item.quantity+"'>"+
 	            "</td>"+
-				"<td class='cart-product-grand-total'>"+"<input type='number' id='oneCost"+i+"' hidden='hidden' value='"+amount+"'>"+"<input type='number' id='oneActualCost"+i+"' hidden='hidden' value='"+item.price+"'>"+
-				"<span>"+"<i class='fa fa-rupee-sign'>"+"</i>"+ "<span id='price"+i+"'>"+amount+ "</span>"+  "</span>"+"<span>"+"&nbsp; <del>"+  "<i class='fa fa-rupee-sign'>"+"</i>"+ "<span id='originalPrice"+i+"'>"+item.price+"</span>"+"</del>"+"</span>"+"</td>"
+				"<td class='cart-product-grand-total'><div id='pricing"+i+"'>"+"<input type='number' id='oneCost"+i+"' hidden='hidden' value='"+amount+"'>"+"<input type='number' id='oneActualCost"+i+"' hidden='hidden' value='"+item.price+"'>"+
+				"<span>"+"<i class='fa fa-rupee-sign'>"+"</i>"+ "<span id='price"+i+"'>"+amount+ "</span>"+  "</span>"+"<span>"+"&nbsp; <del>"+  "<i class='fa fa-rupee-sign'>"+"</i>"+ "<span id='originalPrice"+i+"'>"+item.price+"</span>"+"</del>"+"</span>"+"</div></td>"
 			    data += "<td><a style='color:black' href='#' onclick='deleteRow(this,"+i+")'><i class='fa fa-trash'></i></a></td>"        
 				data += "</tr>";
-			            $("#cartQuant").text("MY CART ("+(parseFloat(i)+1)+")");
-			            $("#noOfItems").val(parseFloat(i)+1);
-			            $("#content").append(data);
-			    	},
-			    	error:function() {
-			        	swal("error occurred");
-			    	}
-				});
+	            $("#cartQuant").text("MY CART ("+(parseFloat(i)+1)+")");
+	            $("#noOfItems").val(parseFloat(i)+1);
+	            $("#content").append(data);
+	            getDealDetails(item.id, i);
+			  },
+			  error:function() {
+			  	swal("error occurred");
+			  }
+		 });
 	}
 	$("#emptyCart").hide();
 	$("#cartBody").show();
@@ -274,10 +283,20 @@ function calculate(){
 		price = parseFloat(document.getElementById("price"+i).innerHTML);
 		actualprice = parseFloat(document.getElementById("originalPrice"+i).innerHTML);
 		quant = parseFloat(document.getElementById("quantity"+i).value);
+		maxquant = parseFloat(document.getElementById("maxquantity"+i).value);
 		price = price * quant;
 		document.getElementById("price"+i).innerHTML = price;
 		actualprice = actualprice * quant;
 		document.getElementById("originalPrice"+i).innerHTML = actualprice;
+		if(maxquant < quant){
+			$("#outofstock"+i).show();
+			$("#quant-input"+i).hide();
+			document.getElementById("price"+i).innerHTML = 0;
+			document.getElementById("originalPrice"+i).innerHTML = 0;
+			price = 0;
+			actualprice = 0;
+			$("#pricing"+i).hide();
+		}
 		total += price;
 		actualtotal += actualprice;
 		savings += actualprice - price;
@@ -318,6 +337,10 @@ function deleteRow(r, i) {
 							swal("Item removed!", {
 							      icon: "success",
 							});
+							var num = $("#noOfItems").val();
+							num--;
+							$("#noOfItems").val(num);
+							$("#cartQuant").text("MY CART ("+num+")");
 						},
 						error : function(){
 							swal("Could not remove from cart");
@@ -351,6 +374,42 @@ function updateQuant(i){
 		error : function()
 		{
 			swal("Error");		
+		}
+	});
+}
+
+function getDealDetails(listingid, i){
+	var ctxPath = "<%=request.getContextPath()%>";
+	$.ajax({
+		type : 'GET',
+		async:false,
+		url : ctxPath + "/webapi/listingDeals/listing/"+listingid,
+		dataType : "json", // data type of response
+		success : function(listdeal){
+			var jsonDeal = JSON.stringify(listdeal);
+			if(jsonDeal !="[]"){
+				document.getElementById("dealId"+i).value = listdeal[0].dealid;
+				getDealName(listdeal[0].dealid, i);
+			}
+		},
+		error: function(){
+			//alert("error occurred"); 
+		}
+	});
+}
+
+function getDealName(dealid, i){
+	var ctxPath = "<%=request.getContextPath()%>";
+	$.ajax({
+		type : 'GET',
+		async:false,
+		url : ctxPath + "/webapi/deals/"+dealid,
+		dataType : "json", // data type of response
+		success : function(deal){
+			document.getElementById("dealName"+i).innerHTML = "DEAL: "+deal.dealname;
+		},
+		error: function(){
+			//alert("error occurred"); 
 		}
 	});
 }
