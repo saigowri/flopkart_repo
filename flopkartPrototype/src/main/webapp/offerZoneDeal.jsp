@@ -271,7 +271,7 @@ function getDealDet(ctxPath,mod,col){
 					  "</div>"+
 					  "<div class='panel-footer'>"+
 					  "<div style='font-size: 20px;color: red; display:inline-flex'> OFFER PRICE: &nbsp; <i class='fa fa-rupee-sign'></i> &nbsp; ( <div id='total"+i+"'></div>"+"  &nbsp; -  &nbsp; "+"<div id='minimum"+i+"'></div> )</div>"+
-					  "<a href='buyNowDeal.jsp?id=\""+listingDeal[parseInt(i)+1].comboid+"\"' class='buynow' id='buynow'>Buy Now</a>"+
+					  "<a href='buyNowDeal.jsp?comboid="+listingDeal[parseInt(i)+1].comboid+"' class='buynow' id='buynow'>Buy Now</a>"+
 					  "</div>"+
 					  "</div>";
 					$("#deal-product").append(data);
