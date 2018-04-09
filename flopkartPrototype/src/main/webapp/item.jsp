@@ -162,6 +162,8 @@
 						                 <span>Seller Rating:</span>
                                          <span style="color:red">Seller currently does not have enough ratings</span> 
 						            </div>
+						            <div id="seller_rating_total" style="font-size:15px"></div>
+						            <div id="seller_rating_customers" style="font-size:15px"></div>
 									<div class='stock-container info-container m-t-10'>
 										<div class='row'>
 											<div class='col-sm-2'>
@@ -542,6 +544,8 @@ function rating(ctxPath,id)
 			if(results.length==0)
 				{
 				   $("#seller_rating").hide()
+				   $('#seller_rating_total').hide()
+				   $('#seller_rating_customers').hide()
 				   $("#seller_rating_unavailable").show()
 				}
 			else
@@ -549,6 +553,10 @@ function rating(ctxPath,id)
 				   var sum=0;
 				   for(var i in results)
 					   sum=sum+results[i].stars
+				   var data = "<span>Seller Total Stars: </span><span>"+sum+" stars</span>";
+				   $('#seller_rating_total').append(data);
+				   data = "<span>Seller Rated By: </span><span>"+results.length+" customers</span>";
+				   $('#seller_rating_customers').append(data);
 				   var val = Math.round(sum/results.length);
 				   renderSeller(val);
 				}
