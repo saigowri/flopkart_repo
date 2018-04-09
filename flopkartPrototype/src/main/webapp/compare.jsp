@@ -330,7 +330,7 @@ function getDetails(i){
 				url : ctxPath + "/webapi/listings/"+listid,
 				dataType : "json", // data type of response
 				success : function(listingJson){
-						$("#image"+i).html("<img src='"+imgServerURL+listingJson.imgUrl+"' style='display: block; object-fit: contain; width: 150px; height: 150px;'>")
+						$("#image"+i).html("<a href='item.jsp?id="+listingJson.id+"'><img src='"+imgServerURL+listingJson.imgUrl+"' style='display: block; object-fit: contain; width: 150px; height: 150px;'></a>")
 		    			$("#mp"+i).html("<i class='fa fa-rupee-sign'></i> "+listingJson.price);
 						$("#discount"+i).text(listingJson.discount+"%");
 						$("#dp"+i).html("<i class='fa fa-rupee-sign'></i> "+ (listingJson.price - (listingJson.discount*listingJson.price/100)));
