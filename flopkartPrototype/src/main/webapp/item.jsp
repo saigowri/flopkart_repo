@@ -158,7 +158,7 @@
 						                 <span class='fa fa-star'></span>
 						                 <span class='fa fa-star'></span>
 						            </div>
-						            <div id="seller_rating_unavailable" style="font-size:20px" hidden>
+						            <div id="seller_rating_unavailable" style="font-size:20px" hidden="hidden">
 						                 <span>Seller Rating:</span>
                                          <span style="color:red">Seller currently does not have enough ratings</span> 
 						            </div>
@@ -473,7 +473,7 @@ function getDealName(ctxPath){
 			url : ctxPath + "/webapi/deals/"+dealid,
 			dataType : "json", // data type of response
 			success : function(deal){
-				$("#dealname").text("SUPER DEAL: "+deal.dealname+"!");
+				$("#dealname").html("SUPER DEAL: "+deal.dealname+"!"+"&nbsp; &nbsp; <a class='btn btn-primary' href='offerZoneDeal.jsp?id="+dealid+"'> Avail Deal </a>");
 			},
 			error: function(){
 				//alert("error occurred"); 

@@ -24,25 +24,14 @@
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
 	border: none;
 	color: #fff;
-	width: 10%;
-	padding: 18px 8px;
-	border-radius: 2px;
- 	float: right; 
-/* 	margin-left: 30px; */
-}
-.addtocart {
-	background: #ff9f00;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
-	border: none;
-	color: #fff;
 	text-align: center;
 	display: inline-block;
 	width: 10%;
 	padding: 18px 8px;
 	border-radius: 2px;
-	margin-left: 500px;
+	margin-left: 700px;
 }
-.addtocart:hover {
+.buynow:hover {
 	color : white;
 }
 </style>
@@ -277,12 +266,12 @@ function getDealDet(ctxPath,mod,col){
 				for(var i=0; i<num; i++){
 					var data = "<div class='panel panel-default' style='border-width:2px; border-color: black'><div class='panel-heading' id='panelHead"+i+"'>COMBO OFFER "+(parseInt(i)+1)+"</div>"+
 					  "<div class='panel-body'>"+
+					  "<div style='font-size:15px; color: green'>Combo Description: "+listingDeal[parseInt(i)+1].comboDesc+"</div>"+"<br/>"+
 					  "<div id='panelBody"+i+"'></div>"+
 					  "</div>"+
 					  "<div class='panel-footer'>"+
 					  "<div style='font-size: 20px;color: red; display:inline-flex'> OFFER PRICE: &nbsp; <i class='fa fa-rupee-sign'></i> &nbsp; ( <div id='total"+i+"'></div>"+"  &nbsp; -  &nbsp; "+"<div id='minimum"+i+"'></div> )</div>"+
-					  "<button id='buynow' onclick='return addToCart()' class='buynow'>Buy Now</button>"+
-					  "<a href='#' onclick='return addToCart()' class='addtocart' id='addtocart'>Add to cart</a>"+
+					  "<a href='buyNowDeal.jsp?id=\""+listingDeal[parseInt(i)+1].comboid+"\"' class='buynow' id='buynow'>Buy Now</a>"+
 					  "</div>"+
 					  "</div>";
 					$("#deal-product").append(data);
