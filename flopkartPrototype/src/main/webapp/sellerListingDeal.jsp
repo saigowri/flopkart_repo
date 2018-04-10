@@ -302,7 +302,7 @@ function fetchListings(num){
 			var data="<select id='list"+num+"' style='background-color:white; font-size:20px;' required>"+
 				"<option value=' "+0+" '>Select a listing</option>";
             for(var i in listings){
-               data+="<option value='"+listings[i].id+"'>"+listings[i].listingName+"</option>";
+               data+="<option value='"+listings[i].id+"'>"+listings[i].listingName+" ( ID: "+listings[i].itemId+") "+"</option>";
             }
             data += "</select>"
             document.getElementById("selectlisting-"+num).innerHTML = data;
