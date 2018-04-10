@@ -294,7 +294,8 @@ $(document).ready(function()
 	$("#arrow_order").hide();
 	$("#orderStatus").hide();
     var ctxPath = "<%=request.getContextPath()%>";
-	headerFunctions(ctxPath);    
+	headerFunctions(ctxPath);
+	checklogin();
 	show_Welcome();
 	fetchCombo();
 })
@@ -378,8 +379,19 @@ function dispOrders(combo_json,i)
 					}
 					else
 					{
-						swal("Sorry for the inconvinence","Cannot place the Deal as one of the items in the deal is out of stock.");
-						document.location.href="index.jsp";
+						swal({
+							  title: "Sorry for the inconvinence",
+							  text: "Cannot place the deal as one of the items in the deal is out of stock.",
+							  icon: "error"
+							})
+							.then((redirect) => {
+							  if (redirect) { 
+								  window.location.href = "index.jsp";
+							  }
+							  else {
+								  window.location.href = "index.jsp";
+							  }
+						});
 					}
 				},
 				error: function(err) 
@@ -509,6 +521,7 @@ function updateQuant(listingid,new_quant)
 
 function insertOrders()
 {
+	checklogin();
 	if ($(".login-class")[0])
 	{
 		hideOrder(); 
@@ -607,6 +620,7 @@ function flopkartBank()
 
 function proceedToPay()
 {
+	checklogin();
 	if ($(".login-class")[0])
 	{
 		hidePayment(); 
@@ -820,6 +834,23 @@ function updateOrder(status,rowid)
 	});
 }
 
-
+function checklogin(){
+	var user = getCookie("user_details");
+    if (user == ""){
+    	swal({
+			  title: "Please Login",
+			  text: "Login to continue",
+			  icon: "error"
+			})
+			.then((redirect) => {
+			  if (redirect) {
+				  window.location.href = "index.jsp";
+			  }
+			  else {
+				  window.location.href = "index.jsp";
+			  }
+		});
+    } 
+}
 </script>
 </html>
