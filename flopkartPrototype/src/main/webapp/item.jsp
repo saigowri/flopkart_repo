@@ -571,7 +571,7 @@ function rating(ctxPath,id)
 					   sum=sum+results[i].stars
 				   var data = "<span> ( </span> <span>"+sum+" stars</span>";
 				   $('#seller_rating_total').append(data);
-				   data = "</span><span> / </span><span>"+results.length+" customers</span> <span> ) </span>";
+				   data = "</span><span> / </span><span>"+results.length+" customer ratings</span> <span> ) </span>";
 				   $('#seller_rating_customers').append(data);
 				   var val = Math.round(sum/results.length);
 				   renderSeller(val);
