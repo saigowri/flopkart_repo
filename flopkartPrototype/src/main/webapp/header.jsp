@@ -141,7 +141,7 @@
 							<button type="button" id="signup_btn"
 								class="btn btn-primary btn-lg btn-block"
 								style="border-radius: 0px; background-color: #F26419; border-width: 0mm"
-								value="Login" onclick="signup('<%=request.getContextPath()%>');">SIGN UP</button>
+								onclick="signup('<%=request.getContextPath()%>');">SIGN UP</button>
 			</div>
 	
 			<div class="row"
@@ -199,6 +199,9 @@
 								class="btn btn-primary btn-lg btn-block"
 								style="border-radius: 0px; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); color: #2455f4; background-color: white; border-width: 0mm"
 								onclick="show_signup();">New to Flopkart? Sign up</button>
+						</div>
+						<div class="row">
+							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 		</div>
 		
@@ -303,12 +306,16 @@
 											<a href="sellerHub.jsp"><i style="color: #157ed2"
 												class="fas fa-briefcase"></i> Sell on Flopkart</a></li>
 									<li role="presentation" class="divider"></li>
+									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="compare.jsp">
+									<i style="color: #157ed2" class="far fa-chart-bar"></i> Compare items</a></li>
+									<li role="presentation" class="divider"></li>
 									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
 									<i style="color: #157ed2" class="fas fa-comments"></i> 24x7
 											Customer Care</a></li>
 									<li role="presentation" class="divider"></li>
 									<li role="presentation" style="display: flex; align-items: center; width: 100%;"><a href="underConstruct.html">
 									<i style="color: #157ed2" class="fas fa-chart-line"></i> Advertise</a></li>
+									<li><a href="#" onclick="signOut();">Sign out</a></li>
 								</ul>
 							</div>
 							<!-- ============================================================= MORE OPTIONS END ============================================================= -->
