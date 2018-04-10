@@ -138,10 +138,14 @@
 			
 			<div class="row"
 							style="padding-left: 0px; padding-top: 15px; padding-bottom: 15px;">
+							
+						<form id="signupForm" method="post" action="#" enctype="multipart/form-data">
 							<button type="button" id="signup_btn"
 								class="btn btn-primary btn-lg btn-block"
 								style="border-radius: 0px; background-color: #F26419; border-width: 0mm"
 								onclick="signup('<%=request.getContextPath()%>');">SIGN UP</button>
+								
+						</form>
 			</div>
 	
 			<div class="row"
@@ -235,7 +239,7 @@
 						<!-- /.contact-row -->
 						<!-- ============================================================= SEARCH AREA ============================================================= -->
 						<div class="search-area">
-							<form>
+							<form id="searchForm">
 								<div class="control-group">
 									<div class="row">
 										<div class="col-md-10">
