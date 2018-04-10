@@ -666,6 +666,8 @@ function order_formToJSON(rowid)
 	var orderid = <%=orderid%> + rowid;
     var user = getCookie("user_details");
 	var userid = JSON.parse(user).id;
+	var fname = JSON.parse(user).firstName;
+	var lname = JSON.parse(user).lastName;
 	var TotalAmount = parseInt($("#quant"+rowid).text()) * parseInt($("#price"+rowid).text());
 	<%
 	Date myDate = new Date();
@@ -673,7 +675,7 @@ function order_formToJSON(rowid)
 	var flopkartOrder = JSON.stringify({
         "itemId": $("#itemid"+rowid).val(),
         "orderId": orderid,
-	    "shippingAddress" : shipAddress,
+	    "shippingAddress" : fname +" " + lname + " , "+shipAddress,
 	    "userId" : userid,
 	    "quantity": $("#quant"+rowid).text(),
 	    "status" : "Ordered",
@@ -910,7 +912,7 @@ function addwalletmoney()
 											var ctxPath = "<%=request.getContextPath()%>";
 										    var user = getCookie("user_details");
 										    if (user != "") 
-										    { 
+										    { 	
 												var user_json = JSON.parse(user);
 												var amount = parseInt(amt) + parseInt(user_json.wallet);
 												

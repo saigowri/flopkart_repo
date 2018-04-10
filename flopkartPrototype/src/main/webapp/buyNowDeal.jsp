@@ -36,9 +36,10 @@
 					    	</div>	    <!-- panel-heading -->
 	
 							<div id="collapseOne" class="panel-collapse collapse in">
-						
+							
 								<!-- panel-body  -->
 							    <div class="panel-body">
+							   
 									<div class="row">		
 						
 										<!-- guest-login -->			
@@ -91,6 +92,7 @@
 						
 								<!-- panel-body  -->
 							    <div class="panel-body">
+							  
 									<div class="row">		
 									
 						      <div class="panel-body">
@@ -130,7 +132,8 @@
 						
 								<!-- panel-body  -->
 							    <div class="panel-body">
-									<div class="row">
+							       <div style="font-size:18px;color:blue;font-weight:1000px;" id = "dealname"></div>
+									<div  class="row">
 									                                                                 
 								  <div class="table-responsive">          
 									  <table id="order_table" class="table">
@@ -312,6 +315,17 @@ function fetchCombo()
 				url : ctxPath + "/webapi/listingDeals/combo/"+comboid,
 				success : function(combo_json)
 				{
+					var num = combo_json.length;
+					if(num == 4){
+						$('#dealname').text("DEAL NAME : BUY 3 GET 1");
+					}
+					else if(num == 3){
+						$('#dealname').text("DEAL NAME : BUY 2 GET 1");
+					}
+					else if(num == 2){
+						$('#dealname').text("DEAL NAME : BUY 1 GET 1");
+					}
+					
 					$('#minimum').val(Number.MAX_VALUE);
 					for(i = 0; i< combo_json.length; i++)
 					{
@@ -588,6 +602,8 @@ function order_formToJSON(rowid)
 	var orderid = <%=orderid%> + rowid;
     var user = getCookie("user_details");
 	var userid = JSON.parse(user).id;
+	var fname = JSON.parse(user).firstName;
+	var lname = JSON.parse(user).lastName;
 	var TotalAmount = parseInt($("#quant"+rowid).text()) * parseInt($("#price"+rowid).text());
 	if(!deduct && $("#minimum").val()==TotalAmount)
 	{
@@ -600,7 +616,7 @@ function order_formToJSON(rowid)
 	var flopkartOrder = JSON.stringify({
         "itemId": $("#itemid"+rowid).val(),
         "orderId": orderid,
-	    "shippingAddress" : shipAddress,
+	    "shippingAddress" : fname +" " + lname + " , "+shipAddress,
 	    "userId" : userid,
 	    "quantity": $("#quant"+rowid).text(),
 	    "status" : "Ordered",
