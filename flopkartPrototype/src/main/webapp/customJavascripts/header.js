@@ -187,9 +187,22 @@ function signup(ctxPath)
 	success : renderDetails,
 	error : function(err)
 			{
-				alert(JSON.stringify(err));
 				var status = err.status;
 				if(status==200){
+					$('#loginModal').modal('hide');
+					swal({
+						  title: "Success",
+						  text: "User signed up successfully!",
+						  icon: "success"
+						})
+						.then((reload) => {
+						  if (reload) { 
+							  window.location.reload(true);
+						  }
+						  else {
+							  window.location.reload(true);
+						  }
+					});
 				}
 			}
 	});
