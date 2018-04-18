@@ -605,7 +605,7 @@ function order_formToJSON(rowid)
 	var fname = JSON.parse(user).firstName;
 	var lname = JSON.parse(user).lastName;
 	var TotalAmount = parseInt($("#quant"+rowid).text()) * parseInt($("#price"+rowid).text());
-	if(!deduct && $("#minimum").val()==TotalAmount)
+	if(!deduct && parseInt($("#minimum").val())==TotalAmount)
 	{
 		deduct=true;
 		TotalAmount=0;
